@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Creator:</b>
+  <%= @room.creator_id %>
+</p>
+
+<p>
+  <b>Joiner:</b>
+  <%= @room.joiner_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @room.name %>
+</p>
+
+<p>
+  <b>Busy:</b>
+  <%= @room.busy %>
+</p>
+
+<p>
+  <b>Session:</b>
+  <%= @room.session_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Back', rooms_path %>

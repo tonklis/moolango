@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  creator_id: 1
+  joiner_id: 1
+  name: MyString
+  busy: false
+  session_id: 1
+
+two:
+  creator_id: 1
+  joiner_id: 1
+  name: MyString
+  busy: false
+  session_id: 1

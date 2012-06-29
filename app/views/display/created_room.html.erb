@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    var apiKey = '16363401';
+    var sessionId = '2_MX4xMjMyMDgxfjcyLjUuMTY3LjE0OH4yMDEyLTA2LTI4IDAyOjIzOjIyLjk2MzgyOCswMDowMH4wLjU3NTA3MTM0MTI1OH4';
+    var token = 'devtoken';           
+
+		TB.setLogLevel(TB.DEBUG);     
+ 
+    var session = TB.initSession(sessionId);      
+    session.addEventListener('sessionConnected', sessionConnectedHandler);
+    session.connect(apiKey, token);
+ 
+    var publisher;
+ 
+    function sessionConnectedHandler(event) {
+      // Put my webcam in a div
+      publisher = TB.initPublisher('myPublisherDiv');
+      // Send my stream to the session
+      session.publish(publisher);
+    }
+		
+		
+  </script>
+
+ <div id="myPublisherDiv"></div>
