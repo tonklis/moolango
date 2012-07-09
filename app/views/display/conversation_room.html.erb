@@ -1,0 +1,28 @@
+<script type="text/javascript">
+
+	var session = TB.initSession('<%= @session %>');
+	session.addEventListener('sessionConnected', sessionConnectedHandler);
+  session.addEventListener('streamCreated', streamCreatedHandler); 
+	session.connect(<%= @api_key %>, "devtoken");
+
+	function sessionConnectedHandler (event) {
+     subscribeToStreams(event.streams);
+     session.publish();
+	}
+
+	function subscribeToStreams(streams) {
+    for (i = 0; i < streams.length; i++) {
+        var stream = streams[i];
+        if (stream.connection.connectionId != session.connection.connectionId) {
+            session.subscribe(stream);
+        }
+    }
+	}
+
+	function streamCreatedHandler(event) {
+    subscribeToStreams(event.streams);
+	}
+		
+
+</script>
+<%= @topic_id %>
