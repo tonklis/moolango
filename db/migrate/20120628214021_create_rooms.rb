@@ -6,6 +6,7 @@ class CreateRooms < ActiveRecord::Migration
       t.string :name
       t.boolean :busy
       t.integer :session_id
+			t.integer :language_id
 
       t.timestamps
     end

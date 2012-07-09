@@ -14,6 +14,14 @@ Moolango::Application.routes.draw do
 	match 'created_room' => 'display#created_room', :as => :created_room
 
 	match 'joined_room' => 'display#joined_room', :as => :joined_room
+	
+	match 'topics_list' => 'display#topics_list', :as => :topics_list
+
+	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
+	
+	match 'admin_room' => 'display#admin_room', :as => :admin_room
+		
+	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
