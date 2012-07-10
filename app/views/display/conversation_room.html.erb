@@ -5,16 +5,26 @@
   session.addEventListener('streamCreated', streamCreatedHandler); 
 	session.connect(<%= @api_key %>, "devtoken");
 
-	function sessionConnectedHandler (event) {
-     subscribeToStreams(event.streams);
-     session.publish();
-	}
+	var publisher;
+
+	function sessionConnectedHandler(event) {
+      publisher = TB.initPublisher('myPublisherDiv');
+      session.publish(publisher);
+       
+      // Subscribe to streams that were in the session when we connected
+      subscribeToStreams(event.streams);
+    }
 
 	function subscribeToStreams(streams) {
     for (i = 0; i < streams.length; i++) {
         var stream = streams[i];
         if (stream.connection.connectionId != session.connection.connectionId) {
-            session.subscribe(stream);
+						
+						var div = document.createElement('div');
+        		div.setAttribute('id', 'stream' + streams[i].streamId);
+        		publisherDiv = document.getElementById("myPublisherDiv");
+						document.body.insertBefore(div, publisherDiv);                   
+        		session.subscribe(stream, div.id, {width: 380, height: 285});
         }
     }
 	}
@@ -26,3 +36,5 @@
 
 </script>
 <%= @topic_id %>
+
+<div id="myPublisherDiv"></div>
