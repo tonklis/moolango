@@ -10,8 +10,6 @@
 	function sessionConnectedHandler(event) {
       publisher = TB.initPublisher('myPublisherDiv');
       session.publish(publisher);
-       
-      // Subscribe to streams that were in the session when we connected
       subscribeToStreams(event.streams);
     }
 

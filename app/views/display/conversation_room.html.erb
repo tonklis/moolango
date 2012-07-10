@@ -10,8 +10,6 @@
 	function sessionConnectedHandler(event) {
       publisher = TB.initPublisher('myPublisherDiv');
       session.publish(publisher);
-       
-      // Subscribe to streams that were in the session when we connected
       subscribeToStreams(event.streams);
     }
 
@@ -19,7 +17,7 @@
     for (i = 0; i < streams.length; i++) {
         var stream = streams[i];
         if (stream.connection.connectionId != session.connection.connectionId) {
-						
+						$('#waitingDiv').remove();
 						var div = document.createElement('div');
         		div.setAttribute('id', 'stream' + streams[i].streamId);
         		publisherDiv = document.getElementById("myPublisherDiv");
@@ -38,3 +36,6 @@
 <%= @topic_id %>
 
 <div id="myPublisherDiv"></div>
+<div id="waitingDiv">
+	<%= image_tag "spinner.gif" %>
+</div>
