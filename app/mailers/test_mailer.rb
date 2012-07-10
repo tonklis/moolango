@@ -4,7 +4,7 @@ class TestMailer < ActionMailer::Base
 	def new_conversation(topic, token)
     @topic = topic
 		@token = token
-		mail(:to => "tonklis@gmail.com", :subject => "New conversation, #{Topic.find(topic).name})
+		mail(:to => "williambabeaux@gmail.com, tonklis@gmail.com", :subject => "New conversation, #{Topic.find(topic).name})
   end
 	
 end
