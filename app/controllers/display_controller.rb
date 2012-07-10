@@ -30,7 +30,7 @@ class DisplayController < ApplicationController
     session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
     @session = opentok.create_session request.remote_addr, session_properties
 
-		TestMailer.new_conversation(@topic_id, @session).deliver	
+		TestMailer.new_conversation(@topic_id, @session).deliver
 
 	end
 
@@ -41,6 +41,7 @@ class DisplayController < ApplicationController
 	def join_conversation_room
 
 		@session = params[:session]
+		@topic_id = params[:topic_id]
 		@api_key = ENV['OPENTOK_API_KEY']
 			
 	end 
