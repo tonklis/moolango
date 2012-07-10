@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  super_id: 1
+  thumbnail_url: MyString
+
+two:
+  name: MyString
+  description: MyString
+  super_id: 1
+  thumbnail_url: MyString
