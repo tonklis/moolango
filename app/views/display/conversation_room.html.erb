@@ -36,7 +36,8 @@
 
 <div id="myPublisherDiv"></div>
 <div id="waitingDiv">
+	<p>Waiting for user to connect, please wait.</p>
 	<%= image_tag "spinner.gif" %>
 </div>
 
-<div style="width:427px" id="__ss_<%=@slideshare_params[:small_id]%>"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/billbabeaux/<%=@slideshare_params[:name_hyp]%>-<%=@slideshare_params[:small_id]%>" title="<%=@slideshare_params[:name_cap]%>" target="_blank"><%=@slideshare_params[:name_cap]%></a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
+<div style="width:427px; float:right" id="__ss_<%=@slideshare_params[:small_id]%>"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/billbabeaux/<%=@slideshare_params[:name_hyp]%>-<%=@slideshare_params[:small_id]%>" title="<%=@slideshare_params[:name_cap]%>" target="_blank"><%=@slideshare_params[:name_cap]%></a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
