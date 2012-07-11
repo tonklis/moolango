@@ -31,7 +31,8 @@ class DisplayController < ApplicationController
     @session = opentok.create_session request.remote_addr, session_properties
 
 		TestMailer.new_conversation(@topic_id, @session).deliver
-
+		
+		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
 	end
 
 	def admin_room	
@@ -44,6 +45,7 @@ class DisplayController < ApplicationController
 		@topic_id = params[:topic_id]
 		@api_key = ENV['OPENTOK_API_KEY']
 			
+		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
 	end 
 
 end
