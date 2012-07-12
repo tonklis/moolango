@@ -8,7 +8,7 @@
 	var publisher;
 
 	function sessionConnectedHandler(event) {
-      publisher = TB.initPublisher('myPublisherDiv');
+      publisher = TB.initPublisher(<%= @api_key %>, 'myPublisherDiv');
       session.publish(publisher);
       subscribeToStreams(event.streams);
     }
@@ -17,12 +17,7 @@
     for (i = 0; i < streams.length; i++) {
         var stream = streams[i];
         if (stream.connection.connectionId != session.connection.connectionId) {
-						$('#waitingDiv').remove();
-						var div = document.createElement('div');
-        		div.setAttribute('id', 'stream' + streams[i].streamId);
-        		publisherDiv = document.getElementById("myPublisherDiv");
-						document.body.insertBefore(div, publisherDiv);                   
-        		session.subscribe(stream, div.id, {width: 380, height: 285});
+        		session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
         }
     }
 	}
@@ -33,10 +28,20 @@
 		
 
 </script>
-<div style="width:427px; float:right; padding-right: 150px;" id="__ss_<%=@slideshare_params[:small_id]%>"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/billbabeaux/<%=@slideshare_params[:name_hyp]%>-<%=@slideshare_params[:small_id]%>" title="<%=@slideshare_params[:name_cap]%>" target="_blank"><%=@slideshare_params[:name_cap]%></a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
 
-<div id="myPublisherDiv"></div>
-<div id="waitingDiv">
-	<p>Waiting for user to connect, please wait.</p>
-	<%= image_tag "spinner.gif" %>
+<div class="row">
+	<div class="span6" id="otherSide">
+		<div id="waitingDiv">
+			<p>Waiting for user to connect, please wait.</p>
+			<%= image_tag "spinner.gif" %>
+		</div>
+	</div>
+	<div class="span6">
+		<div style="width:427px; float:right; padding-right: 150px;" id="__ss_<%=@slideshare_params[:small_id]%>"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/billbabeaux/<%=@slideshare_params[:name_hyp]%>-<%=@slideshare_params[:small_id]%>" title="<%=@slideshare_params[:name_cap]%>" target="_blank"><%=@slideshare_params[:name_cap]%></a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
+	</div>
+</div>
+<div class="row">
+	<div class="span4 offset4">
+		<div id="myPublisherDiv"></div>
+	</div>
 </div>

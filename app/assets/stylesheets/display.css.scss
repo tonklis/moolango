@@ -1,3 +1,13 @@
 // Place all the styles related to the display controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	background-color: #9bd6f7;
+}
+
+.title_image{
+	background-image: url('header.png');
+	height: 120px;
+	width: 950px;
+}

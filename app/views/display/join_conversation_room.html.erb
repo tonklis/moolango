@@ -8,7 +8,7 @@
 	var publisher;
 
 	function sessionConnectedHandler(event) {
-      publisher = TB.initPublisher('myPublisherDiv');
+      publisher = TB.initPublisher(<%= @api_key %>, 'myPublisherDiv');
       session.publish(publisher);
       subscribeToStreams(event.streams);
     }
