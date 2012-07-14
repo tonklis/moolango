@@ -1,3 +1,18 @@
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+<script type="text/javascript">
+    var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
+    var channel = pusher.subscribe('test_channel');
+	
+		channel.bind('my_event', function(data) {
+			var new_li = document.createElement('li');
+			if (data.origin == 'true') {
+				new_li.setAttribute('style','background-color:#DDDDDD');
+			}
+			new_li.innerHTML = data.message;
+			$("#chat").append(new_li);
+			$("#new_message")[0].reset();
+		});
+</script>
 <script type="text/javascript">
 
 	var session = TB.initSession('<%= @session %>');
@@ -30,18 +45,49 @@
 </script>
 
 <div class="row">
-	<div class="span6" id="otherSide">
-		<div id="waitingDiv">
-			<p>Waiting for user to connect, please wait.</p>
-			<%= image_tag "spinner.gif" %>
+	<div class="span12">
+		<div class="title">
+			<div class="title_image" ></div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span6">
+		<div id="waitingDivGone">
+			<div id="waitingDiv">
+				<br />
+				<p>Waiting for user to connect, please wait.</p>
+				<%= image_tag "spinner.gif" %>
+			</div>
 		</div>
 	</div>
 	<div class="span6">
-		<div style="width:427px; float:right; padding-right: 150px;" id="__ss_<%=@slideshare_params[:small_id]%>"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/billbabeaux/<%=@slideshare_params[:name_hyp]%>-<%=@slideshare_params[:small_id]%>" title="<%=@slideshare_params[:name_cap]%>" target="_blank"><%=@slideshare_params[:name_cap]%></a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
+		<div id="slideDiv">
+			<div id="__ss_<%=@slideshare_params[:small_id]%>"> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
+		</div>
 	</div>
 </div>
+
 <div class="row">
-	<div class="span4 offset4">
-		<div id="myPublisherDiv"></div>
+	<div class="span6">
+		<div id="outerPublisherDiv">
+			<div id="publisherDiv">
+				<div id="myPublisherDiv"></div>
+			</div>
+		</div>
+	</div>
+	<div class="span6">
+		<div id="slideDiv">
+			<div id="chatDiv">
+				<ul id="chat">
+				</ul>
+				<%= form_for Message.new, remote: true do |f| %>
+					<%= f.text_field :content%>
+					<%= f.hidden_field :origin, :value => true%>
+					<%= f.submit "Send" %>
+				<% end %>
+			</div>
+		</div>
 	</div>
 </div>

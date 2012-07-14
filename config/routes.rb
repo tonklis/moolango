@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :messages
+
   resources :topics
 
   resources :rooms
