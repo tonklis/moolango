@@ -5,7 +5,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-		Pusher['test_channel'].trigger('my_event', {:message => params[:message][:content], :origin => params[:message][:origin]})
+		event = params[:message][:session]
+		Pusher['test_channel'].trigger(event, {:message => params[:message][:content], :origin => params[:message][:origin]})
     #@message = Message.create!(params[:message])
   end
 

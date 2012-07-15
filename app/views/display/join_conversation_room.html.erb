@@ -84,6 +84,7 @@
 				</ul>
 				<%= form_for Message.new, remote: true do |f| %>
 					<%= f.text_field :content%>
+					<%= f.hidden_field :session, :value => @session %>
 					<%= f.hidden_field :origin, :value => false%>
 					<%= f.submit "Send" %>
 				<% end %>
