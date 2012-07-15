@@ -3,13 +3,14 @@
     var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
     var channel = pusher.subscribe('test_channel');
 	
-		channel.bind('my_event', function(data) {
+		channel.bind('<%= @session %>', function(data) {
 			var new_li = document.createElement('li');
 			if (data.origin == 'true') {
 				new_li.setAttribute('style','background-color:#DDDDDD');
 			}
 			new_li.innerHTML = data.message;
 			$("#chat").append(new_li);
+			document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 			$("#new_message")[0].reset();
 		});
 </script>
@@ -41,7 +42,6 @@
     subscribeToStreams(event.streams);
 	}
 		
-
 </script>
 
 <div class="row">
