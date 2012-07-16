@@ -1,9 +1,9 @@
 <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
 <script type="text/javascript">
     var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
-    var channel = pusher.subscribe('<%= session[6..11]%>');
+    var channel = pusher.subscribe('<%= @session.to_s[6..11] %>');
 	
-		channel.bind('<%= @session[0..5] %>', function(data) {
+		channel.bind('<%= @session.to_s[0..5] %>', function(data) {
 			var new_li = document.createElement('li');
 			if (data.origin == 'true') {
 				new_li.setAttribute('style','background-color:#DDDDDD');
@@ -16,12 +16,10 @@
 </script>
 <script type="text/javascript">
 
+var publisher;
+	var stream;
 	var session = TB.initSession('<%= @session %>');
-	session.addEventListener('sessionConnected', sessionConnectedHandler);
-  session.addEventListener('streamCreated', streamCreatedHandler); 
-	session.connect(<%= @api_key %>, "devtoken");
-
-	var publisher;
+	connect();
 
 	function sessionConnectedHandler(event) {
       publisher = TB.initPublisher(<%= @api_key %>, 'myPublisherDiv');
@@ -31,7 +29,7 @@
 
 	function subscribeToStreams(streams) {
     for (i = 0; i < streams.length; i++) {
-        var stream = streams[i];
+        stream = streams[i];
         if (stream.connection.connectionId != session.connection.connectionId) {
         		session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
         }
@@ -40,6 +38,24 @@
 
 	function streamCreatedHandler(event) {
     subscribeToStreams(event.streams);
+	}
+
+	function connect(){
+		session.addEventListener('sessionConnected', sessionConnectedHandler);
+	  session.addEventListener('streamCreated', streamCreatedHandler); 
+		session.connect(<%= @api_key %>, "devtoken");
+	}
+
+	function reconnect(){
+		var div = document.createElement('div');
+		div.setAttribute('id','myPublisherDiv');
+		$("#publisherDiv").append(div);
+
+		session.unpublish(publisher);
+		session.unsubscribe(stream);
+		session.disconnect();
+
+		setTimeout(function(){connect();}, 1000);
 	}
 		
 </script>
@@ -84,9 +100,10 @@
 				</ul>
 				<%= form_for Message.new, remote: true do |f| %>
 					<%= f.text_field :content%>
-					<%= f.hidden_field :session, :value => @session[0..11] %>
+					<%= f.hidden_field :session, :value => @session.to_s[0..11] %>
 					<%= f.hidden_field :origin, :value => false%>
 					<%= f.submit "Send" %>
+					<button type="button" onClick="reconnect();">Reconnect</button>
 				<% end %>
 			</div>
 		</div>
