@@ -1,9 +1,9 @@
 <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
 <script type="text/javascript">
     var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
-    var channel = pusher.subscribe('test_channel');
+    var channel = pusher.subscribe('<%= session[6..11]%>');
 	
-		channel.bind('<%= @session %>', function(data) {
+		channel.bind('<%= @session[0..5] %>', function(data) {
 			var new_li = document.createElement('li');
 			if (data.origin == 'true') {
 				new_li.setAttribute('style','background-color:#DDDDDD');
@@ -84,7 +84,7 @@
 				</ul>
 				<%= form_for Message.new, remote: true do |f| %>
 					<%= f.text_field :content%>
-					<%= f.hidden_field :session, :value => @session %>
+					<%= f.hidden_field :session, :value => @session[0..11] %>
 					<%= f.hidden_field :origin, :value => false%>
 					<%= f.submit "Send" %>
 				<% end %>
