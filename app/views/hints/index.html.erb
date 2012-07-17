@@ -1,0 +1,27 @@
+<h1>Listing hints</h1>
+
+<table>
+  <tr>
+    <th>Topic</th>
+    <th>Thumbnail</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @hints.each do |hint| %>
+  <tr>
+    <td><%= hint.topic_id %></td>
+    <td><%= hint.thumbnail_url %></td>
+    <td><%= hint.description %></td>
+    <td><%= link_to 'Show', hint %></td>
+    <td><%= link_to 'Edit', edit_hint_path(hint) %></td>
+    <td><%= link_to 'Destroy', hint, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hint', new_hint_path %>

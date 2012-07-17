@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :hints
+
   resources :messages
 
   resources :topics
@@ -12,6 +14,10 @@ Moolango::Application.routes.draw do
 	devise_scope :user do
   	get "logout", :to => "devise/sessions#destroy"
 	end
+
+	match 'interaction' => 'interaction#create', :as => :interaction
+
+	match 'language' => 'display#language', :as => :language
 
 	match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
 

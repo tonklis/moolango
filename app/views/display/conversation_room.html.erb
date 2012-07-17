@@ -1,9 +1,12 @@
 <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
 <script type="text/javascript">
+		var IMAGE_PATH = "http://localhost:3000/assets/<%= Topic.find(@topic_id).name %>_";
     var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
-    var channel = pusher.subscribe('<%= @session.to_s[6..11] %>');
+    var channel_chat = pusher.subscribe('<%= @session.to_s[6..11] %>');
 	
-		channel.bind('<%= @session.to_s[0..5] %>', function(data) {
+		var hints_size = <%= Topic.find(@topic_id).hints.size %>;
+
+		channel_chat.bind('<%= @session.to_s[0..5] %>', function(data) {
 			var new_li = document.createElement('li');
 			if (data.origin == 'true') {
 				new_li.setAttribute('style','background-color:#DDDDDD');
@@ -13,6 +16,19 @@
 			document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 			$("#new_message")[0].reset();
 		});
+
+    var channel_slide = pusher.subscribe('<%= @session.to_s[18..23] %>');
+	
+		channel_slide.bind('<%= @session.to_s[12..17] %>', function(data) {
+			$("#current_slide")[0].value = data.current_image;
+			$("#hint_pic")[0].src = IMAGE_PATH + data.current_image + ".png";
+			$("#hint_text")[0].innerHTML = data.current_text;	
+		});
+
+		function nextInteraction(event){
+			$("#next")[0].value = event;
+		} 
+		
 </script>
 <script type="text/javascript">
 
@@ -102,7 +118,21 @@
 	</div>
 	<div class="span6">
 		<div id="slideDiv">
-			<div id="__ss_<%=@slideshare_params[:small_id]%>"> <iframe src="http://www.slideshare.net/slideshow/embed_code/<%=@slideshare_params[:small_id]%>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> </div>
+		<%= form_tag('/interaction', :remote => true, :id => "new_interaction") do %>
+				<%= hidden_field_tag :session, @session.to_s[12..23] %>
+				<%= hidden_field_tag :origin, true %>
+				<%= hidden_field_tag :next, false %>
+				<%= hidden_field_tag :topic_id, @topic_id %>
+				<%= hidden_field_tag :current_slide, "0" %>
+			<div id="slideImageDiv">
+				<%= submit_tag "Next", :onClick => "nextInteraction(true);"%>
+				<%= submit_tag "Prev", :onClick => "nextInteraction(false);"%>
+				<%= image_tag Topic.find(@topic_id).hints[0].thumbnail_url, :id=>"hint_pic" %>
+			</div>
+			<div id="slideTextDiv">
+				<div id="hint_text"><%= Topic.find(@topic_id).hints[0].description %></div>
+			</div>
+		<% end %>
 		</div>
 	</div>
 </div>
@@ -116,7 +146,6 @@
 		</div>
 	</div>
 	<div class="span6">
-		<div id="slideDiv">
 			<div id="chatDiv">
 				<ul id="chat">
 				</ul>
@@ -128,6 +157,5 @@
 					<button type="button" onClick="reconnect();">Reconnect</button>
 				<% end %>
 			</div>
-		</div>
 	</div>
 </div>

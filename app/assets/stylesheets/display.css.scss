@@ -41,6 +41,21 @@ body {
 	width: 427px;
 	height: 356px;
 	margin: auto;
+	background-color: white;
+}
+
+#slideImageDiv{
+	width: 427px;
+	height: 286px;
+	margin: auto;
+	background-color: red;
+}
+
+#slideTextDiv{
+	width: 427px;
+	height: 70px;
+	margin: auto;
+	background-color: white;
 }
 
 #outerPublisherDiv{
@@ -59,7 +74,7 @@ body {
 }
 
 #chatDiv{
-	width: 100%;
+	width: 427px;
 	height: 220px;
 	margin: auto;
 }
@@ -78,4 +93,12 @@ ul#chat {
 ul#chat li {
   margin: 2px 5px;
   padding: 0;
+}
+
+.no-space [class*="span"] {
+  margin-left: 0;
+}
+
+.fixed-space[class*="span"] {
+	margin-left: 10px;
 }

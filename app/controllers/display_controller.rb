@@ -4,6 +4,14 @@ class DisplayController < ApplicationController
 
 	end
 
+	def language
+
+	end
+
+	def action
+
+	end
+
 	def rooms_listing
 
 		@rooms = Room.where("busy = ?", false)

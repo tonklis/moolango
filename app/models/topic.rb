@@ -1,5 +1,31 @@
 class Topic < ActiveRecord::Base
 
+	has_many :hints
+
+	def next_hint next_slide, slide_number
+		slide_number = slide_number.to_i
+		result = {}
+
+		if next_slide == "true"
+			if slide_number == (self.hints.size-1)
+				puts("ENTRO EN -1")
+				result[:number] = slide_number
+			else
+				result[:number] = slide_number + 1
+			end
+		else
+			if slide_number == 0
+				puts("ENTRO EN 0")
+				result[:number] = slide_number
+			else
+				result[:number] = slide_number - 1
+			end
+		end
+		result[:text] = self.hints[result[:number]].description
+		
+		result
+	end
+
 	def self.get_topic_details(topic_id)
 
 		result = {}

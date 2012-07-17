@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  topic_id: 1
+  thumbnail: MyString
+  description: MyString
+
+two:
+  topic_id: 1
+  thumbnail: MyString
+  description: MyString
