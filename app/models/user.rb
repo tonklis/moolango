@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	has_many :created_rooms, :class_name => "Room", :foreign_key => :creator_id
 	has_many :joined_rooms, :class_name => "Room", :foreign_key => :joiner_id
 
-	validates_presence_of :firstname, :lastname, :email, :password, :password_confirmation
+	validates_presence_of :firstname, :email, :password
 
 	def self.find_for_facebook_oauth(auth, signed_in_resource = nil)
     user = User.where(:email => auth.info.email).first
