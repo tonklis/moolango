@@ -16,33 +16,46 @@
 </script>
 <script type="text/javascript">
 
-var publisher;
+	var publisher;
 	var stream;
+	var audioOnly = true;
 	var session = TB.initSession('<%= @session %>');
 	connect();
 
 	function sessionConnectedHandler(event) {
-      publisher = TB.initPublisher(<%= @api_key %>, 'myPublisherDiv');
-      session.publish(publisher);
-      subscribeToStreams(event.streams);
+		var publisherProperties = new Object();
+		publisherProperties.publishVideo = false;
+		publisher = TB.initPublisher(<%= @api_key %>, 'myPublisherDiv', publisherProperties);
+		session.publish(publisher);
+		
+		var parentDiv = document.getElementById("publisherDiv");
+		var botonDiv = document.createElement('div');
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
+		botonDiv.style.position = 'absolute';
+		botonDiv.style.left = '80px';
+		botonDiv.style.top =  '175px';
+		parentDiv.appendChild(botonDiv);
+		
+		subscribeToStreams(event.streams);
     }
 
 	function subscribeToStreams(streams) {
-    for (i = 0; i < streams.length; i++) {
-        stream = streams[i];
-        if (stream.connection.connectionId != session.connection.connectionId) {
-        		session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
-        }
-    }
+		for (i = 0; i < streams.length; i++) {
+			stream = streams[i];
+			if (stream.connection.connectionId != session.connection.connectionId) {
+					session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
+			}
+		}
 	}
 
 	function streamCreatedHandler(event) {
-    subscribeToStreams(event.streams);
+		subscribeToStreams(event.streams);
+		document.getElementById("videoBtn").style.display = 'block';
 	}
 
 	function connect(){
 		session.addEventListener('sessionConnected', sessionConnectedHandler);
-	  session.addEventListener('streamCreated', streamCreatedHandler); 
+		session.addEventListener('streamCreated', streamCreatedHandler); 
 		session.connect(<%= @api_key %>, "devtoken");
 	}
 
@@ -56,6 +69,15 @@ var publisher;
 		session.disconnect();
 
 		setTimeout(function(){connect();}, 1000);
+	}
+	
+	function enableDisableVideo() {
+		audioOnly = !audioOnly
+		publisher.publishVideo(!audioOnly);
+		if (audioOnly)
+			document.getElementById("videoBtn").value = "Turn on video";
+		else
+			document.getElementById("videoBtn").value = "Turn off video";
 	}
 		
 </script>
@@ -88,7 +110,7 @@ var publisher;
 <div class="row">
 	<div class="span6">
 		<div id="outerPublisherDiv">
-			<div id="publisherDiv">
+			<div id="publisherDiv" style="position:relative;">
 				<div id="myPublisherDiv"></div>
 			</div>
 		</div>
