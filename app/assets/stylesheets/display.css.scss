@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-	background-image: url('background.png');
+	background-color: #9bd7f4;
+}
+
+.header {
+	margin-top: 20px;
 }
 
 .title{
@@ -15,6 +19,50 @@ body {
 	background-image: url('header.png');
 	height: 50px;
 	width: 100%;
+}
+
+.landing_header{
+	color: #ffffff;
+	font-family: "Arial";
+	font-weight: bold;
+	text-align: center;
+}
+
+.landing_body{
+	width: auto;
+	height: 60px;
+	margin-top: 35px;
+	text-align: center;
+}
+
+.landing_begin_button{
+	text-align: right;
+	margin-top: 50px;
+	margin-right: 50px;
+}
+
+.landing_background_image{
+	width: 95%;
+	margin-top: -7.2%;
+	z-index:-1;
+	position: absolute;
+}
+
+.nav_buttons{
+	width:100%;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.landing_left_hemisphere{
+	width: 95%; 
+	height: 300px;
+	margin-left: 50px;
+}
+
+.landing_right_hemisphere{
+	width: 100%; 
+	height: 300px;
 }
 
 #waitingDiv{
