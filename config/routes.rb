@@ -27,6 +27,8 @@ Moolango::Application.routes.draw do
 
 	match 'joined_room' => 'display#joined_room', :as => :joined_room
 	
+	match 'action' => 'display#action', :as => :action
+	
 	match 'topics_list' => 'display#topics_list', :as => :topics_list
 
 	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
