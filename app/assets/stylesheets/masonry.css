@@ -1,0 +1,23 @@
+
+img {
+	margin-top: 10px;
+	max-width: 250px;
+}
+
+#content {
+	width: '100%';
+}
+
+.box {
+	float: none;
+}
+
+.centered { 
+	margin: 0 auto; 
+}
+
+.one-edge-shadow {
+	-webkit-box-shadow: 0 8px 6px -4px black;
+	   -moz-box-shadow: 0 8px 6px -4px black;
+	        box-shadow: 0 8px 6px -4px black;
+}

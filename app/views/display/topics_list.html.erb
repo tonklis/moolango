@@ -1,11 +1,74 @@
-<ol>
-<li><%= link_to "Lost", "conversation_room/1" %></li>
-<li><%= link_to "Batman", "conversation_room/2" %></li>
-<li><%= link_to "Avatar", "conversation_room/3" %></li>
-<li><%= link_to "Up", "conversation_room/4" %></li>
-<li><%= link_to "Mario Kart", "conversation_room/5" %></li>
-<li><%= link_to "Game of Thrones", "conversation_room/6" %></li>
-<li><%= link_to "Steve Jobs", "conversation_room/7" %></li>
-<li><%= link_to "Simpsons", "conversation_room/8" %></li>
-<li><%= link_to "Harry Potter", "conversation_room/9" %></li>
-</ol>
+<head>
+	<link href="assets/masonry.css" rel="stylesheet">
+</head>
+
+<body>
+	
+	<div>
+		<div>
+			Select a topic to talk about it
+		</div>
+		
+		<div id="content" class="centered">
+			<div class="box one-edge-shadow">
+				<%= image_tag "webpage/topics/sustainability.jpg"%>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= image_tag "webpage/topics/popart.jpg"%>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= image_tag "webpage/topics/michaeljackson.jpg"%>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/4"><%= image_tag "webpage/topics/up.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/2"><%= image_tag "webpage/topics/darkknightrises.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/1"><%= image_tag "webpage/topics/lost.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= image_tag "webpage/topics/nyc.jpg"%>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/7"><%= image_tag "webpage/topics/stevejobs.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/8"><%= image_tag "webpage/topics/simpsons.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/6"><%= image_tag "webpage/topics/gameofthrones.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/3"><%= image_tag "webpage/topics/avatar.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/9"><%= image_tag "webpage/topics/harrypotter.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<a href="http://moolango.herokuapp.com/conversation_room/5"><%= image_tag "webpage/topics/mariokart.jpg"%></a>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= image_tag "webpage/topics/aliens.jpg"%>
+			</div>
+		</div>
+	</div>
+	
+	<script src="assets/jquery-1.7.1.min.js"></script>
+    <script src="assets/jquery.masonry.min.js"></script>
+	<script type="text/javascript">
+	
+	$(function(){
+		var $container = $('#content');
+     
+       $container.imagesLoaded( function(){
+			$container.masonry({
+				itemSelector : '.box',
+				gutterWidth: 5,
+				isFitWidth: true
+			});
+		});
+	});
+	</script>
+</body>
