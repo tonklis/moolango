@@ -13,6 +13,8 @@ Moolango::Application.routes.draw do
 	
 	devise_scope :user do
   	get "logout", :to => "devise/sessions#destroy"
+		get "signin", :to => "devise/sessions#new"
+		get "signup", :to => "devise/registrations#new"
 	end
 
 	match 'interaction' => 'interaction#create', :as => :interaction
