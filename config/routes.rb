@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :languages
+
   resources :hints
 
   resources :messages

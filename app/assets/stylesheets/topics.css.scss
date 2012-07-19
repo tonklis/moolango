@@ -1,3 +1,54 @@
 // Place all the styles related to the Topics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+* {
+margin: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	background-color: #9bd7f4;
+	height: 95%;
+	width: 95%;
+}
+
+.topic_header{
+	color: #FFFFFF;
+	text-align: center;
+	margin: 5px 0 20px 0;
+}
+
+.padding{
+	padding-top: 130px;
+}
+
+.header {
+	height: 150px;
+	margin-top: 20px;	
+}
+
+.footer, .push {
+	height: 25px;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.sheight[class*="container"] {
+	min-height: 98%;
+	height: auto !important;
+	height: 100%;
+	margin: -130px auto -25px;
+}
+
+.nav_buttons{
+	width:100%;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.no-space [class*="span"] {
+  margin-left: 0;
+}

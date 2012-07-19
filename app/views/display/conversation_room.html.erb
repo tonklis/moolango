@@ -1,6 +1,7 @@
+<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
 <script type="text/javascript">
-		var IMAGE_PATH = "http://localhost:3000/assets/<%= Topic.find(@topic_id).name %>_";
+		var IMAGE_PATH = "http://localhost:3000/assets/<%= Topic.find(@topic_id).name %>/";
     var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
     var channel_chat = pusher.subscribe('<%= @session.to_s[6..11] %>');
 	
@@ -21,7 +22,7 @@
 	
 		channel_slide.bind('<%= @session.to_s[12..17] %>', function(data) {
 			$("#current_slide")[0].value = data.current_image;
-			$("#hint_pic")[0].src = IMAGE_PATH + data.current_image + ".png";
+			$("#hint_pic")[0].src = IMAGE_PATH + (parseInt(data.current_image) + 1) + ".png";
 			$("#hint_text")[0].innerHTML = data.current_text;	
 		});
 

@@ -9,24 +9,11 @@
 	<div class="span8 offset1">
 		<div style="width: 120%;">
 			<div class="row-fluid">
-				<div class="span2">
-					<%= image_tag "webpage/english.png", :alt => "english" %>
-				</div>
-				<div class="span2">
-					<%= image_tag "webpage/spanish.png", :alt => "english" %>
-				</div>
-				<div class="span2">
-					<%= image_tag "webpage/english.png", :alt => "english" %>
-				</div>
-				<div class="span2">
-					<%= image_tag "webpage/english.png", :alt => "english" %>
-				</div>
-				<div class="span2">
-					<%= image_tag "webpage/english.png", :alt => "english" %>
-				</div>
-				<div class="span2">
-					<%= image_tag "webpage/english.png", :alt => "english" %>
-				</div>
+				<% Language.all.each do |language| %>
+					<div class="span2">
+						<%= link_to (image_tag language.thumbnail_url, :alt => language.name), "topics_list?#{language.id}" %>
+					</div>
+				<% end %>
 			</div>	
 		</div>			
 	</div>

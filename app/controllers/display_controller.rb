@@ -32,6 +32,8 @@ class DisplayController < ApplicationController
 
 	def topics_list
 
+		session[:language] = params[:id]
+		render :layout => "topics"
 	end
 
 	def conversation_room
