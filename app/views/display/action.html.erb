@@ -1,3 +1,13 @@
+<style>
+body {
+	background-color: #9bd7f4;
+	height: 100%;
+	background-attachment: fixed; 
+	background-image: url("/assets/webpage/globe.png"); 
+	background-repeat: no-repeat; 
+	background-position: bottom; 
+}
+</style>
 <div class="header">
 	<div class="row">
 		<div class="span2">
@@ -30,7 +40,7 @@
 					</div>
 					<div class="span1">
 						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/login.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
+						<%= link_to image_tag("webpage/login_button.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
 						</div>
 					</div>
 				</div>
@@ -38,27 +48,23 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span5">
-			<div style="width:510px; height:200px;">
-				<%= image_tag "webpage/earn_btn.jpg"%>
+		<div class="action_body">
+			<div class="span5">
+				<div>
+					<%= image_tag "webpage/earn_button.png"%>
+				</div>
 			</div>
+			<div class="span5">
+					<%= link_to image_tag("webpage/practice_button.png"), :language %>
+				</div>
+			</div>	
 		</div>
-		<div class="span2">
-			<div style="width:100px; height:200px;">
-			</div>
-		</div>
-		<div class="span5">
-			<div style="width:510px; height:200px;">
-				<!--<a href=""><%= image_tag "webpage/practice_btn.png"%></a>-->
-				<%= link_to image_tag("webpage/practice_btn.jpg"), :language %>
-			</div>
-		</div>	
 	</div>
+</div>
+<div class="footer">
 	<div class="row">
 		<div class="span12">
-			<div class="landing_background_image">
-			<%= image_tag "webpage/globe.png", :alt => "HTML globe footer"%>
-			</div>
+		FOOTER
 		</div>
 	</div>
 </div>

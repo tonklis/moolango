@@ -1,7 +1,11 @@
 class DisplayController < ApplicationController
 
-	def index
+	before_filter :authenticate_user!, :except => [:index]
 
+	def index
+		if signed_in?
+			redirect_to action_path
+		end
 	end
 
 	def language

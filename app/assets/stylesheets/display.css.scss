@@ -2,12 +2,42 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+* {
+margin: 0;
+}
+
+html {
+	height: 100%;
+}
+
 body {
 	background-color: #9bd7f4;
+	height: 100%;
 }
 
 .header {
-	margin-top: 20px;
+	min-height: 95%;
+	height: auto !important;
+	height: 100%;
+	margin: 20px auto -10px;
+}
+
+.footer, .push {
+	height: 10px;
+}
+
+.next_button{
+	background-image: url("webpage/next_button.png");
+	min-width: 96px;
+	min-height: 43px;
+}
+
+.sheight[class*="container"] {
+	height: 100%;
+}
+
+.landing_background_image{
+	z-index:-1;
 }
 
 .title{
@@ -29,10 +59,19 @@ body {
 }
 
 .landing_body{
-	width: auto;
 	height: 60px;
 	margin-top: 35px;
 	text-align: center;
+}
+
+.signup_labels{
+	margin: 1px 0 10px 5px;
+}
+
+.signup_body{
+	width: 100%;
+	text-align: left;
+	margin-left: 50px;
 }
 
 .landing_begin_button{
@@ -41,11 +80,21 @@ body {
 	margin-right: 50px;
 }
 
+.action_body{
+	margin: 70px 50px auto 50px;
+	height: 200px;
+}
+
+.landing_next_button{
+	text-align: right;
+	margin-top: 50px;
+	margin-right: 200px;
+}
+
 .landing_background_image{
 	width: 95%;
-	margin-top: -7.2%;
 	z-index:-1;
-	position: absolute;
+	position: relative;
 }
 
 .nav_buttons{
