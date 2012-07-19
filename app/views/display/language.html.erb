@@ -1,35 +1,46 @@
-<div class="row">
-		<div class="span3">
-			<div style="width: 200px; height: 100px; background-color: blue;">
-				Moolango
+<style>
+body {
+	background-color: #9bd7f4;
+	height: 100%;
+	background-attachment: fixed; 
+	background-image: url("/assets/webpage/globe.png"); 
+	background-repeat: no-repeat; 
+	background-position: bottom; 
+}
+</style>
+<div class="header">
+	<div class="row">
+		<div class="span2">
+			<div style="width: 100%; height: 120px;">
+			<%= link_to image_tag("webpage/logo.png", :alt => "Moolango logo"), :root %>
 			</div>
 		</div>
-		<div class="span5">
-			<div style="width: 450px; height: 100px; background-color: orange;">
-				Make some Moola speaking your lango!
+		<div class="span7">
+			<div style="width: 100%; height: 120px;">
+				<%= image_tag "webpage/banner_biplane.png", :alt => "Make some moola speaking your lango" %>
 			</div>
 		</div>
 		<div class="span3">
 			<div class="row no-space">
-				<div style="width: 300px; height: 100px; background-color: red;">
+				<div style="width: 100%; height: 150px;">
 					<div class="span1">
-						<div style="width:50px; height: 50px; background-color: blue; margin-top: 20px;">
-						TWI
+						<div class="nav_buttons">
+						<%= link_to image_tag("webpage/twitter.png", :alt => "Twitter button"), "http://twitter.com/Moolango", :target => "_blank" %>
 						</div>
 					</div>
 					<div class="span1">
-						<div style="width:50px; height: 50px; background-color: white; margin-top: 20px;">
-						FAC
+						<div class="nav_buttons">
+						<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button", :style => "margin-top: 2px;"), "http://facebook.com/Moolango", :target => "_blank" %>
 						</div>
 					</div>
 					<div class="span1">
-						<div style="width:50px; height: 50px; background-color: yellow; margin-top: 20px;">
-						BLO
+						<div class="nav_buttons">
+						<%= link_to image_tag("webpage/blog.png", :alt => "Blog button"), "http://blog.moolango.com", :target => "_blank" %>
 						</div>
 					</div>
 					<div class="span1">
-						<div style="width:70px; height: 70px; background-color: magenta; margin-top: 20px;">
-						ACCT
+						<div class="nav_buttons">
+						<%= link_to image_tag("webpage/login_button.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
 						</div>
 					</div>
 				</div>
@@ -38,53 +49,43 @@
 	</div>
 	<div class="row">
 		<div class="span6 offset3">
-			<div style="width: 450px; height: 100px; background-color: yellow;">
-				CHILL
+			<div style="height: 80px;">
+			<%= image_tag "webpage/language_to_practice.png", :alt => "click on the language to begin"%>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span8 offset1">
-			<div style="width: 900px; height: 300px; background-color: green;">
+			<div style="width: 120%;">
 				<div class="row-fluid">
 					<div class="span2">
-						<div style="width: 130px; height: 130px; background-color: white; text-align: center;">
-							SPANISH
-						</div>
+						<%= image_tag "webpage/english.png", :alt => "english" %>
 					</div>
 					<div class="span2">
-						<div style="width: 130px; height: 130px; background-color: grey; text-align: center;">
-							ENGLISH
-						</div>
+						<%= image_tag "webpage/spanish.png", :alt => "english" %>
 					</div>
 					<div class="span2">
-						<div style="width: 130px; height: 130px; background-color: white; text-align: center;">
-						PORTUGUESE
-						</div>
+						<%= image_tag "webpage/english.png", :alt => "english" %>
 					</div>
 					<div class="span2">
-						<div style="width: 130px; height: 130px; background-color: grey; text-align: center;">
-							CHINESE
-						</div>
+						<%= image_tag "webpage/english.png", :alt => "english" %>
 					</div>
 					<div class="span2">
-						<div style="width: 130px; height: 130px; background-color: white; text-align: center;">
-							FRENCH
-						</div>
+						<%= image_tag "webpage/english.png", :alt => "english" %>
 					</div>
 					<div class="span2">
-						<div style="width: 130px; height: 130px; background-color: white; text-align: center;">
-							JAPANESE
-						</div>
+						<%= image_tag "webpage/english.png", :alt => "english" %>
 					</div>
 				</div>	
 			</div>			
 		</div>
 	</div>
+</div>
+<div class="footer">
 	<div class="row">
-		<div class="span6 offset1">
-			<div style="background-color:red; width: 850px; height: 350px; margin-top: -200px; z-index:-1; position: relative;">
-			</div>
+		<div class="span12">
+		FOOTER
 		</div>
 	</div>
+</div>
 
