@@ -1,79 +1,22 @@
-<style>
-body {
-	background-color: #9bd7f4;
-	height: 100%;
-	background-attachment: fixed; 
-	background-image: url("/assets/webpage/globe.png"); 
-	background-repeat: no-repeat; 
-	background-position: bottom; 
-}
-</style>
-<div class="header">
-	<div class="row">
-		<div class="span2">
-			<div style="width: 100%; height: 120px;">
-			<%= link_to image_tag("webpage/logo.png", :alt => "Moolango logo"), :root %>
-			</div>
-		</div>
-		<div class="span7">
-			<div style="width: 100%; height: 120px;">
-				<%= image_tag "webpage/banner_biplane.png", :alt => "Make some moola speaking your lango" %>
-			</div>
-		</div>
-		<div class="span3">
-			<div class="row no-space">
-				<div style="width: 100%; height: 150px;">
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/twitter.png", :alt => "Twitter button"), "http://twitter.com/Moolango", :target => "_blank" %>
-						</div>
-					</div>
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button", :style => "margin-top: 2px;"), "http://facebook.com/Moolango", :target => "_blank" %>
-						</div>
-					</div>
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/blog.png", :alt => "Blog button"), "http://blog.moolango.com", :target => "_blank" %>
-						</div>
-					</div>
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/login_button.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
-						</div>
-					</div>
-				</div>
-			</div>
+<div class="row">
+	<div class="span6">
+		<div class="landing_left_hemisphere">
+			<iframe src="http://player.vimeo.com/video/41532013?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span6">
-			<div class="landing_left_hemisphere">
-				<iframe src="http://player.vimeo.com/video/41532013?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	<div class="span6">
+		<div class="landing_right_hemisphere">
+			<div class="signup_body">
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+ 				<%= devise_error_messages! %>
+				<%= image_tag "webpage/firstname_field.png", :class => "signup_labels" %><%= f.text_field :firstname %><br/>
+				<%= image_tag "webpage/email_field.png", :class => "signup_labels" %><%= f.text_field :email %><br/>
+				<%= image_tag "webpage/password_field.png", :class => "signup_labels" %><%= f.password_field :password  %>
+			</div>
+			<div class="landing_next_button">
+				<%= f.submit "", :class => "next_button" %>
 			</div>
 		</div>
-		<div class="span6">
-			<div class="landing_right_hemisphere">
-				<div class="signup_body">
-					<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
- 	 				<%= devise_error_messages! %>
-					<%= image_tag "webpage/firstname_field.png", :class => "signup_labels" %><%= f.text_field :firstname %><br/>
-					<%= image_tag "webpage/email_field.png", :class => "signup_labels" %><%= f.text_field :email %><br/>
-					<%= image_tag "webpage/password_field.png", :class => "signup_labels" %><%= f.password_field :password  %>
-				</div>
-				<div class="landing_next_button">
-					<%= f.submit "", :class => "next_button" %>
-				</div>
-			</div>
-			<% end %>
-		</div>	
-	</div>
-</div>
-<div class="footer">
-	<div class="row">
-		<div class="span12">
-		FOOTER
-		</div>
-	</div>
+		<% end %>
+	</div>	
 </div>

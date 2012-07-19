@@ -9,8 +9,53 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div class="container sheight">
-	<%= yield %>
-</div>
+	<div class="container">
+		<div class="header">
+			<div class="row">
+				<div class="span2">
+					<div style="width: 100%; height: 120px;">
+					<%= link_to image_tag("webpage/logo.png", :alt => "Moolango logo"), :root %>
+					</div>
+				</div>
+				<div class="span7">
+					<div style="width: 100%; height: 120px;">
+						<%= image_tag "webpage/banner_biplane.png", :alt => "Make some moola speaking your lango" %>
+					</div>
+				</div>
+				<div class="span3">
+					<div class="row no-space">
+						<div style="width: 100%; height: 150px;">
+							<div class="span1">
+								<div class="nav_buttons">
+								<%= link_to image_tag("webpage/twitter.png", :alt => "Twitter button"), "http://twitter.com/Moolango", :target => "_blank" %>
+								</div>
+							</div>
+							<div class="span1">
+								<div class="nav_buttons">
+								<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button", :style => "margin-top: 2px;"), "http://facebook.com/Moolango", :target => "_blank" %>
+								</div>
+							</div>
+							<div class="span1">
+								<div class="nav_buttons">
+								<%= link_to image_tag("webpage/blog.png", :alt => "Blog button"), "http://blog.moolango.com", :target => "_blank" %>
+								</div>
+							</div>
+							<div class="span1">
+								<div class="nav_buttons">
+								<%= link_to image_tag("webpage/login_button.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container sheight">
+		<%= yield %>
+	</div>
+	<div class="footer">
+		Moolango, LLC 2012
+	</div>
 </body>
 </html>

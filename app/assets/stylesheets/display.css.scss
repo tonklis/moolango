@@ -12,18 +12,23 @@ html {
 
 body {
 	background-color: #9bd7f4;
-	height: 100%;
+	height: 95%;
+	width: 95%;
+	background-attachment: fixed; 
+	background-image: url("/assets/webpage/globe.png"); 
+	background-repeat: no-repeat; 
+	background-position: bottom; 
 }
 
 .header {
-	min-height: 95%;
-	height: auto !important;
-	height: 100%;
-	margin: 20px auto -10px;
+	height: 150px;
+	margin-top: 20px;	
 }
 
 .footer, .push {
-	height: 10px;
+	height: 25px;
+	color: #FFFFFF;
+	text-align: center;
 }
 
 .next_button{
@@ -33,7 +38,10 @@ body {
 }
 
 .sheight[class*="container"] {
+	min-height: 98%;
+	height: auto !important;
 	height: 100%;
+	margin: -130px auto -25px;
 }
 
 .landing_background_image{
@@ -81,7 +89,7 @@ body {
 }
 
 .action_body{
-	margin: 70px 50px auto 50px;
+	margin: 180px 30px auto 90px;
 	height: 200px;
 }
 

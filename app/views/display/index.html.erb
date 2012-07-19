@@ -1,79 +1,22 @@
-<style>
-body {
-	background-color: #9bd7f4;
-	height: 100%;
-	background-attachment: fixed; 
-	background-image: url("/assets/webpage/globe.png"); 
-	background-repeat: no-repeat; 
-	background-position: bottom; 
-}
-</style>
-<div class="header">
-	<div class="row">
-		<div class="span2">
-			<div style="width: 100%; height: 120px;">
-			<%= link_to image_tag("webpage/logo.png", :alt => "Moolango logo"), :root %>
-			</div>
+<div class="row">
+	<div class="span6">
+		<div class="landing_left_hemisphere">
+			<iframe src="http://player.vimeo.com/video/41532013?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
-		<div class="span7">
-			<div style="width: 100%; height: 120px;">
-				<%= image_tag "webpage/banner_biplane.png", :alt => "Make some moola speaking your lango" %>
+	</div>
+	<div class="span6">
+		<div class="landing_right_hemisphere">
+			<h1 class="landing_header">
+				ENJOYABLE, AFFORDABLE, <br /> INSTANT LANGUAGE PRACTICE <br /> ABOUT STUFF YOU LOVE
+			</h1>
+			<div class="landing_body">
+			<%= image_tag "webpage/ohyeah.png", :alt => "...oh yeah, and you can make money speaking your language too..." %>
 			</div>
-		</div>
-		<div class="span3">
-			<div class="row no-space">
-				<div style="width: 100%; height: 150px;">
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/twitter.png", :alt => "Twitter button"), "http://twitter.com/Moolango", :target => "_blank" %>
-						</div>
-					</div>
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button", :style => "margin-top: 2px;"), "http://facebook.com/Moolango", :target => "_blank" %>
-						</div>
-					</div>
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/blog.png", :alt => "Blog button"), "http://blog.moolango.com", :target => "_blank" %>
-						</div>
-					</div>
-					<div class="span1">
-						<div class="nav_buttons">
-						<%= link_to image_tag("webpage/login_button.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
-						</div>
-					</div>
+			<div style="width: 100%;">
+				<div class="landing_begin_button">
+					<%= link_to image_tag("webpage/begin_button.png", :alt => "Begin button"), :signup %>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="span6">
-			<div class="landing_left_hemisphere">
-				<iframe src="http://player.vimeo.com/video/41532013?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-			</div>
-		</div>
-		<div class="span6">
-			<div class="landing_right_hemisphere">
-				<h1 class="landing_header">
-					ENJOYABLE, AFFORDABLE, <br /> INSTANT LANGUAGE PRACTICE <br /> ABOUT STUFF YOU LOVE
-				</h1>
-				<div class="landing_body">
-				<%= image_tag "webpage/ohyeah.png", :alt => "...oh yeah, and you can make money speaking your language too..." %>
-				</div>
-				<div style="width: 100%;">
-					<div class="landing_begin_button">
-						<%= link_to image_tag("webpage/begin_button.png", :alt => "Begin button"), :signup %>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>
-</div>
-<div class="footer">
-	<div class="row">
-		<div class="span12">
-		FOOTER
-		</div>
-	</div>
+	</div>	
 </div>
