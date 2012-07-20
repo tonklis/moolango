@@ -47,6 +47,8 @@ class DisplayController < ApplicationController
 		TestMailer.new_conversation(@topic_id, @session).deliver
 		
 		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
+
+		render :layout => "rooms"
 	end
 
 	def admin_room	
@@ -60,6 +62,8 @@ class DisplayController < ApplicationController
 		@api_key = ENV['OPENTOK_API_KEY']
 			
 		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
+		
+		render :layout => "rooms"
 	end 
 
 end

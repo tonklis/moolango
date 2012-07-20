@@ -52,17 +52,6 @@ body {
 	z-index:-1;
 }
 
-.title{
-	height: 90px;
-	width: 100%;
-}
-
-.title_image{
-	background-image: url('header.png');
-	height: 50px;
-	width: 100%;
-}
-
 .landing_header{
 	color: #ffffff;
 	font-family: "Arial";
@@ -124,84 +113,6 @@ body {
 .landing_right_hemisphere{
 	width: 100%; 
 	height: 300px;
-}
-
-#waitingDiv{
-	height: 285px;
-	width: 380px;
-	text-align: center;
-	margin: auto;
-	color: #CCCCCC;
-	background-color: #000000;
-	float: right;
-}
-
-#waitingDivGone{
-	height: 285px;
-	width: 380px;
-	text-align: center;
-	margin: auto;
-	color: #CCCCCC;
-	background-color: #000000;
-	float: right;
-}
-
-#slideDiv{
-	width: 427px;
-	height: 356px;
-	margin: auto;
-	background-color: white;
-}
-
-#slideImageDiv{
-	width: 427px;
-	height: 286px;
-	margin: auto;
-	background-color: red;
-}
-
-#slideTextDiv{
-	width: 427px;
-	height: 70px;
-	margin: auto;
-	background-color: white;
-}
-
-#outerPublisherDiv{
-	height: 220px;
-	width: 380px;
-	text-align: center;
-	margin: auto;
-	float: right;
-}
-
-#publisherDiv{
-	width: 265px;
-	height: 200px;
-	float: right;
-	margin: -40px 0 0 0;
-}
-
-#chatDiv{
-	width: 427px;
-	height: 220px;
-	margin: auto;
-}
-
-ul#chat {
-  list-style: none;
-	background-color: #FFFFFF;
-  padding: 0;
-  width: 100%;
-  height: 110px;
-  border: solid 1px #777;
-  margin: 10px 0;
-  overflow: auto;
-}
-
-ul#chat li {
-  margin: 2px 5px;
-  padding: 0;
 }
 
 .no-space [class*="span"] {
