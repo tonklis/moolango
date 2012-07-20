@@ -95,6 +95,11 @@
 	}
 		
 </script>
+<script>
+$(function(){
+	$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/1.jpg)");
+});	
+</script>
 
 <div class="row">
 	<div class="span6">
