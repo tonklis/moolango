@@ -21,6 +21,8 @@ Moolango::Application.routes.draw do
 
 	match 'interaction' => 'interaction#create', :as => :interaction
 
+	match 'earn' => 'display#earn', :as => :earn
+
 	match 'language' => 'display#language', :as => :language
 
 	match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
