@@ -11,7 +11,7 @@
 			<div class="row-fluid">
 				<% Language.all.each do |language| %>
 					<div class="span2">
-						<%= link_to (image_tag language.thumbnail_url, :alt => language.name), "topics_list?#{language.id}" %>
+						<%= link_to (image_tag language.thumbnail_url, :alt => language.name), "topics_list?id=#{language.id}" %>
 					</div>
 				<% end %>
 			</div>	
