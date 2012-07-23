@@ -7,6 +7,9 @@
 	</div>
 	<div class="span6">
 		<div class="landing_right_hemisphere">
+			<h1 class="signup_header">
+				SIGN IN
+			</h1>
 			<div class="signup_body">
 				<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 				<%= image_tag "webpage/email_field.png", :class => "signup_labels" %><%= f.text_field :email %><br/>

@@ -8,6 +8,7 @@ margin: 0;
 
 html {
 	height: 100%;
+	width: 100%;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
 	height: 95%;
 	width: 95%;
 	background-attachment: fixed; 
-	background-image: url("/assets/webpage/globe.png"); 
+	background-image: url("/assets/webpage/globe.jpg"); 
 	background-repeat: no-repeat; 
 	background-position: bottom; 
 }
@@ -30,9 +31,18 @@ body {
 }
 
 .footer, .push {
-	height: 25px;
+	background-image: url("/assets/webpage/footer.png");
+	height: 37px;
+	text-align: left;
+	width: 105%;
+	margin: 0 0 0 -19px;
+}
+
+.footerText{
+	padding: 12px 0 5px 10px;
 	color: #FFFFFF;
-	text-align: center;
+	font-family: "Arial";
+	font-size: 16px;
 }
 
 .next_button{
@@ -45,7 +55,7 @@ body {
 	min-height: 98%;
 	height: auto !important;
 	height: 100%;
-	margin: -130px auto -25px;
+	margin: -130px auto -30px;
 }
 
 .landing_background_image{
@@ -57,6 +67,14 @@ body {
 	font-family: "Arial";
 	font-weight: bold;
 	text-align: center;
+}
+
+.signup_header{
+	color: #FFFFFF;
+	font-family: "Arial";
+	font-weight: bold;
+	text-align: left;
+	margin: 0 0 20px 50px;
 }
 
 .landing_body{

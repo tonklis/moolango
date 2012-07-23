@@ -4,11 +4,11 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  //= require bootstrap_and_overrides
- //= require topics
+ //= require masonry/topics
 */
 
 #content {
-	width: '100%';
+	width: 100%;
 }
 
 #content img{
@@ -21,7 +21,7 @@
 }
 
 .centered { 
-	margin: 0 auto; 
+	margin: 0 auto 45px; 
 }
 
 .one-edge-shadow {

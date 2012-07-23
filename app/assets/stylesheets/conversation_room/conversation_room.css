@@ -19,6 +19,37 @@ body {
 	width: 95%;
 }
 
+.header {
+	height: 100px;
+}
+
+.sheight[class*="container"] {
+	min-height: 92%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 0 -50px;
+}
+
+.padding{
+	padding-top: 180px;
+}
+
+.footer, .push {
+	background-image: url("/assets/webpage/footer.png");
+	height: 37px;
+	text-align: left;
+	width: 105%;
+	margin: 0 0 0 -18px;
+}
+
+.footerText{
+	margin: 12px;
+	position: absolute;
+	color: #FFFFFF;
+	font-family: "Arial";
+	font-size: 16px;
+}
+
 #outerPublisherDiv{
 	height: 220px;
 	width: 380px;
@@ -96,11 +127,6 @@ ul#chat li {
   padding: 0;
 }
 
-.title{
-	height: 90px;
-	width: 100%;
-}
-
 .title_image{
 	background-image: url('/assets/header.png');
 	height: 50px;
@@ -115,5 +141,4 @@ ul#chat li {
 .slidePrevButton{
 	float: left;
 	margin: 150px 0 0 0;
-
 }
