@@ -1,102 +1,19 @@
 <script type="text/javascript">
-    var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
-    var channel_chat = pusher.subscribe('<%= @session.to_s[6..11] %>');
-	
-		var hints_size = <%= Topic.find(@topic_id).hints.size %>;
-
-		channel_chat.bind('<%= @session.to_s[0..5] %>', function(data) {
-			var new_li = document.createElement('li');
-			if (data.origin == 'true') {
-				new_li.setAttribute('style','background-color:#DDDDDD');
-			}
-			new_li.innerHTML = data.message;
-			$("#chat").append(new_li);
-			document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
-			$("#new_message")[0].reset();
-		});
-
-    var channel_slide = pusher.subscribe('<%= @session.to_s[18..23] %>');
-	
-		channel_slide.bind('<%= @session.to_s[12..17] %>', function(data) {
-			$("#current_slide")[0].value = data.current_image;
-			$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/"+ (parseInt(data.current_image) + 1) +".jpg)");
-			$("#hint_text")[0].innerHTML = data.current_text;	
-		});
-
-		function nextInteraction(event){
-			$("#next")[0].value = event;
-		} 
-		
-</script>
-<script type="text/javascript">
-
 	var publisher;
 	var stream;
 	var audioOnly = true;
 	var session = TB.initSession('<%= @session %>');
+	var publisherProperties = new Object();
+	var api_key = '<%= @api_key %>';
+
+$(function(){
+	slidePusher('<%= ENV['PUSHER_KEY']%>', '<%= @session.to_s %>', '<%= Topic.find(@topic_id).name %>', <%= Topic.find(@topic_id).hints.size %>);
+	
+	publisherProperties.publishVideo = false;
+	publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
+
 	connect();
 
-	function sessionConnectedHandler(event) {
-		var publisherProperties = new Object();
-		publisherProperties.publishVideo = false;
-		publisher = TB.initPublisher(<%= @api_key %>, 'myPublisherDiv', publisherProperties);
-		session.publish(publisher);
-		
-		var parentDiv = document.getElementById("publisherDiv");
-		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
-		botonDiv.style.position = 'absolute';
-		botonDiv.style.left = '80px';
-		botonDiv.style.top =  '175px';
-		parentDiv.appendChild(botonDiv);
-		
-		subscribeToStreams(event.streams);
-    }
-
-	function subscribeToStreams(streams) {
-		for (i = 0; i < streams.length; i++) {
-			stream = streams[i];
-			if (stream.connection.connectionId != session.connection.connectionId) {
-					session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
-			}
-		}
-	}
-
-	function streamCreatedHandler(event) {
-		subscribeToStreams(event.streams);
-		document.getElementById("videoBtn").style.display = 'block';
-	}
-
-	function connect(){
-		session.addEventListener('sessionConnected', sessionConnectedHandler);
-		session.addEventListener('streamCreated', streamCreatedHandler); 
-		session.connect(<%= @api_key %>, "devtoken");
-	}
-
-	function reconnect(){
-		var div = document.createElement('div');
-		div.setAttribute('id','myPublisherDiv');
-		$("#publisherDiv").append(div);
-
-		session.unpublish(publisher);
-		session.unsubscribe(stream);
-		session.disconnect();
-
-		setTimeout(function(){connect();}, 1000);
-	}
-	
-	function enableDisableVideo() {
-		audioOnly = !audioOnly
-		publisher.publishVideo(!audioOnly);
-		if (audioOnly)
-			document.getElementById("videoBtn").value = "Turn on video";
-		else
-			document.getElementById("videoBtn").value = "Turn off video";
-	}
-		
-</script>
-<script>
-$(function(){
 	$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/1.jpg)");
 });	
 </script>

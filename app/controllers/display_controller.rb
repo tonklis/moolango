@@ -26,10 +26,12 @@ class DisplayController < ApplicationController
 
 	end
 
+	#TODO: remove this from here and from routes.rb
 	def created_room 
 
 	end
 
+	#TODO: remove this from here and from routes.rb
 	def joined_room
 
 	end
