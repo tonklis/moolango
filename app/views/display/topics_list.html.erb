@@ -15,8 +15,9 @@
 
 	function topicOpen(topicId){
 
-		$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
+		$("#modal_message")[0].innerHTML="Connecting...";
 		$("#modal_prog_bar")[0].className="progress progress-stripped";
+		$("#modal_progress")[0].style.width="2%";
 		$("#modal_button_accept").hide();
 		$("#modal_button_accept")[0].href="#";
 		$("#modal_button_close").show();
@@ -43,6 +44,8 @@
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   		},			
   		success: function() {
+				$("#modal_progress")[0].style.width="100%";
+				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
 				$("#modal_prog_bar")[0].className="progress progress-striped active";
 			},
 			error: function() {
@@ -50,7 +53,6 @@
 				$("#modal_prog_bar")[0].className="progress progress-danger";
 			} 
 		});  
-			
 	}
 
 	function windowClose(){
@@ -121,7 +123,7 @@
     <p id="modal_message">Searching for someone to practice with…</p>
 		<div style="width: 45%; margin: auto;">
 			<div id="modal_prog_bar" class="progress progress-striped">
-  			<div class="bar" style="width: 100%;"></div>
+  			<div id="modal_progress" class="bar" style="width: 100%;"></div>
 			</div>
   	</div>
 	</div>

@@ -48,7 +48,7 @@ class DisplayController < ApplicationController
 		@api_key = ENV['OPENTOK_API_KEY']
 		@session = params[:session]
 		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
-
+				
 		render :layout => "rooms"
 
 	end

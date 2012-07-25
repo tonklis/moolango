@@ -41,6 +41,8 @@ Moolango::Application.routes.draw do
 		
 	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
 
+	match 'messages/async_outbound' => 'messages#async_outbound', :as => :async_outbound
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
