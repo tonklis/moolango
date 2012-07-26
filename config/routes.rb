@@ -23,7 +23,7 @@ Moolango::Application.routes.draw do
 
 	match 'earn' => 'display#earn', :as => :earn
 
-	match 'language' => 'display#language', :as => :language
+	match 'language_selection' => 'display#language', :as => :language_selection
 
 	match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
 
