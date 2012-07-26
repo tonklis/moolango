@@ -65,7 +65,7 @@ $(function(){
 					<%= f.hidden_field :session, :value => @session.to_s[0..11] %>
 					<%= f.hidden_field :origin, :value => true%>
 					<%= f.submit "Send" %>
-					<!-- <button type="button" onClick="reconnect();">Reconnect</button> -->
+					<button type="button" onClick="reconnect();">Reconnect</button>
 				<% end %>
 			</div>
 	</div>
