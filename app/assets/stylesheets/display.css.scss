@@ -46,9 +46,14 @@ body {
 }
 
 .next_button{
-	background-image: url("webpage/next_button.png");
-	min-width: 96px;
-	min-height: 43px;
+	background-image: url("webpage/next_button.gif");
+  border: medium none;
+	margin-bottom: 7px;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  min-height: 43px;
+  min-width: 190px;
 }
 
 .sheight[class*="container"] {
@@ -85,12 +90,13 @@ body {
 
 .signup_labels{
 	margin: 1px 0 10px 5px;
+	float: left;
 }
 
 .signup_body{
 	width: 100%;
 	text-align: left;
-	margin-left: 50px;
+	margin: 30px 0 0 50px;
 }
 
 .landing_begin_button{
@@ -105,9 +111,9 @@ body {
 }
 
 .landing_next_button{
-	text-align: right;
-	margin-top: 50px;
-	margin-right: 200px;
+	margin: 20px auto auto 50px;
+  text-align: right;
+  width: 56%;
 }
 
 .landing_background_image{
@@ -120,6 +126,40 @@ body {
 	width:100%;
 	height: 50px;
 	margin-top: 20px;
+}
+
+.login_button{
+  height: 70px;
+  width: 150%;	
+}
+
+.logout_button{
+	height: 50px;
+	margin: -59% 0 0 78%;
+	width: 50px;
+}
+
+.login_text{
+	color: #FFFFFF;
+  font-family: "Arial";
+  font-size: 16px;
+  font-weight: bold;
+  margin: -60% auto auto 15%;
+  text-align: center;
+	cursor: pointer;
+}
+.login_text a:link {color:#FFFFFF; text-decoration: none;}
+.login_text a:visited {color:#FFFFFF; text-decoration: none;}
+.login_text a:hover {color:#FFFFFF; text-decoration: none;}
+.login_text a:active {color:#FFFFFF; text-decoration: none;}
+
+.account_text{
+	color: #FFFFFF;
+  font-family: "Arial";
+  font-size: 16px;
+  font-weight: bold;
+  margin: -70% auto auto 10%;
+  text-align: center;
 }
 
 .landing_left_hemisphere{
