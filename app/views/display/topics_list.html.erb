@@ -24,7 +24,7 @@
 
 		var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
 		var sessionId = Math.random().toString(36).substring(7);
-    var channel_confirm = pusher.subscribe(sessionId);
+		var channel_confirm = pusher.subscribe(sessionId);
 
 		channel_confirm.bind('confirm_channel', function(data) {
 			if(data.message == "OK"){
@@ -32,14 +32,14 @@
 				$("#modal_prog_bar")[0].className="progress progress-success";
 				$("#modal_button_accept").show();
 				$("#modal_button_close").hide();
-				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session
+				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session+"&user="+data.user
 			}
 		});
 
 		$.ajax({  
   		type: "POST",  
   		url: "messages/async_outbound",
-  		data: 'session_id=' + sessionId + '&topic_id=' + topicId,
+  		data: 'session_id=' + sessionId + '&topic_id=' + topicId +'&user=' + '<%=current_user.firstname%>',
 			beforeSend: function(xhr) {
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   		},			
