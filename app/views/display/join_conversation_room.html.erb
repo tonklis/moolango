@@ -20,11 +20,14 @@ $(function(){
 
 <div class="row">
 	<div class="span6">
-		<div id="waitingDivGone">
+		<div id="waitingDivGone" style="position:relative;">
 			<div id="waitingDiv">
 				<br />
 				<p>Waiting for user to connect, please wait.</p>
 				<%= image_tag "spinner.gif" %>
+			</div>
+			<div id="userDiv" style="align:center;">
+				<p> <%=@origin_user%> </p>
 			</div>
 		</div>
 	</div>

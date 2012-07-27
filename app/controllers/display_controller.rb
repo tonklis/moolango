@@ -45,6 +45,7 @@ class DisplayController < ApplicationController
 	def conversation_room
 
 		@topic_id = params[:id]
+		@joined_user = params[:user]
 		@api_key = ENV['OPENTOK_API_KEY']
 		@session = params[:session]
 		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
@@ -62,11 +63,11 @@ class DisplayController < ApplicationController
 		@topic_id = params[:topic_id]
 		@api_key = ENV['OPENTOK_API_KEY']
 		@slideshare_params = Topic.get_topic_details(@topic_id.to_i)
-		
+		@origin_user = params[:user]
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 		@session = opentok.create_session request.remote_addr, session_properties
-		Pusher[params[:session]].trigger('confirm_channel', {:message => "OK", :session => @session.to_s, :topic_id => @topic_id})
+		Pusher[params[:session]].trigger('confirm_channel', {:message => "OK", :session => @session.to_s, :topic_id => @topic_id, :user => current_user.firstname})
 		
 		render :layout => "rooms"
 	end

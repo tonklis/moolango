@@ -23,8 +23,11 @@ $(function(){
 		<div id="waitingDivGone">
 			<div id="waitingDiv">
 				<br />
-				<p>Waiting for user to connect, please wait.</p>
+				<p>Waiting for <%=@joined_user%> to connect, please wait.</p>
 				<%= image_tag "spinner.gif" %>
+			</div>
+			<div id="userDiv">
+				<p> <%=@joined_user%> </p>
 			</div>
 		</div>
 	</div>

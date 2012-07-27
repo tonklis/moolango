@@ -90,16 +90,17 @@ function connectionDestroyedHandler(event) {
 function signalHandler(event) {
 	doReconnect = true;
 	
-	var waitDiv = document.createElement('div');
-	waitDiv.setAttribute('id','waitingDiv');
-	var waitImg = document.createElement('img');
-	waitImg.setAttribute('src', '/assets/spinner.gif');
-	waitImg.setAttribute('alt', 'Spinner');
-	waitDiv.appendChild(document.createElement('br'));
-	waitDiv.appendChild(document.createTextNode("Waiting for user to connect, please wait."));
-	waitDiv.appendChild(waitImg);
-	
-	$("#waitingDivGone").append(waitDiv);
+	if ($("#waitingDiv").length == 0) {
+		var waitDiv = document.createElement('div');
+		waitDiv.setAttribute('id','waitingDiv');
+		var waitImg = document.createElement('img');
+		waitImg.setAttribute('src', '/assets/spinner.gif');
+		waitImg.setAttribute('alt', 'Spinner');
+		waitDiv.appendChild(document.createElement('br'));
+		waitDiv.appendChild(document.createTextNode("Waiting for user to connect, please wait."));
+		waitDiv.appendChild(waitImg);
+		$("#waitingDivGone").append(waitDiv);
+	}
 	
 	if (session.connection.connectionId == event.fromConnection.connectionId) {
 		var div = document.createElement('div');
@@ -118,3 +119,4 @@ function enableDisableVideo() {
 	else
 		document.getElementById("videoBtn").value = "Turn off video";
 }
+
