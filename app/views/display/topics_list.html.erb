@@ -1,5 +1,7 @@
 <script type="text/javascript">
 	
+	var currentUserId = '<%=current_user.id%>';
+
 	$(function(){
 
 		var $container = $('#content');
@@ -12,52 +14,6 @@
 			});
 		});
 	});
-
-	function topicOpen(topicId){
-
-		$("#modal_message")[0].innerHTML="Connecting...";
-		$("#modal_prog_bar")[0].className="progress progress-stripped";
-		$("#modal_progress")[0].style.width="2%";
-		$("#modal_button_accept").hide();
-		$("#modal_button_accept")[0].href="#";
-		$("#modal_button_close").show();
-
-		var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
-		var sessionId = Math.random().toString(36).substring(7);
-		var channel_confirm = pusher.subscribe(sessionId);
-
-		channel_confirm.bind('confirm_channel', function(data) {
-			if(data.message == "OK"){
-				$("#modal_message")[0].innerHTML="Match found!";
-				$("#modal_prog_bar")[0].className="progress progress-success";
-				$("#modal_button_accept").show();
-				$("#modal_button_close").hide();
-				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session+"&user="+data.user
-			}
-		});
-
-		$.ajax({  
-  		type: "POST",  
-  		url: "messages/async_outbound",
-  		data: 'session_id=' + sessionId + '&topic_id=' + topicId +'&user=' + '<%=current_user.firstname%>',
-			beforeSend: function(xhr) {
-    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-  		},			
-  		success: function() {
-				$("#modal_progress")[0].style.width="100%";
-				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
-				$("#modal_prog_bar")[0].className="progress progress-striped active";
-			},
-			error: function() {
-				$("#modal_message")[0].innerHTML="The site is busy, please try again later.";
-				$("#modal_prog_bar")[0].className="progress progress-danger";
-			} 
-		});  
-	}
-
-	function windowClose(){
-
-	}
 
 </script>
 
@@ -79,34 +35,34 @@
 				<%= image_tag "webpage/topics/michaeljackson.gif"%>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/up.gif", :onclick=>"topicOpen(4);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/up.gif", :onclick=>"topicOpen(4, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/darkknightrises.gif", :onclick=>"topicOpen(2);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/darkknightrises.gif", :onclick=>"topicOpen(2, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/lost.gif", :onclick=>"topicOpen(1);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/lost.gif", :onclick=>"topicOpen(1, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
 				<%= image_tag "webpage/topics/nyc.gif"%>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/stevejobs.gif", :onclick=>"topicOpen(7);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/stevejobs.gif", :onclick=>"topicOpen(7, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/simpsons.gif", :onclick=>"topicOpen(8);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/simpsons.gif", :onclick=>"topicOpen(8, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/gameofthrones.gif", :onclick=>"topicOpen(6);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/gameofthrones.gif", :onclick=>"topicOpen(6, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/avatar.gif", :onclick=>"topicOpen(3);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/avatar.gif", :onclick=>"topicOpen(3, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/harrypotter.gif", :onclick=>"topicOpen(9);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/harrypotter.gif", :onclick=>"topicOpen(9, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/mariokart.gif", :onclick=>"topicOpen(5);"%></a>
+				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/mariokart.gif", :onclick=>"topicOpen(5, currentUserId);"%></a>
 			</div>
 			<div class="box one-edge-shadow">
 				<%= image_tag "webpage/topics/aliens.gif"%>

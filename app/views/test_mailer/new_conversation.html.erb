@@ -1,8 +1,8 @@
 <p>
-	Topic: <%= @topic %>
+	Topic: <%= @topic.name %>
 </p>
 <p>
-	<%= link_to "Join room", "http://moolango.herokuapp.com/join_conversation_room/1?session=#{@token}&topic_id=#{@topic}&user=#{@user}" %>
+	<%= link_to "Join room", "http://moolango.herokuapp.com/join_conversation_room/1?session=#{@token}&topic_id=#{@topic.id}&user_id=#{@user.id}" %>
 </p>
 <p>
 	Session token: <%= @token %>

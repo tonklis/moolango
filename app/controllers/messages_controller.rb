@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 	def async_outbound
 		
 		# begin/rescue code not needed now, since it reports back the error in the JS modal frame
-		TestMailer.new_conversation(params[:topic_id], params[:session_id], params[:user]).deliver
+		TestMailer.new_conversation(params[:topic_id], params[:session_id], params[:user_id]).deliver
 	
 		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		if (Language.find_by_name("english").id == session[:language].to_i)
@@ -24,11 +24,11 @@ class MessagesController < ApplicationController
 			message = "Hay una persona en Moolango esperando para hablar de #{Topic.find(params[:topic_id]).name}"
 		end
 		
-		#@twilio_client.account.sms.messages.create(
-		#  :from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-		#  :to => number_to_send_to,
-	 	# :body => message
-		#)
+		@twilio_client.account.sms.messages.create(
+		  :from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+		  :to => number_to_send_to,
+	 	 :body => message
+		)
 		
 	end 
 
