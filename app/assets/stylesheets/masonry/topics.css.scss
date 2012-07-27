@@ -58,6 +58,39 @@ body {
 	height: 50px;
 	margin-top: 20px;
 }
+.login_button{
+  height: 70px;
+  width: 150%;	
+}
+
+.logout_button{
+	height: 50px;
+	margin: -59% 0 0 78%;
+	width: 50px;
+}
+
+.login_text{
+	color: #FFFFFF;
+  font-family: "Arial";
+  font-size: 16px;
+  font-weight: bold;
+  margin: -60% auto auto 15%;
+  text-align: center;
+	cursor: pointer;
+}
+.login_text a:link {color:#FFFFFF; text-decoration: none;}
+.login_text a:visited {color:#FFFFFF; text-decoration: none;}
+.login_text a:hover {color:#FFFFFF; text-decoration: none;}
+.login_text a:active {color:#FFFFFF; text-decoration: none;}
+
+.account_text{
+	color: #FFFFFF;
+  font-family: "Arial";
+  font-size: 16px;
+  font-weight: bold;
+  margin: -70% auto auto 10%;
+  text-align: center;
+}
 
 .no-space [class*="span"] {
   margin-left: 0;

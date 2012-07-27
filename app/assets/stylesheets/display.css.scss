@@ -90,6 +90,7 @@ body {
 
 .signup_labels{
 	margin: 1px 0 10px 5px;
+	float: left;
 }
 
 .signup_body{
@@ -132,6 +133,12 @@ body {
   width: 150%;	
 }
 
+.logout_button{
+	height: 50px;
+	margin: -59% 0 0 78%;
+	width: 50px;
+}
+
 .login_text{
 	color: #FFFFFF;
   font-family: "Arial";
@@ -146,8 +153,13 @@ body {
 .login_text a:hover {color:#FFFFFF; text-decoration: none;}
 .login_text a:active {color:#FFFFFF; text-decoration: none;}
 
-.account_button{
-
+.account_text{
+	color: #FFFFFF;
+  font-family: "Arial";
+  font-size: 16px;
+  font-weight: bold;
+  margin: -70% auto auto 10%;
+  text-align: center;
 }
 
 .landing_left_hemisphere{

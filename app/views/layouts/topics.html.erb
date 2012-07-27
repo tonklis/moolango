@@ -33,7 +33,7 @@
 							</div>
 							<div class="span1">
 								<div class="nav_buttons">
-								<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button", :style => "margin-top: 2px;"), "http://facebook.com/Moolango", :target => "_blank" %>
+								<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button"), "http://facebook.com/Moolango", :target => "_blank" %>
 								</div>
 							</div>
 							<div class="span1">
@@ -42,8 +42,19 @@
 								</div>
 							</div>
 							<div class="span1">
-								<div class="nav_buttons">
-								<%= link_to image_tag("webpage/login_button.png", :alt => "Login button", :style => "margin-top: 5px;"), :signin %>
+								<div class="login_button">
+								<% if current_user %>
+									<%= image_tag "webpage/account_button.png", :alt => "My account button" %>
+									<%= link_to image_tag("webpage/logout_button.png", :class=>"logout_button"), :logout %>
+									<div class="account_text">
+										$ <%= sprintf('%.2f', current_user.credits.round(2)) %>
+									</div>
+								<% else %>
+									<%= link_to image_tag("webpage/login_button.png", :alt => "Login button"), :signin %>
+									<div class="login_text">
+										<%= link_to raw("LOG<br />IN"), :signin %>
+									</div>
+								<% end %>
 								</div>
 							</div>
 						</div>
