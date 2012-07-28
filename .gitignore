@@ -3,5 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
-.swp
-confi/environments/development.rb
+*.swp
+*.swn
+*.swo
+config/environments/development.rb
