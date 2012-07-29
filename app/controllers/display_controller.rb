@@ -47,7 +47,14 @@ class DisplayController < ApplicationController
 		@joined_user = User.find(params[:user_id])
 		@api_key = ENV['OPENTOK_API_KEY']
 		@session = params[:session]
-				
+		# CREATE ROOM
+		Room.create(
+			:creator_id => params[:user_id],
+			:joiner_id => current_user.id,
+			:name => Topic.find(@topic_id).name,
+			:busy => true,
+			:language_id => session[:language]
+		)
 		render :layout => "rooms"
 
 	end
