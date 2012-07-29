@@ -12,7 +12,9 @@
 		var channel_confirm = pusher.subscribe(sessionId);
 
 		channel_confirm.bind('confirm_channel', function(data) {
+			alert("received");
 			if(data.message == "OK"){
+				alert("ok");
 				$("#modal_message")[0].innerHTML="Match found!";
 				$("#modal_prog_bar")[0].className="progress progress-success";
 				$("#modal_button_accept").show();
@@ -21,7 +23,7 @@
 			}
 		});
 
-		$.ajax({  
+		$.ajax({ 
   		type: "POST",  
   		url: "messages/async_outbound",
   		data: 'session_id=' + sessionId + '&topic_id=' + topicId +'&user_id=' + currentUserId,
@@ -32,15 +34,15 @@
 				$("#modal_progress")[0].style.width="100%";
 				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
 				$("#modal_prog_bar")[0].className="progress progress-striped active";
+				alert(data);
 			},
 			error: function() {
 				$("#modal_message")[0].innerHTML="The site is busy, please try again later.";
 				$("#modal_prog_bar")[0].className="progress progress-danger";
 			} 
-		});  
+		});
 	}
 
 	function windowClose(){
 
 	}
-

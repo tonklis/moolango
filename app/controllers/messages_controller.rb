@@ -24,11 +24,11 @@ class MessagesController < ApplicationController
 			message = "Hay una persona en Moolango esperando para hablar de #{Topic.find(params[:topic_id]).name}"
 		end
 		
-		@twilio_client.account.sms.messages.create(
-		  :from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-		  :to => number_to_send_to,
-	 	 :body => message
-		)
+		#@twilio_client.account.sms.messages.create(
+		#  :from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+		#  :to => number_to_send_to,
+	 	# :body => message
+		#)
 		
 	end 
 
