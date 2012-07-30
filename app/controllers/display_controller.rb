@@ -26,18 +26,9 @@ class DisplayController < ApplicationController
 
 	end
 
-	#TODO: remove this from here and from routes.rb
-	def created_room 
-
-	end
-
-	#TODO: remove this from here and from routes.rb
-	def joined_room
-
-	end
-
 	def topics_list
 		session[:language] = params[:id]
+		@topics = Topic.order("id DESC")
 		render :layout => "topics"
 	end
 
@@ -47,7 +38,14 @@ class DisplayController < ApplicationController
 		@joined_user = User.find(params[:user_id])
 		@api_key = ENV['OPENTOK_API_KEY']
 		@session = params[:session]
-				
+		# CREATE ROOM
+		Room.create(
+			:creator_id => params[:user_id],
+			:joiner_id => current_user.id,
+			:name => Topic.find(@topic_id).name,
+			:busy => true,
+			:language_id => session[:language]
+		)
 		render :layout => "rooms"
 
 	end

@@ -1,69 +1,3 @@
-<script type="text/javascript">
-	
-	var currentUserId = '<%=current_user.id%>';
-
-	$(function(){
-
-		var $container = $('#content');
-     
-       $container.imagesLoaded(function(){
-				$container.masonry({
-				itemSelector : '.box',
-				gutterWidth: 5,
-				isFitWidth: true
-			});
-		});
-	});
-
-	//TODO: Move to topics.js.erb
-	function topicOpen(topicId, currentUserId){
-
-		$("#modal_message")[0].innerHTML="Connecting...";
-		$("#modal_prog_bar")[0].className="progress progress-stripped";
-		$("#modal_progress")[0].style.width="2%";
-		$("#modal_button_accept").hide();
-		$("#modal_button_accept")[0].href="#";
-		$("#modal_button_close").show();
-
-		var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>');
-		var sessionId = Math.random().toString(36).substring(7);
-		var channel_confirm = pusher.subscribe(sessionId);
-
-		channel_confirm.bind('confirm_channel', function(data) {
-			if(data.message == "OK"){
-				$("#modal_message")[0].innerHTML="Match found!";
-				$("#modal_prog_bar")[0].className="progress progress-success";
-				$("#modal_button_accept").show();
-				$("#modal_button_close").hide();
-				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session+"&user_id="+data.user_id;
-			}
-		});
-
-		$.ajax({  
-  		type: "POST",  
-  		url: "messages/async_outbound",
-  		data: 'session_id=' + sessionId + '&topic_id=' + topicId +'&user_id=' + currentUserId,
-			beforeSend: function(xhr) {
-    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-  		},			
-  		success: function() {
-				$("#modal_progress")[0].style.width="100%";
-				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
-				$("#modal_prog_bar")[0].className="progress progress-striped active";
-			},
-			error: function() {
-				$("#modal_message")[0].innerHTML="The site is busy, please try again later.";
-				$("#modal_prog_bar")[0].className="progress progress-danger";
-			} 
-		});  
-	}
-
-	function windowClose(){
-
-	}
-
-</script>
-
 <% @title_desc = "Topics List" %>
 	
 	<div>
@@ -72,49 +6,14 @@
 		</div>
 		
 		<div id="content" class="centered">
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/sustainability.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/popart.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/michaeljackson.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/up.gif", :onclick=>"topicOpen(4, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/darkknightrises.gif", :onclick=>"topicOpen(2, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/lost.gif", :onclick=>"topicOpen(1, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/nyc.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/stevejobs.gif", :onclick=>"topicOpen(7, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/simpsons.gif", :onclick=>"topicOpen(8, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/gameofthrones.gif", :onclick=>"topicOpen(6, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/avatar.gif", :onclick=>"topicOpen(3, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/harrypotter.gif", :onclick=>"topicOpen(9, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/mariokart.gif", :onclick=>"topicOpen(5, currentUserId);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/aliens.gif"%>
-			</div>
-		</div>
+			
+			<% @topics.each do |topic| %>
+				<div class="box one-edge-shadow">
+					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey);" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+				</div>
+			<% end %>
+
+	<div id="data_holder" data-user-id="<%=current_user.id%>" data-pusher-key="<%=ENV['PUSHER_KEY']%>" >
 	</div>
 
 <div class="modal hide fade" id="myModal">
@@ -135,3 +34,21 @@
     <a id="modal_button_accept" href="#" class="btn btn-success">Talk now</a>
   </div>
 </div>
+
+<script type="text/javascript">
+
+	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
+	var pusherKey = $("#data_holder")[0].getAttribute("data-pusher-key");
+
+	$(function(){
+		var $container = $('#content');
+		$container.imagesLoaded(function(){
+			$container.masonry({
+				itemSelector : '.box',
+				gutterWidth: 5,
+				isFitWidth: true
+			});
+		});
+	});
+	
+</script>
