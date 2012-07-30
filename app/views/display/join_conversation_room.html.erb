@@ -5,17 +5,18 @@
 	var publisherProperties = new Object();
 	var api_key = '<%= @api_key %>';
 
-$(function(){
-	slidePusher('<%= ENV['PUSHER_KEY']%>', '<%= @session.to_s %>', '<%= Topic.find(@topic_id).name %>', <%= Topic.find(@topic_id).hints.size %>);
-	
-	publisherProperties.publishVideo = false;
-	publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
+	$(function(){
 
-	connect();
+		slidePusher('<%= ENV['PUSHER_KEY']%>', '<%= @session.to_s %>', '<%= Topic.find(@topic_id).name %>', <%= Topic.find(@topic_id).hints.size %>);
+		$('#chat_field')[0].value="Type your message here...";
 
-	$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/1.jpg)");
-});
-	
+		publisherProperties.publishVideo = false;
+		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
+
+		connect();
+
+		$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/1.jpg)");
+	});	
 </script>
 
 <div class="row">
@@ -75,10 +76,10 @@ $(function(){
 				<ul id="chat">
 				</ul>
 				<%= form_for Message.new, remote: true do |f| %>
-					<%= f.text_field :content, :value => "Type your message here...", :onclick => "this.value='';" %>
+					<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field" %>
 					<%= f.hidden_field :session, :value => @session.to_s[0..11] %>
 					<%= f.hidden_field :origin, :value => false%>
-					<%= f.submit "Send" %>
+					<%= f.submit "Send"%>
 					<button type="button" onClick="endCall();">End Call</button>
 					<button type="button" onClick="reconnect();">Reconnect</button>
 				<% end %>
