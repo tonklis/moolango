@@ -6,50 +6,13 @@
 		</div>
 		
 		<div id="content" class="centered">
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/sustainability.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/popart.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/michaeljackson.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/up.gif", :onclick=>"topicOpen(4, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/darkknightrises.gif", :onclick=>"topicOpen(2, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/lost.gif", :onclick=>"topicOpen(1, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/nyc.gif"%>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/stevejobs.gif", :onclick=>"topicOpen(7, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/simpsons.gif", :onclick=>"topicOpen(8, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/gameofthrones.gif", :onclick=>"topicOpen(6, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/avatar.gif", :onclick=>"topicOpen(3, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/harrypotter.gif", :onclick=>"topicOpen(9, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal"><%= image_tag "webpage/topics/mariokart.gif", :onclick=>"topicOpen(5, currentUserId, pusherKey);"%></a>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= image_tag "webpage/topics/aliens.gif"%>
-			</div>
-		</div>
-	</div>
+			
+			<% @topics.each do |topic| %>
+				<div class="box one-edge-shadow">
+					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey);" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+				</div>
+			<% end %>
+
 	<div id="data_holder" data-user-id="<%=current_user.id%>" data-pusher-key="<%=ENV['PUSHER_KEY']%>" >
 	</div>
 
@@ -73,15 +36,13 @@
 </div>
 
 <script type="text/javascript">
-	
+
 	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
 	var pusherKey = $("#data_holder")[0].getAttribute("data-pusher-key");
 
 	$(function(){
-
-		var $container = $('#content');
-     
-       $container.imagesLoaded(function(){
+				var $container = $('#content');
+				$container.imagesLoaded(function(){
 				$container.masonry({
 				itemSelector : '.box',
 				gutterWidth: 5,

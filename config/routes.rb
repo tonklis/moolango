@@ -26,10 +26,6 @@ Moolango::Application.routes.draw do
 	match 'language_selection' => 'display#language', :as => :language_selection
 
 	match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
-
-	match 'created_room' => 'display#created_room', :as => :created_room
-
-	match 'joined_room' => 'display#joined_room', :as => :joined_room
 	
 	match 'action' => 'display#action', :as => :action
 	

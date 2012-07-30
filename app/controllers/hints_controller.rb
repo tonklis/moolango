@@ -2,7 +2,7 @@ class HintsController < ApplicationController
   # GET /hints
   # GET /hints.json
   def index
-    @hints = Hint.all
+    @hints = Hint.order(:id)
 
     respond_to do |format|
       format.html # index.html.erb

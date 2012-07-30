@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Topic.create(name: 'lost', description: 'TV Series')
+Topic.create(name: 'lost', description: 'TV Series', thumbnail_url: 'topics/lost/lost.gif')
 Hint.create(topic_id: 1, description: "What did you think the Smoke Monster was when you first saw it?", thumbnail_url: "topics/lost/1.jpg")
 Hint.create(topic_id: 1, description: "Are you more like Jack Shepherd or John Locke('man of science' or 'man of faith')?", thumbnail_url: "topics/lost/2.jpg")
 Hint.create(topic_id: 1, description: "Did you like how the series ended?", thumbnail_url: "topics/lost/3.jpg")
@@ -16,7 +16,7 @@ Hint.create(topic_id: 1, description: "Did you like that time traveling was part
 Hint.create(topic_id: 1, description: "Do you have a favorite moment in the show?", thumbnail_url: "topics/lost/7.jpg")
 Hint.create(topic_id: 1, description: "Are there any other TV shows as good as LOST?", thumbnail_url: "topics/lost/8.jpg")
 
-Topic.create(name: 'batman', description: 'Movies')
+Topic.create(name: 'batman', description: 'Movies', thumbnail_url: 'topics/batman/batman.gif')
 Hint.create(topic_id: 2, description: "Do you think Bane is a better villain than the Joker?", thumbnail_url: "topics/batman/1.jpg")
 Hint.create(topic_id: 2, description: "Do you think Anne Hathaway plays well the role of Catwoman?", thumbnail_url: "topics/batman/2.jpg")
 Hint.create(topic_id: 2, description: "Would you prefer to drive the Batmobile, the Bat Cycle or the Bat Wing?", thumbnail_url: "topics/batman/3.jpg")
@@ -25,7 +25,7 @@ Hint.create(topic_id: 2, description: "Which Batman gadget has been the coolest 
 Hint.create(topic_id: 2, description: "What would you do to beat Batman?", thumbnail_url: "topics/batman/6.jpg")
 Hint.create(topic_id: 2, description: "Who  would win in a fight where all gadgets are allowed: Batman or Iron Man?", thumbnail_url: "topics/batman/7.jpg")
 
-Topic.create(name: 'avatar', description: 'Movies')
+Topic.create(name: 'avatar', description: 'Movies', thumbnail_url: 'topics/avatar/avatar.gif')
 Hint.create(topic_id: 3, description: "What is your favorite creature on the planet Pandora?", thumbnail_url: "topics/avatar/1.jpg")
 Hint.create(topic_id: 3, description: "Would you ever volunteer to explore Pandora?", thumbnail_url: "topics/avatar/2.jpg")
 Hint.create(topic_id: 3, description: "Would you want to live in Home Tree?", thumbnail_url: "topics/avatar/3.jpg")
@@ -35,7 +35,7 @@ Hint.create(topic_id: 3, description: "Would you want to fly like Jake on this c
 Hint.create(topic_id: 3, description: "How many times did you see Avatar when it was in theatres?", thumbnail_url: "topics/avatar/7.jpg")
 Hint.create(topic_id: 3, description: "Did you see Avatar in 3-D?", thumbnail_url: "topics/avatar/8.jpg")
 
-Topic.create(name: 'up', description: 'Movies')
+Topic.create(name: 'up', description: 'Movies', thumbnail_url: 'topics/up/up.gif')
 Hint.create(topic_id: 4, description: "Which was your favorite: Kenvin (the bird) or Dug (the dog)?", thumbnail_url: "topics/up/1.jpg")
 Hint.create(topic_id: 4, description: "What's your favorite moment in the movie?", thumbnail_url: "topics/up/2.jpg")
 Hint.create(topic_id: 4, description: "Be honest: did you cry when you saw the Carl and Ellie scene?", thumbnail_url: "topics/up/3.jpg")
@@ -45,7 +45,7 @@ Hint.create(topic_id: 4, description: "Do you believe that exotic undiscovered a
 Hint.create(topic_id: 4, description: "Do you know anyone like Carl Fredericksen?", thumbnail_url: "topics/up/7.jpg")
 Hint.create(topic_id: 4, description: "Are there any programs like the Wilderness Explorers where you live?", thumbnail_url: "topics/up/8.jpg")
 
-Topic.create(name: 'mario_kart', description: 'Videogame')
+Topic.create(name: 'mario_kart', description: 'Videogame', thumbnail_url: 'topics/up/up.gif')
 Hint.create(topic_id: 5, description: "Do you remember where and when do you first played MarioKart?", thumbnail_url: "topics/mario_kart/1.jpg")
 Hint.create(topic_id: 5, description: "Which character did you always pick?", thumbnail_url: "topics/mario_kart/2.jpg")
 Hint.create(topic_id: 5, description: "What was better: strength or speed?", thumbnail_url: "topics/mario_kart/3.jpg")
@@ -55,7 +55,7 @@ Hint.create(topic_id: 5, description: "Which did you prefer: the red shells or t
 Hint.create(topic_id: 5, description: "How annoying was it when someone shocked you with the lightning?", thumbnail_url: "topics/mario_kart/7.jpg")
 Hint.create(topic_id: 5, description: "On Koopa Troopa Beach, did you use the secret ramp behind the waterfall?", thumbnail_url: "topics/mario_kart/8.jpg")
 
-Topic.create(name: 'game_of_thrones', description: 'TV Series')
+Topic.create(name: 'game_of_thrones', description: 'TV Series', thumbnail_url: 'topics/game_of_thrones/game_of_thrones.gif')
 Hint.create(topic_id: 6, description: "Tyrion Lannister: mad man or genius?", thumbnail_url: "topics/game_of_thrones/1.jpg")
 Hint.create(topic_id: 6, description: "Who do you think Daenerys Targaryen will attack first with her dragons?", thumbnail_url: "topics/game_of_thrones/2.jpg")
 Hint.create(topic_id: 6, description: "Which character in the show would you want to be?", thumbnail_url: "topics/game_of_thrones/3.jpg")
@@ -65,7 +65,7 @@ Hint.create(topic_id: 6, description: "Which would win in a battle: the White Wa
 Hint.create(topic_id: 6, description: "Who would you rather fight for: Robb Stark or Tywin Lannister?", thumbnail_url: "topics/game_of_thrones/7.jpg")
 Hint.create(topic_id: 6, description: "Who are the most rutheless: the Dothraki or the pirates of the Iron Islands?", thumbnail_url: "topics/game_of_thrones/8.jpg")
 
-Topic.create(name: 'steve_jobs', description: 'Character')
+Topic.create(name: 'steve_jobs', description: 'Character', thumbnail_url: 'topics/steve_jobs/steve_jobs.gif')
 Hint.create(topic_id: 7, description: "Which invention of Steve Jobs do you think was the most important?", thumbnail_url: "topics/steve_jobs/1.jpg")
 Hint.create(topic_id: 7, description: "What was your first Apple product (or which one do you want)?", thumbnail_url: "topics/steve_jobs/2.jpg")
 Hint.create(topic_id: 7, description: "Would you want to hang out with Steve Jobs?", thumbnail_url: "topics/steve_jobs/3.jpg")
@@ -75,7 +75,7 @@ Hint.create(topic_id: 7, description: "Was Steve Jobs the closest thing to Iron 
 Hint.create(topic_id: 7, description: "What industry do you wish Steve Jobs had tried to revolutionize next?", thumbnail_url: "topics/steve_jobs/7.jpg")
 Hint.create(topic_id: 7, description: "Which device do you think was more important: the iPod or the Gameboy?", thumbnail_url: "topics/steve_jobs/8.jpg")
 
-Topic.create(name: 'the_simpsons', description: 'TV Series')
+Topic.create(name: 'the_simpsons', description: 'TV Series', thumbnail_url: 'topics/the_simpsons/the_simpsons.gif')
 Hint.create(topic_id: 8, description: "Who do you like better: Homer or Bart?", thumbnail_url: "topics/the_simpsons/1.jpg")
 Hint.create(topic_id: 8, description: "Do you know anyone like Ned Flanders?", thumbnail_url: "topics/the_simpsons/3.jpg")
 Hint.create(topic_id: 8, description: "How often do you watch the Simpsons?", thumbnail_url: "topics/the_simpsons/4.jpg")
@@ -84,7 +84,7 @@ Hint.create(topic_id: 8, description: "Is it even possible to have hair like Mar
 Hint.create(topic_id: 8, description: "What is your favorite episode of the Simpsons?", thumbnail_url: "topics/the_simpsons/7.jpg")
 Hint.create(topic_id: 8, description: "Who is funnier? Grandrpa Simpson or Ralph Wiggum?", thumbnail_url: "topics/the_simpsons/8.jpg")
 
-Topic.create(name: 'harry_potter', description: 'Movies')
+Topic.create(name: 'harry_potter', description: 'Movies', thumbnail_url: 'topics/harry_potter/harry_potter.gif')
 Hint.create(topic_id: 9, description: "Which Harry Potter book was your favorite?", thumbnail_url: "topics/harry_potter/1.jpg")
 Hint.create(topic_id: 9, description: "In the end who was the coolest: Albus Dumbledore or Severus Snape?", thumbnail_url: "topics/harry_potter/3.jpg")
 Hint.create(topic_id: 9, description: "Which did you prefer: the movies or the books?", thumbnail_url: "topics/harry_potter/4.jpg")
@@ -92,6 +92,33 @@ Hint.create(topic_id: 9, description: "What animal would your Patronus be?", thu
 Hint.create(topic_id: 9, description: "Who would you rather have as your friend: Ron or Hermione?", thumbnail_url: "topics/harry_potter/6.jpg")
 Hint.create(topic_id: 9, description: "Which character should have his own book series written about him?", thumbnail_url: "topics/harry_potter/7.jpg")
 Hint.create(topic_id: 9, description: "Which house would you have belonged to at Hogwarts?", thumbnail_url: "topics/harry_potter/8.jpg")
+
+Topic.create(name: 'aliens', description: 'World', thumbnail_url: 'topics/aliens/aliens.gif')
+Hint.create(topic_id: 10, description: "", thumbnail_url: "topics/aliens/1.jpg")
+Hint.create(topic_id: 10, description: "", thumbnail_url: "topics/aliens/2.jpg")
+Hint.create(topic_id: 10, description: "", thumbnail_url: "topics/aliens/3.jpg")
+Hint.create(topic_id: 10, description: "", thumbnail_url: "topics/aliens/4.jpg")
+Hint.create(topic_id: 10, description: "", thumbnail_url: "topics/aliens/5.jpg")
+
+Topic.create(name: 'michael_jackson', description: 'Character', thumbnail_url: 'topics/michael_jackson/michael_jackson.gif')
+Hint.create(topic_id: 11, description: "", thumbnail_url: "topics/michael_jackson/1.jpg")
+Hint.create(topic_id: 11, description: "", thumbnail_url: "topics/michael_jackson/2.jpg")
+Hint.create(topic_id: 11, description: "", thumbnail_url: "topics/michael_jackson/3.jpg")
+Hint.create(topic_id: 11, description: "", thumbnail_url: "topics/michael_jackson/4.jpg")
+Hint.create(topic_id: 11, description: "", thumbnail_url: "topics/michael_jackson/5.jpg")
+
+Topic.create(name: 'nyc', description: 'World', thumbnail_url: 'topics/nyc/nyc.gif')
+Hint.create(topic_id: 12, description: "", thumbnail_url: "topics/nyc/1.jpg")
+Hint.create(topic_id: 12, description: "", thumbnail_url: "topics/nyc/2.jpg")
+Hint.create(topic_id: 12, description: "", thumbnail_url: "topics/nyc/3.jpg")
+Hint.create(topic_id: 12, description: "", thumbnail_url: "topics/nyc/4.jpg")
+Hint.create(topic_id: 12, description: "", thumbnail_url: "topics/nyc/5.jpg")
+
+Topic.create(name: 'sustainability', description: 'World', thumbnail_url: 'topics/sustainability/sustainability.gif')
+Hint.create(topic_id: 13, description: "", thumbnail_url: "topics/sustainability/1.jpg")
+Hint.create(topic_id: 13, description: "", thumbnail_url: "topics/sustainability/2.jpg")
+Hint.create(topic_id: 13, description: "", thumbnail_url: "topics/sustainability/3.jpg")
+Hint.create(topic_id: 13, description: "", thumbnail_url: "topics/sustainability/4.jpg")
 
 Language.create(name: 'english', thumbnail_url: 'languages/english.gif')
 Language.create(name: 'spanish', thumbnail_url: 'languages/spanish.gif')

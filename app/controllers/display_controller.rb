@@ -26,18 +26,9 @@ class DisplayController < ApplicationController
 
 	end
 
-	#TODO: remove this from here and from routes.rb
-	def created_room 
-
-	end
-
-	#TODO: remove this from here and from routes.rb
-	def joined_room
-
-	end
-
 	def topics_list
 		session[:language] = params[:id]
+		@topics = Topic.order("id DESC")
 		render :layout => "topics"
 	end
 
