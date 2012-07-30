@@ -1,7 +1,6 @@
 <script type="text/javascript">
 	var publisher;
 	var stream;
-	var audioOnly = true;
 	var session = TB.initSession('<%= @session %>');
 	var publisherProperties = new Object();
 	var api_key = '<%= @api_key %>';
@@ -15,8 +14,20 @@ $(function(){
 	connect();
 
 	$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/1.jpg)");
-});	
+});
+	
 </script>
+
+<div class="row">
+	<div class="span6">
+		<div id="totalTimeBar" style="align:center; width:300px; height:20px; background-Color:red; position:relative;">
+			<div id="timeBar" style="width:0px; height:20px; background-Color:blue; position:absolute;">
+			</div>
+			<div id="totalTimeTxt" style="position:absolute;">
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="span6">
@@ -68,6 +79,7 @@ $(function(){
 					<%= f.hidden_field :session, :value => @session.to_s[0..11] %>
 					<%= f.hidden_field :origin, :value => false%>
 					<%= f.submit "Send" %>
+					<button type="button" onClick="endCall();">End Call</button>
 					<button type="button" onClick="reconnect();">Reconnect</button>
 				<% end %>
 			</div>
