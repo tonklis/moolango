@@ -13,7 +13,7 @@ class DisplayController < ApplicationController
 	end
 
 	def action
-
+		@first_signin_flag = params[:first_signin_flag]
 	end
 
 	def earn

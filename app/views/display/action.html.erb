@@ -10,3 +10,13 @@
 		</div>	
 	</div>
 </div>
+<div id="first_signin_flag" data-flag="<%= @first_signin_flag %>"></div>
+<script type="text/javascript">
+
+	var first_signin = $("#first_signin_flag")[0].getAttribute("data-flag");
+	if(first_signin == "true"){
+		$("#credits").popover('show');
+		setTimeout(function(){$("#credits").popover('hide');},4000);
+	}
+	
+</script>

@@ -92,6 +92,11 @@ body {
   text-align: center;
 }
 
+.account_text a:link {color:#FFFFFF; text-decoration: none;}
+.account_text a:visited {color:#FFFFFF; text-decoration: none;}
+.account_text a:hover {color:#FFFFFF; text-decoration: none; cursor: default;}
+.account_text a:active {color:#FFFFFF; text-decoration: none;}
+
 .no-space [class*="span"] {
   margin-left: 0;
 }

@@ -161,6 +161,10 @@ body {
   margin: -70% auto auto 10%;
   text-align: center;
 }
+.account_text a:link {color:#FFFFFF; text-decoration: none;}
+.account_text a:visited {color:#FFFFFF; text-decoration: none;}
+.account_text a:hover {color:#FFFFFF; text-decoration: none; cursor: default;}
+.account_text a:active {color:#FFFFFF; text-decoration: none;}
 
 .landing_left_hemisphere{
 	width: 95%; 
