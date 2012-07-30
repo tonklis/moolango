@@ -45,7 +45,7 @@ Hint.create(topic_id: 4, description: "Do you believe that exotic undiscovered a
 Hint.create(topic_id: 4, description: "Do you know anyone like Carl Fredericksen?", thumbnail_url: "topics/up/7.jpg")
 Hint.create(topic_id: 4, description: "Are there any programs like the Wilderness Explorers where you live?", thumbnail_url: "topics/up/8.jpg")
 
-Topic.create(name: 'mario_kart', description: 'Videogame', thumbnail_url: 'topics/up/up.gif')
+Topic.create(name: 'mario_kart', description: 'Videogame', thumbnail_url: 'topics/mario_kart/mario_kart.gif')
 Hint.create(topic_id: 5, description: "Do you remember where and when do you first played MarioKart?", thumbnail_url: "topics/mario_kart/1.jpg")
 Hint.create(topic_id: 5, description: "Which character did you always pick?", thumbnail_url: "topics/mario_kart/2.jpg")
 Hint.create(topic_id: 5, description: "What was better: strength or speed?", thumbnail_url: "topics/mario_kart/3.jpg")
