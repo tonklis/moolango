@@ -2,6 +2,9 @@
 	Topic: <%= @topic.name %>
 </p>
 <p>
+	Language: <%= @language.name %>
+</p>
+<p>
 	<%= link_to "Join room", "http://www.moolango.com/join_conversation_room/1?session=#{@token}&topic_id=#{@topic.id}&user_id=#{@user.id}" %>
 </p>
 <p>
