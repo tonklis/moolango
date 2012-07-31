@@ -102,6 +102,52 @@ ul#chat {
 	float: right;
 }
 
+#totalTimeBar {
+	width: 300px;
+	height: 20px;
+	margin: auto;
+	float: right;
+	background-color: #FF0000;
+	position: relative;
+}
+
+#toolBar {
+	width: 400px;
+	height: 100px;
+	float: right;
+}
+
+#timeBar {
+	width: 0px;
+	height: 20px;
+	margin: auto;
+	float: right;
+	background-color: #0000FF;
+	position: absolute;
+}
+
+#actionsDiv {
+	width: 400px;
+	height: 40px;
+	float: right;
+}
+
+#endCallDiv {
+	width: 30px;
+	height: 30px;
+	float: right;
+	right: 40px;
+	position: relative;
+}
+
+#reconnectDiv {
+	width: 30px;
+	height: 30px;
+	float: right;
+	right: 90px;
+	position: relative;
+}
+
 #slideDiv{
 	width: 427px;
 	height: 356px;
@@ -144,4 +190,8 @@ ul#chat li {
 .slidePrevButton{
 	float: left;
 	margin: 150px 0 0 0;
+}
+
+.conversationButton {
+	height: 23px;
 }
