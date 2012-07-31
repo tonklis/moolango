@@ -13,8 +13,10 @@
 			<%= image_tag "webpage/ohyeah.png", :alt => "...oh yeah, and you can make money speaking your language too..." %>
 			</div>
 			<div style="width: 100%;">
-				<div class="landing_begin_button">
-					<%= link_to image_tag("webpage/begin_button.png", :alt => "Begin button"), :signup %>
+				<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
+					<div class="get_started_button">
+						<%= link_to "GET STARTED!", :signup%>
+					</div>
 				</div>
 			</div>
 		</div>
