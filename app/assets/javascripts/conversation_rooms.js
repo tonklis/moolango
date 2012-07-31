@@ -19,7 +19,9 @@ function slidePusher(pusherKey, session, topic_name, topic_hints_size){
 		new_li.innerHTML = data.message;
 		$("#chat").append(new_li);
 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
-		$("#new_message")[0].reset();
+		if ($("#origin_field")[0].value == data.origin){
+				$("#new_message")[0].reset();
+		}
 	});
 
     var channel_slide = pusher.subscribe(session.substr(18,6));

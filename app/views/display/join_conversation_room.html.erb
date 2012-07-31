@@ -78,7 +78,7 @@
 				<%= form_for Message.new, remote: true do |f| %>
 					<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field" %>
 					<%= f.hidden_field :session, :value => @session.to_s[0..11] %>
-					<%= f.hidden_field :origin, :value => false%>
+					<%= f.hidden_field :origin, :value => false, :id=>"origin_field"%>
 					<%= f.submit "Send"%>
 					<button type="button" onClick="endCall();">End Call</button>
 					<button type="button" onClick="reconnect();">Reconnect</button>
