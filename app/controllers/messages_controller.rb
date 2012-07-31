@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 	def async_outbound
 		
 		# begin/rescue code not needed now, since it reports back the error in the JS modal frame
-		TestMailer.new_conversation(params[:topic_id], params[:session_id], params[:user_id]).deliver
+		TestMailer.new_conversation(params[:topic_id], params[:session_id], params[:user_id], session[:language]).deliver
 	
 		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		if (Language.find_by_name("english").id == session[:language].to_i)
