@@ -38,6 +38,7 @@ class DisplayController < ApplicationController
 		@joined_user = User.find(params[:user_id])
 		@api_key = ENV['OPENTOK_API_KEY']
 		@session = params[:session]
+		@token = params[:token]
 		# CREATE ROOM
 		Room.create(
 			:creator_id => params[:user_id],
@@ -61,10 +62,25 @@ class DisplayController < ApplicationController
 		@origin_user = User.find(params[:user_id])
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
-		@session = opentok.create_session request.remote_addr, session_properties
-		Pusher[params[:session]].trigger('confirm_channel', {:message => "OK", :session => @session.to_s, :topic_id => @topic_id, :user_id => current_user.id})
+		@session = opentok.create_session(request.remote_addr, session_properties)
+		@token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
+		Pusher[params[:session]].trigger('confirm_channel', {:message => "OK", :session => @session.to_s, :topic_id => @topic_id, :user_id => current_user.id, :token => @token})
 		
 		render :layout => "rooms"
 	end
-
+	
+	def view_video
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
+		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
+		session = opentok.create_session(request.remote_addr, session_properties)
+		token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
+		archive = opentok.get_archive_manifest("301e1ddb-b4df-4c59-83f5-982837a7149f", token)
+		@urls = []
+		archive.resources.each do |video|
+			@urls << archive.downloadArchiveURL(video.getId, token)
+		end
+		
+		render :layout => "rooms"
+	end
+	
 end
