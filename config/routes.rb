@@ -40,6 +40,8 @@ Moolango::Application.routes.draw do
 	match 'messages/async_outbound' => 'messages#async_outbound', :as => :async_outbound
 	
 	match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
+	
+	match 'view_video' => 'display#view_video', :as => :view_video
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

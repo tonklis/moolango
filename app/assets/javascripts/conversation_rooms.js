@@ -3,9 +3,12 @@ var is_end_call = false;
 var is_audio_only = true;
 var is_ready_for_conversation = false;
 var is_timer_running = false;
+var is_recording = false;
 var num_connections = 0;
 var total_time = 600;
 var time_elapsed = 0;
+var archive;
+var archive_id;
 
 function createPusher(pusherKey, session, topic_name, topic_hints_size){
 	
@@ -52,8 +55,12 @@ function connect() {
 	session.addEventListener('streamCreated', streamCreatedHandler); 
 	session.addEventListener('sessionDisconnected', sessionDisconnectedHandler); 
 	session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
-	session.addEventListener('signalReceived', signalHandler)
-	session.connect(api_key, "devtoken");
+	session.addEventListener('signalReceived', signalHandler);
+	session.addEventListener('archiveCreated', archiveCreatedHandler);
+	session.addEventListener('sessionRecordingStopped', stopRecordingHandler);
+	session.addEventListener('archiveClosed', archiveClosedHandler);
+	TB.addEventListener('exception', function(event){alert(event.message);});
+	session.connect(api_key, token);
 }
 
 function reconnect() {
@@ -64,7 +71,12 @@ function endCall() {
 	is_end_call = true;
 	document.getElementById("videoBtn").style.display = 'none';
 	is_timer_running = false;
-	session.disconnect();
+	if (is_recording) {
+		session.stopRecording(archive);
+	}
+	else {
+		session.disconnect();
+	}
 }
 
 function connectionCreatedHandler(event) {
@@ -72,7 +84,7 @@ function connectionCreatedHandler(event) {
 }
 
 function sessionConnectedHandler(event) {
-	session.publish(publisher);
+	//session.publish(publisher);
 	if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
 		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
@@ -82,7 +94,15 @@ function sessionConnectedHandler(event) {
 		$('#publisherDiv').append(botonDiv);
 	}
 	num_connections += event.connections.length;
-	subscribeToStreams(event.streams);
+	//subscribeToStreams(event.streams);
+	if (event.archives.length == 0) {
+		session.createArchive(api_key, "perSession", session.sessionId);
+	}
+	else {
+		//archiveCreatedHandler(event);
+		session.publish(publisher);
+		subscribeToStreams(event.streams);
+	}
 }
 
 function subscribeToStreams(streams) {
@@ -97,6 +117,10 @@ function subscribeToStreams(streams) {
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
+			if (archive) {
+				is_recording = true;
+				session.startRecording(archive);
+			}
 		}
 		else {
 			is_ready_for_conversation = true
@@ -117,6 +141,7 @@ function sessionDisconnectedHandler(event) {
 	}
 	else if (is_end_call) {
 		is_end_call = false;
+		$('#myModal').modal('show');
 		//$('#waitingDivGone').remove();
 		
 	}
@@ -138,6 +163,23 @@ function signalHandler(event) {
 		$("#publisherDiv").append(div);
 		session.disconnect();
 	}
+}
+
+function archiveCreatedHandler(event) {
+	archive = event.archives[0];
+    archive_id = archive.archiveId;
+	session.publish(publisher);
+}
+
+function stopRecordingHandler(event) {
+	if (is_recording) {
+		is_recording = false;
+		session.closeArchive(archive);
+	}
+}
+
+function archiveClosedHandler(event) {
+	session.disconnect();
 }
 
 function showWaitSpiner() {
@@ -174,12 +216,19 @@ function startTimer() {
 		$('#timeBar').width(time_elapsed * ($('#totalTimeBar').width() / total_time));
 		setTimeout(function(){ startTimer(); },1000);
 	}
+	else {
+		endCall();
+	}
 }
 
 function formatTime(n) {
-	if(n.toString().length < 2) {
+	if (n.toString().length < 2) {
 		return '0' + n;
 	} else {
 		return n;
 	}
+}
+
+function windowClose() {
+
 }

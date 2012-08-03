@@ -17,7 +17,7 @@
 				$("#modal_prog_bar")[0].className="progress progress-success";
 				$("#modal_button_accept").show();
 				$("#modal_button_close").hide();
-				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session+"&user_id="+data.user_id;
+				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session+"&user_id="+data.user_id+"&token="+data.token;
 			}
 		});
 
