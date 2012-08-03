@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802215304) do
+ActiveRecord::Schema.define(:version => 20120803004405) do
+
+  create_table "earner_forms", :force => true do |t|
+    t.boolean  "pricing"
+    t.boolean  "donate"
+    t.string   "email"
+    t.boolean  "agree"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "hints", :force => true do |t|
     t.integer  "topic_id"

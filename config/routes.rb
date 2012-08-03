@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :earner_forms
+
   resources :languages
 
   resources :hints
@@ -20,8 +22,6 @@ Moolango::Application.routes.draw do
 	end
 
 	match 'interaction' => 'interaction#create', :as => :interaction
-
-	match 'earn' => 'display#earn', :as => :earn
 
 	match 'language_selection' => 'display#language', :as => :language_selection
 

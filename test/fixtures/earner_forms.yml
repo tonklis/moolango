@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pricing: false
+  donate: false
+  email: MyString
+  agree: false
+
+two:
+  pricing: false
+  donate: false
+  email: MyString
+  agree: false

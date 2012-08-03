@@ -16,14 +16,8 @@ class DisplayController < ApplicationController
 		@first_signin_flag = params[:fs]
 	end
 
-	def earn
-
-	end
-
 	def rooms_listing
-
 		@rooms = Room.where("busy = ?", false)
-
 	end
 
 	def topics_list

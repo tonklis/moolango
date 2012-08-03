@@ -1,0 +1,51 @@
+<style>
+.field_with_errors { display: inline; }
+</style>
+<div class="row">
+		<div class="span12">
+			<div style="margin: -30px;">
+				<div class="landing_header">
+					We're over capacity!
+				</div>
+				<div style="text-align: center; margin: 15px;">
+					This feature is limited to just some of our early users during the beta, but fill in the form below and we'll queue you up!
+					<br /> <br />
+					<div style="margin: auto; height: 50%; width: 40%;">
+					<%= form_for(@earner_form) do |f| %>
+						<div class="field">
+							<%= f.label :pricing, :style => "float: left;" %>
+							<%= f.radio_button :pricing, 'true' %> Yes
+							<%= f.radio_button :pricing, 'false' %> No
+						</div> <br />
+						<div class="field">
+							<%= f.label :donate, :style => "float: left;" %>
+							<%= f.radio_button :donate, 'true' %> Yes
+							<%= f.radio_button :donate, 'false' %> No
+						</div> <br />
+						<div class="field">
+							<%= f.label :email, :style => "float: left;" %>
+							<%= f.text_field :email, :value => current_user.email %>
+						</div> <br />
+						<div class="field">
+							<%= f.label :agree, :style => "float: left;" %>
+							<%= f.check_box :agree %>
+						</div> <br />
+							<%= f.hidden_field :user_id, :value => current_user.id %>
+						<div class="actions">
+							<%= f.submit %>
+						</div> <br />
+					<% end %>
+					<% if @earner_form.errors.any? %>
+							<div id="error_explanation" class="alert alert-error">
+								<ul>
+									<% @earner_form.errors.full_messages.each do |msg| %>
+										<li><%= msg %></li>
+									<% end %>
+								</ul>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>	
+</div>

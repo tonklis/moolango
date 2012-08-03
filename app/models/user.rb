@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :firstname, :lastname
 	has_many :created_rooms, :class_name => "Room", :foreign_key => :creator_id
 	has_many :joined_rooms, :class_name => "Room", :foreign_key => :joiner_id
+	has_many :earner_forms
 
 	validates_presence_of :firstname, :email, :password
 

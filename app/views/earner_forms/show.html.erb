@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pricing:</b>
+  <%= @earner_form.pricing %>
+</p>
+
+<p>
+  <b>Donate:</b>
+  <%= @earner_form.donate %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @earner_form.email %>
+</p>
+
+<p>
+  <b>Agree:</b>
+  <%= @earner_form.agree %>
+</p>
+
+
+<%= link_to 'Edit', edit_earner_form_path(@earner_form) %> |
+<%= link_to 'Back', earner_forms_path %>

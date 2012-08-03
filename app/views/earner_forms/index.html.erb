@@ -1,0 +1,29 @@
+<h1>Listing earner_forms</h1>
+
+<table>
+  <tr>
+    <th>Pricing</th>
+    <th>Donate</th>
+    <th>Email</th>
+    <th>Agree</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @earner_forms.each do |earner_form| %>
+  <tr>
+    <td><%= earner_form.pricing %></td>
+    <td><%= earner_form.donate %></td>
+    <td><%= earner_form.email %></td>
+    <td><%= earner_form.agree %></td>
+    <td><%= link_to 'Show', earner_form %></td>
+    <td><%= link_to 'Edit', edit_earner_form_path(earner_form) %></td>
+    <td><%= link_to 'Destroy', earner_form, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Earner form', new_earner_form_path %>
