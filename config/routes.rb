@@ -1,15 +1,15 @@
 Moolango::Application.routes.draw do
-  resources :earner_forms
+	resources :earner_forms
 
-  resources :languages
+	resources :languages
 
-  resources :hints
+	resources :hints
 
-  resources :messages
+	resources :messages
 
-  resources :topics
+	resources :topics
 
-  resources :rooms
+	resources :rooms
 
 	devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"}
 
@@ -42,6 +42,8 @@ Moolango::Application.routes.draw do
 	match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
 	
 	match 'view_video' => 'display#view_video', :as => :view_video
+	
+	match 'users/new_balance' => 'users#new_balance', :as => :new_balance
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

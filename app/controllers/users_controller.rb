@@ -80,4 +80,12 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+	def new_balance
+		user = current_user
+		user = user.charge_call
+		respond_to do |format|
+			format.json { render json: user }
+		end
+	end
 end

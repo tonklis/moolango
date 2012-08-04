@@ -15,29 +15,37 @@ class User < ActiveRecord::Base
 	validates_presence_of :firstname, :email, :password
 
 	def self.find_for_facebook_oauth(auth, signed_in_resource = nil)
-    user = User.where(:email => auth.info.email).first
+		user = User.where(:email => auth.info.email).first
 		unless user
 			# CHECK FOR NEW/CREATE
 			user = User.create(firstname:auth.info.first_name,
 												 lastname:auth.info.last_name,
-                         uid:auth.uid,
-                         email:auth.info.email,
-                         password:Devise.friendly_token[0,20]
-                         )
+						 uid:auth.uid,
+						 email:auth.info.email,
+						 password:Devise.friendly_token[0,20]
+						 )
 			
 		end
 		user
-  end
+	 end
 
 	def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"]
-        user.email = data.info.email
+		super.tap do |user|
+			if data = session["devise.facebook_data"]
+				user.email = data.info.email
 				user.firstname = data.info.first_name
 				user.lastname = data.info.last_name
 				user.uid = data.uid
-      end
-    end
-  end
+			end
+		end
+	end
 
+	def charge_call()
+		if (self.credits > 0)
+			self.credits -= 2.0
+			self.save
+		end
+		return self
+	end
+	
 end

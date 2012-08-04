@@ -1,11 +1,11 @@
 var is_reconnect = false;
 var is_end_call = false;
-var is_audio_only = true;
+var is_audio_only = false;
 var is_ready_for_conversation = false;
 var is_timer_running = false;
 var is_recording = false;
 var num_connections = 0;
-var total_time = 600;
+var total_time = 600; //30;
 var time_elapsed = 0;
 var archive;
 var archive_id;
@@ -81,7 +81,7 @@ function sessionConnectedHandler(event) {
 	//session.publish(publisher);
 	if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn off video" onClick="enableDisableVideo()" style="display:none;"/>';
 		botonDiv.style.position = 'absolute';
 		botonDiv.style.left = '80px';
 		botonDiv.style.top =  '175px';
@@ -135,9 +135,9 @@ function sessionDisconnectedHandler(event) {
 	}
 	else if (is_end_call) {
 		is_end_call = false;
+		$('#modal_message').html('<p> Your new balance is: ' + formatCredits(credits));
 		$('#myModal').modal('show');
 		//$('#waitingDivGone').remove();
-		
 	}
 }
 
@@ -150,7 +150,7 @@ function connectionDestroyedHandler(event) {
 function signalHandler(event) {
 	is_reconnect = true;
 	if (session.connection.connectionId == event.fromConnection.connectionId) {
-		is_audio_only = true;
+		is_audio_only = false;
 		document.getElementById("videoBtn").style.display = 'none';
 		var div = document.createElement('div');
 		div.setAttribute('id','myPublisherDiv');
@@ -203,6 +203,25 @@ function enableDisableVideo() {
 function startTimer() {
 	if (time_elapsed < total_time && is_timer_running) {
 		time_elapsed++;
+		//if (time_elapsed >= total_time - 60) {
+		if (time_elapsed == 60 && is_buyer) {
+			$.ajax({ 
+				type: "POST",  
+				url: "/users/new_balance",
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+				},			
+				success: function(data) {
+					credits = data.credits;
+				},
+				error: function(error) {
+					alert(error);
+				} 
+			});
+		}
+		if (time_elapsed == 540) {
+			$('#timeBar').css('background-color', '#00FF00');
+		}
 		var minutes, seconds;
 		seconds = time_elapsed % 60;
 		minutes = Math.floor(time_elapsed / 60) % 60;
@@ -221,6 +240,13 @@ function formatTime(n) {
 	} else {
 		return n;
 	}
+}
+
+function formatCredits(value) {
+	if (value.toString().length < 4) {
+		return '$' + value + '0';
+	}
+	return '$' + value;
 }
 
 function windowClose() {

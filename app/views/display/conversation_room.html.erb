@@ -1,17 +1,19 @@
 <script type="text/javascript">
 	var publisher;
 	var stream;
+	var is_buyer = true;
 	var session = TB.initSession('<%= @open_tok_session %>');
 	var publisherProperties = new Object();
 	var api_key = '<%= @api_key %>';
 	var token = '<%= @token %>';
+	var credits = '<%= current_user.credits %>';
 
 	$(function(){
 
 		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');
 		$('#chat_field')[0].value="Type your message here...";
 
-		publisherProperties.publishVideo = false;
+		publisherProperties.publishVideo = true;
 		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
 
 		connect();
@@ -95,5 +97,17 @@
 				<%= f.submit "Send", :class => "conversationButton" %>
 			<% end %>
 		</div>
+	</div>
+</div>
+
+<div class="modal hide fade" id="myModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" onclick="windowClose();">x</button>
+		<h3>The call has ended</h3>
+	</div>
+	<div class="modal-body" style="text-align: center;">
+		<p id="modal_message">Click the button to return to the homepage</p>
+	</div>
+	<div class="modal-footer" style="text-align: center;">
 	</div>
 </div>
