@@ -10,12 +10,10 @@ var time_elapsed = 0;
 var archive;
 var archive_id;
 
-function createPusher(pusherKey, session, topic_name, topic_hints_size){
+function createPusher(pusherKey, session){
 	
-    var pusher = new Pusher(pusherKey);
-    var channel_chat = pusher.subscribe(session.substr(6,6));
-	
-	var hints_size = topic_hints_size;
+	var pusher = new Pusher(pusherKey);
+	var channel_chat = pusher.subscribe(session.substr(6,6));
 
 	channel_chat.bind(session.substr(0,6), function(data) {
 		var new_li = document.createElement('li');
@@ -33,9 +31,9 @@ function createPusher(pusherKey, session, topic_name, topic_hints_size){
 	var channel_slider = pusher.subscribe(session.substr(18,6));
 
 	channel_slider.bind(session.substr(12,6), function(data) {
-		$("#current_slide")[0].value = data.current_image;
-		$('#slideImageDiv').css("background-image", "url(/assets/topics/" + topic_name + "/" + (parseInt(data.current_image) + 1) +".jpg)");
-		$("#hint_text")[0].innerHTML = data.current_text;	
+		$("#current_slide")[0].value = data.id;
+		$('#slideImageDiv').css("background-image", "url(/assets/" + data.thumbnail_url+")");
+		$("#hint_text")[0].innerHTML = data.description;	
 	});
 	
 	var channel_messages = pusher.subscribe('channel_messages');

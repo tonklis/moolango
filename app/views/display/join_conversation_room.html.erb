@@ -8,7 +8,7 @@
 
 	$(function(){
 
-		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @session.to_s %>', '<%= Topic.find(@topic_id).name %>', <%= Topic.find(@topic_id).hints.size %>);
+		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @session.to_s %>', '<%= Topic.find(@topic_id).name %>');
 		$('#chat_field')[0].value="Type your message here...";
 
 		publisherProperties.publishVideo = false;
@@ -16,7 +16,7 @@
 
 		connect();
 
-		$('#slideImageDiv').css("background-image", "url(/assets/topics/<%= Topic.find(@topic_id).name %>/1.jpg)");
+		$('#slideImageDiv').css("background-image", "url(/assets/<%= @hints[0].thumbnail_url %>)");
 	});	
 </script>
 
@@ -40,13 +40,14 @@
 				<%= hidden_field_tag :origin, false %>
 				<%= hidden_field_tag :next, false %>
 				<%= hidden_field_tag :topic_id, @topic_id %>
-				<%= hidden_field_tag :current_slide, "0" %>
+				<%= hidden_field_tag :language_id, @language_id %>
+				<%= hidden_field_tag :current_slide, @hints[0].id %>
 			<div id="slideImageDiv">
 				<%= submit_tag "Next", :onClick => "nextInteraction(true);", :class => "slideNextButton conversationButton" %>
 				<%= submit_tag "Prev", :onClick => "nextInteraction(false);", :class => "slidePrevButton conversationButton" %>				
 			</div>
 			<div id="slideTextDiv">
-				<div id="hint_text"><%= Topic.find(@topic_id).hints[0].description %></div>
+				<div id="hint_text"><%= @hints[0].description %></div>
 			</div>
 		<% end %>
 		</div>

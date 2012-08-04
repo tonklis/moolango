@@ -33,13 +33,15 @@ class DisplayController < ApplicationController
 		@api_key = ENV['OPENTOK_API_KEY']
 		@session = params[:session]
 		@token = params[:token]
+		@language_id = session[:language]
+		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		# CREATE ROOM
 		Room.create(
 			:creator_id => params[:user_id],
 			:joiner_id => current_user.id,
 			:name => Topic.find(@topic_id).name,
 			:busy => true,
-			:language_id => session[:language]
+			:language_id => @language_id
 		)
 		render :layout => "rooms"
 
@@ -58,6 +60,8 @@ class DisplayController < ApplicationController
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 		@session = opentok.create_session(request.remote_addr, session_properties)
 		@token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
+		@language_id = params[:language_id]
+		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		Pusher[params[:session]].trigger('confirm_channel', {:message => "OK", :session => @session.to_s, :topic_id => @topic_id, :user_id => current_user.id, :token => @token})
 		
 		render :layout => "rooms"
