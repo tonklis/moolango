@@ -31,7 +31,8 @@ class DisplayController < ApplicationController
 		@topic_id = params[:id]
 		@joined_user = User.find(params[:user_id])
 		@api_key = ENV['OPENTOK_API_KEY']
-		@session = params[:session]
+		@open_tok_session = params[:open_tok_session]
+		@internal_session = params[:internal_session]
 		@token = params[:token]
 		@language_id = session[:language]
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
@@ -58,11 +59,12 @@ class DisplayController < ApplicationController
 		@origin_user = User.find(params[:user_id])
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
-		@session = opentok.create_session(request.remote_addr, session_properties)
+		@open_tok_session = opentok.create_session(request.remote_addr, session_properties)
+		@internal_session = params[:internal_session]
 		@token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
 		@language_id = params[:language_id]
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		Pusher[params[:session]].trigger('confirm_channel', {:message => "OK", :session => @session.to_s, :topic_id => @topic_id, :user_id => current_user.id, :token => @token})
+		Pusher[@internal_session].trigger('confirm_channel', {:message => "OK", :open_tok_session => @open_tok_session.to_s, :topic_id => @topic_id, :user_id => current_user.id, :token => @token})
 		
 		render :layout => "rooms"
 	end

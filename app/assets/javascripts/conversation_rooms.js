@@ -13,9 +13,9 @@ var archive_id;
 function createPusher(pusherKey, session){
 	
 	var pusher = new Pusher(pusherKey);
-	var channel_chat = pusher.subscribe(session.substr(6,6));
+	var channel = pusher.subscribe(session);
 
-	channel_chat.bind(session.substr(0,6), function(data) {
+	channel.bind('event_chat', function(data) {
 		var new_li = document.createElement('li');
 		if (data.origin == 'true') {
 			new_li.setAttribute('style','background-color:#DDDDDD');
@@ -28,17 +28,13 @@ function createPusher(pusherKey, session){
 		}
 	});
 
-	var channel_slider = pusher.subscribe(session.substr(18,6));
-
-	channel_slider.bind(session.substr(12,6), function(data) {
+	channel.bind('event_slider', function(data) {
 		$("#current_slide")[0].value = data.id;
 		$('#slideImageDiv').css("background-image", "url(/assets/" + data.thumbnail_url+")");
 		$("#hint_text")[0].innerHTML = data.description;	
 	});
 	
-	var channel_messages = pusher.subscribe('channel_messages');
-	
-	channel_messages.bind('end_call', function(data) {
+	channel.bind('event_end_call', function(data) {
 		endCall();
 	});
 }

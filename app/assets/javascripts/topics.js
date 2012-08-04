@@ -8,8 +8,8 @@
 		$("#modal_button_close").show();
 
 		var pusher = new Pusher(pusherKey);
-		var sessionId = Math.random().toString(36).substring(7);
-		var channel_confirm = pusher.subscribe(sessionId);
+		var internal_session = Math.random().toString(36).substring(7);
+		var channel_confirm = pusher.subscribe(internal_session);
 
 		channel_confirm.bind('confirm_channel', function(data) {
 			if(data.message == "OK"){
@@ -17,14 +17,14 @@
 				$("#modal_prog_bar")[0].className="progress progress-success";
 				$("#modal_button_accept").show();
 				$("#modal_button_close").hide();
-				$("#modal_button_accept")[0].href="conversation_room/"+ data.topic_id +"?session="+data.session+"&user_id="+data.user_id+"&token="+data.token;
+				$("#modal_button_accept")[0].href="conversation_room/" + data.topic_id +"?internal_session=" + internal_session + "&open_tok_session=" + data.open_tok_session + "&user_id=" + data.user_id + "&token=" + data.token;
 			}
 		});
 
 		$.ajax({ 
   		type: "POST",  
   		url: "messages/async_outbound",
-  		data: 'session_id=' + sessionId + '&topic_id=' + topicId +'&user_id=' + currentUserId,
+  		data: 'internal_session=' + internal_session + '&topic_id=' + topicId +'&user_id=' + currentUserId,
 			beforeSend: function(xhr) {
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   		},			

@@ -5,15 +5,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-		m_session = params[:message][:session]
-		Pusher[m_session[6..11]].trigger(m_session[0..5], {:message => params[:message][:content], :origin => params[:message][:origin]})
+		channel = params[:message][:channel]
+		Pusher[channel].trigger('event_chat', {:message => params[:message][:content], :origin => params[:message][:origin]})
     #@message = Message.create!(params[:message])
   end
 
 	def async_outbound
 		
 		# begin/rescue code not needed now, since it reports back the error in the JS modal frame
-		TestMailer.new_conversation(params[:topic_id], params[:session_id], params[:user_id], session[:language]).deliver
+		TestMailer.new_conversation(params[:topic_id], params[:internal_session], params[:user_id], session[:language]).deliver
 	
 		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		if (Language.find_by_name("english").id == session[:language].to_i)
