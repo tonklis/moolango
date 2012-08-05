@@ -6,14 +6,15 @@ class Room < ActiveRecord::Base
 	belongs_to :topic
 
 	def self.find_available user_id, topic_id, language_id, internal_session
+		rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)
+		rooms_to_close.each do |rtc|
+			rtc.status = "CLOSED"
+			rtc.save
+		end
+
 		rooms_available = Room.where("language_id = ? and topic_id = ? and status = 'WAITING'", language_id, topic_id)
 		if rooms_available.empty?
-			rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)
-			rooms_to_close.each do |rtc|
-				rtc.status = "CLOSED"
-				rtc.save
-			end
-			room = Room.create(
+				room = Room.create(
 				:creator_id => user_id,
 				:name => Topic.find(topic_id).name,
 				:status => "WAITING",
