@@ -63,7 +63,8 @@ function reconnect() {
 
 function endCall() {
 	is_end_call = true;
-	document.getElementById("videoBtn").style.display = 'none';
+	//document.getElementById("videoBtn").style.display = 'none';
+	$('#videoBtn').css({display: 'none'})
 	is_timer_running = false;
 	if (is_recording) {
 		session.stopRecording(archive);
@@ -106,7 +107,8 @@ function subscribeToStreams(streams) {
 				session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
 		}
 		else {
-			document.getElementById("videoBtn").style.display = 'block';
+			$('#videoBtn').css({display: 'block'})
+			//document.getElementById("videoBtn").style.display = 'block';
 		}
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
@@ -151,7 +153,9 @@ function signalHandler(event) {
 	is_reconnect = true;
 	if (session.connection.connectionId == event.fromConnection.connectionId) {
 		is_audio_only = false;
-		document.getElementById("videoBtn").style.display = 'none';
+		//document.getElementById("videoBtn").style.display = 'none';
+		$('#videoBtn').css({display: 'none'})
+		$('#videoBtn').val('Turn off video');
 		var div = document.createElement('div');
 		div.setAttribute('id','myPublisherDiv');
 		$("#publisherDiv").append(div);
@@ -195,9 +199,11 @@ function enableDisableVideo() {
 	is_audio_only = !is_audio_only
 	publisher.publishVideo(!is_audio_only);
 	if (is_audio_only)
-		document.getElementById("videoBtn").value = "Turn on video";
+		$('#videoBtn').val('Turn on video');
+		//document.getElementById("videoBtn").value = "Turn on video";
 	else
-		document.getElementById("videoBtn").value = "Turn off video";
+		$('#videoBtn').val('Turn off video');
+		//document.getElementById("videoBtn").value = "Turn off video";
 }
 
 function startTimer() {
