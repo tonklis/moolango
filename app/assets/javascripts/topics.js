@@ -20,7 +20,9 @@
 		});
 
 			channel_confirm.bind('room_info', function(data) {
-				$("#data_holder")[0].setAttribute("data-room-id",data.room_id);
+				if ($("#data_holder")[0] != undefined){
+					$("#data_holder")[0].setAttribute("data-room-id",data.room_id);
+				}
 			});
 
 		$.ajax({ 
@@ -56,13 +58,14 @@
 
 	function windowClose(){
 		// ADD the "are you sure you want to stop your search?" dialog
-		var roomToClose = $("#data_holder")[0].getAttribute("data-room-id");
-		$.ajax({ 
-  		type: "POST",  
-  		url: "rooms/cancel/"+roomToClose,
-			beforeSend: function(xhr) {
-    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-  		} 
-		});
-
+		if ($("#data_holder")[0] != undefined){
+			var roomToClose = $("#data_holder")[0].getAttribute("data-room-id");
+			$.ajax({ 
+  			type: "POST",  
+  			url: "rooms/cancel/"+roomToClose,
+				beforeSend: function(xhr) {
+    			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  			} 
+			});
+		}
 	}
