@@ -8,6 +8,7 @@ class CreateRooms < ActiveRecord::Migration
       t.string :session_id
 			t.integer :language_id
 			t.integer :topic_id
+			t.string :record_id
 
       t.timestamps
     end
