@@ -53,7 +53,7 @@ function connect() {
 	session.addEventListener('archiveCreated', archiveCreatedHandler);
 	session.addEventListener('sessionRecordingStopped', stopRecordingHandler);
 	session.addEventListener('archiveClosed', archiveClosedHandler);
-	TB.addEventListener('exception', function(event){alert(event.message);});
+	//TB.addEventListener('exception', function(event){alert(event.message);});
 	session.connect(api_key, token);
 }
 
