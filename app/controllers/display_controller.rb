@@ -4,7 +4,7 @@ class DisplayController < ApplicationController
 
 	def index
 		if signed_in?
-			redirect_to action_path
+			redirect_to (action_path+"?fs=true")
 		end
 	end
 
