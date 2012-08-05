@@ -171,7 +171,7 @@ function archiveCreatedHandler(event) {
 	if (room_id != undefined){
 		$.ajax({ 
 			type: "POST",  
-			url: "rooms/add_record_data/" + room_id,
+			url: "/rooms/add_record_data/" + room_id,
  			data: 'record_id=' + archive_id,
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
