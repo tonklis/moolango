@@ -249,9 +249,9 @@ function formatTime(n) {
 }
 
 function formatCredits(value) {
-	if (value.toString().length < 4) {
+	/*if (value.toString().length < 4) {
 		return '$' + value + '0';
-	}
+	}*/
 	return '$' + value;
 }
 
