@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20120803180024) do
     t.string   "session_id"
     t.integer  "language_id"
     t.integer  "topic_id"
+    t.string   "record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,8 +73,8 @@ ActiveRecord::Schema.define(:version => 20120803180024) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  :default => "",  :null => false
-    t.string   "encrypted_password",     :default => "",  :null => false
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -82,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20120803180024) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.float    "credits",                :default => 2.0
+    t.float    "credits",                :default => 10.0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
