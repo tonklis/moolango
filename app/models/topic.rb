@@ -1,6 +1,7 @@
 class Topic < ActiveRecord::Base
 
 	has_many :hints
+	has_many :rooms
 
 	def next_hint hints, next_slide, current_slide_id
 		current_slide_id = current_slide_id.to_i

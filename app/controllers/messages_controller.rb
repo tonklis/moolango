@@ -11,25 +11,21 @@ class MessagesController < ApplicationController
   end
 
 	def async_outbound
-		
-		# begin/rescue code not needed now, since it reports back the error in the JS modal frame
-		TestMailer.new_conversation(params[:topic_id], params[:internal_session], params[:user_id], session[:language]).deliver
-	
-		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
-		if (Language.find_by_name("english").id == session[:language].to_i)
-	 		number_to_send_to = "6145968264"
-			message = "There's someone waiting on Moolango to talk about #{Topic.find(params[:topic_id]).name}"
-		else 
-			number_to_send_to = "6142826401"
-			message = "Hay una persona en Moolango esperando para hablar de #{Topic.find(params[:topic_id]).name}"
+
+		internal_session = params[:internal_session]
+		room = Room.find_available(params[:user_id], params[:topic_id], params[:language_id], internal_session)
+
+		if room.status == "WAITING"
+			Pusher[internal_session].trigger('room_info', {:room_id => room.id})
+		elsif room.status == "BUSY"
+			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
+			session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
+			open_tok_session = opentok.create_session(request.remote_addr, session_properties)
+			token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
+			Pusher[internal_session].trigger('confirm_event',{:message => "OKO", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
+			Pusher[room.session_id].trigger('confirm_event',{:message => "OK", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
 		end
-		
-		@twilio_client.account.sms.messages.create(
-		  :from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-		  :to => number_to_send_to,
-	 	 :body => message
-		)
-		
+
 	end 
 
 end

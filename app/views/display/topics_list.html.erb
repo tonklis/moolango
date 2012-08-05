@@ -9,16 +9,16 @@
 			
 			<% @topics.each do |topic| %>
 				<div class="box one-edge-shadow">
-					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey);" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey, #{@language_id});" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
 				</div>
 			<% end %>
 
-	<div id="data_holder" data-user-id="<%=current_user.id%>" data-pusher-key="<%=ENV['PUSHER_KEY']%>" >
+	<div id="data_holder" data-user-id="<%=current_user.id%>" data-pusher-key="<%=ENV['PUSHER_KEY']%>" data-room-id="">
 	</div>
 
 <div class="modal hide fade" id="myModal">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" onclick="windowClose();">×</button>
+    <button type="button" class="close" data-dismiss="modal" onclick="windowClose();">x</button>
     <h3>Please wait</h3>
   </div>
   <div class="modal-body" style="text-align: center;">

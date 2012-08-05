@@ -24,12 +24,16 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :busy %><br />
-    <%= f.check_box :busy %>
+    <%= f.label :status %><br />
+    <%= f.check_box :status %>
   </div>
   <div class="field">
     <%= f.label :session_id %><br />
     <%= f.number_field :session_id %>
+  </div>
+  <div class="field">
+    <%= f.label :topic_id %><br />
+    <%= f.number_field :topic_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

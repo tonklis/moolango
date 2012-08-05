@@ -49,9 +49,10 @@ ActiveRecord::Schema.define(:version => 20120803180024) do
     t.integer  "creator_id"
     t.integer  "joiner_id"
     t.string   "name"
-    t.boolean  "busy"
-    t.integer  "session_id"
+    t.string   "status"
+    t.string   "session_id"
     t.integer  "language_id"
+    t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

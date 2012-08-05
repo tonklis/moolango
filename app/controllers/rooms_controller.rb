@@ -80,4 +80,11 @@ class RoomsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+	def cancel
+		@room = Room.cancel(params[:id])
+		respond_to do |format|
+      format.json { render json: @room }
+    end
+	end
 end

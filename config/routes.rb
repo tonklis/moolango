@@ -45,6 +45,8 @@ Moolango::Application.routes.draw do
 	
 	match 'users/new_balance' => 'users#new_balance', :as => :new_balance
 
+	match 'rooms/cancel/:id' => 'rooms#cancel'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

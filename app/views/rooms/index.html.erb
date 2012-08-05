@@ -5,8 +5,9 @@
     <th>Creator</th>
     <th>Joiner</th>
     <th>Name</th>
-    <th>Busy</th>
-    <th>Session</th>
+    <th>Status</th>
+		<th>Session</th>
+		<th>Topic</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,8 +18,9 @@
     <td><%= room.creator_id %></td>
     <td><%= room.joiner_id %></td>
     <td><%= room.name %></td>
-    <td><%= room.busy %></td>
+    <td><%= room.status %></td>
     <td><%= room.session_id %></td>
+    <td><%= room.topic_id %></td>
     <td><%= link_to 'Show', room %></td>
     <td><%= link_to 'Edit', edit_room_path(room) %></td>
     <td><%= link_to 'Destroy', room, confirm: 'Are you sure?', method: :delete %></td>

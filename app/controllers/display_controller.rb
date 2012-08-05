@@ -21,31 +21,24 @@ class DisplayController < ApplicationController
 	end
 
 	def topics_list
-		session[:language] = params[:id]
+		@language_id = session[:language] = params[:id]
 		@topics = Topic.order("id DESC")
 		render :layout => "topics"
 	end
 
 	def conversation_room
 
-		@topic_id = params[:id]
-		@joined_user = User.find(params[:user_id])
-		@api_key = ENV['OPENTOK_API_KEY']
-		@open_tok_session = params[:open_tok_session]
+		room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
+		@open_tok_session = params[:open_tok_session]
 		@token = params[:token]
-		@language_id = session[:language]
+		@topic_id = room.topic_id
+		@joined_user = User.find(room.joiner_id)
+		@api_key = ENV['OPENTOK_API_KEY']
+		@language_id = room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		# CREATE ROOM
-		Room.create(
-			:creator_id => params[:user_id],
-			:joiner_id => current_user.id,
-			:name => Topic.find(@topic_id).name,
-			:busy => true,
-			:language_id => @language_id
-		)
+		
 		render :layout => "rooms"
-
 	end
 
 	def admin_room	
@@ -53,18 +46,16 @@ class DisplayController < ApplicationController
 	end
 
 	def join_conversation_room
-		
-		@topic_id = params[:topic_id]
-		@api_key = ENV['OPENTOK_API_KEY']
-		@origin_user = User.find(params[:user_id])
-		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
-		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
-		@open_tok_session = opentok.create_session(request.remote_addr, session_properties)
+
+		room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
-		@token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
-		@language_id = params[:language_id]
+		@open_tok_session = params[:open_tok_session]
+		@token = params[:token]
+		@topic_id = room.topic_id
+		@api_key = ENV['OPENTOK_API_KEY']
+		@origin_user = User.find(room.creator_id)
+		@language_id = room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		Pusher[@internal_session].trigger('confirm_channel', {:message => "OK", :open_tok_session => @open_tok_session.to_s, :topic_id => @topic_id, :user_id => current_user.id, :token => @token})
 		
 		render :layout => "rooms"
 	end
