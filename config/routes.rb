@@ -47,6 +47,8 @@ Moolango::Application.routes.draw do
 
 	match 'rooms/cancel/:id' => 'rooms#cancel'
 
+	match 'rooms/add_record_data/:id' => 'rooms#add_record_data'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -165,8 +165,20 @@ function signalHandler(event) {
 
 function archiveCreatedHandler(event) {
 	archive = event.archives[0];
-    archive_id = archive.archiveId;
+	archive_id = archive.archiveId;
 	session.publish(publisher);
+	
+	if (room_id != undefined){
+		$.ajax({ 
+			type: "POST",  
+			url: "rooms/add_record_data/" + room_id,
+ 			data: 'record_id=' + archive_id,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+			}
+		});
+	}
+
 }
 
 function stopRecordingHandler(event) {

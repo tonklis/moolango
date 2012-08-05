@@ -7,7 +7,8 @@
 	var api_key = '<%= @api_key %>';
 	var token = '<%= @token %>';
 	var credits = '<%= current_user.credits %>';
-
+	var room_id = '<%= @room.id %>';
+	
 	$(function(){
 
 		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');

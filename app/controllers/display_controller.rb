@@ -28,7 +28,7 @@ class DisplayController < ApplicationController
 
 	def conversation_room
 
-		room = Room.find(params[:id])
+		@room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
 		@token = params[:token]
@@ -47,7 +47,7 @@ class DisplayController < ApplicationController
 
 	def join_conversation_room
 
-		room = Room.find(params[:id])
+		@room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
 		@token = params[:token]

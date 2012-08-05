@@ -87,4 +87,13 @@ class RoomsController < ApplicationController
       format.json { render json: @room }
     end
 	end
+
+	def add_record_data
+		@room = Room.find(params[:id])
+		@room.record_id = params[:record_id]
+		@room.save
+		respond_to do |format|
+			format.json { render json: @room }
+		end
+	end
 end
