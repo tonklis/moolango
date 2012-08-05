@@ -32,10 +32,10 @@ class DisplayController < ApplicationController
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
 		@token = params[:token]
-		@topic_id = room.topic_id
-		@joined_user = User.find(room.joiner_id)
+		@topic_id = @room.topic_id
+		@joined_user = User.find(@room.joiner_id)
 		@api_key = ENV['OPENTOK_API_KEY']
-		@language_id = room.language_id
+		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
 		render :layout => "rooms"
@@ -51,10 +51,10 @@ class DisplayController < ApplicationController
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
 		@token = params[:token]
-		@topic_id = room.topic_id
+		@topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		@origin_user = User.find(room.creator_id)
-		@language_id = room.language_id
+		@origin_user = User.find(@room.creator_id)
+		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
 		render :layout => "rooms"
