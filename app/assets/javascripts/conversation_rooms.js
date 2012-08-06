@@ -147,6 +147,9 @@ function connectionDestroyedHandler(event) {
 	if (is_reconnect) {
 		showWaitSpiner();
 	}
+	else {
+		endCall();
+	}
 }
 
 function signalHandler(event) {
