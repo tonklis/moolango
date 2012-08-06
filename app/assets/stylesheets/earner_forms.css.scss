@@ -1,3 +1,32 @@
 // Place all the styles related to the EarnerForms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.earner_body{
+	margin: 15px auto auto auto;
+	width: 55%;
+	height: 70%;
+	background-color: #71BEEC;
+	color: #FFFFFF;
+}
+
+.earner_info{
+	width: 65%;
+	margin: auto;
+	text-align: center;
+  font-weight: bold;
+}
+
+.contact_soon_body{
+	text-align: center;
+	font-weight: bold;
+}
+
+.earner_form{
+	margin: auto;
+	height: 50%;
+	width: 60%;
+}
+
+.earner_form_questions{
+	float: left;
+}
