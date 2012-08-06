@@ -12,16 +12,22 @@
 </div>
 <div id="first_signin_flag" data-flag="<%= @first_signin_flag %>"></div>
 <div class="modal hide fade" id="myModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" onclick="windowClose();">×</button>
-    <h3>Welcome to MooLango MEGA beta!</h3>
+  <div class="modal-header" style="margin: auto; text-align: center;">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<%= image_tag "webpage/welcome_to_moolango.gif", :alt => "welcome to moolango"%>
   </div>
-  <div class="modal-body" style="text-align: center;">
-		<p id="modal_message">We're live, buggy, and just for fun you just got $10.00 free credits!</p>
-	 	<p>So start enjoying right away and feel free to send us any feedback.</p>
+  <div class="modal-body" style="text-align: center; color: #71BEEC; font-size: 16px;">
+		<p id="modal_message">Hey we just met you. And this is crazy. <br />
+			But here's $10 free dollars. So talk to us maybe?
+		</p>
+		<p>That's right, $10 free dollars on Moolango! Each 10-minute <br />
+			conversation costs $2 so, if we did the math right, that's 5 free <br />
+			conversations about things you love.
+		</p>
+		<p>What are you still doing here?</p>
 	</div>
-  <div class="modal-footer" style="text-align: center;">
-    <a id="modal_button_close" href="#" class="btn" data-dismiss="modal" onclick="windowClose();">Close</a>
+	<div class="modal-footer" style="text-align: center;">
+		<%= link_to image_tag("webpage/lets_do_it_button.gif"), "#", :id => "modal_button_close", "data-dismiss"=>"modal"%>
   </div>
 </div>
 
