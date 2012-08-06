@@ -22,7 +22,8 @@ class DisplayController < ApplicationController
 
 	def topics_list
 		@language_id = session[:language] = params[:id]
-		@topics = Topic.order("id DESC")
+		@enabled_topics = Topic.where("enabled = ?", true)
+		@disabled_topics = Topic.where("enabled = ?", false)
 		render :layout => "topics"
 	end
 

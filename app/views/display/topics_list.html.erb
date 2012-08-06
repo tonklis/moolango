@@ -1,15 +1,21 @@
 <% @title_desc = "Topics List" %>
 	
 	<div>
-		<div style="height: 80px; text-align: center;">
+		<div style="height: 80px; text-align: center; margin-top: -40px;">
 			<%= image_tag "webpage/click_on_the_image.png", :alt => "click on the image to pick a topic"%>
 		</div>
 		
 		<div id="content" class="centered">
 			
-			<% @topics.each do |topic| %>
+			<% @enabled_topics.each do |topic| %>
 				<div class="box one-edge-shadow">
 					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey, #{@language_id});" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+				</div>
+			<% end %>
+
+			<% @disabled_topics.each do |topic| %>
+				<div class="box one-edge-shadow">
+					<%= image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey, #{@language_id});") %>
 				</div>
 			<% end %>
 
