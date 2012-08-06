@@ -59,28 +59,6 @@
 
 <div class="row">
 	<div class="span6">
-		<div id="toolBar">
-			<div id="totalTimeBar">
-				<div id="timeBar"></div>
-				<div id="totalTimeTxt" style="position:absolute; color:white;"></div>
-			</div>
-			<div id="actionsDiv">
-				<div id="endCallDiv">
-					<%= form_tag('/interaction/end_call', :remote => true) do %>
-						<%= hidden_field_tag :channel, @internal_session %>
-						<%= submit_tag "End Call", :class => "conversationButton" %>
-					<% end %>
-				</div>
-				<div id="reconnectDiv">
-					<button type="button" class="conversationButton" onClick="reconnect();">Reconnect</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="span6">
 		<div id="outerPublisherDiv">
 			<div id="publisherDiv" style="position:relative;">
 				<div id="myPublisherDiv"></div>

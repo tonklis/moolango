@@ -3,7 +3,7 @@
 <head>
   <title>Moolango <%= @title_desc if @title_desc %></title>
   <%= stylesheet_link_tag    "conversation_room/conversation_room" %>
-  <%= javascript_include_tag "application" %>
+	<%= javascript_include_tag "application" %>
 	<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
   <%= javascript_include_tag "pusher/pusher.min" %>
 	<%= csrf_meta_tags %>
@@ -14,7 +14,30 @@
 		<div class="header">
 			<div class="row">
 				<div class="span12">
-					<div class="title_image" ></div>
+					<div class="title_image" >
+						<div class="row-fluid" style="padding-top: 10px;">
+							<div class="span4"></div>
+							<div class="span4">
+								<div id="totalTimeBar">
+									<div id="timeBar"></div>
+									<div id="totalTimeTxt"></div>
+								</div>
+							</div>
+							<div class="span4">
+								<div id="actionsDiv">
+									<div id="endCallDiv">
+										<%= form_tag('/interaction/end_call', :remote => true) do %>
+											<%= hidden_field_tag :channel, @internal_session %>
+											<%= submit_tag "End Call", :class => "conversationButton" %>
+										<% end %>
+									</div>
+									<div id="reconnectDiv">
+										<button type="button" class="conversationButton" onClick="reconnect();">Reconnect</button>
+									</div>
+								</div>
+							</div>
+						</div>					
+					</div>
 				</div>
 			</div>
 		</div> 

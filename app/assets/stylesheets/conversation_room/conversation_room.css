@@ -53,7 +53,6 @@ body {
 #outerPublisherDiv{
 	height: 220px;
 	width: 380px;
-	text-align: center;
 	margin: auto;
 	float: right;
 }
@@ -111,10 +110,9 @@ ul#chat {
 	position: relative;
 }
 
-#toolBar {
-	width: 400px;
-	height: 100px;
-	float: right;
+#totalTimeTxt {
+	position:absolute;
+	color:white;
 }
 
 #timeBar {
