@@ -4,7 +4,11 @@ class DisplayController < ApplicationController
 
 	def index
 		if signed_in?
-			redirect_to (action_path+"?fs=true")
+			if current_user.sign_in_count == 1
+				redirect_to (action_path+"?fs=true")
+			else
+				redirect_to action_path
+			end
 		end
 	end
 
