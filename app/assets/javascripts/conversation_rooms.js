@@ -181,7 +181,6 @@ function archiveCreatedHandler(event) {
 			}
 		});
 	}
-
 }
 
 function stopRecordingHandler(event) {

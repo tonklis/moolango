@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <b>Busy:</b>
-  <%= @room.busy %>
+  <b>Status:</b>
+  <%= @room.status %>
 </p>
 
 <p>
@@ -25,6 +25,10 @@
   <%= @room.session_id %>
 </p>
 
+<p>
+  <b>OpenTok video:</b>
+  <%= @room.record_id %>
+</p>
 
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
