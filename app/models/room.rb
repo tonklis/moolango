@@ -31,11 +31,14 @@ class Room < ActiveRecord::Base
 		room
 	end
 
-	def self.cancel room_id
-		room = Room.find(room_id)
-		room.status = "CANCELLED"
-		room.save
-		room
+	def self.cancel user_id
+			
+		rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)
+		rooms_to_close.each do |rtc|
+			rtc.status = "CANCELLED"
+			rtc.save
+		end
+		rooms_to_close
 	end
 
 end

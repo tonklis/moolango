@@ -4,9 +4,3 @@
 <p>
 	Language: <%= @language.name %>
 </p>
-<p>
-<%= link_to "Join room", "http://www.moolango.com/join_conversation_room/1?internal_session=#{@token}&topic_id=#{@topic.id}&user_id=#{@user.id}&language_id=#{@language.id}" %>
-</p>
-<p>
-	Session token: <%= @token %>
-</p>

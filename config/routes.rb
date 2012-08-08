@@ -45,7 +45,7 @@ Moolango::Application.routes.draw do
 	
 	match 'users/new_balance' => 'users#new_balance', :as => :new_balance
 
-	match 'rooms/cancel/:id' => 'rooms#cancel'
+	match 'rooms/cancel' => 'rooms#cancel'
 
 	match 'rooms/add_record_data/:id' => 'rooms#add_record_data'
 

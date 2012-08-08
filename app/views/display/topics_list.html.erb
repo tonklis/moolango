@@ -24,7 +24,7 @@
 
 <div class="modal hide fade" id="myModal">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" onclick="windowClose();">x</button>
+    <button type="button" class="close" data-dismiss="modal" onclick="windowClose('<%= current_user.id %>');">x</button>
     <h3>Please wait</h3>
   </div>
   <div class="modal-body" style="text-align: center;">
@@ -36,7 +36,7 @@
   	</div>
 	</div>
   <div class="modal-footer" style="text-align: center;">
-    <a id="modal_button_close" href="#" class="btn" data-dismiss="modal" onclick="windowClose();">Close</a>
+		<a id="modal_button_close" href="#" class="btn" data-dismiss="modal" onclick="windowClose('<%= current_user.id %>');">Close</a>
     <a id="modal_button_accept" href="#" class="btn btn-success">Talk now</a>
   </div>
 </div>

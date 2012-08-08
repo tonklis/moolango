@@ -82,9 +82,9 @@ class RoomsController < ApplicationController
   end
 
 	def cancel
-		@room = Room.cancel(params[:id])
+		@rooms = Room.cancel(params[:user_id])
 		respond_to do |format|
-      format.json { render json: @room }
+      format.json { render json: @rooms }
     end
 	end
 
