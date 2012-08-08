@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
 			TestMailer.new_conversation(params[:topic_id], params[:user_id], params[:language_id]).deliver
 
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
-			if (Language.find_by_name("english").id == session[:language_id].to_i)
+			if (Language.find_by_name("english").id == params[:language_id].to_i)
 				number_to_send_to = "6145968264"
 				message = "Waiting to talk about #{Topic.find(params[:topic_id]).name} in #{Language.find(params[:language_id]).name}"
 			else 
