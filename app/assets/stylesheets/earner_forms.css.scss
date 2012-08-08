@@ -30,3 +30,21 @@
 .earner_form_questions{
 	float: left;
 }
+
+.contact_soon_button{
+	margin: auto;
+	width: 100px;
+	height: 30px;
+	background-image: url('/assets/webpage/next_button.gif');
+	cursor: pointer;
+}
+
+.contact_soon_button_text{
+	padding-top: 5px;
+}
+
+.contact_soon_button_text a:link {color:#FFFFFF; text-decoration: none;}
+.contact_soon_button_text a:visited {color:#FFFFFF; text-decoration: none;}
+.contact_soon_button_text a:hover {color:#FFFFFF; text-decoration: none;}
+.contact_soon_button_text a:active {color:#FFFFFF; text-decoration: none;}
+
