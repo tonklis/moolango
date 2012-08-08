@@ -12,7 +12,7 @@ var archive_id;
 
 function createPusher(pusherKey, session){
 	
-	var pusher = new Pusher(pusherKey);
+	var pusher = new Pusher(pusherKey, { encrypted: true });
 	var channel = pusher.subscribe(session);
 
 	channel.bind('event_chat', function(data) {
