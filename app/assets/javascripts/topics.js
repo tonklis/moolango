@@ -7,7 +7,7 @@
 		$("#modal_button_accept")[0].href="#";
 		$("#modal_button_close").show();
 
-		var pusher = new Pusher(pusherKey);
+		var pusher = new Pusher(pusherKey, { encrypted: true });
 		var internal_session = Math.random().toString(36).substring(7);
 		var channel_confirm = pusher.subscribe(internal_session);
 
@@ -31,7 +31,7 @@
   		data: 'internal_session=' + internal_session + '&topic_id=' + topicId +'&user_id=' + currentUserId + '&language_id=' + languageId,
 			beforeSend: function(xhr) {
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-  		},			
+  		},
   		success: function() {
 				$("#modal_progress")[0].style.width="100%";
 				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
