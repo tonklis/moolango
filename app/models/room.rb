@@ -24,7 +24,7 @@ class Room < ActiveRecord::Base
 			)
 		else
 			room = rooms_available.first
-			room.status = "BUSY"
+			room.status = "HANDSHAKE"
 			room.joiner_id = user_id
 			room.save
 		end
@@ -39,6 +39,13 @@ class Room < ActiveRecord::Base
 			rtc.save
 		end
 		rooms_to_close
+	end
+
+	def self.make_busy room_id
+		room = Room.find(room_id)
+		room.status = "BUSY"
+		room.save!
+		room
 	end
 
 end

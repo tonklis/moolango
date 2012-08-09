@@ -9,13 +9,13 @@
 			
 			<% @enabled_topics.each do |topic| %>
 				<div class="box one-edge-shadow">
-					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey, #{@language_id});" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusher, #{@language_id});" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
 				</div>
 			<% end %>
 
 			<% @disabled_topics.each do |topic| %>
 				<div class="box one-edge-shadow">
-					<%= image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusherKey, #{@language_id});") %>
+					<%= image_tag(topic.thumbnail_url) %>
 				</div>
 			<% end %>
 
@@ -37,14 +37,13 @@
 	</div>
   <div class="modal-footer" style="text-align: center;">
 		<a id="modal_button_close" href="#" class="btn" data-dismiss="modal" onclick="windowClose('<%= current_user.id %>');">Close</a>
-    <a id="modal_button_accept" href="#" class="btn btn-success">Talk now</a>
   </div>
 </div>
 
 <script type="text/javascript">
 
 	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
-	var pusherKey = $("#data_holder")[0].getAttribute("data-pusher-key");
+	var pusher = new Pusher($("#data_holder")[0].getAttribute("data-pusher-key"), { encrypted: true });
 
 	$(function(){
 		var $container = $('#content');

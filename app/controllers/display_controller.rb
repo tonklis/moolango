@@ -21,7 +21,7 @@ class DisplayController < ApplicationController
 	end
 
 	def rooms_listing
-		@rooms = Room.where("busy = ?", false)
+		@rooms = Room.where("status = ?", "BUSY")
 	end
 
 	def topics_list

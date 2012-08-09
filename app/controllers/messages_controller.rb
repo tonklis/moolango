@@ -17,8 +17,6 @@ class MessagesController < ApplicationController
 
 		if room.status == "WAITING"
 			
-			# Pusher[internal_session].trigger('room_info', {:room_id => room.id})
-
 			# adding previous async notifications for testing purposes
 			TestMailer.new_conversation(params[:topic_id], params[:user_id], params[:language_id]).deliver
 
@@ -37,15 +35,31 @@ class MessagesController < ApplicationController
 				:body => message
 			)
 
-		elsif room.status == "BUSY"
-			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
+			respond_to do |format|
+				format.json { render json: {:message => "WAITING"} }
+	    end
+		elsif room.status == "HANDSHAKE"
+			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']#, :api_url => 'http://api.opentok.com/hl'
 			session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 			open_tok_session = opentok.create_session(request.remote_addr, session_properties)
-			token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
-			Pusher[internal_session].trigger('confirm_event',{:message => "OKO", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
-			Pusher[room.session_id].trigger('confirm_event',{:message => "OK", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
-		end
+			token = opentok.generate_token(:session_id => open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 
-	end 
+			respond_to do |format|
+      	format.json { render json: {:handshake => true, :room_id => room.id, :open_tok_session => open_tok_session, :token => token } }
+	    end
+		end
+	end
+
+	def confirm_chat
+
+		internal_session = params[:internal_session]
+		open_tok_session = params[:open_tok_session]
+		token = params[:token]
+		room = Room.make_busy(params[:room_id])
+
+		Pusher[internal_session].trigger('confirm_event',{:message => "handshake", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
+		Pusher[room.session_id].trigger('confirm_event',{:message => "handshake", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
+
+	end	
 
 end

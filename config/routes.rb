@@ -38,6 +38,8 @@ Moolango::Application.routes.draw do
 	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
 
 	match 'messages/async_outbound' => 'messages#async_outbound', :as => :async_outbound
+
+	match 'messages/confirm_chat' => 'messages#confirm_chat'
 	
 	match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
 	
