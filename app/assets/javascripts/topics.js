@@ -9,6 +9,7 @@
 		var channel_confirm = pusher.subscribe(internal_session);
 
 		channel_confirm.bind('confirm_event', function(data) {
+			alert(data);
 			redirectToRoom(data);
 		});
 
