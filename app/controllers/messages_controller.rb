@@ -60,6 +60,10 @@ class MessagesController < ApplicationController
 		Pusher[internal_session].trigger('confirm_event',{:message => "handshake", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
 		Pusher[room.session_id].trigger('confirm_event',{:message => "handshake", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
 
+		respond_to do |format|
+				format.json { render json: {:message => "BUSY"} }
+	   end
+
 	end	
 
 end
