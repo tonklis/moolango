@@ -45,7 +45,7 @@ class MessagesController < ApplicationController
 			token = opentok.generate_token(:session_id => open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 
 			respond_to do |format|
-      	format.json { render json: {:handshake => true, :room_id => room.id, :open_tok_session => open_tok_session, :token => token } }
+      	format.json { render json: {:handshake => true, :room_id => room.id, :open_tok_session => open_tok_session.to_s, :token => token } }
 	    end
 		end
 	end
