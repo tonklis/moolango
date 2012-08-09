@@ -29,11 +29,11 @@ class MessagesController < ApplicationController
 				message = "Esperando a hablar sobre #{Topic.find(params[:topic_id]).name} en #{Language.find(params[:language_id]).name}"
 			end
 
-			@twilio_client.account.sms.messages.create(
-				:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-				:to => number_to_send_to,
-				:body => message
-			)
+			#@twilio_client.account.sms.messages.create(
+			#	:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+			#	:to => number_to_send_to,
+			#	:body => message
+			#)
 
 			respond_to do |format|
 				format.json { render json: {:message => "WAITING"} }

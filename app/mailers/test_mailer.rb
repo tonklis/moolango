@@ -5,7 +5,7 @@ class TestMailer < ActionMailer::Base
 		@topic = Topic.find(topic)
 		@user = User.find(user)
 		@language = Language.find(language.to_i)
-		mail(:to => "williambabeaux@gmail.com,tonklis@gmail.com,dmiramon@gmail.com", :subject => "New conversation with #{@user.firstname}, about #{@topic.name}")
+		mail(:to => "tonklis@gmail.com", :subject => "New conversation with #{@user.firstname}, about #{@topic.name}")
   end
 	
 end
