@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
 
 	before_filter :authenticate_user!
-	before_filter :check_access
+	before_filter :check_access, :except => [:cancel, :add_record_data]
 
 	# GET /rooms
   # GET /rooms.json

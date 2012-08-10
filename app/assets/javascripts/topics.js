@@ -4,11 +4,15 @@
 		$("#modal_prog_bar")[0].className="progress progress-stripped";
 		$("#modal_progress")[0].style.width="2%";
 		$("#modal_button_close").show();
+		$("#modal_wait_message")[0].innerHTML="";
+		$("#modal_alert").alert()[0].setAttribute("style","display: none");
 
 		var internal_session = Math.random().toString(36).substring(7);
 		var channel_confirm = pusher.subscribe(internal_session);
 
 		channel_confirm.bind('confirm_event', function(data) {
+			$("#modal_wait_message")[0].innerHTML="Match found!";
+			$("#modal_prog_bar")[0].className="progress progress-success";
 			redirectToRoom(data);
 		});
 
@@ -23,6 +27,7 @@
 				$("#modal_progress")[0].style.width="100%";
 				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
 				$("#modal_prog_bar")[0].className="progress progress-striped active";
+				$("#modal_wait_message")[0].innerHTML="Estimated wait time: 2 minutes.";
 				if (data.handshake == true){
 					$.ajax({ 
   					type: "POST",  
@@ -55,20 +60,23 @@
 		window.location = redirect_url;
 	}
 
-	function displayMatch(data){
-		$("#modal_message")[0].innerHTML="Match found!";
-		$("#modal_prog_bar")[0].className="progress progress-success";
+	function windowClose(){
 		$("#modal_button_close").hide();
+		$("#modal_alert").alert()[0].setAttribute("style","");
 	}
 
-	function windowClose(userId){
-		// ADD the "are you sure you want to stop your search?" dialog
+	function cancelRooms(userId){
 		$.ajax({ 
-  		type: "POST",  
+  		type: "POST", 
   		url: "rooms/cancel",
   		data: 'user_id=' + userId,
 			beforeSend: function(xhr) {
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   		} 
 		});
+	}
+
+	function hideAlert(){
+		$("#modal_alert").alert()[0].setAttribute("style","display: none");
+		$("#modal_button_close").show();
 	}
