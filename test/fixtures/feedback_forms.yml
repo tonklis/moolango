@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  rating: 1
+  comments: MyText
+  topics: MyText
+  user_id: 1
+  room_id: 1
+
+two:
+  rating: 1
+  comments: MyText
+  topics: MyText
+  user_id: 1
+  room_id: 1

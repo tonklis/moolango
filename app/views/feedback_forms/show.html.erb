@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Rating:</b>
+  <%= @feedback_form.rating %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @feedback_form.comments %>
+</p>
+
+<p>
+  <b>Topics:</b>
+  <%= @feedback_form.topics %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @feedback_form.user_id %>
+</p>
+
+<p>
+  <b>Room:</b>
+  <%= @feedback_form.room_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_feedback_form_path(@feedback_form) %> |
+<%= link_to 'Back', feedback_forms_path %>

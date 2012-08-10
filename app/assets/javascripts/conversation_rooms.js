@@ -1,3 +1,4 @@
+var selected_star = 0;
 var is_reconnect = false;
 var is_end_call = false;
 var is_audio_only = false;
@@ -136,10 +137,7 @@ function sessionDisconnectedHandler(event) {
 		connect();
 	}
 	else if (is_end_call) {
-		is_end_call = false;
-		$('#modal_message').html('<p> Your new balance is: ' + formatCredits(credits));
-		$('#myModal').modal('show');
-		//$('#waitingDivGone').remove();
+		showModal();
 	}
 }
 
@@ -267,6 +265,29 @@ function formatCredits(value) {
 		return '$' + value + '0';
 	}*/
 	return '$' + value;
+}
+
+function showModal() {
+	is_end_call = false;
+	$('#modal_message').html('<p> Your new balance is: ' + formatCredits(credits));
+	$('#myModal').modal({
+		keyboard: false,
+		backdrop: false
+	});
+	$('#myModal').modal('show');
+	//$('#waitingDivGone').remove();
+}
+
+function selectStars(stars) {
+	var max = stars - 1;
+	$('.star').each(function(index) {
+		if (index <= max) {
+			$(this).css({'background-position':'0 -25px'});
+		}
+		else if (index >= stars) {
+			$(this).css({'background-position':'0 0'});
+		}
+	});
 }
 
 function windowClose() {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806202233) do
+ActiveRecord::Schema.define(:version => 20120809191518) do
 
   create_table "earner_forms", :force => true do |t|
     t.boolean  "pricing"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20120806202233) do
     t.string   "email"
     t.boolean  "agree"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feedback_forms", :force => true do |t|
+    t.integer  "rating"
+    t.text     "comments"
+    t.text     "topics"
+    t.integer  "user_id"
+    t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
