@@ -41,10 +41,9 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def charge_call()
+	def charge_call
 		if (self.credits > 0)
-			self.credits -= 2.0
-			self.save
+			 self.update_attribute(:credits, self.credits - 2.0)
 		end
 		return self
 	end
