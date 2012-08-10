@@ -9,7 +9,7 @@
 		var channel_confirm = pusher.subscribe(internal_session);
 
 		channel_confirm.bind('confirm_event', function(data) {
-			alert(data.internal_session + " + " + data.room_session);
+			alert(data.internal_session + " <- internal session + room session -> " + data.room_session);
 			redirectToRoom(data);
 		});
 
@@ -25,7 +25,7 @@
 				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
 				$("#modal_prog_bar")[0].className="progress progress-striped active";
 				if (data.handshake == true){
-					alert(data.room_id + " + " + internal_session);
+					alert(data.room_id + " <- room id + internal session -> " + internal_session);
 					$.ajax({ 
   					type: "POST",  
   					url: "messages/confirm_chat",
