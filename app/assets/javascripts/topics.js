@@ -9,7 +9,7 @@
 		var channel_confirm = pusher.subscribe(internal_session);
 
 		channel_confirm.bind('confirm_event', function(data) {
-			alert(data.internal_session + " <- internal session + room session -> " + data.room_session);
+			alert("RESPUESTA internal session -> " internal_session + " ROOM SESSION " + data.internal_session );
 			redirectToRoom(data);
 		});
 
@@ -25,7 +25,6 @@
 				$("#modal_message")[0].innerHTML="Searching for someone to practice with...";
 				$("#modal_prog_bar")[0].className="progress progress-striped active";
 				if (data.handshake == true){
-					alert(data.room_id + " <- room id + internal session -> " + internal_session);
 					$.ajax({ 
   					type: "POST",  
   					url: "messages/confirm_chat",
@@ -50,9 +49,9 @@
 	function redirectToRoom(data){
 		var redirect_url;
 		if (currentUserId == data.creator_id){
-			redirect_url = "conversation_room/" + data.room_id +"?internal_session=" + data.internal_session + "&open_tok_session=" + data.open_tok_session + "&token=" + data.token;
+			redirect_url = "conversation_room/" + data.room_id +"?internal_session=" + data.room_session + "&open_tok_session=" + data.open_tok_session + "&token=" + data.token;
 		} else {
-			redirect_url = "join_conversation_room/" + data.room_id +"?internal_session=" + data.internal_session + "&open_tok_session=" + data.open_tok_session + "&token=" + data.token;
+			redirect_url = "join_conversation_room/" + data.room_id +"?internal_session=" + data.room_session + "&open_tok_session=" + data.open_tok_session + "&token=" + data.token;
 		}
 		window.location = redirect_url;
 	}
