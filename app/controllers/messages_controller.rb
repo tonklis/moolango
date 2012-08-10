@@ -39,7 +39,7 @@ class MessagesController < ApplicationController
 				format.json { render json: {:message => "WAITING"} }
 	    end
 		elsif room.status == "HANDSHAKE"
-			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']#, :api_url => 'http://api.opentok.com/hl'
+			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 			session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 			open_tok_session = opentok.create_session(request.remote_addr, session_properties)
 			token = opentok.generate_token(:session_id => open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)

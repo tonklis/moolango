@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+	resources :feedback_forms
+
 	resources :earner_forms
 
 	resources :languages

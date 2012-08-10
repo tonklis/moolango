@@ -4,6 +4,7 @@ class Room < ActiveRecord::Base
 	belongs_to :joiner, :class_name => "User", :foreign_key => :joiner_id
 	belongs_to :language
 	belongs_to :topic
+	has_many :feedback_forms
 
 	def self.find_available user_id, topic_id, language_id, internal_session
 		rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)

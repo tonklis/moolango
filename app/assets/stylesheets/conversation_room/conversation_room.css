@@ -193,3 +193,33 @@ ul#chat li {
 .conversationButton {
 	height: 23px;
 }
+
+.star {
+	width: 25px;
+	height: 25px;
+	background-image: url('/assets/alt_star.gif');
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.next_button{
+	background-image: url('/assets/webpage/next_button.gif');
+	border: medium none;
+	margin-bottom: 7px;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	min-height: 43px;
+	min-width: 190px;
+}
+
+#feedback_form_topics {
+	width: 360px;
+	height: 50px;
+}
+
+#feedback_form_comments {
+	width: 360px;
+	height: 50px;
+}

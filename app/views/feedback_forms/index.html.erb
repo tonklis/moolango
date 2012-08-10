@@ -1,0 +1,31 @@
+<h1>Listing feedback_forms</h1>
+
+<table>
+  <tr>
+    <th>Rating</th>
+    <th>Comments</th>
+    <th>Topics</th>
+    <th>User</th>
+    <th>Room</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @feedback_forms.each do |feedback_form| %>
+  <tr>
+    <td><%= feedback_form.rating %></td>
+    <td><%= feedback_form.comments %></td>
+    <td><%= feedback_form.topics %></td>
+    <td><%= feedback_form.user_id %></td>
+    <td><%= feedback_form.room_id %></td>
+    <td><%= link_to 'Show', feedback_form %></td>
+    <td><%= link_to 'Edit', edit_feedback_form_path(feedback_form) %></td>
+    <td><%= link_to 'Destroy', feedback_form, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Feedback form', new_feedback_form_path %>

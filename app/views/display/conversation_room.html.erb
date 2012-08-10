@@ -20,6 +20,19 @@
 		connect();
 
 		$('#slideImageDiv').css("background-image", "url(/assets/<%= @hints[0].thumbnail_url %>)");
+		
+		$('.star').each(function(index) {
+			$(this).mousemove(function(e) {
+				selectStars($(e.currentTarget).attr("value"));
+			});
+			$(this).mouseout(function(e) {
+				selectStars(selected_star);
+			});
+			$(this).click(function(e) {
+				selected_star = $(e.currentTarget).attr("value");
+				$('#feedback_form_rating').attr('value', selected_star);
+			});
+		});
 	});	
 </script>
 
@@ -81,11 +94,52 @@
 
 <div class="modal hide fade" id="myModal">
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" onclick="windowClose();">x</button>
 		<h3>The call has ended</h3>
 	</div>
-	<div class="modal-body" style="text-align: center;">
-		<p id="modal_message">Click the button to return to the homepage</p>
+	<div class="modal-body" style="text-align: left;">
+		<div id="modal_message"></div>
+		<br/>
+		<div id="modal_form" style="margin-left:5px">
+			<%= form_for feedback_form = FeedbackForm.new do |f| %>
+				<% if feedback_form.errors.any? %>
+					<div id="error_explanation">
+						<h2><%= pluralize(feedback_form.errors.count, "error") %> prohibited this feedback_form from being saved:</h2>
+						<ul>
+							<% feedback_form.errors.full_messages.each do |msg| %>
+								<li><%= msg %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+			
+				<p>Help us improve MooLango by answering these simple questions:</p>
+				<br/>
+				<p> 1. How would you rate this conversation? </p>
+				<div>
+					<div id="star1" class="star" value="1"></div>
+					<div id="star2" class="star" value="2"></div>
+					<div id="star3" class="star" value="3"></div>
+					<div id="star4" class="star" value="4"></div>
+					<div id="star5" class="star" value="5"></div>
+				</div>
+				<br /><br />
+				<p> 2. Which topics would you like to talk about? </p>
+				<div class="field">
+					<%= f.text_area :topics %>
+				</div>
+				<p>3. Comments<p/>
+				<div class="field">
+					<%= f.text_area :comments %>
+				</div>
+				<%= f.hidden_field :rating %>
+				<%= f.hidden_field :user_id, :value => current_user.id %>
+				<%= f.hidden_field :room_id, :value => @room.id %>
+				<br/>
+				<div class="actions">
+					<%= f.submit "SEND", :class => "next_button" %>
+				</div>
+			<% end %>
+		</div>
 	</div>
 	<div class="modal-footer" style="text-align: center;">
 	</div>
