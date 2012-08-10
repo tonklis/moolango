@@ -6,11 +6,9 @@
 		$("#modal_button_close").show();
 
 		var internal_session = Math.random().toString(36).substring(7);
-		alert(internal_session);
 		var channel_confirm = pusher.subscribe(internal_session);
 
 		channel_confirm.bind('confirm_event', function(data) {
-			alert(data.internal_session + " <- internal + room ->" + data.room_session);
 			redirectToRoom(data);
 		});
 
