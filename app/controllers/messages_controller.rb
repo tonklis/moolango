@@ -56,9 +56,14 @@ class MessagesController < ApplicationController
 		open_tok_session = params[:open_tok_session]
 		token = params[:token]
 		room = Room.make_busy(params[:room_id])
+		puts("ROOM TO YAML")
+		puts(room.to_yaml)
 
 		Pusher[internal_session].trigger('confirm_event',{:message => "handshake", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
 		Pusher[room.session_id].trigger('confirm_event',{:message => "handshake", :internal_session => room.session_id, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
+
+		puts("SESSION TO YAML")
+		puts(room.session_id)
 
 		respond_to do |format|
 				format.json { render json: {:message => "BUSY", :internal_session => internal_session, :room_session => room.session_id} }
