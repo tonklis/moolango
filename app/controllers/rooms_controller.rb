@@ -1,5 +1,9 @@
 class RoomsController < ApplicationController
-  # GET /rooms
+
+	before_filter :authenticate_user!
+	before_filter :check_access
+
+	# GET /rooms
   # GET /rooms.json
   def index
     @rooms = Room.all

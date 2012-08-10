@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  # GET /users
+
+	before_filter :authenticate_user!
+	before_filter :check_access
+
+	# GET /users
   # GET /users.json
   def index
     @users = User.all

@@ -1,5 +1,7 @@
 class InteractionController < ApplicationController
 
+	before_filter :authenticate_user!
+
 	def create
 		channel = params[:channel]
 		topic = Topic.find(params[:topic_id])

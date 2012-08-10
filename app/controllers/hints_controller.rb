@@ -1,4 +1,8 @@
 class HintsController < ApplicationController
+
+	before_filter :authenticate_user!
+	before_filter :check_access
+
   # GET /hints
   # GET /hints.json
   def index

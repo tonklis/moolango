@@ -1,5 +1,9 @@
 class TopicsController < ApplicationController
-  # GET /topics
+
+	before_filter :authenticate_user!
+	before_filter :check_access
+
+	# GET /topics
   # GET /topics.json
   def index
     @topics = Topic.all
