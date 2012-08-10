@@ -52,6 +52,7 @@ function connect() {
 	session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
 	session.addEventListener('signalReceived', signalHandler);
 	session.addEventListener('archiveCreated', archiveCreatedHandler);
+	session.addEventListener('sessionRecordingStarted', startRecordingHandler);
 	session.addEventListener('sessionRecordingStopped', stopRecordingHandler);
 	session.addEventListener('archiveClosed', archiveClosedHandler);
 	//TB.addEventListener('exception', function(event){alert(event.message);});
@@ -108,8 +109,7 @@ function subscribeToStreams(streams) {
 				session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
 		}
 		else {
-			$('#videoBtn').css({display: 'block'})
-			//document.getElementById("videoBtn").style.display = 'block';
+			//$('#videoBtn').css({display: 'block'})
 		}
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
@@ -179,6 +179,10 @@ function archiveCreatedHandler(event) {
 			}
 		});
 	}
+}
+
+function startRecordingHandler(event) {
+	$('#videoBtn').css({display: 'block'});
 }
 
 function stopRecordingHandler(event) {

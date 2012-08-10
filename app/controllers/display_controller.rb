@@ -69,8 +69,8 @@ class DisplayController < ApplicationController
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 		session = opentok.create_session(request.remote_addr, session_properties)
-		token = opentok.generate_token(:session_id => @session, :role => OpenTok::RoleConstants::MODERATOR)
-		archive = opentok.get_archive_manifest("cb62668e-40a9-410f-bc6f-fcc2da579242", token)
+		token = opentok.generate_token(:session_id => session, :role => OpenTok::RoleConstants::MODERATOR)
+		archive = opentok.get_archive_manifest("ff082d8f-1aac-48f6-aae4-7bf0f230ae1f", token)
 		@urls = []
 		archive.resources.each do |video|
 			@urls << archive.downloadArchiveURL(video.getId, token)
