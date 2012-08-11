@@ -16,7 +16,7 @@
 <% @rooms.each do |room| %>
   <tr>
     <td><%= User.find(room.creator_id).firstname %></td>
-    <td><%= User.find(room.joiner_id).firstname %></td>
+    <td><%= User.find(room.joiner_id).firstname if room.joiner_id %></td>
     <td><%= room.name %></td>
     <td><%= room.status %></td>
     <td><%= room.session_id %></td>
