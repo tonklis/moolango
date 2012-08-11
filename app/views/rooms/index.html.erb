@@ -15,8 +15,8 @@
 
 <% @rooms.each do |room| %>
   <tr>
-    <td><%= room.creator_id %></td>
-    <td><%= room.joiner_id %></td>
+    <td><%= User.find(room.creator_id).firstname %></td>
+    <td><%= User.find(room.joiner_id).firstname %></td>
     <td><%= room.name %></td>
     <td><%= room.status %></td>
     <td><%= room.session_id %></td>
