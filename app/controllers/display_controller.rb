@@ -36,7 +36,9 @@ class DisplayController < ApplicationController
 		@room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
-		@token = params[:token]
+		#@token = params[:token]
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
+		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 		@topic_id = @room.topic_id
 		@joined_user = User.find(@room.joiner_id)
 		@api_key = ENV['OPENTOK_API_KEY']
@@ -55,7 +57,9 @@ class DisplayController < ApplicationController
 		@room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
-		@token = params[:token]
+		#@token = params[:token]
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
+		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 		@topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
 		@origin_user = User.find(@room.creator_id)
@@ -69,14 +73,13 @@ class DisplayController < ApplicationController
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 		session = opentok.create_session(request.remote_addr, session_properties)
-		token = opentok.generate_token(:session_id => session, :role => OpenTok::RoleConstants::MODERATOR)
-		archive = opentok.get_archive_manifest("ff082d8f-1aac-48f6-aae4-7bf0f230ae1f", token)
+		@token = opentok.generate_token(:session_id => session, :role => OpenTok::RoleConstants::MODERATOR)
+		@address = request.remote_addr
+		archive = opentok.get_archive_manifest("f93ca0e1-e935-4471-9c93-600bdc334354", @token)
 		@urls = []
 		archive.resources.each do |video|
-			@urls << archive.downloadArchiveURL(video.getId, token)
+			@urls << archive.downloadArchiveURL(video.getId, @token)
 		end
-		
-		render :layout => "rooms"
 	end
 	
 end
