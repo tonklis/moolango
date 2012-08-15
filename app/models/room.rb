@@ -42,11 +42,21 @@ class Room < ActiveRecord::Base
 		rooms_to_close
 	end
 
-	def self.make_busy room_id
+	def self.update_status room_id, status, open_tok_session = nil
 		room = Room.find(room_id)
-		room.status = "BUSY"
+		room.status = status
+		room.open_tok_session = open_tok_session if open_tok_session
 		room.save!
 		room
+	end
+
+	def engage user_id
+		if self.status == "BUSY"
+			self.status = "JOINED_#{user_id}"
+		elsif self.status.match(/JOINED/)
+			self.status = "ENGAGED"
+		end
+		self.save
 	end
 
 end

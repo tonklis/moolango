@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809191518) do
+ActiveRecord::Schema.define(:version => 20120815173342) do
 
   create_table "earner_forms", :force => true do |t|
     t.boolean  "pricing"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120809191518) do
     t.string   "record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "open_tok_session"
   end
 
   create_table "topics", :force => true do |t|

@@ -45,6 +45,7 @@ class DisplayController < ApplicationController
 		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
+		@room.engage current_user.id
 		render :layout => "rooms"
 	end
 
@@ -66,6 +67,7 @@ class DisplayController < ApplicationController
 		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
+		@room.engage current_user.id
 		render :layout => "rooms"
 	end
 	

@@ -8,6 +8,8 @@
     <th>Status</th>
 		<th>Session</th>
 		<th>Topic</th>
+		<th>Open Tok Session</th>
+		<th>Archive ID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,6 +23,8 @@
     <td><%= room.status %></td>
     <td><%= room.session_id %></td>
     <td><%= room.topic_id %></td>
+    <td><%= room.open_tok_session %></td>
+    <td><%= room.record_id %></td>
     <td><%= link_to 'Show', room %></td>
     <td><%= link_to 'Edit', edit_room_path(room) %></td>
     <td><%= link_to 'Destroy', room, confirm: 'Are you sure?', method: :delete %></td>

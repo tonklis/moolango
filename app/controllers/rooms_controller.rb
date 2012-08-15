@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
 	# GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = Room.where("status != 'CANCELLED'").order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
