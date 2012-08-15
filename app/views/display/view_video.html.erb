@@ -4,11 +4,7 @@
 	var publisherProperties = new Object();
 	var api_key = "16523631";
 	var token = "T1==cGFydG5lcl9pZD0xNjUyMzYzMSZzaWc9ZDI3N2RkMzI5ZTM0MDEwZTg1Y2ExNWQyZjgxYmEzNGVmMThjZDUwZTpyb2xlPW1vZGVyYXRvciZzZXNzaW9uX2lkPTJfTVg0eE5qVXlNell6TVg0eE1qY3VNQzR3TGpGLVZHaDFJRUYxWnlBd01pQXhPRG93TkRvd01DQlFSRlFnTWpBeE1uNHdMakV3TmpjeE5ETTNmZyZjcmVhdGVfdGltZT0xMzQzOTU1ODMwJm5vbmNlPTAuNTU2MDUwNzcwNjA2MjQ2Ng==";
-	//var archive_id = "e18d221a-1c55-44f6-914f-54b0836aadb4";
-	//var archive_id = "e302bedd-2682-4916-a715-26d72c3a2cd0";
-	//var archive_id = "2a62f0d9-a569-4fa0-b1f5-6343f716ab39";
-	var archive_id = "d1520018-2b37-4401-a7a7-9f627f4ed512";
-	
+	var archive_id;
 	var archive;
 	
 	/*$(function(){
@@ -51,8 +47,13 @@
 </script>
 
 <div id="publisherDiv" style="position:relative;">
-<% @urls.each do |url| %>
-	<%= url %><br/>
-<% end %>
-	
+	<div class="row">
+		<div class="span4">
+			<% @urls.each do |url| %>
+				<p><%= url %></p><br/>
+			<% end %>
+		</div>
+	</div>
+	<p>token: <%= @token %></p><br/>
+	<p>address: <%= @address %></p><br/>
 </div>

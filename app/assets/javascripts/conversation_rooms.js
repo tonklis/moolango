@@ -56,7 +56,7 @@ function connect() {
 	session.addEventListener('sessionRecordingStopped', stopRecordingHandler);
 	session.addEventListener('archiveClosed', archiveClosedHandler);
 	//TB.addEventListener('exception', function(event){alert(event.message);});
-	session.connect(api_key, token);
+	session.connect(api_key, token, {detectConnectionQuality:1});
 }
 
 function reconnect() {
