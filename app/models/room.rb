@@ -15,13 +15,19 @@ class Room < ActiveRecord::Base
 
 		rooms_available = Room.where("language_id = ? and topic_id = ? and status = 'WAITING'", language_id, topic_id)
 		if rooms_available.empty?
-				room = Room.create(
+
+			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
+			session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
+			open_tok_session = opentok.create_session(nil, session_properties)
+				
+			room = Room.create(
 				:creator_id => user_id,
 				:name => Topic.find(topic_id).name,
 				:status => "WAITING",
 				:language_id => language_id,
 				:topic_id => topic_id,
-				:session_id => internal_session
+				:session_id => internal_session,
+				:open_tok_session => open_tok_session.to_s
 			)
 		else
 			room = rooms_available.first
@@ -51,7 +57,7 @@ class Room < ActiveRecord::Base
 	end
 
 	def engage user_id
-		if self.status == "BUSY"
+		if self.status == "HANDSHAKE"
 			self.status = "JOINED_#{user_id}"
 		elsif self.status.match(/JOINED/)
 			self.status = "ENGAGED"

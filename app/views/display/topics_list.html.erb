@@ -9,7 +9,7 @@
 			
 			<% @enabled_topics.each do |topic| %>
 				<div class="box one-edge-shadow">
-					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicOpen(#{topic.id}, currentUserId, pusher, #{@language_id});" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+					<%= link_to image_tag(topic.thumbnail_url, :onclick=>"topicRedirect(#{topic.id}, currentUserId, #{@language_id});" ), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
 				</div>
 			<% end %>
 
@@ -19,7 +19,7 @@
 				</div>
 			<% end %>
 
-	<div id="data_holder" data-user-id="<%=current_user.id%>" data-pusher-key="<%=ENV['PUSHER_KEY']%>" data-room-id="">
+	<div id="data_holder" data-user-id="<%=current_user.id%>" >
 	</div>
 
 <div class="modal hide fade" id="myModal">
@@ -34,26 +34,15 @@
 			</div>
 		</div>
 		<p id="modal_wait_message"></p>
-		<p style="font-size: 11px;"><i> This conversation may be recorded for quality assurance </i></p> 
 	</div>
   <div class="modal-footer" style="text-align: center;">
-		<a id="modal_button_close" href="#" class="btn" onclick="windowClose();">Close</a>
-		
-		<div id="modal_alert" class="alert alert-block alert-error fade in" style="display: none;">
-			<h4 class="alert-heading">We're almost there!</h4>
-			<p> We're still trying to hook you up, but you get the final word.</p>
-			<p>
-				<a class="btn btn-danger" href="#" data-dismiss="modal" onclick="cancelRooms('<%= current_user.id %>');">Cancel</a> <a class="btn" href="#" onclick="hideAlert()">Stay</a>
-      </p>
-		</div>
-		
+		<a id="modal_button_close" href="#" class="btn" data-dismiss="modal">Close</a>
   </div>
 </div>
-
+	
 <script type="text/javascript">
 
 	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
-	var pusher = new Pusher($("#data_holder")[0].getAttribute("data-pusher-key"), { encrypted: true });
 
 	$(function(){
 		var $container = $('#content');

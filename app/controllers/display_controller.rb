@@ -34,12 +34,11 @@ class DisplayController < ApplicationController
 	def conversation_room
 
 		@room = Room.find(params[:id])
-		@internal_session = params[:internal_session]
-		@open_tok_session = params[:open_tok_session]
+		@internal_session = @room.session_id
+		@open_tok_session = @room.open_tok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 		@topic_id = @room.topic_id
-		@joined_user = User.find(@room.joiner_id)
 		@api_key = ENV['OPENTOK_API_KEY']
 		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
@@ -55,8 +54,8 @@ class DisplayController < ApplicationController
 	def join_conversation_room
 
 		@room = Room.find(params[:id])
-		@internal_session = params[:internal_session]
-		@open_tok_session = params[:open_tok_session]
+		@internal_session = @room.session_id
+		@open_tok_session = @room.open_tok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 		@topic_id = @room.topic_id

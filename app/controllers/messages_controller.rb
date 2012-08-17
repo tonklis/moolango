@@ -12,14 +12,13 @@ class MessagesController < ApplicationController
 		#@message = Message.create!(params[:message])
 	end
 
-	def async_outbound
-
+	def topic_redirect
+	
 		internal_session = params[:internal_session]
 		room = Room.find_available(params[:user_id], params[:topic_id], params[:language_id], internal_session)
-
+		
 		if room.status == "WAITING"
-			
-			# adding previous async notifications for testing purposes
+
 			TestMailer.new_conversation(params[:topic_id], params[:user_id], params[:language_id]).deliver
 
 			@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
@@ -31,41 +30,23 @@ class MessagesController < ApplicationController
 				message = "Esperando a hablar sobre #{Topic.find(params[:topic_id]).name} en #{Language.find(params[:language_id]).name}"
 			end
 
-			@twilio_client.account.sms.messages.create(
-				:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
-				:to => number_to_send_to,
-				:body => message
-			)
+			#@twilio_client.account.sms.messages.create(
+			#	:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+			#	:to => number_to_send_to,
+			#	:body => message
+			#)
 
 			respond_to do |format|
-				format.json { render json: {:message => "WAITING"} }
-	    end
+				format.json { render json: {:handshake => false, :room_id => room.id} }
+	    end	
+
 		elsif room.status == "HANDSHAKE"
-			opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
-			session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
-			open_tok_session = opentok.create_session(request.remote_addr, session_properties)
-			token = opentok.generate_token(:session_id => open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 
 			respond_to do |format|
-      	format.json { render json: {:handshake => true, :room_id => room.id, :open_tok_session => open_tok_session.to_s, :token => token } }
+      	format.json { render json: {:handshake => true, :room_id => room.id} }
 	    end
 		end
+
 	end
-
-	def confirm_chat
-
-		internal_session = params[:internal_session]
-		open_tok_session = params[:open_tok_session]
-		token = params[:token]
-		room = Room.update_status(params[:room_id], "BUSY", open_tok_session)
-
-		Pusher[internal_session].trigger('confirm_event',{:message => "handshake", :room_session => room.session_id, :internal_session => internal_session, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
-		Pusher[room.session_id].trigger('confirm_event',{:message => "handshake", :room_session => room.session_id, :internal_session => internal_session, :open_tok_session => open_tok_session.to_s, :room_id => room.id, :creator_id => room.creator_id, :joiner_id => room.joiner_id, :token => token })
-
-		respond_to do |format|
-				format.json { render json: {:message => "BUSY", :internal_session => internal_session, :room_session => room.session_id} }
-	   end
-
-	end	
 
 end
