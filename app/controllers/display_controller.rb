@@ -36,7 +36,6 @@ class DisplayController < ApplicationController
 		@room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
-		#@token = params[:token]
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 		@topic_id = @room.topic_id
@@ -58,7 +57,6 @@ class DisplayController < ApplicationController
 		@room = Room.find(params[:id])
 		@internal_session = params[:internal_session]
 		@open_tok_session = params[:open_tok_session]
-		#@token = params[:token]
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
 		@topic_id = @room.topic_id

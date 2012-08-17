@@ -56,7 +56,7 @@ function connect() {
 	session.addEventListener('sessionRecordingStopped', stopRecordingHandler);
 	session.addEventListener('archiveClosed', archiveClosedHandler);
 	//TB.addEventListener('exception', function(event){alert(event.message);});
-	session.connect(api_key, token, {detectConnectionQuality:1});
+	session.connect(api_key, token, {detectConnectionQuality:0});
 }
 
 function reconnect() {
@@ -65,7 +65,6 @@ function reconnect() {
 
 function endCall() {
 	is_end_call = true;
-	//document.getElementById("videoBtn").style.display = 'none';
 	$('#videoBtn').css({display: 'none'})
 	is_timer_running = false;
 	if (is_recording) {
@@ -81,7 +80,8 @@ function connectionCreatedHandler(event) {
 }
 
 function sessionConnectedHandler(event) {
-	//session.publish(publisher);
+	num_connections += event.connections.length;
+	
 	if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
 		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn off video" onClick="enableDisableVideo()" style="display:none;"/>';
@@ -90,16 +90,12 @@ function sessionConnectedHandler(event) {
 		botonDiv.style.top =  '175px';
 		$('#publisherDiv').append(botonDiv);
 	}
-	num_connections += event.connections.length;
-	//subscribeToStreams(event.streams);
+
 	if (event.archives.length == 0) {
 		session.createArchive(api_key, "perSession", session.sessionId);
 	}
-	else {
-		//archiveCreatedHandler(event);
-		session.publish(publisher);
-		subscribeToStreams(event.streams);
-	}
+	subscribeToStreams(event.streams);
+	session.publish(publisher);
 }
 
 function subscribeToStreams(streams) {
@@ -167,7 +163,11 @@ function signalHandler(event) {
 function archiveCreatedHandler(event) {
 	archive = event.archives[0];
 	archive_id = archive.archiveId;
-	session.publish(publisher);
+	
+	if (is_ready_for_conversation && num_connections == 2) {
+		is_recording = true;
+		session.startRecording(archive);
+	}
 	
 	if (room_id != undefined){
 		$.ajax({ 
