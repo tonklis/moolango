@@ -77,6 +77,7 @@ function endCall() {
 
 function connectionCreatedHandler(event) {
 	num_connections += event.connections.length;
+	getConnectionData(event.connections);
 }
 
 function sessionConnectedHandler(event) {
@@ -94,8 +95,18 @@ function sessionConnectedHandler(event) {
 	if (event.archives.length == 0) {
 		session.createArchive(api_key, "perSession", session.sessionId);
 	}
+
+	getConnectionData(event.connections);
 	subscribeToStreams(event.streams);
 	session.publish(publisher);
+}
+
+function getConnectionData(connections) {
+	for (i = 0; i < connections.length; i++) {
+		connection = connections[i];
+		if (connection.connectionId != session.connection.connectionId)
+			$('#userDiv').text(connection.data);
+	}
 }
 
 function subscribeToStreams(streams) {

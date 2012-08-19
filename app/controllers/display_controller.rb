@@ -37,7 +37,7 @@ class DisplayController < ApplicationController
 		@internal_session = @room.session_id
 		@open_tok_session = @room.open_tok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
-		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
+		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
 		@topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
 		@language_id = @room.language_id
@@ -57,10 +57,9 @@ class DisplayController < ApplicationController
 		@internal_session = @room.session_id
 		@open_tok_session = @room.open_tok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
-		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR)
+		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
 		@topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		@origin_user = User.find(@room.creator_id)
 		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
