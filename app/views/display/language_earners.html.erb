@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="span6 offset3">
+		<div style="height: 50px;">
+		<%= image_tag "webpage/language_to_practice.png", :alt => "click on the language to begin", :style => "margin: -30px auto auto auto;"%>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="alert" style="width: 70%; margin: auto auto 30px auto;">
+		<p><strong>We're sorry!</strong> You can't earn money yet... but you can still go on and help someone practice!</p>
+		<% if @notify %>
+			<p id="notification"><%= check_box_tag :notify, current_user.id, false, :onclick => "notify('#{current_user.id}', '#{current_user.email}')"%> Please notify me via e-mail when this feature is ready.</p>
+		<% end %>	
+	</div>
+	<div class="span8 offset1">
+		<div style="width: 120%;">
+			<div class="row-fluid">
+				<% Language.all.each do |language| %>
+					<div class="span2">
+						<% if language.id == 1 or language.id == 2 %>	
+							<%= link_to (image_tag language.thumbnail_url, :alt => language.name), "topics_list_earners?id=#{language.id}" %>
+						<% else %>
+							<%= image_tag language.thumbnail_url, :alt => language.name %>
+						<% end %>
+					</div>
+				<% end %>
+			</div>	
+		</div>			
+	</div>
+</div>

@@ -27,8 +27,9 @@
 							<div class="span4">
 								<div id="actionsDiv">
 									<div id="endCallDiv">
-										<%= form_tag('/interaction/end_call', :remote => true) do %>
+										<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
 											<%= hidden_field_tag :channel, @internal_session %>
+											<%= hidden_field_tag :room_id, @room.id if @room%>
 											<%= submit_tag "End Call", :class => "conversationButton" %>
 										<% end %>
 									</div>

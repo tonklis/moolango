@@ -27,12 +27,7 @@
 	}
 
 	function redirectToRoom(data){
-		var redirect_url;
-		if (data.handshake == false){
-			redirect_url = "conversation_room/" + data.room_id;
-		} else {
-			redirect_url = "join_conversation_room/" + data.room_id;
-		}
+		var	redirect_url = "conversation_room/" + data.room_id;
 		window.location = redirect_url;
 	}
 
@@ -44,5 +39,29 @@
 			beforeSend: function(xhr) {
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   		} 
+		});
+	}
+
+	function queryRooms(){
+		$(".button_topic").hide();
+		$(".waiting_topic").show();
+		$(".text_topic").show();
+
+		$.ajax({ 
+  		type: "POST", 
+  		url: "rooms/available",
+			beforeSend: function(xhr) {
+    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  		},
+			success: function(data){
+				for (var prop in data){
+					$("#button_topic_"+prop).show();
+					$("#join_now_topic_"+prop)[0].href = "/join_conversation_room/" + data[prop];
+					$("#waiting_topic_"+prop).hide();
+					$("#text_topic_"+prop).hide();
+				}
+			},
+			error: function(){
+			}
 		});
 	}

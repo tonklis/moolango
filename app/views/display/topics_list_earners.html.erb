@@ -1,0 +1,60 @@
+<% @title_desc = "Topics List" %>
+	
+	<div style="">
+		<div style="height: auto; text-align: center;">
+			<%= image_tag "webpage/click_on_the_image.png", :alt => "click on the image to pick a topic", :style => "margin: -30px auto 20px auto;"%>
+		</div>
+		
+		<div id="content" class="centered">
+			
+			<% @enabled_topics.each do |topic| %>
+				<div class="box one-edge-shadow">
+					<%= image_tag topic.thumbnail_url %>
+					<br/>
+					<div id="topic_<%=topic.id%>" style="margin: auto; text-align: center;">
+						<p class="text_topic" id="text_topic_<%=topic.id%>">Searching ...</p>
+						<p class="waiting_topic" id="waiting_topic_<%=topic.id%>"><%= image_tag "waiting.gif" %></p>
+						<p class="button_topic" id="button_topic_<%=topic.id%>" style="display:none; margin-top: 10px;"><%= link_to "Join now!", "/", :class=>"btn btn-success", :id => "join_now_topic_#{topic.id}" %></p>
+					</div>
+				</div>
+			<% end %>
+
+	<div id="data_holder" data-user-id="<%=current_user.id%>" >
+	</div>
+
+<div class="modal hide fade" id="myModal">
+  <div class="modal-header">
+    <h3>Please wait</h3>
+  </div>
+  <div class="modal-body" style="text-align: center;">
+    <p id="modal_message">Searching for someone to practice with…</p>
+		<div style="width: 45%; margin: auto;">
+			<div id="modal_prog_bar" class="progress progress-striped">
+				<div id="modal_progress" class="bar" style="width: 100%;"></div>
+			</div>
+		</div>
+		<p id="modal_wait_message"></p>
+	</div>
+  <div class="modal-footer" style="text-align: center;">
+		<a id="modal_button_close" href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
+	
+<script type="text/javascript">
+
+	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
+
+	$(function(){
+		var $container = $('#content');
+		$container.imagesLoaded(function(){
+			$container.masonry({
+				itemSelector : '.box',
+				gutterWidth: 5,
+				isFitWidth: true
+			});
+			});
+		queryRooms();
+		setInterval(function(){queryRooms();},10000);
+	});
+	
+</script>

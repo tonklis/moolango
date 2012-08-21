@@ -4,7 +4,7 @@ class DisplayController < ApplicationController
 
 	def index
 		if signed_in?
-			if current_user.sign_in_count == 1
+			if current_user.sign_in_count == 1 and not session[:language] 
 				redirect_to (action_path+"?fs=true")
 			else
 				redirect_to action_path
@@ -14,6 +14,10 @@ class DisplayController < ApplicationController
 
 	def language
 
+	end
+	
+	def language_earners
+		@notify = EarnerForm.notify(current_user.id)
 	end
 
 	def action
@@ -31,6 +35,13 @@ class DisplayController < ApplicationController
 		render :layout => "topics"
 	end
 
+	def topics_list_earners
+		@language_id = session[:language] = params[:id]
+		@enabled_topics = Topic.where("enabled = ?", true)
+		
+		render :layout => "topics"
+	end
+
 	def conversation_room
 
 		@room = Room.find(params[:id])
@@ -43,7 +54,7 @@ class DisplayController < ApplicationController
 		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
-		@room.engage current_user.id
+		@room.engage
 		render :layout => "rooms"
 	end
 
@@ -63,7 +74,7 @@ class DisplayController < ApplicationController
 		@language_id = @room.language_id
 		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
-		@room.engage current_user.id
+		@room.engage
 		render :layout => "rooms"
 	end
 	

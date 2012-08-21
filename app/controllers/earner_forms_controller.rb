@@ -47,9 +47,9 @@ class EarnerFormsController < ApplicationController
 
     respond_to do |format|
       if @earner_form.save
-        render :contact_soon
+        #render :contact_soon
         format.json { render json: @earner_form, status: :created, location: @earner_form }
-				return
+				#return
       else
         format.html { render action: "new" }
         format.json { render json: @earner_form.errors, status: :unprocessable_entity }

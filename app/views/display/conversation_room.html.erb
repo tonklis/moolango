@@ -8,7 +8,11 @@
 	var token = '<%= @token %>';
 	var credits = '<%= current_user.credits %>';
 	var room_id = '<%= @room.id %>';
-	
+
+	window.onbeforeunload = function(){
+		$("#end_call_form").submit()
+	}
+
 	$(function(){
 
 		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');

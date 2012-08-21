@@ -12,6 +12,7 @@ class InteractionController < ApplicationController
 	
 	def end_call
 		channel = params[:channel]
+		Room.update_status(params[:room_id], "ENDED")
 		Pusher[channel].trigger('event_end_call', {:message => 'call has ended'})
 	end	
 

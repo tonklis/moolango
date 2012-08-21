@@ -9,6 +9,10 @@
 	var credits = '<%= current_user.credits %>';
 	var room_id = '<%= @room.id %>';
 
+	window.onbeforeunload = function(){
+		$("#end_call_form").submit()
+	}
+
 	$(function(){
 
 		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');
@@ -33,7 +37,8 @@
 				$('#feedback_form_rating').attr('value', selected_star);
 			});
 		});
-	});	
+	});
+	
 </script>
 
 <div class="row">
@@ -45,7 +50,7 @@
 				<%= image_tag "spinner.gif" %>
 			</div>
 			<div id="userDiv" style="align:center;">
-				<!-- <p> <%=@origin_user.firstname%> </p> -->
+				<!-- <p> insert creator user here </p> -->
 			</div>
 		</div>
 	</div>

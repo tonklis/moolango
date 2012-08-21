@@ -26,12 +26,18 @@ Moolango::Application.routes.draw do
 	match 'interaction' => 'interaction#create', :as => :interaction
 
 	match 'language_selection' => 'display#language', :as => :language_selection
+	
+	match 'language_selection_earners' => 'display#language_earners', :as => :language_selection_earners
 
 	match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
+
+	match 'rooms/available' => 'rooms#available' 
 	
 	match 'action' => 'display#action', :as => :action
 	
 	match 'topics_list' => 'display#topics_list', :as => :topics_list
+	
+	match 'topics_list_earners' => 'display#topics_list_earners', :as => :topics_list_earners
 
 	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
 	

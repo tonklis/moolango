@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
 
 	before_filter :authenticate_user!
-	before_filter :check_access, :except => [:cancel, :add_record_data]
+	before_filter :check_access, :except => [:cancel, :add_record_data, :available]
 
 	# GET /rooms
   # GET /rooms.json
@@ -100,4 +100,12 @@ class RoomsController < ApplicationController
 			format.json { render json: @room }
 		end
 	end
+
+	def available
+		@rooms = Room.available(session[:language])
+		respond_to do |format|
+			format.json { render json: @rooms }
+		end
+	end
+
 end
