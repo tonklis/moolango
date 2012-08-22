@@ -83,6 +83,16 @@
 		</div>
 		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-501e03fd47cca81f"></script>
 	</div>
+
+	<script id="IntercomSettingsScriptTag">
+	var intercomSettings = {
+	    app_id: 'medkivz',
+	    email:  '<%= current_user.email unless current_user == nil %>',
+	    created_at: '<%= current_user.created_at.to_time.to_i unless current_user == nil %>',
+	    name: '<%= current_user.firstname.to_s + " " + current_user.lastname.to_s unless current_user == nil %>'
+	};
+	</script>
+
 </body>
 </html>
 
