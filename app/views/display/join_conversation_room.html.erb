@@ -37,6 +37,11 @@
 				$('#feedback_form_rating').attr('value', selected_star);
 			});
 		});
+
+		if ($(document).width()%2==1){
+			$("#publisherDiv")[0].style.setProperty("margin-left", ".5px");
+		}
+
 	});
 	
 </script>
@@ -64,8 +69,8 @@
 				<%= hidden_field_tag :language_id, @language_id %>
 				<%= hidden_field_tag :current_slide, @hints[0].id %>
 			<div id="slideImageDiv">
-				<%= submit_tag "Next", :onClick => "nextInteraction(true);", :class => "slideNextButton conversationButton" %>
-				<%= submit_tag "Prev", :onClick => "nextInteraction(false);", :class => "slidePrevButton conversationButton" %>				
+				<%= submit_tag "Next", :onClick => "nextInteraction(true);", :class => "slideNextButton conversation_button" %>
+				<%= submit_tag "Prev", :onClick => "nextInteraction(false);", :class => "slidePrevButton conversation_button" %>				
 			</div>
 			<div id="slideTextDiv">
 				<div id="hint_text"><%= @hints[0].description %></div>
@@ -91,7 +96,7 @@
 				<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field" %>
 				<%= f.hidden_field :channel, :value => @internal_session %>
 				<%= f.hidden_field :origin, :value => false, :id=>"origin_field"%>
-				<%= f.submit "Send", :class => "conversationButton" %>
+				<%= f.submit "Send", :class => "conversation_button" %>
 			<% end %>
 		</div>
 	</div>

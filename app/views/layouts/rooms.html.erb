@@ -16,7 +16,7 @@
 	<meta property="og:description" content="Make some moola speaking your lango" />
 	<meta property="og:site_name" content="Moolango" />
 </head>
-<body>
+<body id="body">
 	<div class="container">
 		<div class="header">
 			<div class="row">
@@ -36,11 +36,11 @@
 										<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
 											<%= hidden_field_tag :channel, @internal_session %>
 											<%= hidden_field_tag :room_id, @room.id if @room%>
-											<%= submit_tag "End Call", :class => "conversationButton" %>
+											<%= submit_tag "End Call", :class => "conversation_button" %>
 										<% end %>
 									</div>
 									<div id="reconnectDiv">
-										<button type="button" class="conversationButton" onClick="reconnect();">Reconnect</button>
+										<button type="button" class="conversation_button" onClick="reconnect();">Reconnect</button>
 									</div>
 								</div>
 							</div>

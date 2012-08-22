@@ -2,9 +2,10 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
  //= require bootstrap_and_overrides
+ *= require_self
 */
+
 * {
 margin: 0;
 }
@@ -14,7 +15,7 @@ html {
 }
 
 body {
-	background-image: url("/assets/background.png");
+	background-color: #9bd7f4; 
 	height: 95%;
 	width: 95%;
 }
@@ -131,10 +132,10 @@ ul#chat {
 }
 
 #endCallDiv {
-	width: 30px;
 	height: 30px;
 	float: right;
-	right: 40px;
+	right: 20px;
+	width: 90px;
 	position: relative;
 }
 
@@ -182,16 +183,22 @@ ul#chat li {
 
 .slideNextButton{
 	float: right;
-	margin: 150px 0 0 0;
+	margin: 150px -20px 0 0;
 }
 
 .slidePrevButton{
 	float: left;
-	margin: 150px 0 0 0;
+	margin: 150px 0 0 -20px;
 }
 
-.conversationButton {
-	height: 23px;
+.conversation_button{
+	background-image: url('/assets/webpage/next_button.gif');
+	border: medium none;
+	margin-bottom: 10px;
+	color: #FFFFFF;
+	font-size: 16px;
+	min-height: 26px;
+	min-width: 90px;
 }
 
 .star {
