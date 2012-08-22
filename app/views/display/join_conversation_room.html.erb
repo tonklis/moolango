@@ -69,8 +69,8 @@
 				<%= hidden_field_tag :language_id, @language_id %>
 				<%= hidden_field_tag :current_slide, @hints[0].id %>
 			<div id="slideImageDiv">
-				<%= submit_tag "Next", :onClick => "nextInteraction(true);", :class => "slideNextButton conversation_button" %>
-				<%= submit_tag "Prev", :onClick => "nextInteraction(false);", :class => "slidePrevButton conversation_button" %>				
+				<%= submit_tag ">>", :onClick => "nextInteraction(true);", :class => "slideNextButton conversation_button", :style => "min-width: 40px;" %>
+				<%= submit_tag "<<", :onClick => "nextInteraction(false);", :class => "slidePrevButton conversation_button", :style => "min-width: 40px;" %>		
 			</div>
 			<div id="slideTextDiv">
 				<div id="hint_text"><%= @hints[0].description %></div>
