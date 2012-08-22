@@ -1,6 +1,5 @@
 <% @title_desc = "Topics List" %>
 	
-	<div style="">
 		<div style="height: auto; text-align: center;">
 			<%= image_tag "webpage/click_on_the_image.png", :alt => "click on the image to pick a topic", :style => "margin: -30px auto 20px auto;"%>
 		</div>
@@ -18,6 +17,7 @@
 					<%= image_tag(topic.thumbnail_url) %>
 				</div>
 			<% end %>
+		</div>
 
 	<div id="data_holder" data-user-id="<%=current_user.id%>" >
 	</div>
