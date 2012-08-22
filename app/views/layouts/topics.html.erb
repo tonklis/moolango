@@ -8,6 +8,12 @@
 	<%= javascript_include_tag "pusher/pusher.min" %>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:title" content="MooLango" />
+	<meta property="og:type" content="Language Practice" />
+	<meta property="og:url" content="http://moolango.com" />
+	<meta property="og:image" content="http://www.moolango.com/assets/webpage/logo-f9b058d1dd43b070080ebfc130923998.png" />
+	<meta property="og:description" content="Make some moola speaking your lango" />
+	<meta property="og:site_name" content="Moolango" />
 </head>
 <body>
 	<div class="container">
@@ -70,27 +76,23 @@
 	</div>
 	<div class="footer">
 		<div class="footerText" style="float: left;">&nbsp;&nbsp;&nbsp;&copy; 2012 MooLango LLC</div>
-		<script type="text/javascript">
-			var addthis_share =
-			{
-				url: "http://www.moolango.com",
-				title: "MooLango: make some moola speaking your lango"
-			}
-		</script>
-		<div class="addthis_toolbox addthis_default_style" style="margin: 10px auto auto 40px; float: left;">
-			<a class="addthis_button_tweet"></a>
-			<a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://www.facebook.com/Moolango"></a>
+		<div style="margin: 10px auto auto 40px; float: left;">
+			<span class='st_facebook_hcount' displayText='Facebook'></span>
+			<span class='st_twitter_hcount' displayText='Tweet'></span>
+			<span class='st_sharethis_hcount' displayText='ShareThis'></span>
 		</div>
-		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-501e03fd47cca81f"></script>
+		<script type="text/javascript">var switchTo5x=false;</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "58bcc210-352f-4981-869c-519804f479a5"}); </script>
 	</div>
 
 	<script id="IntercomSettingsScriptTag">
-	var intercomSettings = {
-	    app_id: 'medkivz',
-	    email:  '<%= current_user.email unless current_user == nil %>',
-	    created_at: '<%= current_user.created_at.to_time.to_i unless current_user == nil %>',
-	    name: '<%= current_user.firstname.to_s + " " + current_user.lastname.to_s unless current_user == nil %>'
-	};
+		var intercomSettings = {
+		    app_id: 'medkivz',
+		    email:  '<%= current_user.email unless current_user == nil %>',
+		    created_at: '<%= current_user.created_at.to_time.to_i unless current_user == nil %>',
+		    name: '<%= current_user.firstname.to_s + " " + current_user.lastname.to_s unless current_user == nil %>'
+		};
 	</script>
 
 </body>
