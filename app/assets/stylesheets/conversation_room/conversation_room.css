@@ -44,8 +44,7 @@ body {
 }
 
 .footerText{
-	margin: 12px;
-	position: absolute;
+	margin: 12px 0 5px 10px;
 	color: #FFFFFF;
 	font-family: "Arial";
 	font-size: 16px;
