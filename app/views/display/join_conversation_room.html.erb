@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	var publisher;
 	var stream;
-	var is_buyer = true; //change to false when earners are enabled
+	var is_buyer = false;
 	var session = TB.initSession('<%= @open_tok_session %>');
 	var publisherProperties = new Object();
 	var api_key = '<%= @api_key %>';
@@ -38,9 +38,9 @@
 			});
 		});
 
-		if ($(document).width()%2==1){
+		/*if ($(document).width()%2==1){
 			$("#publisherDiv")[0].style.setProperty("margin-left", ".5px");
-		}
+		}*/
 
 	});
 	
@@ -54,9 +54,7 @@
 				<p>Waiting for user to connect, please wait.</p>
 				<%= image_tag "spinner.gif" %>
 			</div>
-			<div id="userDiv" style="align:center;">
-				<!-- <p> insert creator user here </p> -->
-			</div>
+			<div id="userDiv" style="align:center;"/>
 		</div>
 	</div>
 	<div class="span6">
