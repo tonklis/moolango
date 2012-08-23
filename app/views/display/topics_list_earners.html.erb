@@ -7,10 +7,11 @@
 		<div id="content" class="centered">
 			
 			<% @enabled_topics.each do |topic| %>
-				<div class="box one-edge-shadow">
-					<%= image_tag topic.thumbnail_url %>
-					<br/>
-					<div id="topic_<%=topic.id%>" style="margin: auto; text-align: center;">
+				<div class="box">
+					<div class="box_shell">
+						<%= image_tag topic.thumbnail_url %>
+					</div>
+					<div id="topic_<%=topic.id%>" class="box_details  one-edge-shadow">
 						<p class="text_topic" id="text_topic_<%=topic.id%>">Searching ...</p>
 						<p class="waiting_topic" id="waiting_topic_<%=topic.id%>"><%= image_tag "waiting.gif" %></p>
 						<p class="button_topic" id="button_topic_<%=topic.id%>" style="display:none; margin-top: 10px;"><%= link_to "Join now!", "/", :class=>"btn btn-success", :id => "join_now_topic_#{topic.id}" %></p>
@@ -44,17 +45,16 @@
 
 	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
 
-	$(function(){
+	$(document).ready(function(){
 		var $container = $('#content');
-		$container.imagesLoaded(function(){
+		$container.imagesLoaded(function() {
 			$container.masonry({
 				itemSelector : '.box',
-				gutterWidth: 5,
+				gutterWidth: 8,
 				isFitWidth: true
 			});
-			});
-		queryRooms();
-		setInterval(function(){queryRooms();},10000);
+			$('.box').each(function(index){$('.box')[index].style.display = 'block'});
+		});
 	});
 	
 </script>

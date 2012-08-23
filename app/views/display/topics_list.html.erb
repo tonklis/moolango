@@ -44,14 +44,15 @@
 
 	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
 
-	$(function(){
+	$(document).ready(function(){
 		var $container = $('#content');
-		$container.imagesLoaded(function(){
+		$container.imagesLoaded(function() {
 			$container.masonry({
 				itemSelector : '.box',
 				gutterWidth: 5,
 				isFitWidth: true
 			});
+			$('.box').each(function(index){$('.box')[index].style.display = 'block'});
 		});
 	});
 	
