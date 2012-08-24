@@ -18,6 +18,25 @@
 
 .box {
 	float: none;
+	display: none;
+	width: 250px;
+}
+
+.box_shell {
+	width: 100%;
+}
+
+.box_shell img {
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+.box_details {
+	width: 100%;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-top: 0;
+	text-align: center;
 }
 
 .centered { 
