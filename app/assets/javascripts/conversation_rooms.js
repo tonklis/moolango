@@ -42,6 +42,7 @@ function createPusher(pusherKey, session){
 
 function nextInteraction(event){
 	$("#next")[0].value = event;
+	$("#new_interaction").submit();
 }
 
 function connect() {
@@ -121,6 +122,7 @@ function subscribeToStreams(streams) {
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
+			setInterval(function(){nextInteraction(true);},60000);
 			if (archive) {
 				is_recording = true;
 				session.startRecording(archive);
