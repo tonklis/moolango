@@ -94,6 +94,8 @@
 				<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field" %>
 				<%= f.hidden_field :channel, :value => @internal_session %>
 				<%= f.hidden_field :origin, :value => true, :id=>"origin_field" %>
+				<%= f.hidden_field :room_id, :value => @room.id %>
+				<%= f.hidden_field :user_id, :value => current_user.id %>
 				<%= f.submit "Send", :class => "conversation_button" %>
 			<% end %>
 		</div>

@@ -8,8 +8,8 @@ class MessagesController < ApplicationController
 
 	def create
 		channel = params[:message][:channel]
-		Pusher[channel].trigger('event_chat', {:message => params[:message][:content], :origin => params[:message][:origin]})
-		#@message = Message.create!(params[:message])
+		Pusher[channel].trigger('event_chat', {:message => "#{User.find(params[:message][:user_id]).firstname}: #{params[:message][:content]}", :origin => params[:message][:origin]})
+		@message = Message.create!(params[:message].except(:channel, :origin))
 	end
 
 	def topic_redirect

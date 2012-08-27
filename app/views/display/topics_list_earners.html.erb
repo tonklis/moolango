@@ -55,6 +55,8 @@
 			});
 			$('.box').each(function(index){$('.box')[index].style.display = 'block'});
 		});
+		queryRooms();
+		setInterval(function(){queryRooms();},10000);
 	});
 	
 </script>

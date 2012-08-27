@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815173342) do
+ActiveRecord::Schema.define(:version => 20120827171648) do
 
   create_table "earner_forms", :force => true do |t|
     t.boolean  "pricing"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20120815173342) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "room_id"
+    t.integer  "user_id"
   end
 
   create_table "rooms", :force => true do |t|
