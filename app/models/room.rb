@@ -5,6 +5,7 @@ class Room < ActiveRecord::Base
 	belongs_to :language
 	belongs_to :topic
 	has_many :feedback_forms
+	has_many :messages
 
 	def self.create_available user_id, topic_id, language_id, internal_session
 		rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)
@@ -59,7 +60,7 @@ class Room < ActiveRecord::Base
 	def self.available language_id
 		
 		result_by_topic = {}
-		rooms_available = Room.where("language_id = ? and status = 'JOINED'", language_id).order("created_at ASC")
+		rooms_available = Room.where("language_id = ? and status = 'JOINED'", language_id).order("created_at DESC")
 		rooms_available.each do |room|
 			result_by_topic[room.topic_id] = room.id
 		end
