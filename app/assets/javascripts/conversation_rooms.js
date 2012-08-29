@@ -122,7 +122,9 @@ function subscribeToStreams(streams) {
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
-			setInterval(function(){nextInteraction(true);},60000);
+			if (is_buyer) {
+				setInterval(function(){nextInteraction(true);},60000);
+			}
 			if (archive) {
 				is_recording = true;
 				session.startRecording(archive);
@@ -192,6 +194,16 @@ function archiveCreatedHandler(event) {
 			}
 		});
 	}
+}
+
+function keepalive(){
+	$.ajax({ 
+		type: "POST",  
+		url: "/rooms/keepalive/" + room_id,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+		}
+	});
 }
 
 function startRecordingHandler(event) {
@@ -282,6 +294,20 @@ function formatCredits(value) {
 		return '$' + value + '0';
 	}*/
 	return '$' + value;
+}
+
+function openDisconnectDialog() {
+	if (!is_end_call) {
+		$.ajax({ 
+			type: "POST",
+			async : false,
+			url: "/interaction/end_call",
+			data: "room_id=" + room_id,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+			}
+		});
+	}
 }
 
 function showModal() {

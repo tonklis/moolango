@@ -17,7 +17,7 @@ class Room < ActiveRecord::Base
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
 		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
 		open_tok_session = opentok.create_session(nil, session_properties)
-				
+
 		room = Room.create(
 			:creator_id => user_id,
 			:name => Topic.find(topic_id).name,
@@ -44,6 +44,17 @@ class Room < ActiveRecord::Base
 		room = Room.find(room_id)
 		room.status = status
 		room.open_tok_session = open_tok_session if open_tok_session
+		room.save!
+		room
+	end
+	
+	def self.finish_call room_id
+		room = Room.find(room_id)
+		if room.status == "JOINED"
+			room.status = "CANCELLED"
+		elsif room.status == "ENGAGED"
+			room.status = "ENDED"
+		end
 		room.save!
 		room
 	end

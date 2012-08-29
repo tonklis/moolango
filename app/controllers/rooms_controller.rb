@@ -107,5 +107,26 @@ class RoomsController < ApplicationController
 			format.json { render json: @rooms }
 		end
 	end
+	
+	def keepalive 
+		@room = Room.find(params[:id])
+		@room.update_attribute(:updated_at, Time.now)
+		respond_to do |format|
+			format.json { render json: @rooms }
+		end
+	end
+
+	def reactivate
+		@room = Room.find(params[:id])
+		if @room.joiner_id
+			@room.update_attribute(:status, "ENGAGED")
+		else
+			@room.update_attribute(:status, "JOINED")
+		end
+
+		respond_to do |format|
+			format.json { render json: @rooms }
+		end
+	end
 
 end

@@ -10,7 +10,7 @@
 	var room_id = '<%= @room.id %>';
 
 	window.onbeforeunload = function(){
-		$("#end_call_form").submit()
+		openDisconnectDialog();
 	}
 
 	$(function(){

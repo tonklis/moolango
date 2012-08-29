@@ -5,11 +5,12 @@
 		$("#modal_progress")[0].style.width="100%";
 		$("#modal_button_close").show();
 		$("#modal_wait_message")[0].innerHTML="";
+		$("#modal_button_close").hide();
 
 		var internal_session = Math.random().toString(36).substring(7);
 
 		$.ajax({ 
-  		type: "POST",  
+  		type: "POST",
   		url: "messages/topic_redirect",
   		data: 'internal_session=' + internal_session + '&topic_id=' + topicId +'&user_id=' + currentUserId + '&language_id=' + languageId,
 			beforeSend: function(xhr) {
@@ -22,6 +23,7 @@
 			error: function() {
 				$("#modal_message")[0].innerHTML="The site is busy, please try again later.";
 				$("#modal_prog_bar")[0].className="progress progress-danger";
+				$("#modal_button_close").show();
 			} 
 		});
 	}
