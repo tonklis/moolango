@@ -4,7 +4,8 @@ class Room < ActiveRecord::Base
 	belongs_to :joiner, :class_name => "User", :foreign_key => :joiner_id
 	belongs_to :language
 	belongs_to :topic
-	has_many :feedback_forms
+	has_many :evaluation_buyers
+	has_many :evaluation_sellers
 	has_many :messages
 
 	def self.create_available user_id, topic_id, language_id, internal_session

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Room:</b>
+  <%= @evaluation_seller.room_id %>
+</p>
+
+<p>
+  <b>Enjoy:</b>
+  <%= @evaluation_seller.enjoy %>
+</p>
+
+<p>
+  <b>Recommend:</b>
+  <%= @evaluation_seller.recommend %>
+</p>
+
+<p>
+  <b>Helpful:</b>
+  <%= @evaluation_seller.helpful %>
+</p>
+
+<p>
+  <b>Confidence:</b>
+  <%= @evaluation_seller.confidence %>
+</p>
+
+<p>
+  <b>Improvement:</b>
+  <%= @evaluation_seller.improvement %>
+</p>
+
+
+<%= link_to 'Edit', edit_evaluation_seller_path(@evaluation_seller) %> |
+<%= link_to 'Back', evaluation_sellers_path %>

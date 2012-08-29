@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Room:</b>
+  <%= @evaluation_buyer.room_id %>
+</p>
+
+<p>
+  <b>Clarity:</b>
+  <%= @evaluation_buyer.clarity %>
+</p>
+
+<p>
+  <b>Pronunciation:</b>
+  <%= @evaluation_buyer.pronunciation %>
+</p>
+
+<p>
+  <b>Fluency:</b>
+  <%= @evaluation_buyer.fluency %>
+</p>
+
+<p>
+  <b>Comprehension:</b>
+  <%= @evaluation_buyer.comprehension %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @evaluation_buyer.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_evaluation_buyer_path(@evaluation_buyer) %> |
+<%= link_to 'Back', evaluation_buyers_path %>

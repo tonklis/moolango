@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  room_id: 1
+  enjoy: 1
+  recommend: 1
+  helpful: 1
+  confidence: 1
+  improvement: 1
+
+two:
+  room_id: 1
+  enjoy: 1
+  recommend: 1
+  helpful: 1
+  confidence: 1
+  improvement: 1

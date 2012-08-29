@@ -312,7 +312,7 @@ function openDisconnectDialog() {
 
 function showModal() {
 	is_end_call = false;
-	$('#modal_message').html('<p> Your new balance is: ' + formatCredits(credits));
+	//$('#modal_message').html('<p> Your new balance is: ' + formatCredits(credits));
 	$('#myModal').modal({
 		keyboard: false,
 		backdrop: false
@@ -321,11 +321,13 @@ function showModal() {
 	//$('#waitingDivGone').remove();
 }
 
-function selectStars(stars) {
+function selectStars(element, stars) {
 	var max = stars - 1;
-	$('.star').each(function(index) {
+	$('#' + element +' > .description').text('');
+	$('#' + element +' > .star').each(function(index) {
 		if (index <= max) {
 			$(this).css({'background-position':'0 -25px'});
+			$('#' + element +' > .description').text($(this).attr("description"));
 		}
 		else if (index >= stars) {
 			$(this).css({'background-position':'0 0'});

@@ -1,0 +1,41 @@
+<%= form_for(@evaluation_seller) do |f| %>
+  <% if @evaluation_seller.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluation_seller.errors.count, "error") %> prohibited this evaluation_seller from being saved:</h2>
+
+      <ul>
+      <% @evaluation_seller.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :room_id %><br />
+    <%= f.number_field :room_id %>
+  </div>
+  <div class="field">
+    <%= f.label :enjoy %><br />
+    <%= f.number_field :enjoy %>
+  </div>
+  <div class="field">
+    <%= f.label :recommend %><br />
+    <%= f.number_field :recommend %>
+  </div>
+  <div class="field">
+    <%= f.label :helpful %><br />
+    <%= f.number_field :helpful %>
+  </div>
+  <div class="field">
+    <%= f.label :confidence %><br />
+    <%= f.number_field :confidence %>
+  </div>
+  <div class="field">
+    <%= f.label :improvement %><br />
+    <%= f.number_field :improvement %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
