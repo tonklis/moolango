@@ -261,8 +261,8 @@ function startTimer() {
 				success: function(data) {
 					credits = data.credits;
 				},
-				error: function(error) {
-					alert(error);
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert(textStatus);
 				} 
 			});
 		}

@@ -63,7 +63,8 @@
 					$("#text_topic_"+prop).hide();
 				}
 			},
-			error: function(){
+			error: function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
 			}
 		});
 	}
