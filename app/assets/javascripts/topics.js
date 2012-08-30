@@ -35,6 +35,30 @@
 		window.location = redirect_url;
 	}
 
+	function verifyAndRedirect(topicId){
+
+			$.ajax({ 
+  		type: "POST", 
+  		url: "rooms/verify",
+			beforeSend: function(xhr) {
+    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  		},
+			success: function(data){
+				for (var prop in data){
+					$("#button_topic_"+prop).show();
+					$("#join_now_topic_"+prop)[0].href = "/join_conversation_room/" + data[prop];
+					$("#waiting_topic_"+prop).hide();
+					$("#text_topic_"+prop).hide();
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				alert("Room already busy");
+				queryRooms();
+			}
+		});
+
+	}
+
 	function cancelRooms(userId){
 		$.ajax({ 
   		type: "POST", 
@@ -60,7 +84,7 @@
 			success: function(data){
 				for (var prop in data){
 					$("#button_topic_"+prop).show();
-					$("#join_now_topic_"+prop)[0].href = "/join_conversation_room/" + data[prop];
+					$("#join_now_topic_"+prop)[0]. = "/join_conversation_room/" + data[prop];
 					$("#waiting_topic_"+prop).hide();
 					$("#text_topic_"+prop).hide();
 				}
@@ -71,7 +95,10 @@
 		});
 	}
 
-	function startTimer() {
-		queryRooms();
-		setTimeout(function(){ startTimer(); },5000);
+	function queryRoomsTimer() {
+		time_elapsed++;
+		if (0 == time_elapsed % 5) {
+			queryRooms();
+		}
+		setTimeout(function(){ queryRoomsTimer(); },1000);
 	}
