@@ -60,7 +60,7 @@
 			success: function(data){
 				for (var prop in data){
 					$("#button_topic_"+prop).show();
-					$("#join_now_topic_"+prop)[0]. = "/join_conversation_room/" + data[prop];
+					$("#join_now_topic_"+prop)[0] = "/join_conversation_room/" + data[prop];
 					$("#waiting_topic_"+prop).hide();
 					$("#text_topic_"+prop).hide();
 				}
