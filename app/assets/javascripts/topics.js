@@ -72,9 +72,6 @@
 	}
 
 	function startTimer() {
-		time_elapsed++;
-		if (0 == time_elapsed % 5) {
-			queryRooms();
-		}
-		setTimeout(function(){ startTimer(); },1000);
+		queryRooms();
+		setTimeout(function(){ startTimer(); },5000);
 	}
