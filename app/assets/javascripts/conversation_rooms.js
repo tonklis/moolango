@@ -122,9 +122,6 @@ function subscribeToStreams(streams) {
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
-			if (is_buyer) {
-				setInterval(function(){nextInteraction(true);},60000);
-			}
 			if (archive) {
 				is_recording = true;
 				session.startRecording(archive);
@@ -266,8 +263,11 @@ function startTimer() {
 				} 
 			});
 		}
-		if (time_elapsed == 540) {
+		if (time_elapsed == 60) {
 			$('#timeBar').css('background-color', '#00FF00');
+		}
+		if ( (0 == time_elapsed % 60) && is_buyer) {
+			nextInteraction(true);
 		}
 		var minutes, seconds;
 		seconds = time_elapsed % 60;

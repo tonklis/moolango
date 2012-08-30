@@ -1,3 +1,5 @@
+	var time_elapsed = 0;
+
 	function topicRedirect(topicId, currentUserId, languageId){
 
 		$("#modal_message")[0].innerHTML="Connecting...";
@@ -67,4 +69,12 @@
 				alert(textStatus);
 			}
 		});
+	}
+
+	function startTimer() {
+		time_elapsed++;
+		if (0 == time_elapsed % 5) {
+			queryRooms();
+		}
+		setTimeout(function(){ startTimer(); },1000);
 	}
