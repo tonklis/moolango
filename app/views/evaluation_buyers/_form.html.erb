@@ -1,0 +1,41 @@
+<%= form_for(@evaluation_buyer) do |f| %>
+  <% if @evaluation_buyer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluation_buyer.errors.count, "error") %> prohibited this evaluation_buyer from being saved:</h2>
+
+      <ul>
+      <% @evaluation_buyer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :room_id %><br />
+    <%= f.number_field :room_id %>
+  </div>
+  <div class="field">
+    <%= f.label :clarity %><br />
+    <%= f.number_field :clarity %>
+  </div>
+  <div class="field">
+    <%= f.label :pronunciation %><br />
+    <%= f.number_field :pronunciation %>
+  </div>
+  <div class="field">
+    <%= f.label :fluency %><br />
+    <%= f.number_field :fluency %>
+  </div>
+  <div class="field">
+    <%= f.label :comprehension %><br />
+    <%= f.number_field :comprehension %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.number_field :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

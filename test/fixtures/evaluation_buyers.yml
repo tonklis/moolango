@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  room_id: 1
+  clarity: 1
+  pronunciation: 1
+  fluency: 1
+  comprehension: 1
+  content: 1
+
+two:
+  room_id: 1
+  clarity: 1
+  pronunciation: 1
+  fluency: 1
+  comprehension: 1
+  content: 1

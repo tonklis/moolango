@@ -13,7 +13,8 @@
 		openDisconnectDialog();
 	}
 
-	$(function(){
+	$(function() {
+		
 		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');
 		$('#chat_field')[0].value="Type your message here...";
 
@@ -26,14 +27,16 @@
 		
 		$('.star').each(function(index) {
 			$(this).mousemove(function(e) {
-				selectStars($(e.currentTarget).attr("value"));
+				element = $(e.currentTarget);
+				selectStars(element.parent().attr('id'), element.attr("value"));
 			});
 			$(this).mouseout(function(e) {
-				selectStars(selected_star);
+				element = $(e.currentTarget);
+				selectStars(element.parent().attr('id'), $('#evaluation_seller_' + element.parent().attr("metric-value")).attr('value'));
 			});
 			$(this).click(function(e) {
-				selected_star = $(e.currentTarget).attr("value");
-				$('#feedback_form_rating').attr('value', selected_star);
+				element = $(e.currentTarget);
+				$('#evaluation_seller_' + element.parent().attr("metric-value")).attr('value', element.attr("value"));
 			});
 		});
 	});
@@ -103,15 +106,13 @@
 		<h3>The call has ended</h3>
 	</div>
 	<div class="modal-body" style="text-align: left;">
-		<div id="modal_message"></div>
-		<br/>
 		<div id="modal_form" style="margin-left:5px">
-			<%= form_for feedback_form = FeedbackForm.new do |f| %>
-				<% if feedback_form.errors.any? %>
+			<%= form_for evaluation_seller = EvaluationSeller.new do |f| %>
+				<% if evaluation_seller.errors.any? %>
 					<div id="error_explanation">
-						<h2><%= pluralize(feedback_form.errors.count, "error") %> prohibited this feedback_form from being saved:</h2>
+						<h2><%= pluralize(evaluation_seller.errors.count, "error") %> prohibited this evaluation_seller from being saved:</h2>
 						<ul>
-							<% feedback_form.errors.full_messages.each do |msg| %>
+							<% evaluation_seller.errors.full_messages.each do |msg| %>
 								<li><%= msg %></li>
 							<% end %>
 						</ul>
@@ -120,27 +121,72 @@
 			
 				<p>Help us improve MooLango by answering these simple questions:</p>
 				<br/>
-				<p> 1. How would you rate this conversation? </p>
-				<div>
-					<div id="star1" class="star" value="1"></div>
-					<div id="star2" class="star" value="2"></div>
-					<div id="star3" class="star" value="3"></div>
-					<div id="star4" class="star" value="4"></div>
-					<div id="star5" class="star" value="5"></div>
+				<div id="metric1" metric-value="enjoy" style="position:relative;">
+					<div>1. Did you enjoy your conversation with a native speaker?
+					</div>
+					<div class="star" value="1" description="Totally disagree"></div>
+					<div class="star" value="2" description="Disagree"></div>
+					<div class="star" value="3" description="Neutral"></div>
+					<div class="star" value="4" description="Agree"></div>
+					<div class="star" value="5" description="Totally agree"></div>
+					<br/><div></div>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :enjoy %>
 				</div>
 				<br /><br />
-				<p> 2. Can you tell us why? </p>
-				<div class="field">
-					<%= f.text_area :comments %>
+				<div id="metric2" metric-value="recommend" style="position:relative;">
+					<div>2. Would you recommend this activity to another language learner?
+					</div>
+					<div class="star" value="1" description="Totally disagree"></div>
+					<div class="star" value="2" description="Disagree"></div>
+					<div class="star" value="3" description="Neutral"></div>
+					<div class="star" value="4" description="Agree"></div>
+					<div class="star" value="5" description="Totally agree"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :recommend %>
 				</div>
-				<p>3. Which topics would you like to talk about?<p/>
-				<div class="field">
-					<%= f.text_area :topics %>
+				<br /><br />
+				<div id="metric3" metric-value="helpful" style="position:relative;">
+					<div>3. Do you think the native speaker was helpful?
+					</div>
+					<div class="star" value="1" description="Totally disagree"></div>
+					<div class="star" value="2" description="Disagree"></div>
+					<div class="star" value="3" description="Neutral"></div>
+					<div class="star" value="4" description="Agree"></div>
+					<div class="star" value="5" description="Totally agree"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :helpful %>
 				</div>
-				<%= f.hidden_field :rating %>
-				<%= f.hidden_field :user_id, :value => current_user.id %>
+				<br /><br />
+				<div id="metric4" metric-value="confidence" style="position:relative;">
+					<div>4. Do you feel more confident with your language after this conversation?
+					</div>
+					<div class="star" value="1" description="Totally disagree"></div>
+					<div class="star" value="2" description="Disagree"></div>
+					<div class="star" value="3" description="Neutral"></div>
+					<div class="star" value="4" description="Agree"></div>
+					<div class="star" value="5" description="Totally agree"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :confidence %>
+				</div>
+				<br /><br />
+				<div id="metric5" metric-value="improvement" style="position:relative;">
+					<div>5. Do you feel your speaking and listening improved after this conversation?
+					</div>
+					<div class="star" value="1" description="Totally disagree"></div>
+					<div class="star" value="2" description="Disagree"></div>
+					<div class="star" value="3" description="Neutral"></div>
+					<div class="star" value="4" description="Agree"></div>
+					<div class="star" value="5" description="Totally agree"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :improvement %>
+				</div>
+				<br/><br/>
 				<%= f.hidden_field :room_id, :value => @room.id %>
-				<br/>
 				<div class="actions">
 					<%= f.submit "SEND", :class => "next_button" %>
 				</div>

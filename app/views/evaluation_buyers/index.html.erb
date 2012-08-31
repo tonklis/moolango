@@ -1,0 +1,33 @@
+<h1>Listing evaluation_buyers</h1>
+
+<table>
+  <tr>
+    <th>Room</th>
+    <th>Clarity</th>
+    <th>Pronunciation</th>
+    <th>Fluency</th>
+    <th>Comprehension</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @evaluation_buyers.each do |evaluation_buyer| %>
+  <tr>
+    <td><%= evaluation_buyer.room_id %></td>
+    <td><%= evaluation_buyer.clarity %></td>
+    <td><%= evaluation_buyer.pronunciation %></td>
+    <td><%= evaluation_buyer.fluency %></td>
+    <td><%= evaluation_buyer.comprehension %></td>
+    <td><%= evaluation_buyer.content %></td>
+    <td><%= link_to 'Show', evaluation_buyer %></td>
+    <td><%= link_to 'Edit', edit_evaluation_buyer_path(evaluation_buyer) %></td>
+    <td><%= link_to 'Destroy', evaluation_buyer, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Evaluation buyer', new_evaluation_buyer_path %>

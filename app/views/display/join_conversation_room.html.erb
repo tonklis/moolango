@@ -13,7 +13,7 @@
 		openDisconnectDialog();
 	}
 
-	$(function(){
+	$(function() {
 
 		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');
 		$('#chat_field')[0].value="Type your message here...";
@@ -27,14 +27,16 @@
 		
 		$('.star').each(function(index) {
 			$(this).mousemove(function(e) {
-				selectStars($(e.currentTarget).attr("value"));
+				element = $(e.currentTarget);
+				selectStars(element.parent().attr('id'), element.attr("value"));
 			});
 			$(this).mouseout(function(e) {
-				selectStars(selected_star);
+				element = $(e.currentTarget);
+				selectStars(element.parent().attr('id'), $('#evaluation_buyer_' + element.parent().attr("metric-value")).attr('value'));
 			});
 			$(this).click(function(e) {
-				selected_star = $(e.currentTarget).attr("value");
-				$('#feedback_form_rating').attr('value', selected_star);
+				element = $(e.currentTarget);
+				$('#evaluation_buyer_' + element.parent().attr("metric-value")).attr('value', element.attr("value"));
 			});
 		});
 	});
@@ -103,15 +105,13 @@
 		<h3>The call has ended</h3>
 	</div>
 	<div class="modal-body" style="text-align: left;">
-		<div id="modal_message"></div>
-		<br/>
 		<div id="modal_form" style="margin-left:5px">
-			<%= form_for feedback_form = FeedbackForm.new do |f| %>
-				<% if feedback_form.errors.any? %>
+			<%= form_for evaluation_buyer = EvaluationBuyer.new do |f| %>
+				<% if evaluation_buyer.errors.any? %>
 					<div id="error_explanation">
-						<h2><%= pluralize(feedback_form.errors.count, "error") %> prohibited this feedback_form from being saved:</h2>
+						<h2><%= pluralize(evaluation_buyer.errors.count, "error") %> prohibited this evaluation_buyer from being saved:</h2>
 						<ul>
-							<% feedback_form.errors.full_messages.each do |msg| %>
+							<% evaluation_buyer.errors.full_messages.each do |msg| %>
 								<li><%= msg %></li>
 							<% end %>
 						</ul>
@@ -120,27 +120,55 @@
 			
 				<p>Help us improve MooLango by answering these simple questions:</p>
 				<br/>
-				<p> 1. How would you rate this conversation? </p>
-				<div>
-					<div id="star1" class="star" value="1"></div>
-					<div id="star2" class="star" value="2"></div>
-					<div id="star3" class="star" value="3"></div>
-					<div id="star4" class="star" value="4"></div>
-					<div id="star5" class="star" value="5"></div>
+				<div id="metric1" metric-value="clarity" style="position:relative;">
+					<div>1. How clearly did the language practicer speak?
+					</div>
+					<div class="star" value="1" description="Awkward and incomprehensible"></div>
+					<div class="star" value="2" description="Awkward and incomprehensible at times"></div>
+					<div class="star" value="3" description="Awkward at times but always understandable"></div>
+					<div class="star" value="4" description="Clear and comprehensible"></div>
+					<br/><div></div>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :clarity %>
 				</div>
 				<br /><br />
-				<p> 2. Can you tell us why? </p>
-				<div class="field">
-					<%= f.text_area :comments %>
+				<div id="metric2" metric-value="pronunciation" style="position:relative;">
+					<div>2. How would you describe the pronunciation of the language practicer?
+					</div>
+					<div class="star" value="1" description="Impossible to understand"></div>
+					<div class="star" value="2" description="Made understanding difficult"></div>
+					<div class="star" value="3" description="Understandable with some error"></div>
+					<div class="star" value="4" description="Like a native speaker"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :pronunciation %>
 				</div>
-				<p>3. Which topics would you like to talk about?<p/>
-				<div class="field">
-					<%= f.text_area :topics %>
+				<br /><br />
+				<div id="metric3" metric-value="fluency" style="position:relative;">
+					<div>3. How fluidly was the language practicer able to communicate?
+					</div>
+					<div class="star" value="1" description="Unable to respond or ask questions"></div>
+					<div class="star" value="2" description="Took a long time to respond or ask questions"></div>
+					<div class="star" value="3" description="Answer with little difficulty"></div>
+					<div class="star" value="4" description="Had no difficulty"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :fluency %>
 				</div>
-				<%= f.hidden_field :rating %>
-				<%= f.hidden_field :user_id, :value => current_user.id %>
+				<br /><br />
+				<div id="metric4" metric-value="comprehension" style="position:relative;">
+					<div>4. How well did the language practicer comprehend questions/comments?
+					</div>
+					<div class="star" value="1" description="Questions/comments had to be repeated consistently"></div>
+					<div class="star" value="2" description="Questions/comments had to be repeated occasionally"></div>
+					<div class="star" value="3" description="Understood most of questions/comments"></div>
+					<div class="star" value="4" description="Fully understood questions/comments"></div>
+					<br/>
+					<div class="description" style="position:absolute; color: #999;"></div>
+					<%= f.hidden_field :comprehension %>
+				</div>
+				<br /><br />
 				<%= f.hidden_field :room_id, :value => @room.id %>
-				<br/>
 				<div class="actions">
 					<%= f.submit "SEND", :class => "next_button" %>
 				</div>

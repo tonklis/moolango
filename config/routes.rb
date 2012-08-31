@@ -1,4 +1,8 @@
 Moolango::Application.routes.draw do
+  resources :evaluation_sellers
+
+  resources :evaluation_buyers
+
 	resources :feedback_forms
 
 	resources :earner_forms
