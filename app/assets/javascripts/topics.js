@@ -61,6 +61,7 @@
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				alert(textStatus);
+				$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
 				queryRooms();
 			}
 		});
@@ -81,7 +82,6 @@
 		$(".button_topic").hide();
 		$(".waiting_topic").show();
 		$(".text_topic").show();
-		$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
 
 		$.ajax({ 
   		type: "POST", 
