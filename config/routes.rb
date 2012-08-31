@@ -62,6 +62,8 @@ Moolango::Application.routes.draw do
 	match 'rooms/keepalive/:id' => 'rooms#keepalive'
 	
 	match 'rooms/reactivate/:id' => 'rooms#reactivate'
+	
+	match 'rooms/verify/:id' => 'rooms#verify'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

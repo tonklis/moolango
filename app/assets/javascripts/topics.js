@@ -20,7 +20,7 @@
   		},
   		success: function(data) {
 				$("#modal_prog_bar")[0].className="progress progress-striped active";
-				redirectToRoom(data);	
+				redirectToRoom(data,false);
 			},
 			error: function() {
 				$("#modal_message")[0].innerHTML="The site is busy, please try again later.";
@@ -30,9 +30,43 @@
 		});
 	}
 
-	function redirectToRoom(data){
-		var	redirect_url = "conversation_room/" + data.room_id;
+	function redirectToRoom(data, join){
+		var redirect_url;
+		if (join) {
+			redirect_url = "join_conversation_room/" + data.room_id;
+		} else {
+			redirect_url = "conversation_room/" + data.room_id;
+		}
 		window.location = redirect_url;
+	}
+
+	function verifyAndRedirect(topicId){
+		roomId = $("#join_now_topic_"+topicId)[0].getAttribute("data-room-id");
+		$.ajax({	
+			type: "POST", 
+  		url: "rooms/verify/"+roomId,
+			beforeSend: function(xhr) {
+    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  		},
+			success: function(data){
+				if (data.room_id){
+					redirectToRoom(data, true);
+				} else {
+					$(".button_topic").hide();
+					$(".waiting_topic").show();
+					$(".text_topic").show();
+					$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
+					alert("The room is busy. Please try again later");
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				$(".button_topic").hide();
+				$(".waiting_topic").show();
+				$(".text_topic").show();
+				$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
+				alert(textStatus);
+			}
+		});
 	}
 
 	function cancelRooms(userId){
@@ -60,7 +94,7 @@
 			success: function(data){
 				for (var prop in data){
 					$("#button_topic_"+prop).show();
-					$("#join_now_topic_"+prop)[0] = "/join_conversation_room/" + data[prop];
+					$("#join_now_topic_"+prop)[0].setAttribute("data-room-id",data[prop]);
 					$("#waiting_topic_"+prop).hide();
 					$("#text_topic_"+prop).hide();
 				}

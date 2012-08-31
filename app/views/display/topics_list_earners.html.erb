@@ -14,7 +14,7 @@
 					<div id="topic_<%=topic.id%>" class="box_details  one-edge-shadow">
 						<p class="text_topic" id="text_topic_<%=topic.id%>">Searching ...</p>
 						<p class="waiting_topic" id="waiting_topic_<%=topic.id%>"><%= image_tag "waiting.gif" %></p>
-						<p class="button_topic" id="button_topic_<%=topic.id%>" style="display:none;"><%= link_to "Join now!", "#", :class=>"btn btn-success", :id => "join_now_topic_#{topic.id}" %></p>
+						<p class="button_topic" id="button_topic_<%=topic.id%>" style="display:none;"><%= link_to "Join now!", "#", :class=>"btn btn-success", :id => "join_now_topic_#{topic.id}", :onclick => "verifyAndRedirect(#{topic.id})", "data-room-id"=>"" %></p>
 					</div>
 				</div>
 			<% end %>

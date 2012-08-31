@@ -129,4 +129,12 @@ class RoomsController < ApplicationController
 		end
 	end
 
+	def verify
+		room_id = Room.verify(params[:id])
+
+		respond_to do |format|
+			format.json { render json: {:room_id => room_id} }
+	  end	
+	end
+
 end

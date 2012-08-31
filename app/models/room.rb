@@ -62,7 +62,7 @@ class Room < ActiveRecord::Base
 	def engage
 		if self.status == "WAITING"
 			self.status = "JOINED"
-		elsif self.status.match(/JOINED/)
+		elsif self.status.match(/LOCKED/)
 			self.status = "ENGAGED"
 		end
 		self.save
@@ -76,6 +76,17 @@ class Room < ActiveRecord::Base
 			result_by_topic[room.topic_id] = room.id
 		end
 		result_by_topic
+	end
+
+	def self.verify room_id
+		room = Room.find(room_id)
+		if room.status == "JOINED"
+			room.status = "LOCKED"
+			room.save
+			return room.id
+		else
+			return nil
+		end
 	end
 
 end
