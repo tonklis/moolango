@@ -60,11 +60,8 @@
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
-				$(".button_topic").hide();
-				$(".waiting_topic").show();
-				$(".text_topic").show();
-				$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
 				alert(textStatus);
+				queryRooms();
 			}
 		});
 	}
@@ -84,6 +81,7 @@
 		$(".button_topic").hide();
 		$(".waiting_topic").show();
 		$(".text_topic").show();
+		$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
 
 		$.ajax({ 
   		type: "POST", 
