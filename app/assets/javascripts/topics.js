@@ -52,11 +52,9 @@
 				if (data.room_id){
 					redirectToRoom(data, true);
 				} else {
-					$(".button_topic").hide();
-					$(".waiting_topic").show();
-					$(".text_topic").show();
-					$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
 					alert("The room is busy. Please try again later");
+					$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
+					queryRooms();
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
