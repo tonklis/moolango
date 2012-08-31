@@ -264,8 +264,9 @@ function startTimer() {
 			});
 		}
 		if (time_elapsed == 60) {
-			$('#timeBar').css('background-color', '#00FF00');
+			$('#timeBar').css('background-image', "url('/assets/timer_full_yellow.png')");
 		}
+
 		if ( (0 == time_elapsed % 60) && is_buyer) {
 			nextInteraction(true);
 		}
