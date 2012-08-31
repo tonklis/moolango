@@ -263,8 +263,8 @@ function startTimer() {
 				} 
 			});
 		}
-		if (time_elapsed == 60) {
-			$('#timeBar').css('background-image', "url('/assets/timer_full_yellow.png')");
+		if (time_elapsed == 480) {
+			$('#timeBar').css('background-image', "url('/assets/timer_full_red.png')");
 		}
 
 		if ( (0 == time_elapsed % 60) && is_buyer) {
