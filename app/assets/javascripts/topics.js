@@ -53,8 +53,7 @@
 					redirectToRoom(data, true);
 				} else {
 					alert("The room is busy. Please try again later");
-					$("#join_now_topic_"+topicId)[0].setAttribute("data-room-id","");
-					queryRooms();
+					window.location.reload();
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
