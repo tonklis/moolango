@@ -130,7 +130,7 @@ class RoomsController < ApplicationController
 	end
 
 	def verify
-		room_id = Room.verify(params[:id])
+		room_id = Room.verify(params[:id], current_user.id)
 
 		respond_to do |format|
 			format.json { render json: {:room_id => room_id} }

@@ -79,10 +79,11 @@ class Room < ActiveRecord::Base
 		result_by_topic
 	end
 
-	def self.verify room_id
+	def self.verify room_id, user_id
 		room = Room.find(room_id)
 		if room.status == "JOINED"
 			room.status = "LOCKED"
+			room.joiner_id = user_id
 			room.save
 			return room.id
 		else
