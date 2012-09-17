@@ -89,7 +89,7 @@ GEM
     omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    opentok (0.0.7)
+    opentok (0.0.91)
     orm_adapter (0.0.7)
     pg (0.14.0)
     polyglot (0.3.3)
@@ -168,7 +168,7 @@ DEPENDENCIES
   devise
   jquery-rails
   omniauth-facebook
-  opentok
+  opentok (~> 0.0.91)
   pg
   pusher
   rails (= 3.1.0)

@@ -7,7 +7,7 @@ gem 'rails', '3.1.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'devise'
-gem 'opentok'
+gem 'opentok', " ~> 0.0.91"
 gem 'omniauth-facebook'
 gem 'pusher'
 gem 'twilio-ruby'
