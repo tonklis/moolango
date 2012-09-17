@@ -47,7 +47,7 @@ class DisplayController < ApplicationController
 		@room = Room.find(params[:id])
 		@internal_session = @room.session_id
 		@open_tok_session = @room.open_tok_session
-		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
 		@topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
@@ -67,7 +67,7 @@ class DisplayController < ApplicationController
 		@room = Room.find(params[:id])
 		@internal_session = @room.session_id
 		@open_tok_session = @room.open_tok_session
-		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
 		@topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
@@ -79,12 +79,11 @@ class DisplayController < ApplicationController
 	end
 	
 	def view_video
-		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
-		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
-		session = opentok.create_session(request.remote_addr, session_properties)
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
+		session = opentok.create_session(request.remote_addr)
 		@token = opentok.generate_token(:session_id => session, :role => OpenTok::RoleConstants::MODERATOR)
 		@address = request.remote_addr
-		archive = opentok.get_archive_manifest("f93ca0e1-e935-4471-9c93-600bdc334354", @token)
+		archive = opentok.get_archive_manifest("e7d0affb-3b7c-4633-865e-5ce702ab6799", @token)
 		@urls = []
 		archive.resources.each do |video|
 			@urls << archive.downloadArchiveURL(video.getId, @token)

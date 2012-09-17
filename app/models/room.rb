@@ -8,16 +8,15 @@ class Room < ActiveRecord::Base
 	has_many :evaluation_sellers
 	has_many :messages
 
-	def self.create_available user_id, topic_id, language_id, internal_session
+	def self.create_available user_id, topic_id, language_id, internal_session, ip_address
 		rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)
 		rooms_to_close.each do |rtc|
 			rtc.status = "CLOSED"
 			rtc.save
 		end
 
-		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET'], :api_url => 'https://api.opentok.com/hl'
-		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "disabled"}
-		open_tok_session = opentok.create_session(nil, session_properties)
+		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
+		open_tok_session = opentok.create_session(ip_address)
 
 		room = Room.create(
 			:creator_id => user_id,
