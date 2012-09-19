@@ -45,6 +45,8 @@ Moolango::Application.routes.draw do
 
 	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
 	
+	match 'come_back_later' => 'display#come_back_later', :as => :come_back_later
+	
 	match 'admin_room' => 'display#admin_room', :as => :admin_room
 		
 	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room

@@ -2,6 +2,9 @@ class DisplayController < ApplicationController
 
 	before_filter :authenticate_user!, :except => [:index]
 
+	#negative to remove open window constraint
+	AVAILABLE_TIME = 18
+
 	def index
 		if signed_in?
 			if current_user.sign_in_count == 1 and not session[:language] 
@@ -12,15 +15,27 @@ class DisplayController < ApplicationController
 		end
 	end
 
-	def language
+	def come_back_later
 
+	end
+
+	def language
+		if not is_site_open?
+				redirect_to come_back_later_path
+		end
 	end
 	
 	def language_earners
+		if not is_site_open?
+				redirect_to come_back_later_path
+		end
 		@notify = EarnerForm.notify(current_user.id)
 	end
 
 	def action
+		if not is_site_open?
+				redirect_to come_back_later_path
+		end
 		@first_signin_flag = params[:fs]
 	end
 
@@ -89,5 +104,18 @@ class DisplayController < ApplicationController
 			@urls << archive.downloadArchiveURL(video.getId, @token)
 		end
 	end
-	
+
+	private
+
+	def is_site_open?
+		Time.use_zone("Mexico City") do
+			mex_time = Time.now.in_time_zone
+			if AVAILABLE_TIME > 0 and mex_time.hour == AVAILABLE_TIME
+				return true
+			else
+				return false
+			end
+		end
+	end
+
 end
