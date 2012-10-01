@@ -21,6 +21,27 @@ body {
 	background-position: bottom; 
 }
 
+iframe {
+	border: 0;
+
+  -moz-box-shadow: 4px 4px 14px #000; 
+  -webkit-box-shadow: 4px 4px 14px #000; 
+  box-shadow: 4px 4px 14px #000; 
+}
+
+.moolango-box{
+	overflow:hidden;background-color:#303433;background-color:rgba(113,190,236,.75);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);
+	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);box-shadow:inset 0 0 16px rgba(74,78,68,.25);border:none;
+}
+//.moolango-box:hover{
+//	background-color:#303433;background-color:rgba(255,255,255,.06);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);
+//	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);box-shadow:inset 0 0 16px rgba(255,255,255,.12);
+//}
+
+.moolango-box-inner{
+	margin: 5px 10px 5px 10px;
+}
+
 .come_later_body{
 	margin: 15px auto auto auto;
 	width: 55%;
@@ -85,6 +106,11 @@ body {
 	z-index:-1;
 }
 
+.body_text{
+	color: #ffffff;
+	font-family: "Arial";
+}
+
 .landing_header{
 	color: #ffffff;
 	font-family: "Arial";
@@ -119,8 +145,8 @@ body {
 
 .landing_get_started_button{
 	text-align: center;
-	margin-top: 50px;
-	margin-right: 50px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 	height: 43px;
   width: 190px;
 	float: right;

@@ -7,8 +7,18 @@
 				<div class="landing_header">
 					<%= image_tag "webpage/sign_up_for_an_invite.gif", :alt => "sign up for an invite"%>
 				</div>
-				<div class="earner_body">
+				<div class="earner_body moolango-box">
 					<br />
+					<% if @earner_form.errors.any? %>
+						<div id="error_explanation" class="alert alert-error" style="width: 70%; margin: auto;">
+							<ul>
+								<% @earner_form.errors.full_messages.each do |msg| %>
+									<li><%= msg %></li>
+								<% end %>
+							</ul>
+						</div>
+						<br />
+					<% end %>
 					<div class="earner_info">
 						Thanks for your interest! We've had a ton of folks sign up who want to make some moola speaking their lango.
 						<br /><br />
@@ -29,26 +39,16 @@
 						</div> <br />
 						<div class="field">
 							<%= f.label "What's your e-mail address?", :class => "earner_form_questions" %>
-							<%= f.text_field :email, :value => current_user.email %>
+							<%= f.text_field :email %>
 						</div> <br />
 						<div class="field">
 							<%= f.check_box :agree, :class => "earner_form_questions"%>
 							<%= f.label "Cool if we contact you via e-mail when your invite is ready?" %>
 						</div> <br />
-							<%= f.hidden_field :user_id, :value => current_user.id %>
 						<div class="actions" style="text-align: center">
 							<%= f.submit "GET YOUR INVITE", :class => "next_button" %>
 						</div> <br />
 					<% end %>
-					<% if @earner_form.errors.any? %>
-							<div id="error_explanation" class="alert alert-error">
-								<ul>
-									<% @earner_form.errors.full_messages.each do |msg| %>
-										<li><%= msg %></li>
-									<% end %>
-								</ul>
-							</div>
-						<% end %>
 					</div>
 				</div>
 			</div>

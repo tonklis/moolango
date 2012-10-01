@@ -1,6 +1,6 @@
 class EarnerFormsController < ApplicationController
 	
-	before_filter :authenticate_user!
+	#before_filter :authenticate_user!
 	before_filter :check_access, :except => [:new, :create]
 
 	# GET /earner_forms
@@ -28,11 +28,11 @@ class EarnerFormsController < ApplicationController
   # GET /earner_forms/new
   # GET /earner_forms/new.json
   def new
-		if current_user.earner_forms.count > 0
-			render :contact_soon	
-		else
+		#if current_user.earner_forms.count > 0
+		#	render :contact_soon	
+		#else
     	@earner_form = EarnerForm.new
-		end
+		#end
   end
 
   # GET /earner_forms/1/edit
@@ -47,9 +47,9 @@ class EarnerFormsController < ApplicationController
 
     respond_to do |format|
       if @earner_form.save
-        #render :contact_soon
+       	render :contact_soon
         format.json { render json: @earner_form, status: :created, location: @earner_form }
-				#return
+				return
       else
         format.html { render action: "new" }
         format.json { render json: @earner_form.errors, status: :unprocessable_entity }

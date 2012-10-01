@@ -4,13 +4,13 @@
 .earner_body{
 	margin: 15px auto auto auto;
 	width: 55%;
-	height: 70%;
-	background-color: #71BEEC;
+	height: 450px;
 	color: #FFFFFF;
+	overflow: auto;
 }
 
 .earner_info{
-	width: 65%;
+	width: 75%;
 	margin: auto;
 	text-align: center;
   font-weight: bold;
@@ -24,7 +24,7 @@
 .earner_form{
 	margin: auto;
 	height: 50%;
-	width: 60%;
+	width: 65%;
 }
 
 .earner_form_questions{
@@ -33,7 +33,7 @@
 
 .contact_soon_button{
 	margin: auto;
-	width: 100px;
+	width: 170px;
 	height: 30px;
 	background-image: url('/assets/webpage/next_button.gif');
 	cursor: pointer;

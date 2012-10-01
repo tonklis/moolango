@@ -263,11 +263,11 @@ function startTimer() {
 				} 
 			});
 		}
-		if (time_elapsed == 480) {
+		if (time_elapsed == 1500) {
 			$('#timeBar').css('background-image', "url('/assets/timer_full_red.png')");
 		}
 
-		if ( (0 == time_elapsed % 60) && is_buyer) {
+		if ( (0 == time_elapsed % 90) && is_buyer) {
 			nextInteraction(true);
 		}
 		var minutes, seconds;

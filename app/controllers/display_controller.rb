@@ -3,7 +3,7 @@ class DisplayController < ApplicationController
 	before_filter :authenticate_user!, :except => [:index]
 
 	#negative to remove open window constraint
-	AVAILABLE_TIME = 18
+	AVAILABLE_TIME = -1
 
 	def index
 		if signed_in?
@@ -110,7 +110,7 @@ class DisplayController < ApplicationController
 	def is_site_open?
 		Time.use_zone("Mexico City") do
 			mex_time = Time.now.in_time_zone
-			if AVAILABLE_TIME > 0 and mex_time.hour == AVAILABLE_TIME
+			if AVAILABLE_TIME < 0 or mex_time.hour == AVAILABLE_TIME
 				return true
 			else
 				return false

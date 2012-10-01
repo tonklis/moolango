@@ -1,24 +1,53 @@
 <div class="row">
 	<div class="span6">
 		<div class="landing_left_hemisphere">
-			<iframe src="http://player.vimeo.com/video/46380365?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="84%" height="110%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<div class="landing_header" style="width: 77%">
+				<h2>
+					ENJOYABLE, AFFORDABLE <br /> LANGUAGE PRACTICE ABOUT <br /> STUFF YOU LOVE
+				</h2>
+			</div>
+			<br />
+			<br />
+			<iframe src="http://player.vimeo.com/video/46380365?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="76%" height="100%" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 	</div>
 	<div class="span6">
 		<div class="landing_right_hemisphere">
-			<h1 class="landing_header">
-				ENJOYABLE, AFFORDABLE, <br /> INSTANT LANGUAGE PRACTICE <br /> ABOUT STUFF YOU LOVE
-			</h1>
-			<div class="landing_body">
-			<%= image_tag "webpage/ohyeah.png", :alt => "...oh yeah, and you can make money speaking your language too..." %>
+			<div class="moolango-box">
+				<div class="moolango-box-inner">
+					<h2 class="landing_header" style="text-align: left;">
+						Practice English
+					</h2>
+					<br />
+					<div class="body_text">
+						<p> Lorem ipsum blah blah, lorem ipsum blah blah blah blah blah lorem ipsum blah blah </p>
+						<p> Lorem ipsum blah blah, lorem ipsum blah blah blah blah blah lorem ipsum blah blah </p>
+					</div>
+					<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
+						<div class="get_started_button">
+							<%= link_to "GET STARTED!", :signup %>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div style="width: 100%;">
-				<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
-					<div class="get_started_button">
-						<%= link_to "GET STARTED!", :signup%>
+			<br /> <br /> <br />
+			<div class="moolango-box">
+				<div class="moolango-box-inner">
+					<h2 class="landing_header" style="text-align: left;">
+						Become a MooLango associate
+					</h2>
+					<br />
+					<div class="body_text">
+						<p> Lorem ipsum blah blah, lorem ipsum blah blah blah blah blah lorem ipsum blah blah </p>
+						<p> Lorem ipsum blah blah, lorem ipsum blah blah blah blah blah lorem ipsum blah blah </p>
+					</div>
+					<div class="landing_get_started_button" onclick="window.open('<%= new_earner_form_path %>', '_self');">
+						<div class="get_started_button">
+							<%= link_to "GET YOUR INVITE!", new_earner_form_path %>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </div>
