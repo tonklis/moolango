@@ -5,7 +5,12 @@ class TestMailer < ActionMailer::Base
 		@topic = Topic.find(topic)
 		@user = User.find(user)
 		@language = Language.find(language.to_i)
-		mail(:to => "tonklis@gmail.com,dmiramon@gmail.com,williambabeaux@gmail.com", :subject => "New conversation with #{@user.firstname}, about #{@topic.name}")
+		mail(:to => "tonklis@gmail.com", :subject => "New conversation with #{@user.firstname}, about #{@topic.name}")
   end
+
+	def new_scheduling(user_id)
+		@user = User.find(user_id)
+		mail(:to => "tonklis@gmail.com", :subject => "New conversation scheduled with #{@user.firstname}")
+	end
 	
 end

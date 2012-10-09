@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :schedules
+
   resources :evaluation_sellers
 
   resources :evaluation_buyers

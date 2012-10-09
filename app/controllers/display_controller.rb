@@ -7,6 +7,7 @@ class DisplayController < ApplicationController
 
 	def index
 		if signed_in?
+			#session[:language] is obsolete, modify when we find out the new rule
 			if current_user.sign_in_count == 1 and not session[:language] 
 				redirect_to (action_path+"?fs=true")
 			else
@@ -16,27 +17,21 @@ class DisplayController < ApplicationController
 	end
 
 	def come_back_later
+	end
 
+	def schedule_conversation
 	end
 
 	def language
-		if not is_site_open?
-				redirect_to come_back_later_path
-		end
 	end
 	
 	def language_earners
-		if not is_site_open?
-				redirect_to come_back_later_path
-		end
 		@notify = EarnerForm.notify(current_user.id)
 	end
 
 	def action
-		if not is_site_open?
-				redirect_to come_back_later_path
-		end
-		@first_signin_flag = params[:fs]
+		# on standby till we define welcome message
+		#@first_signin_flag = params[:fs]
 	end
 
 	def rooms_listing
@@ -53,12 +48,10 @@ class DisplayController < ApplicationController
 	def topics_list_earners
 		@language_id = session[:language] = params[:id]
 		@enabled_topics = Topic.where("enabled = ?", true)
-		
 		render :layout => "topics"
 	end
 
 	def conversation_room
-
 		@room = Room.find(params[:id])
 		@internal_session = @room.session_id
 		@open_tok_session = @room.open_tok_session
@@ -74,7 +67,6 @@ class DisplayController < ApplicationController
 	end
 
 	def admin_room	
-		
 	end
 
 	def join_conversation_room
@@ -107,6 +99,7 @@ class DisplayController < ApplicationController
 
 	private
 
+	# unused code to limit available practice hours
 	def is_site_open?
 		Time.use_zone("Mexico City") do
 			mex_time = Time.now.in_time_zone

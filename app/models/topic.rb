@@ -2,6 +2,7 @@ class Topic < ActiveRecord::Base
 
 	has_many :hints
 	has_many :rooms
+	has_and_belongs_to_many :schedules
 
 	def next_hint hints, next_slide, current_slide_id
 		current_slide_id = current_slide_id.to_i

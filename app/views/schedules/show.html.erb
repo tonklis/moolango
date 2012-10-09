@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Purpose:</b>
+  <%= @schedule.purpose %>
+</p>
+
+<p>
+  <b>When:</b>
+  <%= @schedule.when %>
+</p>
+
+<p>
+  <b>Options:</b>
+  <%= @schedule.options %>
+</p>
+
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

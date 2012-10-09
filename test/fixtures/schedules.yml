@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  purpose: MyString
+  when: 2012-10-03 02:49:05
+  gender: MyString
+
+two:
+  purpose: MyString
+  when: 2012-10-03 02:49:05
+  gender: MyString

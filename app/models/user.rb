@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	has_many :joined_rooms, :class_name => "Room", :foreign_key => :joiner_id
 	has_many :earner_forms
 	has_many :messages
+	has_many :schedules
 
 	validates_presence_of :firstname, :email, :password
 

@@ -1,0 +1,65 @@
+<script type="text/javascript">
+	$(function(){
+			$("#schedule_when").datetimepicker({
+				dateFormat: "yy-mm-dd",
+				minDate: 2,
+				maxDate: 20,
+				timeFormat: 'hh:mm z',
+				showTimezone: true,
+				timezoneList: [{ value: '-0400', label: 'EDT' }],
+				stepMinute: 30,
+				hourMin: 9,
+				hourMax: 20
+			});
+	});
+</script>
+<style>
+.field_with_errors { display: inline; }
+</style>
+<div class="row">
+	<div class="span12">
+		<div style="margin: -50px;">
+			<div class="landing_header">
+				<%= image_tag "webpage/schedule_a_conversation.png", :alt => "schedule a conversation"%>
+			</div>
+			<div class="earner_body moolango-box">
+				<br />
+				<% if @schedule.errors.any? %>
+				<div id="error_explanation" class="alert alert-error" style="width: 70%; margin: auto;">
+					<ul>
+					<% @schedule.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+					</ul>
+				</div>
+				<br />
+				<% end %>
+				<div class="earner_info" style="text-align: left">
+					Please provide us with the following information:
+					<br /><br /> <br />
+				</div>
+				<div class="earner_form">
+				<%= form_for(@schedule) do |f| %>
+  				<div class="field">
+						<%= f.label "On what would you like to focus during this session?" %>
+						<%= f.select :purpose, [['fun','fun'],['pace','pace'],['vocabulary','vocabulary'],['pronunciation','pronunciation']] %>
+					</div> <br />
+					<div class="field">
+						<%= f.label "Which topic would you like to talk about? (food, TV series, movies, etc)" %>
+						<%= f.text_field :options, :value => "" %>
+					</div> <br />
+				  <div class="field">
+						<%= f.label "When do you want to practice? (eastern daylight time) "%> 
+						<%= f.text_field :when %> <%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
+						<br />
+						<%= hidden_field_tag :user_id, current_user.id %>
+					</div> <br />
+					<div class="actions" style="text-align: center">
+							<%= f.submit "Schedule now!", :class => "next_button" %>
+					</div> <br />
+				<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

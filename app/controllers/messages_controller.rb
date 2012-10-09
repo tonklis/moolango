@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
 		room = Room.create_available(params[:user_id], params[:topic_id], params[:language_id], internal_session, request.remote_addr)
     user = User.find(params[:user_id])
 
-		#TestMailer.new_conversation(params[:topic_id], params[:user_id], params[:language_id]).deliver
+		TestMailer.new_conversation(params[:topic_id], params[:user_id], params[:language_id]).deliver
 
 		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		if (Language.find_by_name("english").id == params[:language_id].to_i)
