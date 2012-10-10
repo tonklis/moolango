@@ -42,7 +42,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
-				TestMailer.new_scheduling(current_user.id).deliver
+				TestMailer.new_scheduling(@schedule).deliver
 				render :contact_soon
         format.json { render json: @schedule, status: :created, location: @schedule }
 				return
