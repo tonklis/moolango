@@ -60,6 +60,8 @@ Moolango::Application.routes.draw do
 	match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
 	
 	match 'view_video' => 'display#view_video', :as => :view_video
+
+  match 'paypal_test' => 'display#paypal_test', :as => :paypal_test
 	
 	match 'users/new_balance' => 'users#new_balance', :as => :new_balance
 

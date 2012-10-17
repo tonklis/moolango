@@ -90,12 +90,42 @@ class DisplayController < ApplicationController
 		session = opentok.create_session(request.remote_addr)
 		@token = opentok.generate_token(:session_id => session, :role => OpenTok::RoleConstants::MODERATOR)
 		@address = request.remote_addr
-		archive = opentok.get_archive_manifest("e7d0affb-3b7c-4633-865e-5ce702ab6799", @token)
+		@result = opentok.stitchArchive("d4319cee-15fb-4df3-acc9-5ee41f404bbd")
+		archive = opentok.get_archive_manifest("d4319cee-15fb-4df3-acc9-5ee41f404bbd", @token)
 		@urls = []
 		archive.resources.each do |video|
 			@urls << archive.downloadArchiveURL(video.getId, @token)
 		end
 	end
+
+	def paypal_test
+
+		@securetokenid = SecureRandom.uuid
+		#paypal_params = {:PARTNER => "PayPal", :VENDOR => "moolango", 
+		#	:USER => "moolangotroll", :PWD => "dimival", :TRXTYPE => "S", :AMT => "14.99",
+		#	:CREATESECURETOKEN => "Y", :SECURETOKENID => @securetokenid}
+		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
+		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
+		curl.ssl_verify_host = false
+		curl.ssl_verify_peer = false
+		curl.post(
+			Curl::PostField.content('PARTNER', 'PayPal'),
+			Curl::PostField.content('VENDOR', 'moolango'),
+			Curl::PostField.content('USER', 'moolangotroll'),
+			Curl::PostField.content('PWD', 'dimival1234'),
+			Curl::PostField.content('TRXTYPE', 'A'),
+			Curl::PostField.content('AMT', '1.00'),
+			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
+			Curl::PostField.content('SECURETOKENID', @securetokenid)
+			)
+		@response = curl.body_str.split('&')
+		@response.each do |pair|
+			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
+		end
+		#@securetoken = response
+		@mode = 'LIVE'
+	end
+	
 
 	private
 
