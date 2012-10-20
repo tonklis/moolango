@@ -1,6 +1,6 @@
 class DisplayController < ApplicationController
 
-	before_filter :authenticate_user!, :except => [:index]
+	before_filter :authenticate_user!, :except => [:index, :paypal_purchase]
 
 	#negative to remove open window constraint
 	AVAILABLE_TIME = -1
@@ -114,7 +114,7 @@ class DisplayController < ApplicationController
 			Curl::PostField.content('USER', 'moolangotroll'),
 			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
-			Curl::PostField.content('AMT', '1.00'),
+			Curl::PostField.content('AMT', '0.01'),
 			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
 			Curl::PostField.content('SECURETOKENID', @securetokenid)
 			)
@@ -126,6 +126,10 @@ class DisplayController < ApplicationController
 		@mode = 'LIVE'
 	end
 	
+
+	def paypal_purchase
+		@valores = params
+	end
 
 	private
 

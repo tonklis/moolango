@@ -62,6 +62,8 @@ Moolango::Application.routes.draw do
 	match 'view_video' => 'display#view_video', :as => :view_video
 
   match 'paypal_test' => 'display#paypal_test', :as => :paypal_test
+
+  match 'paypal_purchase' => 'display#paypal_purchase', :as => :paypal_purchase
 	
 	match 'users/new_balance' => 'users#new_balance', :as => :new_balance
 
