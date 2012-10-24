@@ -1,18 +1,22 @@
 class PaypalController < ApplicationController
 
 	before_filter :authenticate_user!, :except => [:complete]
-	
-	def billing
+
+	def shopping_cart
 
 	end
 
+	def billing
+		session[:pricing_id] = params[:pricing]
+	end
+
 	def checkout
+		session[:billing_id] = params[:id]
 		billing_info = BillingAddress.find(params[:id])
+		amount = Pricing.find(session[:pricing_id]).price
 		@securetokenid = SecureRandom.uuid
 		@mode = 'LIVE'
-		#paypal_params = {:PARTNER => "PayPal", :VENDOR => "moolango", 
-		#	:USER => "moolangotroll", :PWD => "dimival", :TRXTYPE => "S", :AMT => "14.99",
-		#	:CREATESECURETOKEN => "Y", :SECURETOKENID => @securetokenid}
+		
 		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
 		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
 		curl.ssl_verify_host = false
@@ -41,10 +45,20 @@ class PaypalController < ApplicationController
 	end
 
 	def complete
-		session["paypal_response"] = params
+		session[:paypal_response] = params
+		trans = Transaction.new
+		trans.user_id = current_user.id
+		trans.pricing_id = session[:pricing_id]
+		trans.billing_address_id = session[:billing_id]
+		trans.paypal_trans_id = params['PNREF']
+		trans.save
+		current_user.update_attribute(:credits, current_user.credits + Pricing.find(session[:pricing_id]).minutes)
 	end
 
 	def receipt
-		@valores = session["paypal_response"]
+		@valores = session[:paypal_response]
+		session[:paypal_response] = nil
+		session[:pricing_id] = nil
+		session[:billing_id] = nil
 	end
 end

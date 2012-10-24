@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :transactions
+
   resources :billing_addresses
 
   resources :schedules
@@ -64,6 +66,8 @@ Moolango::Application.routes.draw do
 	match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
 	
 	match 'view_video' => 'display#view_video', :as => :view_video
+
+  match 'paypal_shopping_cart' => 'paypal#shopping_cart', :as => :paypal_shopping_cart
 
   match 'paypal_billing' => 'paypal#billing', :as => :paypal_billing
 

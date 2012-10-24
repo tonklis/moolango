@@ -1,0 +1,11 @@
+<%= form_tag('/paypal_billing') do %>
+	<% Pricing.all.each do |item| %>
+		<div style="float:left; text-align:center; margin-right:15px">
+			<%= item.description %> <br/>
+			$<%= item.price %> <br/>
+			<%= radio_button_tag 'pricing', item.id %>
+		</div>
+	<% end %>
+	<br/><br/><br/><br/>
+		<%= submit_tag 'Continue' %>
+<% end %>

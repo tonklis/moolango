@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 	has_many :earner_forms
 	has_many :messages
 	has_many :schedules
+	has_many :billing_addresses
+	has_many :transactions
 
 	validates_presence_of :firstname, :email, :password
 

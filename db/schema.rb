@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024034531) do
+ActiveRecord::Schema.define(:version => 20121024192249) do
 
   create_table "billing_addresses", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(:version => 20121024034531) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "iso"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -92,6 +99,14 @@ ActiveRecord::Schema.define(:version => 20121024034531) do
     t.integer  "user_id"
   end
 
+  create_table "pricings", :force => true do |t|
+    t.float    "price"
+    t.integer  "minutes"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rooms", :force => true do |t|
     t.integer  "creator_id"
     t.integer  "joiner_id"
@@ -131,6 +146,15 @@ ActiveRecord::Schema.define(:version => 20121024034531) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "enabled"
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "paypal_trans_id"
+    t.integer  "pricing_id"
+    t.integer  "billing_address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
