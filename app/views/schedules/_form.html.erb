@@ -34,14 +34,14 @@
 				</div>
 				<br />
 				<% end %>
-				<div class="earner_info" style="text-align: left">
-					Please provide us with the following information:
-					<br /><br /> <br />
-				</div>
 				<div class="earner_form">
 				<%= form_for(@schedule) do |f| %>
-  				<div class="field">
-						<%= f.label "On what would you like to focus during this session?" %>
+					<div class="field">
+						<%= f.label "What language do you want to practice?" %>
+						<%= f.select :language_id, [['English','1'],['Spanish','2']] %>
+					</div> <br />
+					<div class="field">
+						<%= f.label "What would you like to focus on this session?" %>
 						<%= f.select :purpose, [['fun','fun'],['pace','pace'],['vocabulary','vocabulary'],['pronunciation','pronunciation']] %>
 					</div> <br />
 					<div class="field">
@@ -50,13 +50,15 @@
 					</div> <br />
 				  <div class="field">
 						<%= f.label "When do you want to practice? (eastern daylight time) "%> 
-						<%= f.text_field :when %> <%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
-						<br />
+						<%= f.text_field :when %> <%= f.select :length, [['30 minutes','30'],['60 minutes','60']]%> <br />
+						<p style="text-align: center;">
+						<%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
+						</p>
 						<%= hidden_field_tag :user_id, current_user.id %>
-					</div> <br /> <br />
+					</div> <br />
 					<div class="actions" style="text-align: center">
 							<%= f.submit "Schedule now!", :class => "next_button" %>
-					</div> <br />
+					</div>
 				<% end %>
 				</div>
 			</div>

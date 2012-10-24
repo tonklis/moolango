@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20121024034531) do
     t.string   "options"
     t.integer  "user_id"
     t.integer  "room_id"
+    t.integer  "language_id"
+    t.integer  "length"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

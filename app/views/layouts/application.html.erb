@@ -54,7 +54,7 @@
 										<%= link_to image_tag("webpage/logout_button.png"), :logout, :rel => "tooltip", "data-original-title" => "Logout", "data-placement"=> "left" %>
 									</div>
 									<div class="account_text">
-										<%= link_to sprintf('$ %.2f', current_user.credits), "#", :rel=>"tooltip", "data-placement"=>"left", "data-original-title"=>"Your credits", :id=>"credits" %>
+										<%= link_to sprintf('%s min', current_user.credits.to_i), "#", :rel=>"tooltip", "data-placement"=>"left", "data-original-title"=>"Available minutes", :id=>"minutes" %>
 									</div>
 								<% else %>
 									<%= link_to image_tag("webpage/login_button.png", :alt => "Login button"), :signin %>

@@ -5,7 +5,11 @@
 	e-mail: <%= @user.email %>
 </p>
 <p>
+	Language: <%= Language.find(@schedule.language_id).name %>
+</p>
+<p>
 	When: <%= @schedule.when %>
+	for: <%= @schedule.length %> minutes
 </p>
 <p>
 	Topic(s): <%= @schedule.options %>

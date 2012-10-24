@@ -6,6 +6,8 @@ class CreateSchedules < ActiveRecord::Migration
       t.string :options
 			t.integer :user_id
 			t.integer :room_id
+			t.integer :language_id
+			t.integer :length
 
       t.timestamps
     end
