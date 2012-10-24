@@ -6,10 +6,30 @@ var is_ready_for_conversation = false;
 var is_timer_running = false;
 var is_recording = false;
 var num_connections = 0;
-var total_time = 600; //30;
 var time_elapsed = 0;
 var archive;
 var archive_id;
+
+function submitWithMessage(){
+	if ($("#chat_field")[0].value	!= ""){
+		$("#new_message").submit();
+	}	
+
+}
+
+function validateEnterKey(e){
+
+	var key;      
+  if(window.event)
+  	key = window.event.keyCode; //IE
+	else
+  	key = e.which; //firefox      
+
+	if (key == 13){
+		submitWithMessage();
+	}
+	return (key != 13);
+}
 
 function simplePusher(pusherKey, session){
 	
@@ -140,8 +160,8 @@ function subscribeToStreams(streams) {
 				session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
 		}
 		else {
+			// video of self repositioning
 			$("#publisherDiv").css('margin','-90px auto auto 260px');
-			//$('#videoBtn').css({display: 'block'})
 		}
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
@@ -271,11 +291,11 @@ function enableDisableVideo() {
 function startTimer() {
 	if (time_elapsed < total_time && is_timer_running) {
 		time_elapsed++;
-		//if (time_elapsed >= total_time - 60) {
 		if (time_elapsed == 60 && is_buyer) {
 			$.ajax({ 
 				type: "POST",  
 				url: "/users/new_balance",
+				data: "total_time=" + total_time,
 				beforeSend: function(xhr) {
 					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
 				},			
@@ -287,13 +307,13 @@ function startTimer() {
 				} 
 			});
 		}
-		if (time_elapsed == 1500) {
+		if (time_elapsed == (total_time*.9) ) {
 			$('#timeBar').css('background-image', "url('/assets/timer_full_red.png')");
 		}
 
-		if ( (0 == time_elapsed % 90) && is_buyer) {
+		/*if ( (0 == time_elapsed % 90) && is_buyer) {
 			nextInteraction(true);
-		}
+		}*/
 		var minutes, seconds;
 		seconds = time_elapsed % 60;
 		minutes = Math.floor(time_elapsed / 60) % 60;
@@ -302,7 +322,7 @@ function startTimer() {
 		setTimeout(function(){ startTimer(); },1000);
 	}
 	else {
-		endCall();
+		// endCall();
 	}
 }
 

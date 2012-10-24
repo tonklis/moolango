@@ -45,9 +45,9 @@ class MessagesController < ApplicationController
 	def simple_redirect
 	
 		internal_session = params[:internal_session]
-		room = Room.create_available(params[:user_id], nil, nil, internal_session, request.remote_addr)
     user = User.find(params[:user_id])
 		schedule = Schedule.find(params[:schedule_id])
+		room = Room.create_available(params[:user_id], schedule.language_id, nil, internal_session, request.remote_addr)
 		schedule.update_attribute(:room_id, room.id)
 
 		TestMailer.new_simple_conversation(params[:user_id], room.id).deliver

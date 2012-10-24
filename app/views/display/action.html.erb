@@ -7,7 +7,6 @@
 			<br /> <br />
 		</div>
 
-
 	<% if current_user.credits > 0 %>
 		<div class="row">
 				<%= link_to image_tag("webpage/schedule_conversation.png", :alt => "schedule button", :class=>"one-edge-shadow"), new_schedule_path %>
@@ -16,7 +15,13 @@
 	<% end %>
 	<% if @schedule %>
 		<div class="row">
-			<%= link_to image_tag("webpage/practice_now.png", :alt => "practice button", :class=>"one-edge-shadow", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			<% if current_user.credits > 0 %>
+				<%= link_to image_tag("webpage/practice_now.png", :alt => "practice button", :class=>"one-edge-shadow", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			<% else %>
+				<div class="alert alert-error" style="width: 29%; margin: auto;">
+					<p><strong>We're sorry!</strong> You don't have credits to enter your scheduled session.</p>
+				</div>
+			<% end %>	
 			<br /> <br />
 		</div>
 	<% end %>

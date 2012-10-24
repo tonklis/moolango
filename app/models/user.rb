@@ -42,11 +42,13 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def charge_call
-		if (self.credits > 0)
-			 self.update_attribute(:credits, self.credits - 2.0)
+	def charge_call total_time
+		if (self.credits >= (total_time.to_f / 60) )
+			self.update_attribute(:credits, self.credits - (total_time.to_f/60) )
+			return self
+		else
+			raise 'Not enough money'	
 		end
-		return self
 	end
 	
 end

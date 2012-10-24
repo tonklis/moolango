@@ -60,7 +60,8 @@ class DisplayController < ApplicationController
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
 		# @topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		# @language_id = @room.language_id
+		@language_id = @room.language_id
+		@schedule = @room.schedule
 		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
 		@room.engage
@@ -79,7 +80,8 @@ class DisplayController < ApplicationController
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
 		# @topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		# @language_id = @room.language_id
+		@language_id = @room.language_id
+		@schedule = @room.schedule
 		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
 		@room.engage

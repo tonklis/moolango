@@ -87,7 +87,7 @@ class UsersController < ApplicationController
   
 	def new_balance
 		user = current_user
-		user = user.charge_call
+		user = user.charge_call params[:total_time]
 		respond_to do |format|
 			format.json { render json: user }
 		end
