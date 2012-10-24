@@ -12,6 +12,7 @@ gem 'opentok', " ~> 0.0.91"
 gem 'omniauth-facebook'
 gem 'pusher'
 gem 'twilio-ruby'
+gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -19,7 +20,6 @@ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-  gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
 end
 
 gem 'jquery-rails'
