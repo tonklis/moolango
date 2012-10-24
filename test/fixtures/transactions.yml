@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  paypal_trans_id: MyString
+  pricing_id: 1
+  billing_address_id: 1
+
+two:
+  user_id: 1
+  paypal_trans_id: MyString
+  pricing_id: 1
+  billing_address_id: 1

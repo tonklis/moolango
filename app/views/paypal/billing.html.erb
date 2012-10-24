@@ -37,7 +37,7 @@
   </div>
   <div class="field">
     <%= f.label :country %><br />
-    <%= f.text_field :country %>
+    <%= collection_select :billing_address, :country, Country.order('name ASC'), :iso, :name, :prompt => true %>
   </div>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <div class="actions">

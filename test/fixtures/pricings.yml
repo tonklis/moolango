@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  price: 1.5
+  minutes: 1
+  description: MyString
+
+two:
+  price: 1.5
+  minutes: 1
+  description: MyString
