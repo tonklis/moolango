@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :billing_addresses
+
   resources :schedules
 
   resources :evaluation_sellers
@@ -61,7 +63,9 @@ Moolango::Application.routes.draw do
 	
 	match 'view_video' => 'display#view_video', :as => :view_video
 
-  match 'paypal_checkout' => 'paypal#checkout', :as => :paypal_checkout
+  match 'paypal_billing' => 'paypal#billing', :as => :paypal_billing
+
+  match 'paypal_checkout/:id' => 'paypal#checkout', :as => :paypal_checkout
 
   match 'paypal_complete' => 'paypal#complete', :as => :paypal_complete
 

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @billing_address.user_id %>
+</p>
+
+<p>
+  <b>Firstname:</b>
+  <%= @billing_address.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%= @billing_address.lastname %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @billing_address.address %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @billing_address.city %>
+</p>
+
+<p>
+  <b>Zipcode:</b>
+  <%= @billing_address.zipcode %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @billing_address.state %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @billing_address.country %>
+</p>
+
+
+<%= link_to 'Edit', edit_billing_address_path(@billing_address) %> |
+<%= link_to 'Back', billing_addresses_path %>

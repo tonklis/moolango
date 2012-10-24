@@ -1,0 +1,37 @@
+<h1>Listing billing_addresses</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Zipcode</th>
+    <th>State</th>
+    <th>Country</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @billing_addresses.each do |billing_address| %>
+  <tr>
+    <td><%= billing_address.user_id %></td>
+    <td><%= billing_address.firstname %></td>
+    <td><%= billing_address.lastname %></td>
+    <td><%= billing_address.address %></td>
+    <td><%= billing_address.city %></td>
+    <td><%= billing_address.zipcode %></td>
+    <td><%= billing_address.state %></td>
+    <td><%= billing_address.country %></td>
+    <td><%= link_to 'Show', billing_address %></td>
+    <td><%= link_to 'Edit', edit_billing_address_path(billing_address) %></td>
+    <td><%= link_to 'Destroy', billing_address, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Billing address', new_billing_address_path %>
