@@ -56,6 +56,8 @@ Moolango::Application.routes.draw do
 	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
 
 	match 'messages/topic_redirect' => 'messages#topic_redirect', :as => :topic_redirect
+	
+	match 'messages/simple_redirect' => 'messages#simple_redirect', :as => :simple_redirect
 
 	match 'messages/confirm_chat' => 'messages#confirm_chat'
 	

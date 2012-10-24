@@ -15,15 +15,15 @@
 
 	$(function() {
 
-		simplePusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>');
+		createPusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>', '<%= Topic.find(@topic_id).name %>');
 		$('#chat_field')[0].value="Type your message here...";
 
 		publisherProperties.publishVideo = true;
-		publisherProperties.height = 90;
-		publisherProperties.width = 120;
 		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
 
 		connect();
+
+		$('#slideImageDiv').css("background-image", "url(/assets/<%= @hints[0].thumbnail_url %>)");
 		
 		$('.star').each(function(index) {
 			$(this).mousemove(function(e) {
@@ -56,6 +56,23 @@
 		</div>
 	</div>
 	<div class="span6">
+		<div id="slideDiv">
+		<%= form_tag('/interaction', :remote => true, :id => "new_interaction") do %>
+				<%= hidden_field_tag :channel, @internal_session %>
+				<%= hidden_field_tag :origin, false %>
+				<%= hidden_field_tag :next, false %>
+				<%= hidden_field_tag :topic_id, @topic_id %>
+				<%= hidden_field_tag :language_id, @language_id %>
+				<%= hidden_field_tag :current_slide, @hints[0].id %>
+			<div id="slideImageDiv">
+				<%= submit_tag ">>", :onClick => "nextInteraction(true);", :class => "slideNextButton conversation_button", :style => "display: none; min-width: 40px;" %>
+				<%= submit_tag "<<", :onClick => "nextInteraction(false);", :class => "slidePrevButton conversation_button", :style => "display: none; min-width: 40px;" %>		
+			</div>
+			<div id="slideTextDiv">
+				<div id="hint_text"><%= @hints[0].description %></div>
+			</div>
+		<% end %>
+		</div>
 	</div>
 </div>
 

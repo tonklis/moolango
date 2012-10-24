@@ -32,6 +32,7 @@ class DisplayController < ApplicationController
 	def action
 		# on standby till we define welcome message
 		#@first_signin_flag = params[:fs]
+		@schedule = Schedule.find_available(current_user)
 	end
 
 	def rooms_listing
@@ -57,10 +58,10 @@ class DisplayController < ApplicationController
 		@open_tok_session = @room.open_tok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
-		@topic_id = @room.topic_id
+		# @topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		@language_id = @room.language_id
-		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
+		# @language_id = @room.language_id
+		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
 		@room.engage
 		render :layout => "rooms"
@@ -76,10 +77,10 @@ class DisplayController < ApplicationController
 		@open_tok_session = @room.open_tok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::MODERATOR, :connection_data => current_user.firstname)
-		@topic_id = @room.topic_id
+		# @topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		@language_id = @room.language_id
-		@hints = Hint.per_topic_and_language(@topic_id, @language_id)
+		# @language_id = @room.language_id
+		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
 		
 		@room.engage
 		render :layout => "rooms"

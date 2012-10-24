@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
  	before_filter :authenticate_user!
-	before_filter :check_access, :except => [:new, :create]
+#	before_filter :check_access, :except => [:new, :create]
 	# GET /schedules
   # GET /schedules.json
   def index

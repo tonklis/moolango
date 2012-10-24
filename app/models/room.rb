@@ -7,6 +7,7 @@ class Room < ActiveRecord::Base
 	has_many :evaluation_buyers
 	has_many :evaluation_sellers
 	has_many :messages
+	has_one :schedule
 
 	def self.create_available user_id, topic_id, language_id, internal_session, ip_address
 		rooms_to_close = Room.where("creator_id = ? and status = 'WAITING'", user_id)
@@ -20,10 +21,10 @@ class Room < ActiveRecord::Base
 
 		room = Room.create(
 			:creator_id => user_id,
-			:name => Topic.find(topic_id).name,
+			:name => (topic_id != nil) ? Topic.find(topic_id).name : nil,
 			:status => "WAITING",
-			:language_id => language_id,
-			:topic_id => topic_id,
+			:language_id => (language_id != nil) ? language_id : nil,
+			:topic_id => (topic_id != nil) ? topic_id : nil,
 			:session_id => internal_session,
 			:open_tok_session => open_tok_session.to_s
 		)

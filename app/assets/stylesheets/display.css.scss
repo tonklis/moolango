@@ -16,7 +16,7 @@ body {
 	height: 95%;
 	width: 95%;
 	background-attachment: fixed; 
-	background-image: url("/assets/webpage/globe.jpg"); 
+	background-image: url("/assets/webpage/globe_2.gif"); 
 	background-repeat: no-repeat; 
 	background-position: bottom; 
 }
@@ -30,7 +30,7 @@ iframe {
 }
 
 .moolango-box{
-	overflow:hidden;background-color:#303433;background-color:rgba(113,190,236,.75);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);
+	overflow:hidden;background-color:#303433;background-color:rgba(113,190,236,.90);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);
 	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);box-shadow:inset 0 0 16px rgba(74,78,68,.25);border:none;
 }
 //.moolango-box:hover{
@@ -109,6 +109,8 @@ iframe {
 .body_text{
 	color: #ffffff;
 	font-family: "Arial";
+	font-weight: bold;
+	font-size: 16px;
 }
 
 .landing_header{
@@ -173,6 +175,7 @@ iframe {
 .action_body{
 	margin: auto;
 	height: 200px;
+	text-align: center;
 }
 
 .landing_next_button{
@@ -213,6 +216,7 @@ iframe {
   text-align: center;
 	cursor: pointer;
 }
+
 .login_text a:link {color:#FFFFFF; text-decoration: none;}
 .login_text a:visited {color:#FFFFFF; text-decoration: none;}
 .login_text a:hover {color:#FFFFFF; text-decoration: none;}
@@ -248,4 +252,10 @@ iframe {
 
 .fixed-space[class*="span"] {
 	margin-left: 10px;
+}
+
+.one-edge-shadow {
+	-webkit-box-shadow: 0 8px 6px -4px grey;
+	   -moz-box-shadow: 0 8px 6px -4px grey;
+	        box-shadow: 0 8px 6px -4px grey;
 }

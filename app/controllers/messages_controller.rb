@@ -42,4 +42,30 @@ class MessagesController < ApplicationController
 
 	end
 
+	def simple_redirect
+	
+		internal_session = params[:internal_session]
+		room = Room.create_available(params[:user_id], nil, nil, internal_session, request.remote_addr)
+    user = User.find(params[:user_id])
+		schedule = Schedule.find(params[:schedule_id])
+		schedule.update_attribute(:room_id, room.id)
+
+		TestMailer.new_simple_conversation(params[:user_id], room.id).deliver
+
+		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
+		number_to_send_to = "6145968264"
+		message = "#{user.firstname} waiting to talk"
+
+		@twilio_client.account.sms.messages.create(
+			:from => "+1#{ENV['TWILIO_PHONE_NUMBER']}",
+			:to => number_to_send_to,
+			:body => message
+		)
+
+		respond_to do |format|
+			format.json { render json: {:handshake => false, :room_id => room.id} }
+	  end	
+
+	end
+
 end

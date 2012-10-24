@@ -11,6 +11,29 @@ var time_elapsed = 0;
 var archive;
 var archive_id;
 
+function simplePusher(pusherKey, session){
+	
+	var pusher = new Pusher(pusherKey, { encrypted: true });
+	var channel = pusher.subscribe(session);
+
+	channel.bind('event_chat', function(data) {
+		var new_li = document.createElement('li');
+		if (data.origin == 'true') {
+			new_li.setAttribute('style','background-color:#DDDDDD');
+		}
+		new_li.innerHTML = data.message;
+		$("#chat").append(new_li);
+		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+		if ($("#origin_field")[0].value == data.origin){
+				$("#new_message")[0].reset();
+		}
+	});
+	
+	channel.bind('event_end_call', function(data) {
+		endCall();
+	});
+}
+
 function createPusher(pusherKey, session){
 	
 	var pusher = new Pusher(pusherKey, { encrypted: true });
@@ -117,6 +140,7 @@ function subscribeToStreams(streams) {
 				session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
 		}
 		else {
+			$("#publisherDiv").css('margin','-90px auto auto 260px');
 			//$('#videoBtn').css({display: 'block'})
 		}
 		if (is_ready_for_conversation && num_connections == 2) {

@@ -54,18 +54,15 @@ body {
 	height: 200px;
 	width: 380px;
 	margin: auto;
-	float: right;
 }
 
 #publisherDiv{
-	width: 265px;
-	height: 200px;
-	float: right;
-	margin: -40px 0 0 0;
+	width: 120px;
+	height: 90px;
 }
 
 #chatDiv{
-	width: 427px;
+	width: 380px;
 	height: 200px;
 	margin: auto;
 }
@@ -88,7 +85,6 @@ ul#chat {
 	margin: auto;
 	color: #CCCCCC;
 	background-color: #000000;
-	float: right;
 }
 
 #waitingDivGone{
@@ -98,7 +94,6 @@ ul#chat {
 	margin: auto;
 	color: #CCCCCC;
 	background-color: #000000;
-	float: right;
 }
 
 #totalTimeBar {

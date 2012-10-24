@@ -30,6 +30,37 @@
 		});
 	}
 
+	function simpleRedirect(currentUserId, scheduleId){
+
+		$("#modal_message")[0].innerHTML="Connecting...";
+		$("#modal_prog_bar")[0].className="progress progress-stripped";
+		$("#modal_progress")[0].style.width="100%";
+		$("#modal_button_close").show();
+		$("#modal_wait_message")[0].innerHTML="";
+		$("#modal_button_close").hide();
+
+		var internal_session = Math.random().toString(36).substring(7);
+
+		$.ajax({ 
+  		type: "POST",
+  		url: "messages/simple_redirect",
+  		data: 'internal_session=' + internal_session + '&user_id=' + currentUserId + '&schedule_id=' + scheduleId,
+			beforeSend: function(xhr) {
+    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  		},
+  		success: function(data) {
+				$("#modal_prog_bar")[0].className="progress progress-striped active";
+				redirectToRoom(data,false);
+			},
+			error: function() {
+				$("#modal_message")[0].innerHTML="The site is busy, please try again later.";
+				$("#modal_prog_bar")[0].className="progress progress-danger";
+				$("#modal_button_close").show();
+			} 
+		});
+	}
+
+
 	function redirectToRoom(data, join){
 		var redirect_url;
 		if (join) {

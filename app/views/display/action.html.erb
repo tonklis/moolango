@@ -1,48 +1,52 @@
-<%= stylesheet_link_tag "masonry/masonry" %>
-<div class="row">
-	<% if current_user.credits <= 0 %>
-		<div class="alert" style="width: 50%; margin: auto auto 30px auto;">
-			<p><strong>You don't have credits!</strong> Please buy them <a href="/">here</a> or use the menu button located on your top right corner.</p>
-		</div>
-	<% end %>
+<div>
 
 	<div class="action_body">
-		<div class="span5">
-				<%= link_to image_tag("webpage/earn_button.gif", :alt => "earn button", :class=>"one-edge-shadow"), :new_earner_form %>
+
+		<div class="row">
+			<%= link_to image_tag("webpage/buy_credit.png", :alt => "buy credits button", :class=>"one-edge-shadow"), :new_earner_form %>
+			<br /> <br />
 		</div>
-		<div class="span5">
-				<%= link_to image_tag("webpage/practice_button.gif", :alt => "practice button", :class=>"one-edge-shadow"), :language_selection %>
-			</div>
-		</div>	
+
+
+	<% if current_user.credits > 0 %>
+		<div class="row">
+				<%= link_to image_tag("webpage/schedule_conversation.png", :alt => "schedule button", :class=>"one-edge-shadow"), new_schedule_path %>
+				<br /> <br />
+		</div>
+	<% end %>
+	<% if @schedule %>
+		<div class="row">
+			<%= link_to image_tag("webpage/practice_now.png", :alt => "practice button", :class=>"one-edge-shadow", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			<br /> <br />
+		</div>
+	<% end %>
 	</div>
 </div>
-<div id="first_signin_flag" data-flag="<%= @first_signin_flag %>"></div>
+
+<div id="data_holder" data-user-id="<%=current_user.id%>" >
+</div>
+
 <div class="modal hide fade" id="myModal">
-  <div class="modal-header" style="margin: auto; text-align: center;">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<%= image_tag "webpage/welcome_to_moolango.gif", :alt => "welcome to moolango"%>
+  <div class="modal-header">
+    <h3>Please wait</h3>
   </div>
-  <div class="modal-body" style="text-align: center; color: #71BEEC; font-size: 16px;">
-		<p id="modal_message" style="font-style: italic">Hey we just met you. And this is crazy. <br />
-			But here's $10 free dollars. So talk to us maybe?
-		</p>
-		<p>That's right, $10 free dollars on Moolango! Each 10-minute <br />
-			conversation costs $2 so, if we did the math right, that's 5 free <br />
-			conversations about things you love.
-		</p>
-		<p>What are you still doing here?</p>
+  <div class="modal-body" style="text-align: center;">
+    <p id="modal_message">Connecting…</p>
+		<div style="width: 45%; margin: auto;">
+			<div id="modal_prog_bar" class="progress progress-striped">
+				<div id="modal_progress" class="bar" style="width: 100%;"></div>
+			</div>
+		</div>
+		<p id="modal_wait_message"></p>
 	</div>
 	<div class="modal-footer" style="text-align: center;">
-		<%= link_to image_tag("webpage/lets_do_it_button.gif"), "#", :id => "modal_button_close", "data-dismiss"=>"modal"%>
+		<a id="modal_button_close" href="#" class="btn" data-dismiss="modal">Close</a>
   </div>
 </div>
 
 
 <script type="text/javascript">
-
-	var first_signin = $("#first_signin_flag")[0].getAttribute("data-flag");
-	if(first_signin == "true"){
-		$('#myModal').modal();
-	}
+		
+	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
 	
 </script>
