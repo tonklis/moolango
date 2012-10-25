@@ -3,20 +3,20 @@
 	<div class="action_body">
 
 		<div class="row">
-			<%= link_to image_tag("webpage/buy_credit.png", :alt => "buy credits button", :class=>"one-edge-shadow"), :paypal_billing %>
+			<%= link_to image_tag("webpage/buy_credit.gif", :alt => "buy credits button", :class=>"one-edge-shadow"), :paypal_shopping_cart %>
 			<br /> <br />
 		</div>
 
 	<% if current_user.credits > 0 %>
 		<div class="row">
-				<%= link_to image_tag("webpage/schedule_conversation.png", :alt => "schedule button", :class=>"one-edge-shadow"), new_schedule_path %>
+				<%= link_to image_tag("webpage/schedule_conversation.gif", :alt => "schedule button", :class=>"one-edge-shadow"), new_schedule_path %>
 				<br /> <br />
 		</div>
 	<% end %>
 	<% if @schedule %>
 		<div class="row">
 			<% if current_user.credits > 0 %>
-				<%= link_to image_tag("webpage/practice_now.png", :alt => "practice button", :class=>"one-edge-shadow", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+				<%= link_to image_tag("webpage/practice_now.gif", :alt => "practice button", :class=>"one-edge-shadow", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
 			<% else %>
 				<div class="alert alert-error" style="width: 29%; margin: auto;">
 					<p><strong>We're sorry!</strong> You don't have credits to enter your scheduled session.</p>

@@ -409,3 +409,7 @@ Country.create(:id=>248,:iso=>"ZM",:name=>"Zambia")
 Country.create(:id=>249,:iso=>"ZW",:name=>"Zimbabwe")
 Country.create(:id=>250,:iso=>"CS",:name=>"Serbia and Montenegro")
 Country.create(:id=>251,:iso=>"AN",:name=>"Netherlands Antilles")
+
+Pricing.create(:id=>1, :price=>14.99, :minutes=>60, :description=>"1 hr")
+Pricing.create(:id=>2, :price=>12.99, :minutes=>300, :description=>"5 hrs")
+Pricing.create(:id=>3, :price=>9.99, :minutes=>600, :description=>"10 hrs")
