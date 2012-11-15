@@ -1,0 +1,89 @@
+<% @title_desc = "Topics List Feedback" %>
+	
+		<div style="height: auto; text-align: center;">
+			<%= image_tag "webpage/click_on_the_image.png", :alt => "click on the image to pick a topic", :style => "margin: -30px auto 20px auto;"%>
+		</div>
+		
+		<div id="content" class="centered">
+			<div class="box one-edge-shadow" style="width: 250px; height: 250px;">
+				<%= link_to image_tag("topics/apple/apple.gif", :style=>"height: 100%; width: 100%;", :onclick=>"$('#topics')[0].value = 'apple'; $('#topic_div').hide();"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			</div>
+			<div class="box one-edge-shadow" style="width: 250px; height: 250px;">
+				<%= link_to image_tag("topics/the_beatles.jpg", :style=>"height: 100%; width: 100%;", :onclick=>"$('#topics')[0].value = 'beatles'; $('#topic_div').hide();"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			</div>
+			<div class="box one-edge-shadow" style="width: 250px; height: 250px;">
+				<%= link_to image_tag("topics/food/food.gif", :style=>"height: 100%; width: 100%;", :onclick=>"$('#topics')[0].value = 'food'; $('#topic_div').hide();"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			</div>
+			<!-- <div class="box one-edge-shadow">
+				<%= link_to image_tag("topics/beer_pong.gif"), "/" %>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= link_to image_tag("topics/fraternities.gif"), "/" %>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= link_to image_tag("topics/tail_gate.gif"), "/" %>
+			</div> -->
+			<div class="box one-edge-shadow" style="width: 250px; height: 250px;">
+				<%= link_to image_tag("topics/pick_your_own.gif", :style=>"height: 100%; width: 100%;", :onclick=>"$('#topics')[0].value = 'Eg. movies, music, football'; $('#topic_div').show();"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
+			</div>
+
+		</div>
+
+<div class="modal hide fade" id="myModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Thank you for your input!</h3>
+  </div>
+	<div class="modal-body" style="text-align: center;">
+		<div id="topic_div">
+    	<p id="modal_message">Write the topic(s) you would like to talk about.</p>
+			<div style="width: 40%; margin: auto;">
+				<%= text_field_tag "topics", "Eg. movies, music, football", :onfocus => "resetField();" %>	
+			</div>
+		</div>
+		<p id="modal_message">What's your e-mail?</p>
+		<div style="width: 40%; margin: auto;">
+			<%= text_field_tag "email" %>	
+		</div>
+	</div>
+	<div class="modal-footer" style="text-align: center;">
+		<a id="modal_button_close" href="#" class="btn btn-primary" data-dismiss="modal" onclick="submitForm();">Send</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+	function resetField(){
+		$('#topics')[0].value = '';
+	}
+
+	function submitForm(){
+		$.ajax({ 
+  		type: "POST",
+  		url: "messages/topic_feedback",
+  		data: 'email=' + $('#email')[0].value+ '&topics=' + $('#topics')[0].value,
+			beforeSend: function(xhr) {
+    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  		},
+			success: function(data) {
+				window.location = "thank_you";
+			},
+			error: function() {
+				alert("There was an error, please try again");
+			} 
+		});
+	}
+
+	$(document).ready(function(){
+		var $container = $('#content');
+		$container.imagesLoaded(function() {
+			$container.masonry({
+				itemSelector : '.box',
+				gutterWidth: 5,
+				isFitWidth: true
+			});
+			$('.box').each(function(index){$('.box')[index].style.display = 'block'});
+		});
+	});
+	
+</script>

@@ -12,6 +12,16 @@ class MessagesController < ApplicationController
 		@message = Message.create!(params[:message].except(:channel, :origin))
 	end
 
+	def topic_feedback
+		email = params[:email]
+		topics = params[:topics]
+		feedback = Feedback.create(:email => email, :topics => topics)
+
+		respond_to do |format|
+			format.json { render :json => feedback }
+	  end	
+	end
+
 	def topic_redirect
 	
 		internal_session = params[:internal_session]

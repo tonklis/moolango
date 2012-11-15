@@ -1,6 +1,6 @@
 class DisplayController < ApplicationController
 
-	before_filter :authenticate_user!, :except => [:index, :paypal_purchase]
+	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :topics_list_feedback]
 
 	#negative to remove open window constraint
 	AVAILABLE_TIME = -1
@@ -23,6 +23,10 @@ class DisplayController < ApplicationController
 	end
 
 	def language
+	end
+
+	def thank_you
+		render :layout => "feedback"
 	end
 	
 	def language_earners
@@ -50,6 +54,10 @@ class DisplayController < ApplicationController
 		@language_id = session[:language] = params[:id]
 		@enabled_topics = Topic.where("enabled = ?", true)
 		render :layout => "topics"
+	end
+
+	def topics_list_feedback
+		render :layout => "feedback"
 	end
 
 	def conversation_room

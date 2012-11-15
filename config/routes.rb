@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :feedbacks
+
   resources :transactions
 
   resources :billing_addresses
@@ -48,6 +50,10 @@ Moolango::Application.routes.draw do
 	match 'topics_list' => 'display#topics_list', :as => :topics_list
 	
 	match 'topics_list_earners' => 'display#topics_list_earners', :as => :topics_list_earners
+	
+	match 'topics_list_feedback' => 'display#topics_list_feedback', :as => :topics_list_feedback
+	
+	match 'thank_you' => 'display#thank_you', :as => :thank_you
 
 	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
 	
@@ -58,6 +64,8 @@ Moolango::Application.routes.draw do
 	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
 
 	match 'messages/topic_redirect' => 'messages#topic_redirect', :as => :topic_redirect
+	
+	match 'messages/topic_feedback' => 'messages#topic_feedback', :as => :topic_feedback
 	
 	match 'messages/simple_redirect' => 'messages#simple_redirect', :as => :simple_redirect
 
