@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
  
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => [:topic_feedback]
 
 	def index
 		@messages = Message.all
