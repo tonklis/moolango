@@ -1,5 +1,6 @@
 class FeedbacksController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :check_access, :except => [:new, :create]
 
 	# GET /feedbacks
   # GET /feedbacks.json
