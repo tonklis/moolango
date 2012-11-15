@@ -1,5 +1,8 @@
 class FeedbacksController < ApplicationController
-  # GET /feedbacks
+	before_filter :authenticate_user!
+	before_filter :check_access, :except => [:new, :create]
+
+	# GET /feedbacks
   # GET /feedbacks.json
   def index
     @feedbacks = Feedback.all
