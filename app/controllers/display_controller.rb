@@ -1,6 +1,6 @@
 class DisplayController < ApplicationController
 
-	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :topics_list_feedback]
+	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :topics_list_feedback, :thank_you]
 
 	#negative to remove open window constraint
 	AVAILABLE_TIME = -1
