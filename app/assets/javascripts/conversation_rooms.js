@@ -4,11 +4,8 @@ var is_end_call = false;
 var is_audio_only = false;
 var is_ready_for_conversation = false;
 var is_timer_running = false;
-var is_recording = false;
 var num_connections = 0;
 var time_elapsed = 0;
-var archive;
-var archive_id;
 
 function submitWithMessage(){
 	if ($("#chat_field")[0].value	!= ""){
@@ -95,28 +92,8 @@ function connect() {
 	session.addEventListener('sessionDisconnected', sessionDisconnectedHandler); 
 	session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
 	session.addEventListener('signalReceived', signalHandler);
-	session.addEventListener('archiveCreated', archiveCreatedHandler);
-	session.addEventListener('sessionRecordingStarted', startRecordingHandler);
-	session.addEventListener('sessionRecordingStopped', stopRecordingHandler);
-	session.addEventListener('archiveClosed', archiveClosedHandler);
 	//TB.addEventListener('exception', function(event){alert(event.message);});
 	session.connect(api_key, token, {detectConnectionQuality:0});
-}
-
-function reconnect() {
-	session.signal();
-}
-
-function endCall() {
-	is_end_call = true;
-	$('#videoBtn').css({display: 'none'})
-	is_timer_running = false;
-	if (is_recording) {
-		session.stopRecording(archive);
-	}
-	else {
-		session.disconnect();
-	}
 }
 
 function connectionCreatedHandler(event) {
@@ -136,13 +113,47 @@ function sessionConnectedHandler(event) {
 		$('#publisherDiv').append(botonDiv);
 	}
 
-	if (event.archives.length == 0) {
-		session.createArchive(api_key, "perSession", session.sessionId);
-	}
-
 	getConnectionData(event.connections);
 	subscribeToStreams(event.streams);
 	session.publish(publisher);
+}
+
+function streamCreatedHandler(event) {
+	subscribeToStreams(event.streams);
+}
+
+function sessionDisconnectedHandler(event) {
+	if (is_reconnect) {
+		num_connections -= 1;
+		showWaitSpiner();
+		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
+		connect();
+	}
+	else if (is_end_call) {
+		//DIEGO //showModal();
+	}
+}
+
+function connectionDestroyedHandler(event) {
+	if (is_reconnect) {
+		showWaitSpiner();
+	}
+	else {
+		endCall();
+	}
+}
+
+function signalHandler(event) {
+	is_reconnect = true;
+	if (session.connection.connectionId == event.fromConnection.connectionId) {
+		is_audio_only = false;
+		$('#videoBtn').css({display: 'none'})
+		$('#videoBtn').val('Turn off video');
+		var div = document.createElement('div');
+		div.setAttribute('id','myPublisherDiv');
+		$("#publisherDiv").append(div);
+		session.disconnect();
+	}
 }
 
 function getConnectionData(connections) {
@@ -161,15 +172,12 @@ function subscribeToStreams(streams) {
 		}
 		else {
 			// video of self repositioning
+			$('#videoBtn').css({display: 'block'});
 			$("#publisherDiv").css('margin','-90px auto auto 260px');
 		}
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
-			if (archive) {
-				is_recording = true;
-				session.startRecording(archive);
-			}
 		}
 		else {
 			is_ready_for_conversation = true
@@ -177,64 +185,15 @@ function subscribeToStreams(streams) {
 	}
 }
 
-function streamCreatedHandler(event) {
-	subscribeToStreams(event.streams);
+function reconnect() {
+	session.signal();
 }
 
-function sessionDisconnectedHandler(event) {
-	if (is_reconnect) {
-		num_connections -= 1;
-		showWaitSpiner();
-		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
-		connect();
-	}
-	else if (is_end_call) {
-		showModal();
-	}
-}
-
-function connectionDestroyedHandler(event) {
-	if (is_reconnect) {
-		showWaitSpiner();
-	}
-	else {
-		endCall();
-	}
-}
-
-function signalHandler(event) {
-	is_reconnect = true;
-	if (session.connection.connectionId == event.fromConnection.connectionId) {
-		is_audio_only = false;
-		//document.getElementById("videoBtn").style.display = 'none';
-		$('#videoBtn').css({display: 'none'})
-		$('#videoBtn').val('Turn off video');
-		var div = document.createElement('div');
-		div.setAttribute('id','myPublisherDiv');
-		$("#publisherDiv").append(div);
-		session.disconnect();
-	}
-}
-
-function archiveCreatedHandler(event) {
-	archive = event.archives[0];
-	archive_id = archive.archiveId;
-	
-	if (is_ready_for_conversation && num_connections == 2) {
-		is_recording = true;
-		session.startRecording(archive);
-	}
-	
-	if (room_id != undefined){
-		$.ajax({ 
-			type: "POST",  
-			url: "/rooms/add_record_data/" + room_id,
- 			data: 'record_id=' + archive_id,
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-			}
-		});
-	}
+function endCall() {
+	is_end_call = true;
+	$('#videoBtn').css({display: 'none'})
+	is_timer_running = false;
+	session.disconnect();
 }
 
 function keepalive(){
@@ -245,21 +204,6 @@ function keepalive(){
 			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
 		}
 	});
-}
-
-function startRecordingHandler(event) {
-	$('#videoBtn').css({display: 'block'});
-}
-
-function stopRecordingHandler(event) {
-	if (is_recording) {
-		is_recording = false;
-		session.closeArchive(archive);
-	}
-}
-
-function archiveClosedHandler(event) {
-	session.disconnect();
 }
 
 function showWaitSpiner() {
