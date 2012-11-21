@@ -6,6 +6,11 @@
 margin: 0;
 }
 
+a:link {text-decoration: none; color: white;}
+a:visited {text-decoration: none; color: white;}
+a:active {text-decoration: none; color: white;}
+a:hover {text-decoration: underline; color: white;}
+
 html {
 	height: 100%;
 	width: 100%;
@@ -18,7 +23,7 @@ body {
 	background-attachment: fixed; 
 	background-image: url("/assets/webpage/globe_2.gif"); 
 	background-repeat: no-repeat; 
-	background-position: bottom; 
+	background-position: bottom;
 }
 
 iframe {
