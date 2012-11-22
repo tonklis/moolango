@@ -19,9 +19,12 @@
 		simplePusher('<%= ENV['PUSHER_KEY']%>', '<%= @internal_session %>');
 		$('#chat_field')[0].value="Type your message here...";
 
-		publisherProperties.publishVideo = true;
+		publisherProperties.publishVideo = false;
 		publisherProperties.height = 90;
 		publisherProperties.width = 120;
+		publisherProperties.name = '<%= current_user.firstname %>';
+		publisherProperties.style = new Object();
+		publisherProperties.style.nameDisplayMode = 'on';
 		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
 
 		connect();
@@ -46,13 +49,12 @@
 
 <div class="row">
 	<div class="span12">
-		<div id="waitingDivGone" style="position:relative;">
+		<div id="waitingDivGone">
+			
 			<div id="waitingDiv">
 				<br />
 				<p>Waiting for user to connect, please wait.</p>
 				<%= image_tag "spinner.gif" %>
-			</div>
-			<div id="userDiv" style="align:center;">
 			</div>
 
 			<div id="publisherDiv" style="margin: -150px auto auto 85px;">
