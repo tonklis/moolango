@@ -1,7 +1,7 @@
 var selected_star = 0;
 var is_reconnect = false;
 var is_end_call = false;
-var is_audio_only = false;
+var is_audio_only = true;
 var is_ready_for_conversation = false;
 var is_timer_running = false;
 var num_connections = 0;
@@ -103,13 +103,21 @@ function connectionCreatedHandler(event) {
 
 function sessionConnectedHandler(event) {
 	num_connections += event.connections.length;
-	
-	if ($('#videoBtn').length == 0) {
+
+	/*if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn off video" onClick="enableDisableVideo()" style="display:none;"/>';
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
 		botonDiv.style.position = 'absolute';
 		botonDiv.style.left = '80px';
 		botonDiv.style.top =  '175px';
+		$('#publisherDiv').append(botonDiv);
+	}*/
+	if ($('#videoBtn').length == 0) {
+		var botonDiv = document.createElement('div');
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
+		botonDiv.style.position = 'absolute';
+		botonDiv.style.left = '0px';
+		botonDiv.style.top =  '0px';
 		$('#publisherDiv').append(botonDiv);
 	}
 
@@ -159,8 +167,8 @@ function signalHandler(event) {
 function getConnectionData(connections) {
 	for (i = 0; i < connections.length; i++) {
 		connection = connections[i];
-		if (connection.connectionId != session.connection.connectionId)
-			$('#userDiv').text(connection.data);
+		//REMOVE if (connection.connectionId != session.connection.connectionId)
+		//REMOVE	$('#userDiv').text(connection.data);
 	}
 }
 
@@ -171,9 +179,12 @@ function subscribeToStreams(streams) {
 				session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
 		}
 		else {
+			$("#publisherDiv").css('margin', 'auto auto auto auto');
+			$("#publisherDiv")[0].style.position = 'absolute';
+			$("#publisherDiv")[0].style.right = '0px';
+			$("#publisherDiv")[0].style.bottom = '0px';
 			// video of self repositioning
 			$('#videoBtn').css({display: 'block'});
-			$("#publisherDiv").css('margin','-90px auto auto 260px');
 		}
 		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
@@ -217,7 +228,7 @@ function showWaitSpiner() {
 		waitDiv.appendChild(document.createElement('br'));
 		waitDiv.appendChild(document.createTextNode("Waiting for user to connect, please wait."));
 		waitDiv.appendChild(waitImg);
-		$("#userDiv").before(waitDiv);
+		//REMOVE $("#userDiv").before(waitDiv);
 	}
 }
 

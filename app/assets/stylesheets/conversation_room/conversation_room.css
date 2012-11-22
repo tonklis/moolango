@@ -94,6 +94,12 @@ ul#chat {
 	margin: auto;
 	color: #CCCCCC;
 	background-color: #000000;
+	position: relative;
+}
+
+.userTxt{
+	text-align: center;
+	height:	18px;
 }
 
 #totalTimeBar {
