@@ -77,7 +77,7 @@ Moolango::Application.routes.draw do
 
   match 'paypal_shopping_cart' => 'paypal#shopping_cart', :as => :paypal_shopping_cart
 
-  match 'paypal_billing' => 'paypal#billing', :as => :paypal_billing
+  match 'paypal_billing' => 'billing_addresses#new', :as => :paypal_billing
 
   match 'paypal_checkout/:id' => 'paypal#checkout', :as => :paypal_checkout
 

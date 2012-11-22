@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115084548) do
+ActiveRecord::Schema.define(:version => 20121122053858) do
 
   create_table "billing_addresses", :force => true do |t|
     t.integer  "user_id"
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20121115084548) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "hourly_rate"
+    t.string   "tagline"
   end
 
   create_table "rooms", :force => true do |t|

@@ -24,12 +24,15 @@ class BillingAddressesController < ApplicationController
   # GET /billing_addresses/new
   # GET /billing_addresses/new.json
   def new
-    @billing_address = BillingAddress.new
+		session[:pricing_id] = params[:pricing]
+
+		@billing_address = BillingAddress.new
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @billing_address }
     end
+		
   end
 
   # GET /billing_addresses/1/edit

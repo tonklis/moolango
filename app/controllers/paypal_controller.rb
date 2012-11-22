@@ -6,10 +6,6 @@ class PaypalController < ApplicationController
 
 	end
 
-	def billing
-		session[:pricing_id] = params[:pricing]
-	end
-
 	def checkout
 		session[:billing_id] = params[:id]
 		billing_info = BillingAddress.find(params[:id])
