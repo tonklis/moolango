@@ -8,8 +8,11 @@ class PaypalController < ApplicationController
 
 	def checkout
 		session[:billing_id] = params[:id]
+		
+		@billing = BillingAddress.find(session[:billing_id])
+		@pricing = Pricing.find(session[:pricing_id])
 		billing_info = BillingAddress.find(params[:id])
-		amount = Pricing.find(session[:pricing_id]).price
+		amount = @pricing.price
 		@securetokenid = SecureRandom.uuid
 		@mode = 'LIVE'
 		
@@ -53,6 +56,7 @@ class PaypalController < ApplicationController
 
 	def receipt
 		@valores = session[:paypal_response]
+		TestMailer.new_purchase(current_user.id, @valores['PNREF'], @valores['AMT']).deliver
 		session[:paypal_response] = nil
 		session[:pricing_id] = nil
 		session[:billing_id] = nil

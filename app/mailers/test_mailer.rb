@@ -8,6 +8,13 @@ class TestMailer < ActionMailer::Base
 		mail(:to => "tonklis@gmail.com,dmiramon@gmail.com,williambabeaux@gmail.com", :subject => "New conversation with #{@user.firstname}, about #{@topic.name}")
   end
 
+	def new_purchase(user_id, reference, amount)
+		@user = User.find(user_id)
+		@reference = reference
+		@amount = amount
+		mail(:to => @user.email, :subject => "Order confirmation from MooLango")
+	end
+
 	def new_simple_conversation(user_id, room_id)
 		@user = User.find(user_id)
 		@room_id = room_id

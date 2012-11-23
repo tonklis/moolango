@@ -24,8 +24,8 @@ class BillingAddressesController < ApplicationController
   # GET /billing_addresses/new
   # GET /billing_addresses/new.json
   def new
-		session[:pricing_id] = params[:pricing]
-
+		session[:pricing_id] = params[:pricing] if params[:pricing] 
+		@pricing = Pricing.find(session[:pricing_id])
 		@billing_address = BillingAddress.new
 
     respond_to do |format|

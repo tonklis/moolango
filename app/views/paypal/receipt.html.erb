@@ -1,9 +1,21 @@
-THANK YOU FOR YOUR PURCHASE!<br/>
-<br/>
-Print this receipt for your records.<br/>
-<br/>
-Reference ID: <%= @valores['PNREF'] %> <br/>
-Amount: $<%= @valores['AMT'] %> <br/>
-<br/>
-Valores <%=@valores.to_s%>
-
+<div class="earner_body">
+	<br />
+	<div class="contact_soon_body moolango-box">
+		<div class="moolango-box-inner">
+			<h3>
+				Thank you for your purchase!
+			</h3>
+			<br/>
+			<div>
+				Your reference number is: <div style="font-weight: bold; font-size: 14px; display: inline-block;"><%= @valores['PNREF'] %></div> for a total amount of <div style="font-weight: bold; font-size: 14px; display: inline-block;">$<%= @valores['AMT'] %></div>.
+			</div><br/>
+			<div> You will receive this same confirmation via e-mail. </div>
+			<div> Please save it as a record for your transaction. </div><br/>
+			<div>
+				<p>	Thank you again, </p>
+				<p> The MooLango Team</p>
+			</div>
+		</div>
+		<br />
+	</div>
+</div>

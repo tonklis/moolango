@@ -1,27 +1,25 @@
 <div class="selection_body moolango-box">
 	<div class="moolango-box-inner">
+		<br/>
 		<div>
 			You can buy practice time in three different packages:
 		</div>
 		<br/>
 		<%= form_tag('/paypal_billing') do %>
-			<div style="width: 485px; margin: auto; height: 10px;">
+			<div style="width: 435px; margin: auto; height: 10px;">
 				<% Pricing.all.each do |item| %>
 					<% if item == Pricing.first %>
-						<div style="float:left; margin: 0;">
-							<div style="margin-left: 40px; width: 125px; height: 85px;"> <%= item.tagline %> </div>
-							<div style="margin-left: 40px; width: 125px;"> <%= item.description %> </div>
-							<div style="font-weight: bold; margin-left: 40px; "> $<%= item.price %> </div>
-							<div style="float: left;"> Hourly </div>
-							<div style="margin-left: 30px; "> ($<%= item.hourly_rate %>) </div>
-							<div style="margin-left: 40px; "> <%= radio_button_tag 'pricing', item.id, :selected %> </div>
+						<div style="float:left; margin: 0 10px 0 10px;">
+							<div style="width: 125px; height: 85px;"> <%= item.tagline %> </div>
+							<div style="width: 125px;"> <%= item.description %> </div>
+							<div style="font-weight: bold;"> $<%= item.price %> </div>
+							<%= radio_button_tag 'pricing', item.id, :selected %>
 						</div>
 					<% else %>
 						<div style="float:left; margin: 0 10px 0 10px;">
 							<div style="width: 125px; height: 85px;"> <%= item.tagline %> </div>
 							<div style="width: 125px;"> <%= item.description %> </div>
 							<div style="font-weight: bold;"> $<%= item.price %> </div>
-							($<%= item.hourly_rate %>) <br/>
 							<%= radio_button_tag 'pricing', item.id%>
 						</div>
 					<% end %>

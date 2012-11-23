@@ -1,3 +1,18 @@
+<div class="alert alert-info" style="width: 20%; margin: 15px; float: right;">
+	<div style="font-weight: bold;">Selected item </div><br/>
+	<div> Amount: <div style="float: right;"><%= @pricing.description%></div> </div>
+	<div> Hourly rate: <div style="float: right;"> $<%= @pricing.hourly_rate%></div> </div><br/>
+	<div style="font-weight: bold; font-size: 14px;"> Total: <div style="float: right;"> $<%= @pricing.price %> </div> </div> <br/>
+	<div style="font-weight: bold;">Billing information </div><br/>
+	<div>First Name: <div style="float: right;"> <%= @billing.firstname%></div></div>
+	<div>Last Name: <div style="float: right;"> <%= @billing.lastname%></div></div>
+	<div>Address: <div style="float: right;"> <%= @billing.address%></div></div>
+	<div>City: <div style="float: right;"> <%= @billing.city%></div> </div>
+	<div>Zipcode: <div style="float: right;"> <%= @billing.zipcode%></div></div>
+	<div>State: <div style="float: right;"> <%= @billing.state%></div></div>
+	<div>Country: <div style="float: right;"> <%= @billing.country%></div></div><br/></br>
+	<div style="text-align: center; margin: auto;"><%= button_tag "Change", :type => 'button', :class => "next_button_small",  :onclick => "location.href = '/paypal_billing'" %> </div>
+</div>
 <div style="text-align: center;">
 	<div class="moolango-box" style="margin: auto; height:470px; width: 480px;">
 		<iframe src='https://payflowlink.paypal.com?SECURETOKEN=<%= @securetoken %>&SECURETOKENID=<%= @securetokenid %>&MODE=<%= @mode %>' width='490' height='565' border='0' frameborder='0' scrolling='no' allowtransparency='true'></iframe>

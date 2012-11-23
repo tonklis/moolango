@@ -1,16 +1,35 @@
-<div class="billing_body moolango-box">
+<% if @billing_address.errors.any? %>
+	<% @pricing = Pricing.find(session[:pricing_id])%>
+	<div style="width: 25%; margin: 15px; float: right;">
+		<div class="alert alert-info">
+			<div style="font-weight: bold;">Selected item </div><br/>
+			<div> Amount: <div style="float: right;"><%= @pricing.description%></div> </div>
+			<div> Hourly rate: <div style="float: right;"> $<%= @pricing.hourly_rate%></div> </div><br/>
+			<div style="font-weight: bold; font-size: 14px;"> Total: <div style="float: right;"> $<%= @pricing.price %> </div> </div><br/>
+			<div style="text-align: center; margin: auto;"><%= button_tag "Change", :type => 'button', :class => "next_button_small",  :onclick => "location.href = '#{:paypal_shopping_cart}'" %></div>
+		</div>
+		<div id="error_explanation" class="alert alert-error" >
+  		<ul>
+	    	<% @billing_address.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+      	<% end %>
+			</ul>
+		</div>
+	</div>
+<% else %>
+	<div class="alert alert-info" style="width: 20%; margin: 15px; float: right;">
+		<div style="font-weight: bold;">Selected item </div><br/>
+		<div> Amount: <div style="float: right;"><%= @pricing.description%></div> </div>
+		<div> Hourly rate: <div style="float: right;"> $<%= @pricing.hourly_rate%></div> </div><br/>
+		<div style="font-weight: bold; font-size: 14px;"> Total: <div style="float: right;"> $<%= @pricing.price %> </div> </div>
+		<br/>
+		<div style="text-align: center; margin: auto;"><%= button_tag "Change", :type => 'button', :class => "next_button_small",  :onclick => "location.href = '#{:paypal_shopping_cart}'" %></div>
+	</div>
+<% end %>
+<div class="billing_body moolango-box" >
 <div class="moolango-box-inner" style="text-align: center;">
 <%= form_for(@billing_address) do |f| %>
-  <% if @billing_address.errors.any? %>
-		<div id="error_explanation" class="alert alert-error" style="width: 70%; margin: auto;">
-      <ul>
-      <% @billing_address.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-	<br />
+  <br />
   <div class="field">
     <%= f.label "First Name", :style => "float: left; width: 100px;" %>
     <%= f.text_field :firstname %>
@@ -41,7 +60,7 @@
 	</div>
 	<%= f.hidden_field :user_id, :value => current_user.id %>
 	<br/>
-  <div class="actions">
+	<div class="actions">	
     <%= f.submit "Continue", :class => "next_button" %>
   </div>
 <% end %>

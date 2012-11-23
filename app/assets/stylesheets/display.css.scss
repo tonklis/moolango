@@ -100,6 +100,16 @@ iframe {
   min-width: 190px;
 }
 
+.next_button_small{
+	background-image: url("webpage/next_button.gif");
+  border: medium none;
+	margin-bottom: 7px;
+  color: #FFFFFF;
+  font-size: 14px;
+  min-height: 35px;
+  min-width: 110px;
+}
+
 .sheight[class*="container"] {
 	min-height: 98%;
 	height: auto !important;
