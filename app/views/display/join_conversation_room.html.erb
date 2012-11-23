@@ -47,36 +47,64 @@
 	
 </script>
 
-<div class="row">
-	<div class="span12">
-		<div id="waitingDivGone">
+<div>
+	<div style="float:left; width:35%">
 			
-			<div id="waitingDiv">
-				<br />
-				<p>Waiting for user to connect, please wait.</p>
-				<%= image_tag "spinner.gif" %>
-			</div>
-
-			<div id="publisherDiv" style="margin: -150px auto auto 85px;">
-				<div id="myPublisherDiv"></div>
+			<div style="float:right;">
+				<div id="endCallDiv">
+					<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
+						<%= hidden_field_tag :channel, @internal_session %>
+						<%= hidden_field_tag :room_id, @room.id if @room%>
+						<%= submit_tag "", :class => "endCallButton" %>
+					<% end %>
+				</div><br/>
+				<button type="button" class="reconnectButton" onClick="reconnect();"></button><br/>
+			
+			<div style="height:2px"></div>
+			
+			<div id="timerDiv">
+				<div id="totalTimeBar">
+					<div id="timeBar"></div>
+					<div id="totalTimeTxt"></div>
+				</div>
 			</div>
 		</div>
+		
 	</div>
-</div>
 
-<div class="row">
-	<div class="span12">
-		<div id="chatDiv">
-			<ul id="chat">
-			</ul>
-			<%= form_for Message.new, remote: true do |f| %>
-				<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field", :onkeypress=>"return validateEnterKey(event);" %>
-				<%= f.hidden_field :channel, :value => @internal_session %>
-				<%= f.hidden_field :origin, :value => false, :id=>"origin_field" %>
-				<%= f.hidden_field :room_id, :value => @room.id %>
-				<%= f.hidden_field :user_id, :value => current_user.id %>
-				<%= button_tag "Send", :class => "conversation_button", :onclick => "submitWithMessage();", :type => "button" %>
-			<% end %>
+	<div style="width:65%; float:left;">
+		<div class="row">
+			<div class="span4">
+				<div id="waitingDivGone">
+
+					<div id="waitingDiv">
+						<br />
+						<p>Waiting for user to connect, please wait.</p>
+						<%= image_tag "spinner.gif" %>
+					</div>
+
+					<div id="publisherDiv" style="margin: -150px auto auto 85px;">
+						<div id="myPublisherDiv"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span12">
+				<div id="chatDiv">
+					<ul id="chat">
+					</ul>
+					<%= form_for Message.new, remote: true do |f| %>
+						<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field", :onkeypress=>"return validateEnterKey(event);" %>
+						<%= f.hidden_field :channel, :value => @internal_session %>
+						<%= f.hidden_field :origin, :value => false, :id=>"origin_field" %>
+						<%= f.hidden_field :room_id, :value => @room.id %>
+						<%= f.hidden_field :user_id, :value => current_user.id %>
+						<%= button_tag "Send", :class => "conversation_button", :onclick => "submitWithMessage();", :type => "button" %>
+					<% end %>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

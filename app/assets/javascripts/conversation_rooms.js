@@ -154,9 +154,9 @@ function connectionDestroyedHandler(event) {
 function signalHandler(event) {
 	is_reconnect = true;
 	if (session.connection.connectionId == event.fromConnection.connectionId) {
-		is_audio_only = false;
+		is_audio_only = true;
 		$('#videoBtn').css({display: 'none'})
-		$('#videoBtn').val('Turn off video');
+		$('#videoBtn').val('Turn on video');
 		var div = document.createElement('div');
 		div.setAttribute('id','myPublisherDiv');
 		$("#publisherDiv").append(div);
@@ -183,16 +183,17 @@ function subscribeToStreams(streams) {
 			$("#publisherDiv")[0].style.position = 'absolute';
 			$("#publisherDiv")[0].style.right = '0px';
 			$("#publisherDiv")[0].style.bottom = '0px';
-			// video of self repositioning
 			$('#videoBtn').css({display: 'block'});
+			is_timer_running = true;
+			startTimer();
 		}
-		if (is_ready_for_conversation && num_connections == 2) {
+		/*if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
 		}
 		else {
 			is_ready_for_conversation = true
-		}
+		}*/
 	}
 }
 
@@ -207,7 +208,7 @@ function endCall() {
 	session.disconnect();
 }
 
-function keepalive(){
+function keepalive() {
 	$.ajax({ 
 		type: "POST",  
 		url: "/rooms/keepalive/" + room_id,
@@ -273,8 +274,8 @@ function startTimer() {
 		seconds = time_elapsed % 60;
 		minutes = Math.floor(time_elapsed / 60) % 60;
 		$('#totalTimeTxt').html(formatTime(minutes) + ' minutes ' + formatTime(seconds) + ' seconds');
-		$('#timeBar').width(time_elapsed * ($('#totalTimeBar').width() / total_time));
-		setTimeout(function(){ startTimer(); },1000);
+		$('#timeBar').height($('#totalTimeBar').height() - time_elapsed * ($('#totalTimeBar').height() / total_time));
+		setTimeout(function(){ startTimer(); }, 1000);
 	}
 	else {
 		// endCall();
@@ -287,13 +288,6 @@ function formatTime(n) {
 	} else {
 		return n;
 	}
-}
-
-function formatCredits(value) {
-	/*if (value.toString().length < 4) {
-		return '$' + value + '0';
-	}*/
-	return '$' + value;
 }
 
 function openDisconnectDialog() {
@@ -312,7 +306,6 @@ function openDisconnectDialog() {
 
 function showModal() {
 	is_end_call = false;
-	//$('#modal_message').html('<p> Your new balance is: ' + formatCredits(credits));
 	$('#myModal').modal({
 		keyboard: false,
 		backdrop: false

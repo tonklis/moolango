@@ -102,27 +102,50 @@ ul#chat {
 	height:	18px;
 }
 
-#totalTimeBar {
-	width: 300px;
-	height: 20px;
-	margin: auto;
+#timerDiv {
+	background-color: #de9c2e;
+	width: 45px;
+	height: 333px;
 	float: right;
-	background-image: url('/assets/timer_empty.png');
+
+}
+
+#totalTimeBar {
+	max-width: 20px;
+	max-height: 310px;
+	height: 310px;
+	margin: auto;
+	right: 1px;
+	top: 10px;
+	background-image: url('/assets/timer_full.png');
 	position: relative;
 }
 
-#totalTimeTxt {
-	position:absolute;
-	color:white;
+#timeBar {
+	max-width: 20px;
+	max-height: 310px;
+	height:	310px;
+	margin: auto;
+	right: 1px;
+	top: 10px;
+	background-image: url('/assets/timer_empty.png');
 }
 
-#timeBar {
-	width: 0px;
-	height: 20px;
-	margin: auto;
-	float: right;
-	background-image: url('/assets/timer_full.png');
+#totalTimeTxt {
 	position: absolute;
+	color: white;
+}
+
+.endCallButton {
+	background-image: url('/assets/webpage/end_call.png');
+	min-width:  44px;
+	min-height: 36px;
+}
+
+.reconnectButton {
+	background-image: url('/assets/webpage/reconnect.png');
+	width:  44px;
+	height: 36px;
 }
 
 #actionsDiv {
@@ -132,11 +155,9 @@ ul#chat {
 }
 
 #endCallDiv {
-	height: 30px;
+	height: 36px;
 	float: right;
-	right: 20px;
-	width: 90px;
-	position: relative;
+	width: 44px;
 }
 
 #reconnectDiv {
