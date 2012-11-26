@@ -26,7 +26,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('USER', 'moolangotroll'),
 			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
-			Curl::PostField.content('AMT', "#{@pricing.price}"),
+			Curl::PostField.content('AMT','0.01'),
 			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
 			Curl::PostField.content('SECURETOKENID', @securetokenid),
 			Curl::PostField.content('BILLTOFIRSTNAME', billing_info.firstname),
