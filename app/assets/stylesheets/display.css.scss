@@ -274,3 +274,9 @@ iframe {
 	   -moz-box-shadow: 0 8px 6px -4px grey;
 	        box-shadow: 0 8px 6px -4px grey;
 }
+
+.one-edge-shadow-selected {
+	-webkit-box-shadow: 0 0 8px 3px yellow;
+	   -moz-box-shadow: 0 0 8px 3px yellow;
+	        box-shadow: 0 0 8px 3px yellow;
+}

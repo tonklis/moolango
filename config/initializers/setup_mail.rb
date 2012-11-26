@@ -1,11 +1,11 @@
+ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
 
-	:address	=> "smtp.gmail.com",
-	:port		=> 587,
-	:domain		=> "gmail.com",
-	:user_name	=> "tonklis2@gmail.com",
-	:password	=> "garywillisbass2",
-	:authentication	=> "plain",
-	:enable_starttls_auto	=> true
+	:address	=> "smtpout.secureserver.net",
+	:port		=> 80,
+	:domain		=> "moolango.com",
+	:user_name	=> "hello@moolango.com",
+	:password	=> "grandcayman",
+	:authentication	=> "plain"
 }
 
