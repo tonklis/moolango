@@ -23,8 +23,8 @@ class PaypalController < ApplicationController
 		curl.post(
 			Curl::PostField.content('PARTNER', 'PayPal'),
 			Curl::PostField.content('VENDOR', 'moolango'),
-			Curl::PostField.content('USER', ''),
-			Curl::PostField.content('PWD', 'X0ch1m1lc0!'),
+			Curl::PostField.content('USER', 'moolangotroll'),
+			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
 			Curl::PostField.content('AMT', "#{@pricing.price}"),
 			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
