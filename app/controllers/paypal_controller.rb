@@ -19,7 +19,7 @@ class PaypalController < ApplicationController
 		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
 		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
 		curl.ssl_verify_host = true
-		curl.ssl_verify_peer = true
+		curl.ssl_verify_peer = false
 		curl.post(
 			Curl::PostField.content('PARTNER', 'PayPal'),
 			Curl::PostField.content('VENDOR', 'moolango'),
