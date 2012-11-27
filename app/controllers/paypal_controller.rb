@@ -1,9 +1,15 @@
 class PaypalController < ApplicationController
 
-	before_filter :authenticate_user!, :except => [:complete]
+	before_filter :authenticate_user!, :except => [:complete, :test]
 
 	def shopping_cart
 
+	end
+
+	def test
+		logger.error "DEBUG START----"
+		logger.error "params --- #{params}"
+		logger.error "DEBUG END-----"
 	end
 
 	def checkout
@@ -13,16 +19,17 @@ class PaypalController < ApplicationController
 		@pricing = Pricing.find(session[:pricing_id])
 		billing_info = BillingAddress.find(params[:id])
 		amount = @pricing.price
-		#@securetokenid = SecureRandom.uuid
+		@securetokenid = SecureRandom.uuid
 		@mode = 'LIVE'
 
-		@securetokenid = '004fde34-1c82-4e79-833d-7d86accbfead'
-		@securetoken = 'LtKkTgcuONUywLXpEvDWlvQxO'
+		#@securetokenid = '004fde34-1c82-4e79-833d-7d86accbfead'
+		#@securetoken = 'LtKkTgcuONUywLXpEvDWlvQxO'
 		
 		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
-		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
-		curl.ssl_verify_host = true
-		curl.ssl_verify_peer = true
+		#curl = Curl::Easy.new("https://payflowpro.paypal.com/")
+		curl = Curl::Easy.new("http://moolango.dev/paypal_test")
+		curl.ssl_verify_host = false
+		curl.ssl_verify_peer = false
 		curl.post(
 			Curl::PostField.content('PARTNER', 'PayPal'),
 			Curl::PostField.content('VENDOR', 'moolango'),
@@ -44,9 +51,9 @@ class PaypalController < ApplicationController
 		logger.error "DEBUG START----"
 		logger.error "content --- #{@response}"
 		logger.error "DEBUG END-----"
-		#@response.each do |pair|
-		#	@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
-		#end
+		@response.each do |pair|
+			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
+		end
 	end
 
 	def complete
