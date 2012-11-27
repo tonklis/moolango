@@ -27,7 +27,7 @@ class PaypalController < ApplicationController
 		
 		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
 		#curl = Curl::Easy.new("https://payflowpro.paypal.com/")
-		curl = Curl::Easy.new("http://moolango.dev/paypal_test")
+		curl = Curl::Easy.new("http://moolango.com/paypal_test")
 		curl.ssl_verify_host = false
 		curl.ssl_verify_peer = false
 		curl.post(
