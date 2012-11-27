@@ -36,11 +36,11 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('BILLTOSTATE', billing_info.state),
 			Curl::PostField.content('BILLTOZIP', billing_info.zipcode),
 			Curl::PostField.content('BILLTOCOUNTRY', billing_info.country),
-			)
-		puts "DEBUG START----"
-		puts "content --- #{@response}"
-		puts "DEBUG END-----"
+			)	
 		@response = curl.body_str.split('&')
+		logger.error "DEBUG START----"
+		logger.error "content --- #{@response}"
+		logger.error "DEBUG END-----"
 		@response.each do |pair|
 			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
 		end
