@@ -18,7 +18,7 @@ class PaypalController < ApplicationController
 		
 		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
 		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
-		curl.ssl_verify_host = true
+		curl.ssl_verify_host = false
 		curl.ssl_verify_peer = false
 		curl.post(
 			Curl::PostField.content('PARTNER', 'PayPal'),
@@ -26,7 +26,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('USER', 'moolangotroll'),
 			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
-			Curl::PostField.content('AMT', "#{@pricing.price}"),
+			Curl::PostField.content('AMT', @pricing.price),
 			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
 			Curl::PostField.content('SECURETOKENID', @securetokenid),
 			Curl::PostField.content('BILLTOFIRSTNAME', billing_info.firstname),
