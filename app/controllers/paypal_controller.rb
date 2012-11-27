@@ -37,6 +37,9 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('BILLTOZIP', billing_info.zipcode),
 			Curl::PostField.content('BILLTOCOUNTRY', billing_info.country),
 			)
+		puts "DEBUG START----"
+		puts @response
+		puts "DEBUG END-----"
 		@response = curl.body_str.split('&')
 		@response.each do |pair|
 			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
