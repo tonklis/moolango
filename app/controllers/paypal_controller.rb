@@ -13,8 +13,11 @@ class PaypalController < ApplicationController
 		@pricing = Pricing.find(session[:pricing_id])
 		billing_info = BillingAddress.find(params[:id])
 		amount = @pricing.price
-		@securetokenid = SecureRandom.uuid
+		#@securetokenid = SecureRandom.uuid
 		@mode = 'LIVE'
+
+		@securetokenid = '004fde34-1c82-4e79-833d-7d86accbfead'
+		@securetoken = 'LtKkTgcuONUywLXpEvDWlvQxO'
 		
 		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
 		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
@@ -41,9 +44,9 @@ class PaypalController < ApplicationController
 		logger.error "DEBUG START----"
 		logger.error "content --- #{@response}"
 		logger.error "DEBUG END-----"
-		@response.each do |pair|
-			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
-		end
+		#@response.each do |pair|
+		#	@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
+		#end
 	end
 
 	def complete
