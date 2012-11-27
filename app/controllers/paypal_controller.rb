@@ -38,7 +38,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('BILLTOCOUNTRY', billing_info.country),
 			)
 		puts "DEBUG START----"
-		puts @response
+		puts "content --- #{@response}"
 		puts "DEBUG END-----"
 		@response = curl.body_str.split('&')
 		@response.each do |pair|
