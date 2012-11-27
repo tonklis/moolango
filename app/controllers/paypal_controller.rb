@@ -26,7 +26,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('USER', 'moolangotroll'),
 			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
-			Curl::PostField.content('AMT', @pricing.price),
+			Curl::PostField.content('AMT', sprintf( "%0.02f", @pricing.price)),
 			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
 			Curl::PostField.content('SECURETOKENID', @securetokenid),
 			Curl::PostField.content('BILLTOFIRSTNAME', billing_info.firstname),
@@ -39,7 +39,7 @@ class PaypalController < ApplicationController
 			)	
 		@response = curl.body_str.split('&')
 		logger.error "DEBUG START----"
-		logger.error "content --- #{@pricing.price}"
+		logger.error "content --- #{sprintf( "%0.02f", @pricing.price)}"
 		logger.error "DEBUG END-----"
 		@response.each do |pair|
 			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
