@@ -39,7 +39,8 @@ class PaypalController < ApplicationController
 			)	
 		@response = curl.body_str.split('&')
 		logger.error "DEBUG START----"
-		logger.error "content --- #{sprintf( "%0.02f", @pricing.price)}"
+		logger.error "pricing --- #{sprintf( "%0.02f", @pricing.price)}"
+		logger.error "content --- #{@response}"
 		logger.error "DEBUG END-----"
 		@response.each do |pair|
 			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
