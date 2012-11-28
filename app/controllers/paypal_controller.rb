@@ -35,7 +35,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('PARTNER', 'PayPal'),
 			Curl::PostField.content('VENDOR', 'moolango'),
 			Curl::PostField.content('USER', 'moolangotroll'),
-			Curl::PostField.content('PWD', 'dimival12345'),
+			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
 			Curl::PostField.content('CURRENCY', 'USD'),
 			Curl::PostField.content('AMT', @pricing.price),
@@ -48,6 +48,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('BILLTOSTATE', billing_info.state),
 			Curl::PostField.content('BILLTOZIP', billing_info.zipcode),
 			Curl::PostField.content('BILLTOCOUNTRY', billing_info.country),
+			Curl::PostField.content('VERBOSITY', 'HIGH')
 			)	
 		@response = curl.body_str.split('&')
 		logger.error "DEBUG START----"
