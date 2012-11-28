@@ -82,8 +82,6 @@ Moolango::Application.routes.draw do
   match 'paypal_checkout/:id' => 'paypal#checkout', :as => :paypal_checkout
 
   match 'paypal_complete' => 'paypal#complete', :as => :paypal_complete
-  
-	match 'paypal_test' => 'paypal#test', :as => :paypal_test
 
   match 'paypal_receipt' => 'paypal#receipt', :as => :paypal_receipt
 	

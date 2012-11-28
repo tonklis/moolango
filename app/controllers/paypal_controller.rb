@@ -6,12 +6,6 @@ class PaypalController < ApplicationController
 
 	end
 
-	def test
-		logger.error "DEBUG START----"
-		logger.error "params --- #{params}"
-		logger.error "DEBUG END-----"
-	end
-
 	def checkout
 		session[:billing_id] = params[:id]
 		
@@ -22,38 +16,33 @@ class PaypalController < ApplicationController
 		@securetokenid = SecureRandom.uuid
 		@mode = 'LIVE'
 
-		#@securetokenid = '004fde34-1c82-4e79-833d-7d86accbfead'
-		#@securetoken = 'LtKkTgcuONUywLXpEvDWlvQxO'
-		
-		#curl = Curl::Easy.new("https://pilot-payflowpro.paypal.com/")
-		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
-		#curl = Curl::Easy.new("http://moolango.com/paypal_test")
+		uri = URI.parse("https://payflowpro.paypal.com/")
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-		curl.ssl_verify_host = 2
-		curl.ssl_verify_peer = false
-		curl.post(
-			Curl::PostField.content('PARTNER', 'PayPal'),
-			Curl::PostField.content('VENDOR', 'moolango'),
-			Curl::PostField.content('USER', 'moolangotroll'),
-			Curl::PostField.content('PWD', 'dimival1234'),
-			Curl::PostField.content('TRXTYPE', 'A'),
-			Curl::PostField.content('CURRENCY', 'USD'),
-			Curl::PostField.content('AMT', @pricing.price),
-			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
-			Curl::PostField.content('SECURETOKENID', @securetokenid),
-			Curl::PostField.content('BILLTOFIRSTNAME', billing_info.firstname),
-			Curl::PostField.content('BILLTOLASTNAME', billing_info.lastname),
-			Curl::PostField.content('BILLTOSTREET', billing_info.address),
-			Curl::PostField.content('BILLTOCITY', billing_info.city),
-			Curl::PostField.content('BILLTOSTATE', billing_info.state),
-			Curl::PostField.content('BILLTOZIP', billing_info.zipcode),
-			Curl::PostField.content('BILLTOCOUNTRY', billing_info.country),
-			Curl::PostField.content('VERBOSITY', 'HIGH')
-			)	
-		@response = curl.body_str.split('&')
-		logger.error "DEBUG START----"
-		logger.error "content --- #{@response}"
-		logger.error "DEBUG END-----"
+		request = Net::HTTP::Post.new(uri.request_uri)
+		request.set_form_data(
+		{
+			'PARTNER' => 'PayPal',
+			'VENDOR' => 'moolango',
+			'USER' => 'moolangotroll',
+			'PWD' => 'dimival1234',
+			'TRXTYPE' => 'A',
+			'CREATESECURETOKEN' => 'Y',
+			'AMT' => amount,
+			'SECURETOKENID' => @securetokenid,
+			'BILLTOFIRSTNAME'=> billing_info.firstname,
+			'BILLTOLASTNAME'=> billing_info.lastname,
+			'BILLTOSTREET' => billing_info.address,
+			'BILLTOCITY' => billing_info.city,
+			'BILLTOSTATE' => billing_info.state,
+			'BILLTOZIP' => billing_info.zipcode,
+			'BILLTOCOUNTRY' => billing_info.country
+			}
+		)
+		@response = http.request(request).body.split('&')
+
 		@response.each do |pair|
 			@securetoken = pair.split('=')[1] if pair.split('=')[0] == 'SECURETOKEN'
 		end
