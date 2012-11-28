@@ -29,7 +29,6 @@ class PaypalController < ApplicationController
 		curl = Curl::Easy.new("https://payflowpro.paypal.com/")
 		#curl = Curl::Easy.new("http://moolango.com/paypal_test")
 
-		curl.header_in_body = true
 		curl.ssl_verify_host = 2
 		curl.ssl_verify_peer = false
 		curl.post(
@@ -38,6 +37,7 @@ class PaypalController < ApplicationController
 			Curl::PostField.content('USER', 'moolangotroll'),
 			Curl::PostField.content('PWD', 'dimival1234'),
 			Curl::PostField.content('TRXTYPE', 'A'),
+			Curl::PostField.content('CURRENCY', 'USD'),
 			Curl::PostField.content('AMT', @pricing.price),
 			Curl::PostField.content('CREATESECURETOKEN', 'Y'),
 			Curl::PostField.content('SECURETOKENID', @securetokenid),
