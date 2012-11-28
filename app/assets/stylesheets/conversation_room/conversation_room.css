@@ -140,12 +140,21 @@ ul#chat {
 	background-image: url('/assets/webpage/end_call.png');
 	min-width:  44px;
 	min-height: 36px;
+	border: 'none';
 }
 
 .reconnectButton {
 	background-image: url('/assets/webpage/reconnect.png');
-	width:  44px;
-	height: 36px;
+	min-width:  44px;
+	min-height: 36px;
+	border: 'none';
+}
+
+.videoButton {
+	background-image: url('/assets/webpage/videobutton.png');
+	min-width:  23px;
+	min-height: 23px;
+	border:	'none';
 }
 
 #actionsDiv {

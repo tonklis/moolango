@@ -50,7 +50,7 @@
 <div>
 	<div style="float:left; width:35%">
 			
-			<div style="float:right;">
+			<div style="float:right; width:44px; border:none">
 				<div id="endCallDiv">
 					<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
 						<%= hidden_field_tag :channel, @internal_session %>
@@ -58,7 +58,7 @@
 						<%= submit_tag "", :class => "endCallButton" %>
 					<% end %>
 				</div><br/>
-				<button type="button" class="reconnectButton" onClick="reconnect();"></button><br/>
+				<input type="button" class="reconnectButton" onClick="reconnect();"></input><br/>
 			
 			<div style="height:2px"></div>
 			

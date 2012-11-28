@@ -114,10 +114,11 @@ function sessionConnectedHandler(event) {
 	}*/
 	if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="videoButton" onClick="enableDisableVideo()" style="display:none;"/>';
 		botonDiv.style.position = 'absolute';
 		botonDiv.style.left = '0px';
 		botonDiv.style.top =  '0px';
+		botonDiv.style.border = 'none';
 		$('#publisherDiv').append(botonDiv);
 	}
 
@@ -156,7 +157,7 @@ function signalHandler(event) {
 	if (session.connection.connectionId == event.fromConnection.connectionId) {
 		is_audio_only = true;
 		$('#videoBtn').css({display: 'none'})
-		$('#videoBtn').val('Turn on video');
+		//$('#videoBtn').val('Turn on video');
 		var div = document.createElement('div');
 		div.setAttribute('id','myPublisherDiv');
 		$("#publisherDiv").append(div);
@@ -236,12 +237,10 @@ function showWaitSpiner() {
 function enableDisableVideo() {
 	is_audio_only = !is_audio_only
 	publisher.publishVideo(!is_audio_only);
-	if (is_audio_only)
+	/*if (is_audio_only)
 		$('#videoBtn').val('Turn on video');
-		//document.getElementById("videoBtn").value = "Turn on video";
 	else
-		$('#videoBtn').val('Turn off video');
-		//document.getElementById("videoBtn").value = "Turn off video";
+		$('#videoBtn').val('Turn off video');*/
 }
 
 function startTimer() {
