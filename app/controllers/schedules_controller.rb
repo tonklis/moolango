@@ -6,25 +6,25 @@ class SchedulesController < ApplicationController
 
 	def new_schedule_ui
 		@schedule = Schedule.new
-    @schedule_options = Schedule.get_options(current_user, SCHEDULE_OPTIONS)
+		@schedule_options = SCHEDULE_OPTIONS
 	end
 
 	def create_schedule_ui
 		params[:schedule][:user_id] = params[:user_id]
-    @schedule = Schedule.new(params[:schedule])
-    @schedule_options = Schedule.get_options(current_user, SCHEDULE_OPTIONS)
+		@schedule = Schedule.new(params[:schedule])
+		@schedule_options = SCHEDULE_OPTIONS
 
-    respond_to do |format|
-      if @schedule.save
+		respond_to do |format|
+			if @schedule.save
 				TestMailer.new_scheduling(@schedule).deliver
 				render :contact_soon
         format.json { render json: @schedule, status: :created, location: @schedule }
 				return
-      else
-        format.html { render action: "new_schedule_ui" }
-        format.json { render json: @schedule.errors, status: :unprocessable_entity }
-      end
-    end
+ 			else
+      	format.html { render action: "new_schedule_ui" }
+      	format.json { render json: @schedule.errors, status: :unprocessable_entity }
+			end
+		end
 	end
 
 	# GET /schedules
