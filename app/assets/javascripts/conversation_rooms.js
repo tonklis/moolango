@@ -114,7 +114,7 @@ function sessionConnectedHandler(event) {
 	}*/
 	if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="videoButton" onClick="enableDisableVideo()" style="display:none; border: none;" title = "Video On"/>';
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="videoButton" onClick="enableDisableVideo()" style="display:none; border: none;" title = "Switch Video"/>';
 		botonDiv.style.position = 'absolute';
 		botonDiv.style.left = '0px';
 		botonDiv.style.top =  '0px';
