@@ -1,6 +1,32 @@
 class SchedulesController < ApplicationController
  	before_filter :authenticate_user!
-#	before_filter :check_access, :except => [:new, :create]
+	before_filter :check_access, :except => [:schedule_ui, :create_ui]
+
+	SCHEDULE_OPTIONS = [['30 minutes','30'], ['60 minutes','60']]
+
+	def new_schedule_ui
+		@schedule = Schedule.new
+    @schedule_options = Schedule.get_options(current_user, SCHEDULE_OPTIONS)
+	end
+
+	def create_schedule_ui
+		params[:schedule][:user_id] = params[:user_id]
+    @schedule = Schedule.new(params[:schedule])
+    @schedule_options = Schedule.get_options(current_user, SCHEDULE_OPTIONS)
+
+    respond_to do |format|
+      if @schedule.save
+				TestMailer.new_scheduling(@schedule).deliver
+				render :contact_soon
+        format.json { render json: @schedule, status: :created, location: @schedule }
+				return
+      else
+        format.html { render action: "new_schedule_ui" }
+        format.json { render json: @schedule.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+
 	# GET /schedules
   # GET /schedules.json
   def index
@@ -26,13 +52,12 @@ class SchedulesController < ApplicationController
   # GET /schedules/new
   # GET /schedules/new.json
   def new
-    @schedule = Schedule.new
-    @schedule_options = [['30 minutes','30']]
-    total_time = 0
-    current_user.schedules.each do |schedule|
-      total_time += schedule.length unless schedule.when <= Time.now
+		@schedule = Schedule.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @schedule }
     end
-    @schedule_options.push(['60 minutes','60']) unless (current_user.credits - total_time < 60)
   end
 
   # GET /schedules/1/edit
@@ -43,13 +68,11 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-		params[:schedule][:user_id] = params[:user_id]
     @schedule = Schedule.new(params[:schedule])
 
     respond_to do |format|
       if @schedule.save
-				TestMailer.new_scheduling(@schedule).deliver
-				render :contact_soon
+				format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
         format.json { render json: @schedule, status: :created, location: @schedule }
 				return
       else

@@ -1,0 +1,120 @@
+<script type="text/javascript">
+
+	function selected(desc, show){
+
+		$(".box").each(function(i, obj) {
+			obj.className = "box one-edge-shadow";
+		});
+
+		if (show){
+			$('#schedule_options').show('normal');
+			$("#pick_div")[0].className = "box one-edge-shadow-selected"
+		} else {
+			$('#schedule_options').hide('normal');
+			$("#"+desc+"_div")[0].className = "box one-edge-shadow-selected"
+		}
+		$('#schedule_options')[0].value = desc;
+	}
+
+	function resetField(){
+		$('#schedule_options')[0].value = '';
+	}
+
+	$(function(){
+			$("#schedule_when").datetimepicker({
+				dateFormat: "yy-mm-dd",
+				minDate: 2,
+				maxDate: 20,
+				timeFormat: 'hh:mm z',
+				showTimezone: true,
+				timezoneList: [{ value: '-0400', label: 'EDT' }],
+				stepMinute: 30,
+				hourMin: 9,
+				hourMax: 20
+				});
+			$('#schedule_options').hide();
+	});
+</script>
+<style>
+.field_with_errors { display: inline; }
+</style>
+<div class="row">
+	<div class="span12">
+		<div style="margin: -50px;">
+			<div class="landing_header">
+				<%= image_tag "webpage/schedule_a_conversation.png", :alt => "schedule a conversation"%>
+			</div>
+			<% if @schedule.errors.any? %>
+				<div id="error_explanation" class="alert alert-error" style="width: 15%; margin-top: 15px; float: right;">
+					<ul>
+					<% @schedule.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+					</ul>
+				</div>
+				<% end %>
+			<div class="earner_body moolango-box"  style="height: 510px;">
+				<br />
+				<div class="earner_form">
+					<%= form_for(@schedule, :url => :create_schedule_ui) do |f| %>
+					<div class="field">
+						<%= f.label "What language do you want to practice?" %>
+						<%= f.select :language_id, [['English','1'],['Spanish','2']] %>
+					</div> <br />
+					<div class="field">
+						<%= f.label "What would you like to focus on this session?" %>
+						<%= f.select :purpose, [['vocabulary','vocabulary'],['fun','fun'],['pace','pace'],['pronunciation','pronunciation']], :prompt => true %>
+					</div> <br />
+					<div class="field">
+						<%= f.label "Which topic would you like to talk about?" %>
+					</div>
+		<div id="content" style="height: 115px;">
+			
+			<div id="apple_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 0; ">
+				<%= image_tag("topics/apple_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('apple', false);") %>
+			</div>
+			<div id="beatles_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 5px;">
+				<%= image_tag("topics/the_beatles_s.jpg", :style=>"height: 100%; width: 100%;", :onclick=>"selected('beatles', false);") %>
+			</div>
+			<div id="food_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 5px;">
+				<%= image_tag("topics/food_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('food', false);") %>
+			</div>
+			<!-- <div class="box one-edge-shadow">
+				<%= link_to image_tag("topics/beer_pong.gif"), "/" %>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= link_to image_tag("topics/fraternities.gif"), "/" %>
+			</div>
+			<div class="box one-edge-shadow">
+				<%= link_to image_tag("topics/tail_gate.gif"), "/" %>
+			</div> -->
+			<div id="pick_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 5px;">
+				<%= image_tag("topics/pick_your_own_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('Eg. movies, music, football', true);") %>
+			</div>
+			
+		</div>
+		<div>
+			<%= f.text_field :options, :value => "", :onfocus => "resetField();" %>
+		</div>
+		<br/>
+					
+				  <div class="field">
+						<%= f.label "When do you want to practice? (eastern daylight time) "%> 
+						<%= f.text_field :when %> <%= f.select :length, @schedule_options %> <br />
+						<p style="text-align: center;">
+						<%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
+						</p>
+						<%= hidden_field_tag :user_id, current_user.id %>
+					</div> <br />
+					<div class="actions" style="text-align: center">
+							<%= f.submit "Schedule now!", :class => "next_button" %>
+					</div>
+				<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br/><br/>
+<br/><br/>
+<br/><br/>

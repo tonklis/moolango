@@ -9,7 +9,7 @@
 
 	<% if current_user.credits > 0 %>
 		<div class="row">
-				<%= link_to image_tag("webpage/schedule_conversation.gif", :alt => "schedule button", :class=>"one-edge-shadow"), new_schedule_path %>
+				<%= link_to image_tag("webpage/schedule_conversation.gif", :alt => "schedule button", :class=>"one-edge-shadow"), :new_schedule_ui %>
 				<br /> <br />
 		</div>
 	<% end %>

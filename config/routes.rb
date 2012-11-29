@@ -96,6 +96,10 @@ Moolango::Application.routes.draw do
 	match 'rooms/reactivate/:id' => 'rooms#reactivate'
 	
 	match 'rooms/verify/:id' => 'rooms#verify'
+	
+	match 'new_schedule_ui' => 'schedules#new_schedule_ui', :as => :new_schedule_ui
+	
+	match 'create_schedule_ui' => 'schedules#create_schedule_ui', :as => :create_schedule_ui
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -15,4 +15,13 @@ class Schedule < ActiveRecord::Base
 		return nil
 	end
 
+	def self.get_options current_user, options
+		total_time = 0
+    current_user.schedules.each do |schedule|
+      total_time += schedule.length unless schedule.when <= Time.now
+    end
+    options.pop if (current_user.credits - total_time < 60)
+		return options
+	end
+
 end

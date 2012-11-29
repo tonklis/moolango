@@ -25,6 +25,7 @@ class TestMailer < ActionMailer::Base
 		@user = User.find(schedule.user_id)
 		@schedule = schedule
 		mail(:to => "tonklis@gmail.com, dmiramon@gmail.com, williambabeaux@gmail.com", :subject => "New conversation scheduled with #{@user.firstname}")
+		#send mail to the user that is scheduling too
 	end
 
 end
