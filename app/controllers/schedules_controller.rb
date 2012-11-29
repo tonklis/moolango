@@ -2,17 +2,15 @@ class SchedulesController < ApplicationController
  	before_filter :authenticate_user!
 	before_filter :check_access, :except => [:schedule_ui, :create_ui]
 
-	SCHEDULE_OPTIONS = [['30 minutes','30'], ['60 minutes','60']]
-
 	def new_schedule_ui
 		@schedule = Schedule.new
-		@schedule_options = SCHEDULE_OPTIONS
+		@schedule_options = Schedule.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
 	end
 
 	def create_schedule_ui
 		params[:schedule][:user_id] = params[:user_id]
 		@schedule = Schedule.new(params[:schedule])
-		@schedule_options = SCHEDULE_OPTIONS
+		@schedule_options = Schedule.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
 
 		respond_to do |format|
 			if @schedule.save
