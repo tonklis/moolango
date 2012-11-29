@@ -15,6 +15,7 @@
 	<% end %>
 	<% if @schedule %>
 		<div class="row">
+			<!-- REVIEW THIS IF CONDITIONAL, MIGHT NOT BE NECCESARY -->
 			<% if current_user.credits > 0 %>
 				<%= link_to image_tag("webpage/practice_now.gif", :alt => "practice button", :class=>"one-edge-shadow", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
 			<% else %>

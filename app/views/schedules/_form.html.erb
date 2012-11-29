@@ -100,7 +100,7 @@
 					
 				  <div class="field">
 						<%= f.label "When do you want to practice? (eastern daylight time) "%> 
-						<%= f.text_field :when %> <%= f.select :length, [['30 minutes','30'],['60 minutes','60']]%> <br />
+						<%= f.text_field :when %> <%= f.select :length, @schedule_options%> <br />
 						<p style="text-align: center;">
 						<%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
 						</p>

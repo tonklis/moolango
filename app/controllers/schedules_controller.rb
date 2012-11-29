@@ -27,6 +27,12 @@ class SchedulesController < ApplicationController
   # GET /schedules/new.json
   def new
     @schedule = Schedule.new
+    @schedule_options = [['30 minutes','30']]
+    total_time = 0
+    current_user.schedules.each do |schedule|
+      total_time += schedule.length unless schedule.when <= Time.now
+    end
+    @schedule_options.push(['60 minutes','60']) unless (current_user.credits - total_time < 60)
   end
 
   # GET /schedules/1/edit

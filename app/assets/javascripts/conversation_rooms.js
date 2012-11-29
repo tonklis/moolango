@@ -139,7 +139,7 @@ function sessionDisconnectedHandler(event) {
 		connect();
 	}
 	else if (is_end_call) {
-		//DIEGO //showModal();
+		showModal();
 	}
 }
 
@@ -185,16 +185,14 @@ function subscribeToStreams(streams) {
 			$("#publisherDiv")[0].style.right = '0px';
 			$("#publisherDiv")[0].style.bottom = '0px';
 			$('#videoBtn').css({display: 'block'});
-			is_timer_running = true;
-			startTimer();
 		}
-		/*if (is_ready_for_conversation && num_connections == 2) {
+		if (is_ready_for_conversation && num_connections == 2) {
 			is_timer_running = true;
 			startTimer();
 		}
 		else {
 			is_ready_for_conversation = true
-		}*/
+		}
 	}
 }
 
@@ -272,12 +270,12 @@ function startTimer() {
 		var minutes, seconds;
 		seconds = time_elapsed % 60;
 		minutes = Math.floor(time_elapsed / 60) % 60;
-		$('#totalTimeTxt').html(formatTime(minutes) + ' minutes ' + formatTime(seconds) + ' seconds');
+		//$('#totalTimeTxt').html(formatTime(minutes) + ' minutes ' + formatTime(seconds) + ' seconds');
 		$('#timeBar').height($('#totalTimeBar').height() - time_elapsed * ($('#totalTimeBar').height() / total_time));
 		setTimeout(function(){ startTimer(); }, 1000);
 	}
 	else {
-		// endCall();
+		// NOTIFY THE TIME IS OVER
 	}
 }
 
