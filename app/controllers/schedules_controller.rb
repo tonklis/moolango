@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
  	before_filter :authenticate_user!
-	before_filter :check_access, :except => [:schedule_ui, :create_ui]
+	before_filter :check_access, :except => [:schedule_ui, :create_ui, :new, :create]
 
 	def new_schedule_ui
 		@schedule = Schedule.new
