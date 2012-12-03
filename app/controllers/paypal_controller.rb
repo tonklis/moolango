@@ -28,7 +28,7 @@ class PaypalController < ApplicationController
 			'VENDOR' => 'moolango',
 			'USER' => 'moolangotroll',
 			'PWD' => 'dimival1234',
-			'TRXTYPE' => 'A',
+			'TRXTYPE' => 'S',
 			'CREATESECURETOKEN' => 'Y',
 			'AMT' => amount,
 			'SECURETOKENID' => @securetokenid,

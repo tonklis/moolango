@@ -14,7 +14,7 @@
 	<div style="text-align: center; margin: auto;"><%= button_tag "Change", :type => 'button', :class => "next_button_small",  :onclick => "location.href = '/paypal_billing'" %> </div>
 </div>
 <div style="text-align: center;">
-	<div class="moolango-box" style="margin: auto; height:470px; width: 490px;">
+	<div class="" style="overflow:hidden; margin: auto; height:470px; width: 490px; background-color: white;">
 		<iframe src='https://payflowlink.paypal.com?SECURETOKEN=<%= @securetoken %>&SECURETOKENID=<%= @securetokenid %>&MODE=<%= @mode %>' width='490' height='525' border='0' frameborder='0' scrolling='yes' allowtransparency='true'></iframe>
 	</div>
 	<p style='margin-left:40px;font-family:monospace;'></p>
