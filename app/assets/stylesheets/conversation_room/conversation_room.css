@@ -107,7 +107,7 @@ ul#chat {
 	width: 45px;
 	height: 333px;
 	float: right;
-
+	border: none;
 }
 
 #totalTimeBar {
@@ -119,6 +119,7 @@ ul#chat {
 	top: 10px;
 	background-image: url('/assets/timer_full.png');
 	position: relative;
+	border: none;
 }
 
 #timeBar {
@@ -129,6 +130,7 @@ ul#chat {
 	right: 1px;
 	top: 10px;
 	background-image: url('/assets/timer_empty.png');
+	border: none;
 }
 
 #totalTimeTxt {
@@ -140,21 +142,22 @@ ul#chat {
 	background-image: url('/assets/webpage/end_call.png');
 	min-width:  44px;
 	min-height: 36px;
-	border: 'none';
+	border: none;
 }
 
 .reconnectButton {
 	background-image: url('/assets/webpage/reconnect.png');
 	min-width:  44px;
 	min-height: 36px;
-	border: 'none';
+	border: none;
 }
 
 .videoButton {
 	background-image: url('/assets/webpage/videobutton.png');
+	background-color: #000000;
 	min-width:  23px;
 	min-height: 23px;
-	border:	'none';
+	border:	none;
 }
 
 #actionsDiv {

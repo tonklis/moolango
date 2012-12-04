@@ -17,7 +17,8 @@ class Room < ActiveRecord::Base
 		end
 
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
-		open_tok_session = opentok.create_session(ip_address)
+		session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "enabled"}
+		open_tok_session = opentok.create_session(ip_address, session_properties)
 
 		room = Room.create(
 			:creator_id => user_id,

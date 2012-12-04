@@ -4,8 +4,8 @@ var is_end_call = false;
 var is_audio_only = true;
 var is_ready_for_conversation = false;
 var is_timer_running = false;
-var num_connections = 0;
 var time_elapsed = 0;
+var num_streams = 0;
 
 function submitWithMessage(){
 	if ($("#chat_field")[0].value	!= ""){
@@ -51,34 +51,6 @@ function simplePusher(pusherKey, session){
 	});
 }
 
-function createPusher(pusherKey, session){
-	
-	var pusher = new Pusher(pusherKey, { encrypted: true });
-	var channel = pusher.subscribe(session);
-
-	channel.bind('event_chat', function(data) {
-		var new_li = document.createElement('li');
-		if (data.origin == 'true') {
-			new_li.setAttribute('style','background-color:#DDDDDD');
-		}
-		new_li.innerHTML = data.message;
-		$("#chat").append(new_li);
-		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
-		if ($("#origin_field")[0].value == data.origin){
-				$("#new_message")[0].reset();
-		}
-	});
-
-	channel.bind('event_slider', function(data) {
-		$("#current_slide")[0].value = data.id;
-		$('#slideImageDiv').css("background-image", "url(/assets/" + data.thumbnail_url+")");
-		$("#hint_text")[0].innerHTML = data.description;	
-	});
-	
-	channel.bind('event_end_call', function(data) {
-		endCall();
-	});
-}
 
 function nextInteraction(event){
 	$("#next")[0].value = event;
@@ -91,32 +63,22 @@ function connect() {
 	session.addEventListener('streamCreated', streamCreatedHandler); 
 	session.addEventListener('sessionDisconnected', sessionDisconnectedHandler); 
 	session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
+	session.addEventListener('streamDestroyed', streamDestroyedHandler);
 	session.addEventListener('signalReceived', signalHandler);
 	//TB.addEventListener('exception', function(event){alert(event.message);});
 	session.connect(api_key, token, {detectConnectionQuality:0});
 }
 
 function connectionCreatedHandler(event) {
-	num_connections += event.connections.length;
 	getConnectionData(event.connections);
 }
 
 function sessionConnectedHandler(event) {
-	num_connections += event.connections.length;
-
-	/*if ($('#videoBtn').length == 0) {
-		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="conversationButton" value="Turn on video" onClick="enableDisableVideo()" style="display:none;"/>';
-		botonDiv.style.position = 'absolute';
-		botonDiv.style.left = '80px';
-		botonDiv.style.top =  '175px';
-		$('#publisherDiv').append(botonDiv);
-	}*/
 	if ($('#videoBtn').length == 0) {
 		var botonDiv = document.createElement('div');
-		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="videoButton" onClick="enableDisableVideo()" style="display:none; border: none;" title = "Switch Video"/>';
+		botonDiv.innerHTML = '<input type="button" id="videoBtn" class="videoButton" onClick="enableDisableVideo()" style="display:none;" title = "Video On"/>';
 		botonDiv.style.position = 'absolute';
-		botonDiv.style.left = '0px';
+		botonDiv.style.right = '0px';
 		botonDiv.style.top =  '0px';
 		botonDiv.style.border = 'none';
 		$('#publisherDiv').append(botonDiv);
@@ -133,7 +95,6 @@ function streamCreatedHandler(event) {
 
 function sessionDisconnectedHandler(event) {
 	if (is_reconnect) {
-		num_connections -= 1;
 		showWaitSpiner();
 		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
 		connect();
@@ -147,17 +108,19 @@ function connectionDestroyedHandler(event) {
 	if (is_reconnect) {
 		showWaitSpiner();
 	}
-	else {
-		endCall();
-	}
+}
+
+function streamDestroyedHandler(event) {
+	num_streams -=1;
 }
 
 function signalHandler(event) {
 	is_reconnect = true;
 	if (session.connection.connectionId == event.fromConnection.connectionId) {
 		is_audio_only = true;
-		$('#videoBtn').css({display: 'none'})
-		//$('#videoBtn').val('Turn on video');
+		$('#videoBtn').css({display: 'none'});
+		$('#videoBtn').css({'background-image': "url('/assets/webpage/videobutton.png')"});
+		$('#videoBtn')[0].title = "Video On"
 		var div = document.createElement('div');
 		div.setAttribute('id','myPublisherDiv');
 		$("#publisherDiv").append(div);
@@ -168,14 +131,13 @@ function signalHandler(event) {
 function getConnectionData(connections) {
 	for (i = 0; i < connections.length; i++) {
 		connection = connections[i];
-		//REMOVE if (connection.connectionId != session.connection.connectionId)
-		//REMOVE	$('#userDiv').text(connection.data);
 	}
 }
 
 function subscribeToStreams(streams) {
 	for (i = 0; i < streams.length; i++) {
 		stream = streams[i];
+		num_streams++;
 		if (stream.connection.connectionId != session.connection.connectionId) {
 				session.subscribe(stream, 'waitingDiv', {width: 380, height: 285});
 		}
@@ -186,7 +148,7 @@ function subscribeToStreams(streams) {
 			$("#publisherDiv")[0].style.bottom = '0px';
 			$('#videoBtn').css({display: 'block'});
 		}
-		if (is_ready_for_conversation && num_connections == 2) {
+		if (is_ready_for_conversation && num_streams == 2) {
 			is_timer_running = true;
 			startTimer();
 		}
@@ -228,17 +190,20 @@ function showWaitSpiner() {
 		waitDiv.appendChild(document.createElement('br'));
 		waitDiv.appendChild(document.createTextNode("Waiting for user to connect, please wait."));
 		waitDiv.appendChild(waitImg);
-		//REMOVE $("#userDiv").before(waitDiv);
 	}
 }
 
 function enableDisableVideo() {
 	is_audio_only = !is_audio_only
 	publisher.publishVideo(!is_audio_only);
-	/*if (is_audio_only)
-		$('#videoBtn').val('Turn on video');
-	else
-		$('#videoBtn').val('Turn off video');*/
+	if (is_audio_only) {
+		$('#videoBtn').css({'background-image': "url('/assets/webpage/videobutton.png')"});
+		$('#videoBtn')[0].title = "Video On"
+	}
+	else {
+		$('#videoBtn').css({'background-image': "url('/assets/webpage/videobuttonoff.png')"});
+		$('#videoBtn')[0].title = "Video Off"
+	}
 }
 
 function startTimer() {
@@ -256,12 +221,12 @@ function startTimer() {
 					credits = data.credits;
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
-					alert(textStatus);
+					//alert(textStatus);
 				} 
 			});
 		}
-		if (time_elapsed == (total_time*.9) ) {
-			$('#timeBar').css('background-image', "url('/assets/timer_full_red.png')");
+		if (time_elapsed == (total_time*.85) ) {
+			$('#totalTimeBar').css({'background-image': "url('/assets/timer_full_red.png')"});
 		}
 
 		/*if ( (0 == time_elapsed % 90) && is_buyer) {

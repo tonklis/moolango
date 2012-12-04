@@ -8,7 +8,7 @@
 	var token = '<%= @token %>';
 	var credits = '<%= current_user.credits %>';
 	var room_id = '<%= @room.id %>';
-	var total_time = 60*<%= @schedule.length %>;
+	var total_time = 60 * <%= @schedule.length %>;
 
 	window.onbeforeunload = function(){
 		openDisconnectDialog();
@@ -23,6 +23,7 @@
 		publisherProperties.height = 90;
 		publisherProperties.width = 120;
 		publisherProperties.name = '<%= current_user.firstname %>';
+		publisherProperties.rememberDeviceAccess = true;
 		publisherProperties.style = new Object();
 		publisherProperties.style.nameDisplayMode = 'on';
 		publisher = TB.initPublisher(api_key, 'myPublisherDiv', publisherProperties);
@@ -50,18 +51,18 @@
 <div>
 	<div style="float:left; width:35%">
 			
-			<div style="float:right; width:44px; border:none">
-				<div id="endCallDiv">
-					<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
-						<%= hidden_field_tag :channel, @internal_session %>
-						<%= hidden_field_tag :room_id, @room.id if @room%>
-						<%= submit_tag "", :class => "endCallButton", :style => "border: none;", :title => "End Call" %>
-					<% end %>
-				</div><br/>
-				<div id="reconnectDiv" style="width:44px; height: 36px;">
-					<!--<input type="button" class="reconnectButton" onClick="reconnect();"></input><br/>-->
-				</div>
-			
+		<div style="float:right; width:44px; border:none">
+			<div id="endCallDiv">
+				<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
+					<%= hidden_field_tag :channel, @internal_session %>
+					<%= hidden_field_tag :room_id, @room.id if @room%>
+					<%= submit_tag "", :class => "endCallButton", :style => "border: none;", :title => "End Call" %>
+				<% end %>
+			</div><br/>
+			<div id="reconnectDiv" style="width:44px; height: 36px;">
+				<!--<input type="button" class="reconnectButton" onClick="reconnect();"></input><br/>-->
+			</div>
+		
 			<div style="height:2px"></div>
 			
 			<div id="timerDiv">
