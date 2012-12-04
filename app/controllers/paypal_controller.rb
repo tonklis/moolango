@@ -49,7 +49,6 @@ class PaypalController < ApplicationController
 	end
 
 	def complete
-		session[:paypal_response] = params
 		trans = Transaction.new
 		trans.user_id = current_user.id
 		trans.pricing_id = session[:pricing_id]
@@ -57,11 +56,13 @@ class PaypalController < ApplicationController
 		trans.paypal_trans_id = params['PNREF']
 		trans.save
 		current_user.update_attribute(:credits, current_user.credits + Pricing.find(session[:pricing_id]).minutes)
+		session[:transaction_id] = trans.id
 	end
 
 	def receipt
-		@valores = session[:paypal_response]
-		TestMailer.new_purchase(current_user.id, @valores['PNREF'], @valores['AMT']).deliver
+		@transaction = Transaction.find(session[:transaction_id])
+		@price = Pricing.find(@transaction.pricing_id).price 
+		TestMailer.new_purchase(current_user.id, @transaction.paypal_trans_id, @price).deliver
 		session[:paypal_response] = nil
 		session[:pricing_id] = nil
 		session[:billing_id] = nil

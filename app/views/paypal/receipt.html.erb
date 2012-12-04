@@ -7,7 +7,7 @@
 			</h3>
 			<br/>
 			<div>
-				Your reference number is: <div style="font-weight: bold; font-size: 14px; display: inline-block;"><%= @valores['PNREF'] %></div> for a total amount of <div style="font-weight: bold; font-size: 14px; display: inline-block;">$<%= @valores['AMT'] %></div>.
+				Your reference number is: <div style="font-weight: bold; font-size: 14px; display: inline-block;"><%= @transaction.paypal_trans_id %></div> for a total amount of <div style="font-weight: bold; font-size: 14px; display: inline-block;">$<%= @price %></div>.
 			</div><br/>
 			<div> You will receive this same confirmation via e-mail. </div>
 			<div> Please save it as a record for your transaction. </div><br/>
