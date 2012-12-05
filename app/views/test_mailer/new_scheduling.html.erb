@@ -1,14 +1,21 @@
 <p>
-<%= @user.firstname %>, your conversation in <%= Language.find(@schedule.language_id).name %> about <%= @schedule.options %> has been scheduled!
+<%= @user.firstname.capitalize %>, your conversation in <%= Language.find(@schedule.language_id).name.capitalize %> about <%= @schedule.options %> has been scheduled!
 </p>
 <br />
 <p>
 	Here are the details:
 </p>
-<p> Focus: <%= @schedule.purpose %></p>
-<p>	When: <%= @schedule.when.in_time_zone("Eastern Time (US & Canada)") %>. Convert to your timezone <a href="http://www.thetimezoneconverter.com/" target="_blank">here</a>.</p>
+<ul>
+	<li>Focus: <%= @schedule.purpose %> </li>
+	<li>Date: <%= @schedule.when.in_time_zone("Eastern Time (US & Canada)").strftime("%h %d %Y, %H:%M GMT%z") %>. You can convert to your timezone <a href="http://www.thetimezoneconverter.com/" target="_blank">here</a>.</li>
+</ul>
+<br/>
+<p> A 'practice now' button will be enabled in your <a href="http://www.moolango.com/action">MooLango homepage</a> five minutes before, and five minutes after your scheduled time. </p>
+<p> For canceling or rescheduling, please let us know with 12 hours in advance replying to this e-mail. </p>
+</p>
+<br/>
 <p>
-	Please write us at hello@moolango.com if you have any question regarding your conversation.
+	Feel free to write us at hello@moolango.com if you have any questions.
 </p>
 <br />
 <p>	Sincerily, </p>
