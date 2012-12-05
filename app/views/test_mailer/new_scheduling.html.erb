@@ -1,19 +1,15 @@
 <p>
-	User: <%= @user.firstname %>
+<%= @user.firstname %>, your conversation in <%= Language.find(@schedule.language_id).name %> about <%= @schedule.options %> has been scheduled!
 </p>
+<br />
 <p>
-	e-mail: <%= @user.email %>
+	Here are the details:
 </p>
+<p> Focus: <%= @schedule.purpose %></p>
+<p>	When: <%= @schedule.when.in_time_zone("Eastern Time (US & Canada)") %>. Convert to your timezone <a href="http://www.thetimezoneconverter.com/" target="_blank">here</a>.</p>
 <p>
-	Language: <%= Language.find(@schedule.language_id).name %>
+	Please write us at hello@moolango.com if you have any question regarding your conversation.
 </p>
-<p>
-	When: <%= @schedule.when %>
-	for: <%= @schedule.length %> minutes
-</p>
-<p>
-	Topic(s): <%= @schedule.options %>
-</p>
-<p>
-	Purpose: <%= @schedule.purpose %>
-</p>
+<br />
+<p>	Sincerily, </p>
+<p> The MooLango Team</p>

@@ -26,8 +26,8 @@
 				minDate: 2,
 				maxDate: 20,
 				timeFormat: 'hh:mm z',
-				showTimezone: true,
-				timezoneList: [{ value: '-0400', label: 'EDT' }],
+				showTimezone: false,
+				timezoneList: [{ value: '-0500', label: 'Eastern Time' }],
 				stepMinute: 30,
 				hourMin: 9,
 				hourMax: 20
@@ -99,7 +99,7 @@
 		<br/>
 					
 				  <div class="field">
-						<%= f.label "When do you want to practice? (eastern daylight time) "%> 
+						<p> When do you want to practice? (in EST, GMT-05:00) </p>
 						<%= f.text_field :when %> <%= f.select :length, @schedule_options %> <br />
 						<p style="text-align: center;">
 						<%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
