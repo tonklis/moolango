@@ -53,7 +53,7 @@
 					</ul>
 				</div>
 				<% end %>
-			<div class="earner_body moolango-box"  style="height: 510px;">
+			<div class="earner_body moolango-box"  style="height: auto;">
 				<br />
 				<div class="earner_form">
 					<%= form_for(@schedule, :url => :create_schedule_ui) do |f| %>
@@ -64,11 +64,11 @@
 					<div class="field">
 						<%= f.label "What would you like to focus on this session?" %>
 						<%= f.select :purpose, [['vocabulary','vocabulary'],['fun','fun'],['pace','pace'],['pronunciation','pronunciation']], :prompt => true %>
-					</div> <br />
+					</div>
 					<div class="field">
 						<%= f.label "Which topic would you like to talk about?" %>
 					</div>
-		<div id="content" style="height: 115px;">
+		<div id="content" style="height: auto; width: auto; overflow: auto;">
 			
 			<div id="apple_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 0; ">
 				<%= image_tag("topics/apple_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('apple', false);") %>
