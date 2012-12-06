@@ -25,9 +25,9 @@ class PaypalController < ApplicationController
 		request.set_form_data(
 		{
 			'PARTNER' => 'PayPal',
-			'VENDOR' => 'moolango',
-			'USER' => 'moolangotroll',
-			'PWD' => 'dimival1234',
+			'VENDOR' => ENV['PAYPAL_VENDOR'],
+			'USER' => ENV['PAYPAL_USER'],
+			'PWD' => ENV['PAYPAL_PWD'],
 			'TRXTYPE' => 'S',
 			'CREATESECURETOKEN' => 'Y',
 			'AMT' => amount,
