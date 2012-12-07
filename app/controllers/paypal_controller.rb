@@ -30,7 +30,7 @@ class PaypalController < ApplicationController
 			'PWD' => ENV['PAYPAL_PWD'],
 			'TRXTYPE' => 'S',
 			'CREATESECURETOKEN' => 'Y',
-			'AMT' => amount,
+			'AMT' => "0.01",
 			'SECURETOKENID' => @securetokenid,
 			'BILLTOFIRSTNAME'=> billing_info.firstname,
 			'BILLTOLASTNAME'=> billing_info.lastname,
