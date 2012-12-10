@@ -6,6 +6,9 @@
 
 		<div class="row">
 			<%= link_to image_tag("webpage/buy_credit.gif", :alt => "buy credits button", :class=>"one-edge-shadow"), :paypal_shopping_cart %>
+			<% if current_user.credits <= 0%>
+				<%= link_to image_tag("webpage/trial_button.gif", :alt => "buy credits button", :class=>"one-edge-shadow", :style=>"margin-top: -52px;"), "mailto:hello@moolango.com?subject=MooLango free trial&body=Please help us fill why you you want to try MooLango out and we'll give you a free conversation!%0D%0A%0D%0AI'd like to try out MooLango because ..." %>
+			<% end %>
 			<br /> <br />
 		</div>
 
