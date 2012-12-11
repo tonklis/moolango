@@ -25,6 +25,9 @@ class DisplayController < ApplicationController
 	def language
 	end
 
+	def about
+	end
+
 	def thank_you
 		render :layout => "feedback"
 	end

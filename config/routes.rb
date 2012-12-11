@@ -54,6 +54,8 @@ Moolango::Application.routes.draw do
 	match 'topics_list_feedback' => 'display#topics_list_feedback', :as => :topics_list_feedback
 	
 	match 'thank_you' => 'display#thank_you', :as => :thank_you
+	
+	match 'about' => 'display#about', :as => :about
 
 	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
 	
