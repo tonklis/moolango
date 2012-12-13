@@ -6,6 +6,7 @@
 	<link rel="shortcut icon" href="http://24.media.tumblr.com/avatar_5449ac512dba_16.png" />	
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "uservoice/uv_snippet" %>
+  <%= javascript_include_tag "olark/olark_snippet" %>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta property="og:title" content="MooLango" />
@@ -102,6 +103,5 @@
 		    name: '<%= current_user.firstname.to_s + " " + current_user.lastname.to_s unless current_user == nil %>'
 		};
 	</script>
-
 </body>
 </html>
