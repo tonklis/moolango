@@ -16,12 +16,17 @@ class Schedule < ActiveRecord::Base
 	end
 
 	def self.get_options current_user, options
-		total_time = 0
-    current_user.schedules.each do |schedule|
-      total_time += schedule.length unless schedule.when <= Time.now
-    end
-    options.pop if (current_user.credits - total_time < 60)
-		return options
+		#FREE TRIALS
+		if current_user.credits == 15
+			return [['15 minutes', 15]]
+		else
+			total_time = 0
+    	current_user.schedules.each do |schedule|
+      	total_time += schedule.length unless schedule.when <= Time.now
+    	end
+    	options.pop if (current_user.credits - total_time < 60)
+			return options
+		end
 	end
 
 end
