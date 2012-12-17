@@ -2,6 +2,7 @@ class Schedule < ActiveRecord::Base
 
 	has_and_belongs_to_many :topics
 	belongs_to :user
+	belongs_to :teacher, :class_name => "User", :foreign_key => :teacher_id
 	belongs_to :room
 
 	validates_presence_of :language_id, :purpose, :options, :user_id, :when

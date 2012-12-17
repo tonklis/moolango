@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 	has_many :earner_forms
 	has_many :messages
 	has_many :schedules
+	has_many :teacher_schedules, :class_name => "Schedule", :foreign_key => :teacher_id
 	has_many :billing_addresses
 	has_many :transactions
 

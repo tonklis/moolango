@@ -49,12 +49,36 @@ function simplePusher(pusherKey, session){
 	channel.bind('event_end_call', function(data) {
 		endCall();
 	});
+
+	channel.bind('event_interaction', function(data) {
+		if ($("#origin_field")[0].value == 'true'){
+				if (data.button_pressed == 'btnNext'){
+					$('.btnNext')[0].click();
+				}else if(data.button_pressed == 'btnPrevious'){
+					$('.btnPrevious')[0].click();
+				}else if(data.button_pressed == 'btnLast'){
+					$('.btnLast')[0].click();
+				}else{
+					$('.btnFirst')[0].click();
+				}
+		}	
+	});
 }
 
 
-function nextInteraction(event){
-	$("#next")[0].value = event;
-	$("#new_interaction").submit();
+function nextInteraction(button_pressed){
+		$.ajax({ 
+				type: "POST",  
+				url: "/interaction",
+				data: "button_pressed=" + button_pressed + "&channel=" + $("#internal_session")[0].value,
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+				},			
+				success: function(data) {
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				} 
+			});
 }
 
 function connect() {

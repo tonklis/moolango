@@ -74,7 +74,7 @@ class DisplayController < ApplicationController
 		@language_id = @room.language_id
 		@schedule = @room.schedule
 		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		
+		@bucket_location = @schedule.bucket
 		@room.engage
 		render :layout => "rooms"
 	end
@@ -94,7 +94,7 @@ class DisplayController < ApplicationController
 		@language_id = @room.language_id
 		@schedule = @room.schedule
 		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		
+		@bucket_location = @schedule.bucket
 		@room.engage
 		render :layout => "rooms"
 	end

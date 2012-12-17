@@ -24,6 +24,47 @@ body {
 	height: 100px;
 }
 
+.toolbar{background-image:-moz-linear-gradient(#ececec,#a8a8a8);background-image:-webkit-gradient(linear,0% 0,0% 100%,from(#ececec),to(#a8a8a8));background-image:-o-linear-gradient(#ececec,#a8a8a8);background-image:-ms-linear-gradient(#ececec,#a8a8a8);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#ececec',EndColorStr='#a8a8a8');-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#ececec', EndColorStr='#a8a8a8')";border-bottom:1px solid #888;border-top:1px solid #ccc;overflow:hidden;margin:0;padding:3px 6px;position:relative;width:auto}
+.toolbar .nav{border:0;display:block;font:inherit;margin:0 auto;text-align:center;vertical-align:baseline}
+.toolbar .navActions{visibility: hidden;}
+
+.btnFirst{
+	float: left;
+	font-size: 18px;
+	color: #FFFFFF;
+	font-weight: bold;
+	margin: 5px 5px auto 140px;
+}
+.btnPrevious{
+	float: left;
+	background-image: url('/assets/webpage/next_button.gif');
+	display: block;
+	color: #FFFFFF;
+	font-size: 18px;
+	font-weight: bold;
+	height: 20px;
+	width: 40px;
+	margin: 5px 5px auto 5px;
+}
+.btnNext{
+	float: left;
+	background-image: url('/assets/webpage/next_button.gif');
+	display: block;
+	color: #FFFFFF;
+	font-size: 18px;
+	font-weight: bold;
+	height: 20px;
+	width: 40px;
+	margin: 5px 5px auto 5px;
+}
+.btnLast{
+	float: left;
+	color: #FFFFFF;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 5px 5px auto 5px;
+}
+
 .sheight[class*="container"] {
 	min-height: 107%;
 	height: auto !important;
@@ -103,7 +144,7 @@ ul#chat {
 }
 
 #timerDiv {
-	background-color: #de9c2e;
+	background-color: #fc8e1e;
 	width: 45px;
 	height: 333px;
 	float: right;
@@ -155,8 +196,8 @@ ul#chat {
 .videoButton {
 	background-image: url('/assets/webpage/videobutton.png');
 	background-color: #000000;
-	min-width:  23px;
-	min-height: 23px;
+	min-width:  21px;
+	min-height: 21px;
 	border:	none;
 }
 
