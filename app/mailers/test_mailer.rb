@@ -15,10 +15,11 @@ class TestMailer < ActionMailer::Base
 		mail(:to => "#{@user.email}, hello@moolango.com", :subject => "Order confirmation from MooLango")
 	end
 
-	def new_simple_conversation(user_id, room_id)
+	def new_simple_conversation(user_id, room_id, teacher_id)
 		@user = User.find(user_id)
 		@room_id = room_id
-		mail(:to => "hello@moolango.com", :subject => "New conversation with #{@user.firstname}")
+		@teacher = User.find(teacher_id)
+		mail(:to => "#{@teacher.email}, hello@moolango.com", :subject => "New conversation with #{@user.firstname}")
   end
 
 	def new_scheduling(schedule)

@@ -60,7 +60,7 @@ class MessagesController < ApplicationController
 		room = Room.create_available(params[:user_id], schedule.language_id, nil, internal_session, request.remote_addr)
 		schedule.update_attribute(:room_id, room.id)
 
-		TestMailer.new_simple_conversation(params[:user_id], room.id).deliver
+		TestMailer.new_simple_conversation(params[:user_id], room.id, schedule.teacher_id).deliver
 
 		@twilio_client = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']
 		number_to_send_to = "6145968264"
