@@ -40,9 +40,9 @@ body {
 iframe {
 	border: 0;
 
-  -moz-box-shadow: 4px 6px 4px #777; 
-  -webkit-box-shadow: 6px 4px 4px #777; 
-  box-shadow: 4px 6px 4px #777;
+  -moz-box-shadow: 3px 4px 4px #777; 
+  -webkit-box-shadow: 3px 4px 4px #777; 
+  box-shadow: 3px 4px 4px #777;
 }
 
 .about_text_container{
@@ -51,8 +51,9 @@ iframe {
 	background-color: #fc9d47;
 	float: right;
 	margin-left: 10px;
-	background-color:#303433;background-color:rgba(252,157,71,.90);-moz-box-shadow:4px 6px 4px #777;
-	-webkit-box-shadow:4px 6px 4px #777;box-shadow: 4px 6px 4px #777;border:none;
+	background-color:#303433;background-color:rgba(252,157,71,.90);-moz-box-shadow:3px 4px 4px #777;
+	-webkit-box-shadow:3px 4px 4px #777;box-shadow: 3px 4px 4px #777;border:none;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#777', Direction=145, Strength=3);
 }
 
 .about_name_container{
@@ -85,14 +86,11 @@ iframe {
 }
 
 .moolango-box{
-	overflow:hidden;background-color:#303433;background-color:rgba(113,190,236,.90);-moz-box-shadow:4px 6px 4px #777;
-	-webkit-box-shadow:4px 6px 4px #777;box-shadow: 4px 6px 4px #777;border:none;
+	overflow:hidden;background-color:#303433;background-color:rgba(113,190,236,.90);-moz-box-shadow:3px 4px 4px #777;
+	-webkit-box-shadow:3px 4px 4px #777;box-shadow: 3px 4px 4px #777;border:none;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#777', Direction=145, Strength=3);
 }
 
-.moolango-box-orange{
-	overflow:hidden;background-color:#303433;background-color:rgba(252,157,71,.90);-moz-box-shadow:4px 6px 4px #777;
-	-webkit-box-shadow:4px 6px 4px #777;box-shadow: 4px 6px 4px #777;border:none;
-}
 //.moolango-box:hover{
 //	background-color:#303433;background-color:rgba(255,255,255,.06);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);
 //	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.8);box-shadow:inset 0 0 16px rgba(255,255,255,.12);
@@ -325,15 +323,17 @@ iframe {
 }
 
 .one-edge-shadow {
-	-webkit-box-shadow: 0 8px 6px -4px grey;
-	   -moz-box-shadow: 0 8px 6px -4px grey;
-	        box-shadow: 0 8px 6px -4px grey;
+	-webkit-box-shadow: 2px 2px 4px grey;
+	   -moz-box-shadow: 2px 2px 4px grey;
+	        box-shadow: 2px 2px 4px grey;
+					filter: progid:DXImageTransform.Microsoft.Shadow(color='grey', Direction=145, Strength=3);
 }
 
 .one-edge-shadow-selected {
-	-webkit-box-shadow: 0 0 8px 3px yellow;
-	   -moz-box-shadow: 0 0 8px 3px yellow;
-	        box-shadow: 0 0 8px 3px yellow;
+	-webkit-box-shadow: 0 0 6px 4px yellow;
+	   -moz-box-shadow: 0 0 6px 4px yellow;
+	        box-shadow: 0 0 6px 4px yellow;
+					filter: progid:DXImageTransform.Microsoft.Shadow(color='yellow', Direction=145, Strength=3);
 }
 
 .upgrade-link a:link {color:#0000FF; }
