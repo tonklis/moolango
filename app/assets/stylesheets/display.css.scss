@@ -51,9 +51,8 @@ iframe {
 	background-color: #fc9d47;
 	float: right;
 	margin-left: 10px;
-	background-color:#303433;background-color:rgba(252,157,71,.90);-moz-box-shadow:3px 4px 4px #777;
+	background-color:rgba(252,157,71,.90);-moz-box-shadow:3px 4px 4px #777;
 	-webkit-box-shadow:3px 4px 4px #777;box-shadow: 3px 4px 4px #777;border:none;
-	filter: progid:DXImageTransform.Microsoft.Shadow(color='#777', Direction=145, Strength=3);
 }
 
 .about_name_container{
@@ -86,9 +85,8 @@ iframe {
 }
 
 .moolango-box{
-	overflow:hidden;background-color:#303433;background-color:rgba(113,190,236,.90);-moz-box-shadow:3px 4px 4px #777;
+	overflow:hidden;background-color:rgba(113,190,236,.90);-moz-box-shadow:3px 4px 4px #777;
 	-webkit-box-shadow:3px 4px 4px #777;box-shadow: 3px 4px 4px #777;border:none;
-	filter: progid:DXImageTransform.Microsoft.Shadow(color='#777', Direction=145, Strength=3);
 }
 
 //.moolango-box:hover{
@@ -326,14 +324,13 @@ iframe {
 	-webkit-box-shadow: 2px 2px 4px grey;
 	   -moz-box-shadow: 2px 2px 4px grey;
 	        box-shadow: 2px 2px 4px grey;
-					filter: progid:DXImageTransform.Microsoft.Shadow(color='grey', Direction=145, Strength=3);
 }
 
 .one-edge-shadow-selected {
 	-webkit-box-shadow: 0 0 6px 4px yellow;
 	   -moz-box-shadow: 0 0 6px 4px yellow;
 	        box-shadow: 0 0 6px 4px yellow;
-					filter: progid:DXImageTransform.Microsoft.Shadow(color='yellow', Direction=145, Strength=3);
+					filter: progid:DXImageTransform.Microsoft.Shadow(color='grey', Direction=100, Strength=2);
 }
 
 .upgrade-link a:link {color:#0000FF; }
