@@ -8,34 +8,43 @@
 		<div class="landing_right_hemisphere">
 			<div class="moolango-box">
 				<div class="moolango-box-inner">
-					<h2 class="landing_header" style="text-align: left;">
-						Practice with native speakers
-					</h2>
-					<br />
-					<div class="body_text">
-						<p> Talk about stuff you love. </p>
-					</div>
-					<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
-						<div class="get_started_button">
-							<%= link_to "GET STARTED!", :signup %>
+					<div style="float: right; width: 70%;">
+						<div style="float: left;">
+							<h2 class="landing_header" style="text-align: left;">
+								Practice a language 
+							</h2>
+							<p style="color: #FFFFFF; font-size: 12px;">(English and Spanish available)</p>
+							<br />
+							<div class="body_text">
+								<ul>
+									<li>Talk with native speakers</li>
+									<li>Pick topics you love</li>
+									<li>No need to swap Skype names</li>
+									<li>First conversation is FREE</li>
+								</ul>
+							</div>							
 						</div>
+						<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
+							<div class="get_started_button">
+								<%= link_to "GET STARTED!", :signup %>
+							</div>
+						</div>
+					</div>
+					<div stye="float: right;">
+						<%= image_tag "webpage/topics_conversations.png", :alt => "topics and conversations", :style=>"width: 25%;" %>
 					</div>
 				</div>
 			</div>
 			<br /> <br /> <br />
 			<div class="moolango-box">
 				<div class="moolango-box-inner">
-					<h2 class="landing_header" style="text-align: left;">
-						Make some money
-					</h2>
-					<br />
-					<div class="body_text">
-						<p> Sign up, speak your language, and earn some money. </p>
-					</div>
 					<div class="landing_get_started_button" onclick="window.open('<%= new_earner_form_path %>', '_self');">
-						<div class="get_started_button">
+						<div class="get_started_button" style="float: right;">
 							<%= link_to "GET YOUR INVITE!", new_earner_form_path %>
 						</div>
+					</div>
+					<div class="body_text" style="float: left; margin-top: 10px; width: 50%;">
+						<p> Want to make money speaking your language? </p>
 					</div>
 				</div>
 			</div>
