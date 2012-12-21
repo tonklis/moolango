@@ -1,0 +1,43 @@
+<h1>Listing conversations</h1>
+
+<table>
+  <tr>
+    <th>When</th>
+    <th>Language</th>
+    <th>Topic</th>
+    <th>Duration</th>
+    <th>Buyer</th>
+    <th>Seller</th>
+    <th>Status</th>
+    <th>Opentok session</th>
+    <th>Internal session</th>
+    <th>Purpose</th>
+    <th>Slide deck</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @conversations.each do |conversation| %>
+  <tr>
+    <td><%= conversation.when %></td>
+    <td><%= conversation.language_id %></td>
+    <td><%= conversation.topic %></td>
+    <td><%= conversation.duration %></td>
+    <td><%= conversation.buyer_id %></td>
+    <td><%= conversation.seller_id %></td>
+    <td><%= conversation.status_id %></td>
+    <td><%= conversation.opentok_session %></td>
+    <td><%= conversation.internal_session %></td>
+    <td><%= conversation.purpose %></td>
+    <td><%= conversation.slide_deck %></td>
+    <td><%= link_to 'Show', conversation %></td>
+    <td><%= link_to 'Edit', edit_conversation_path(conversation) %></td>
+    <td><%= link_to 'Destroy', conversation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Conversation', new_conversation_path %>

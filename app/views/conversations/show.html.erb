@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>When:</b>
+  <%= @conversation.when %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%= @conversation.language_id %>
+</p>
+
+<p>
+  <b>Topic:</b>
+  <%= @conversation.topic %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @conversation.duration %>
+</p>
+
+<p>
+  <b>Buyer:</b>
+  <%= @conversation.buyer_id %>
+</p>
+
+<p>
+  <b>Seller:</b>
+  <%= @conversation.seller_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @conversation.status_id %>
+</p>
+
+<p>
+  <b>Opentok session:</b>
+  <%= @conversation.opentok_session %>
+</p>
+
+<p>
+  <b>Internal session:</b>
+  <%= @conversation.internal_session %>
+</p>
+
+<p>
+  <b>Purpose:</b>
+  <%= @conversation.purpose %>
+</p>
+
+<p>
+  <b>Slide deck:</b>
+  <%= @conversation.slide_deck %>
+</p>
+
+
+<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
+<%= link_to 'Back', conversations_path %>

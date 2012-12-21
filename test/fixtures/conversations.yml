@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  when: 
+  language_id: 
+  topic: 
+  duration: 
+  buyer_id: 
+  seller_id: 
+  status_id: 
+  opentok_session: 
+  internal_session: 
+  purpose: 
+  slide_deck: MyString
+
+two:
+  when: 
+  language_id: 
+  topic: 
+  duration: 
+  buyer_id: 
+  seller_id: 
+  status_id: 
+  opentok_session: 
+  internal_session: 
+  purpose: 
+  slide_deck: MyString

@@ -14,13 +14,13 @@
 
 	<% if current_user.credits > 0 %>
 		<div class="row">
-				<%= link_to image_tag("webpage/schedule_conversation.gif", :alt => "schedule button", :class=>"moolango-box"), :new_schedule_ui %>
+				<%= link_to image_tag("webpage/schedule_conversation.gif", :alt => "schedule button", :class=>"moolango-box"), :new_conversation_ui %>
 				<br /> <br />
 		</div>
 	<% end %>
+	<!--
 	<% if @schedule %>
 		<div class="row">
-			<!-- REVIEW THIS IF CONDITIONAL, MIGHT NOT BE NECCESARY -->
 			<% if current_user.credits > 0 %>
 				<%= link_to image_tag("webpage/practice_now.gif", :alt => "practice button", :class=>"moolango-box", :onclick=>"simpleRedirect(currentUserId,'#{@schedule.id}');"), "#myModal", "data-toggle"=>"modal", "data-backdrop"=>"static", "data-keyboard"=>"false" %>
 			<% else %>
@@ -31,6 +31,7 @@
 			<br /> <br />
 		</div>
 	<% end %>
+	-->
 	</div>
 </div>
 

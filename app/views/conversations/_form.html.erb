@@ -1,0 +1,61 @@
+<%= form_for(@conversation) do |f| %>
+  <% if @conversation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@conversation.errors.count, "error") %> prohibited this conversation from being saved:</h2>
+
+      <ul>
+      <% @conversation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :when %><br />
+    <%= f.text_field :when %>
+  </div>
+  <div class="field">
+    <%= f.label :language_id %><br />
+    <%= f.text_field :language_id %>
+  </div>
+  <div class="field">
+    <%= f.label :topic %><br />
+    <%= f.text_field :topic %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br />
+    <%= f.text_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :buyer_id %><br />
+    <%= f.text_field :buyer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :seller_id %><br />
+    <%= f.text_field :seller_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status_id %><br />
+    <%= f.text_field :status_id %>
+  </div>
+  <div class="field">
+    <%= f.label :opentok_session %><br />
+    <%= f.text_field :opentok_session %>
+  </div>
+  <div class="field">
+    <%= f.label :internal_session %><br />
+    <%= f.text_field :internal_session %>
+  </div>
+  <div class="field">
+    <%= f.label :purpose %><br />
+    <%= f.text_field :purpose %>
+  </div>
+  <div class="field">
+    <%= f.label :slide_deck %><br />
+    <%= f.text_field :slide_deck %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

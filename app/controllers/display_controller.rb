@@ -42,7 +42,7 @@ class DisplayController < ApplicationController
 	def action
 		# on standby till we define welcome message
 		#@first_signin_flag = params[:fs]
-		@schedule = Schedule.find_available(current_user)
+		# REMOVE @schedule = Schedule.find_available(current_user)
 	end
 
 	def rooms_listing

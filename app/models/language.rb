@@ -1,6 +1,5 @@
 class Language < ActiveRecord::Base
 
-	has_many :rooms
+	belongs_to :conversation
 	has_many :hints
-
 end

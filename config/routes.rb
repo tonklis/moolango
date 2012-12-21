@@ -1,4 +1,6 @@
 Moolango::Application.routes.draw do
+  resources :conversations
+
   resources :feedbacks
 
   resources :transactions
@@ -11,73 +13,73 @@ Moolango::Application.routes.draw do
 
   resources :evaluation_buyers
 
-	resources :feedback_forms
+  resources :feedback_forms
 
-	resources :earner_forms
+  resources :earner_forms
 
-	resources :languages
+  resources :languages
+  
+  resources :hints
 
-	resources :hints
+  resources :messages
 
-	resources :messages
+  resources :topics
 
-	resources :topics
+  resources :rooms
 
-	resources :rooms
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"}
 
-	devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"}
-
-	resources :users
+  resources :users
 	
-	devise_scope :user do
-  	get "logout", :to => "devise/sessions#destroy"
-		get "signin", :to => "devise/sessions#new"
-		get "signup", :to => "devise/registrations#new"
-	end
+  devise_scope :user do
+    get "logout", :to => "devise/sessions#destroy"
+	get "signin", :to => "devise/sessions#new"
+	get "signup", :to => "devise/registrations#new"
+    end
 
-	match 'interaction' => 'interaction#create', :as => :interaction
+  match 'interaction' => 'interaction#create', :as => :interaction
 
-	match 'language_selection' => 'display#language', :as => :language_selection
+  match 'language_selection' => 'display#language', :as => :language_selection
 	
-	match 'language_selection_earners' => 'display#language_earners', :as => :language_selection_earners
+  match 'language_selection_earners' => 'display#language_earners', :as => :language_selection_earners
 
-	match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
+  match 'rooms_listing' => 'display#rooms_listing', :as => :rooms_listing
 
-	match 'rooms/available' => 'rooms#available' 
+  match 'rooms/available' => 'rooms#available' 
 	
-	match 'action' => 'display#action', :as => :action
+  match 'action' => 'display#action', :as => :action
 	
-	match 'topics_list' => 'display#topics_list', :as => :topics_list
+  match 'topics_list' => 'display#topics_list', :as => :topics_list
 	
-	match 'topics_list_earners' => 'display#topics_list_earners', :as => :topics_list_earners
+  match 'topics_list_earners' => 'display#topics_list_earners', :as => :topics_list_earners
 	
-	match 'topics_list_feedback' => 'display#topics_list_feedback', :as => :topics_list_feedback
+  match 'topics_list_feedback' => 'display#topics_list_feedback', :as => :topics_list_feedback
 	
-	match 'thank_you' => 'display#thank_you', :as => :thank_you
+  match 'thank_you' => 'display#thank_you', :as => :thank_you
 	
-	match 'about' => 'display#about', :as => :about
+  match 'about' => 'display#about', :as => :about
 	
-	match 'faq' => 'display#faq', :as => :faq
+  match 'faq' => 'display#faq', :as => :faq
 
-	match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
+  match 'conversation_room/:id' => 'display#conversation_room', :as => :conversation_room
 	
-	match 'come_back_later' => 'display#come_back_later', :as => :come_back_later
-	
-	match 'admin_room' => 'display#admin_room', :as => :admin_room
+  match 'come_back_later' => 'display#come_back_later', :as => :come_back_later
+
+  match 'admin_room' => 'display#admin_room', :as => :admin_room
 		
-	match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
+  match 'join_conversation_room/:id' => 'display#join_conversation_room', :as => :join_conversation_room
 
-	match 'messages/topic_redirect' => 'messages#topic_redirect', :as => :topic_redirect
+  match 'messages/topic_redirect' => 'messages#topic_redirect', :as => :topic_redirect
 	
-	match 'messages/topic_feedback' => 'messages#topic_feedback', :as => :topic_feedback
+  match 'messages/topic_feedback' => 'messages#topic_feedback', :as => :topic_feedback
 	
-	match 'messages/simple_redirect' => 'messages#simple_redirect', :as => :simple_redirect
+  match 'messages/simple_redirect' => 'messages#simple_redirect', :as => :simple_redirect
 
-	match 'messages/confirm_chat' => 'messages#confirm_chat'
+  match 'messages/confirm_chat' => 'messages#confirm_chat'
 	
-	match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
+  match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
 	
-	match 'view_video' => 'display#view_video', :as => :view_video
+  match 'view_video' => 'display#view_video', :as => :view_video
 
   match 'paypal_shopping_cart' => 'paypal#shopping_cart', :as => :paypal_shopping_cart
 
@@ -89,21 +91,25 @@ Moolango::Application.routes.draw do
 
   match 'paypal_receipt' => 'paypal#receipt', :as => :paypal_receipt
 	
-	match 'users/new_balance' => 'users#new_balance', :as => :new_balance
+  match 'users/new_balance' => 'users#new_balance', :as => :new_balance
 
-	match 'rooms/cancel' => 'rooms#cancel'
+  match 'rooms/cancel' => 'rooms#cancel'
 
-	match 'rooms/add_record_data/:id' => 'rooms#add_record_data'
+  match 'rooms/add_record_data/:id' => 'rooms#add_record_data'
 	
-	match 'rooms/keepalive/:id' => 'rooms#keepalive'
+  match 'rooms/keepalive/:id' => 'rooms#keepalive'
 	
-	match 'rooms/reactivate/:id' => 'rooms#reactivate'
+  match 'rooms/reactivate/:id' => 'rooms#reactivate'
 	
-	match 'rooms/verify/:id' => 'rooms#verify'
+  match 'rooms/verify/:id' => 'rooms#verify'
 	
-	match 'new_schedule_ui' => 'schedules#new_schedule_ui', :as => :new_schedule_ui
+  match 'new_conversation_ui' => 'conversations#new_conversation_ui', :as => :new_conversation_ui
+
+  match 'create_conversation_ui' => 'conversations#create_conversation_ui', :as => :create_conversation_ui	
+
+  #match 'new_schedule_ui' => 'schedules#new_schedule_ui', :as => :new_schedule_ui
 	
-	match 'create_schedule_ui' => 'schedules#create_schedule_ui', :as => :create_schedule_ui
+  #match 'create_schedule_ui' => 'schedules#create_schedule_ui', :as => :create_schedule_ui
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

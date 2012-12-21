@@ -6,4 +6,6 @@ tmp/
 *.swp
 *.swn
 *.swo
+*.*~
+*~
 config/environments/development.rb

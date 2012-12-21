@@ -1,3 +1,3 @@
 class EvaluationSeller < ActiveRecord::Base
-	belongs_to :room
+	belongs_to :conversation
 end

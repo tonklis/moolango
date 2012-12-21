@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217222939) do
+ActiveRecord::Schema.define(:version => 20121221003628) do
 
   create_table "billing_addresses", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(:version => 20121217222939) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conversations", :force => true do |t|
+    t.datetime "when"
+    t.integer  "language_id"
+    t.string   "topic"
+    t.integer  "duration"
+    t.integer  "buyer_id"
+    t.integer  "seller_id"
+    t.integer  "status_id"
+    t.string   "opentok_session"
+    t.string   "internal_session"
+    t.string   "purpose"
+    t.string   "slide_deck"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20121217222939) do
   end
 
   create_table "evaluation_buyers", :force => true do |t|
-    t.integer  "room_id"
+    t.integer  "conversation_id"
     t.integer  "clarity"
     t.integer  "pronunciation"
     t.integer  "fluency"
@@ -55,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20121217222939) do
   end
 
   create_table "evaluation_sellers", :force => true do |t|
-    t.integer  "room_id"
+    t.integer  "conversation_id"
     t.integer  "enjoy"
     t.integer  "recommend"
     t.integer  "helpful"
@@ -147,6 +163,11 @@ ActiveRecord::Schema.define(:version => 20121217222939) do
   create_table "schedules_topics", :id => false, :force => true do |t|
     t.integer "schedule_id"
     t.integer "topic_id"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string "name"
+    t.string "description"
   end
 
   create_table "topics", :force => true do |t|
