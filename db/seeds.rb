@@ -261,4 +261,4 @@ Status.create(:id=>1, :name=>"open", :description=>"The conversation is booked a
 Status.create(:id=>2, :name=>"closed", :description=>"The conversation took place")
 Status.create(:id=>3, :name=>"canceled", :description=>"The conversation is canceled")
 Status.create(:id=>4, :name=>"buyer absent", :description=>"The conversation didn't take place because the buyer didn't show up")
-Status.create(:id=>4, :name=>"seller absent", :description=>"The conversation didn't take place because the seller didn't show up")
+Status.create(:id=>5, :name=>"seller absent", :description=>"The conversation didn't take place because the seller didn't show up")

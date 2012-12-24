@@ -4,9 +4,10 @@
   <title>Moolango <%= @title_desc if @title_desc %></title>
 	<%= stylesheet_link_tag    "application" %>
 	<link rel="shortcut icon" href="http://24.media.tumblr.com/avatar_5449ac512dba_16.png" />	
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "uservoice/uv_snippet" %>
-  <%= javascript_include_tag "olark/olark_snippet" %>
+  	<%= javascript_include_tag "application" %>
+  	<%= javascript_include_tag "uservoice/uv_snippet" %>
+  	<%= javascript_include_tag "olark/olark_snippet" %>
+  	<script src="http://static.opentok.com/v0.91/js/TB.min.js"></script>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta property="og:title" content="MooLango" />
@@ -56,7 +57,7 @@
 										<%= link_to image_tag("webpage/logout_button.png"), :logout, :rel => "tooltip", "data-original-title" => "Logout", "data-placement"=> "left" %>
 									</div>
 									<div class="account_text">
-										<%= link_to sprintf('%s min', current_user.credits.to_i), "#", :rel=>"tooltip", "data-placement"=>"left", "data-original-title"=>"Available minutes", :id=>"minutes" %>
+										<%= link_to sprintf('%s hrs', (current_user.credits/60)), "#", :rel=>"tooltip", "data-placement"=>"left", "data-original-title"=>"Available minutes", :id=>"minutes" %>
 									</div>
 								<% else %>
 									<%= link_to image_tag("webpage/login_button.png", :alt => "Login button"), :signin %>

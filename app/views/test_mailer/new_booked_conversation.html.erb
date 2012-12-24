@@ -1,0 +1,23 @@
+<p>
+<%= @user.firstname.capitalize %>, your conversation in <%= Language.find(@conversation.language_id).name.capitalize %> about <%= @conversation.topic %> has been scheduled!
+</p>
+<br />
+<p>
+	Here are the details:
+</p>
+<ul>
+	<li>Focus: <%= @conversation.purpose %> </li>
+	<li>Date: <%= @conversation.when.in_time_zone("Eastern Time (US & Canada)").strftime("%h %d %Y, %H:%M GMT%z") %>. You can convert to your timezone <a href="http://www.thetimezoneconverter.com/" target="_blank">here</a>.</li>
+</ul>
+<br/>
+<p> A 'practice now' button will be enabled in your <a href="http://www.moolango.com/action">MooLango homepage</a> five minutes before, and five minutes after your scheduled time. </p>
+<p> For canceling or rescheduling, please let us know with 12 hours in advance replying to this e-mail. </p>
+<br/>
+<p>
+	Feel free to write us at hello@moolango.com if you have any questions.
+</p>
+<p>
+You will need Adobe Flash installed on your browser. To get the latest version for free, <a href="http://get.adobe.com/flashplayer/">click here</a>.</p>
+<br />
+<p>	Sincerily, </p>
+<p> The MooLango Team</p>

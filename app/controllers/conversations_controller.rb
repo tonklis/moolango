@@ -10,13 +10,18 @@ class ConversationsController < ApplicationController
   end
 
   def create_conversation_ui
-    params[:conversation][:user_id] = params[:user_id]
-    @conversation = Conversation.new(params[:conversation])
+    params[:conversation][:buyer_id] = params[:buyer_id]
+    opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
+    session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "enabled"}
+    open_tok_session = opentok.create_session(request.remote_addr, session_properties)
+
+    @conversation = Conversation.create_new(params[:conversation], open_tok_session)
+    #@conversation = Conversation.new(params[:conversation])
     @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
 
     respond_to do |format|
       if @conversation.save
-        TestMailer.new_scheduling(@conversation).deliver
+        TestMailer.new_booked_conversation(@conversation).deliver
 	render :contact_soon
         format.json { render json: @conversation, status: :created, location: @conversation }
 	return

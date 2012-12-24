@@ -6,6 +6,22 @@ class Conversation < ActiveRecord::Base
     has_many :evaluation_buyers
     has_many :evaluation_sellers
 	
+    def self.create_new values, opentok
+
+        conversation = Conversation.create(
+            :when => values[:when],
+            :language_id => values[:language_id],
+            :topic => values[:topic],
+            :duration => values[:duration],
+            :purpose => values[:purpose],
+            :buyer_id => values[:buyer_id],
+            :status_id => Status.find_by_name("open").id,
+            :internal_session => SecureRandom.uuid.slice(0,7),
+            :opentok_session => opentok.to_s
+        )
+        conversation
+    end
+
     def self.get_options current_user, options
         #FREE TRIALS
         if current_user.credits == 15
