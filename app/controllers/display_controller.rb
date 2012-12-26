@@ -42,7 +42,7 @@ class DisplayController < ApplicationController
 	def action
 		# on standby till we define welcome message
 		#@first_signin_flag = params[:fs]
-		# REMOVE @schedule = Schedule.find_available(current_user)
+		@conversation = current_user.next_conversation
 	end
 
 	def rooms_listing
@@ -67,18 +67,17 @@ class DisplayController < ApplicationController
 	end
 
 	def conversation_room
-		@room = Room.find(params[:id])
-		@internal_session = @room.session_id
-		@open_tok_session = @room.open_tok_session
+		@conversation = Conversation.find(params[:id])
+		@internal_session = @conversation.internal_session
+		@open_tok_session = @conversation.opentok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::PUBLISHER, :connection_data => current_user.firstname)
 		# @topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		@language_id = @room.language_id
-		@schedule = @room.schedule
+		@language_id = @conversation.language_id
+		#@schedule = @room.schedule
 		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		@bucket_location = @schedule.bucket
-		@room.engage
+		@bucket_location = @conversation.slide_deck
 		render :layout => "rooms"
 	end
 
@@ -86,19 +85,17 @@ class DisplayController < ApplicationController
 	end
 
 	def join_conversation_room
-
-		@room = Room.find(params[:id])
-		@internal_session = @room.session_id
-		@open_tok_session = @room.open_tok_session
+		@conversation = Conversation.find(params[:id])
+		@internal_session = @conversation.internal_session
+		@open_tok_session = @conversation.opentok_session
 		opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
 		@token = opentok.generate_token(:session_id => @open_tok_session, :role => OpenTok::RoleConstants::PUBLISHER, :connection_data => current_user.firstname)
 		# @topic_id = @room.topic_id
 		@api_key = ENV['OPENTOK_API_KEY']
-		@language_id = @room.language_id
-		@schedule = @room.schedule
+		@language_id = @conversation.language_id
+		#@schedule = @room.schedule
 		# @hints = Hint.per_topic_and_language(@topic_id, @language_id)
-		@bucket_location = @schedule.bucket
-		@room.engage
+		@bucket_location = @conversation.slide_deck
 		render :layout => "rooms"
 	end
 	

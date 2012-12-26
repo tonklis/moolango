@@ -51,5 +51,14 @@ class User < ActiveRecord::Base
 			raise 'Not enough money'	
 		end
 	end
+
+	def next_conversation
+		self.buyer_conversations.each do |conversation|
+			if (conversation.status_id == Status.find_by_name("open").id) && (Time.now >= (conversation.when - 5.minutes)) && ( Time.now <= (conversation.when + 5.minutes))
+				return conversation
+			end
+		end
+		return nil
+	end
 	
 end

@@ -19,8 +19,8 @@
 	var api_key = '<%= @api_key %>';
 	var token = '<%= @token %>';
 	var credits = '<%= current_user.credits %>';
-	var room_id = '<%= @room.id %>';
-	var total_time = 60 * <%= @schedule.length %>;
+	var conversation_id = '<%= @conversation.id %>';
+	var total_time = 60 * <%= @conversation.duration %>;
 
 	window.onbeforeunload = function(){
 		openDisconnectDialog();
@@ -67,7 +67,7 @@
 			<div id="endCallDiv">
 				<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
 					<%= hidden_field_tag :channel, @internal_session %>
-					<%= hidden_field_tag :room_id, @room.id if @room%>
+					<%= hidden_field_tag :conversation_id, @conversation.id if @conversation%>
 					<%= submit_tag "", :class => "endCallButton", :style => "border: none;", :title => "End Call"%>
 				<% end %>
 			</div><br/>
@@ -116,7 +116,7 @@
 						<%= f.text_field :content, :onclick => "$('#chat_field')[0].value='';", :id=>"chat_field", :onkeypress=>"return validateEnterKey(event);" %>
 						<%= f.hidden_field :channel, :value => @internal_session, :id => "internal_session" %>
 						<%= f.hidden_field :origin, :value => true, :id=>"origin_field" %>
-						<%= f.hidden_field :room_id, :value => @room.id %>
+						<%= f.hidden_field :conversation_id, :value => @conversation.id %>
 						<%= f.hidden_field :user_id, :value => current_user.id %>
 						<%= button_tag "Send", :class => "conversation_button", :onclick => "submitWithMessage();", :type => "button" %>
 					<% end %>
@@ -216,7 +216,7 @@
 					<%= f.hidden_field :improvement %>
 				</div>
 				<br/><br/>
-				<%= f.hidden_field :room_id, :value => @room.id %>
+				<%= f.hidden_field :conversation_id, :value => @conversation.id %>
 				<div class="actions">
 					<%= f.submit "SEND", :class => "next_button" %>
 				</div>

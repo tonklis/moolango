@@ -25,18 +25,17 @@ class Conversation < ActiveRecord::Base
     def self.get_options current_user, options
         #FREE TRIALS
         if current_user.credits == 15
-	    return [['15 minutes', 15]]
-	else
-	    total_time = 0
-    	    current_user.buyer_conversations.each do |conversation|
-      	    	total_time += conversation.duration unless conversation.status_id != Status.find_by_name("open").id
-    	    end
+	       return [['15 minutes', 15]]
+        else
+	       total_time = 0
+    	   current_user.buyer_conversations.each do |conversation|
+                total_time += conversation.duration unless conversation.status_id != Status.find_by_name("open").id
+    	   end
     	 
-	    if (current_user.credits - total_time < 60)
-	        options.pop
+    	    if (current_user.credits - total_time < 60)
+    	        options.pop
+    	    end
+    	    return options
 	    end
-	    return options
-	end
     end
-
 end
