@@ -39,6 +39,10 @@ class DisplayController < ApplicationController
 		@notify = EarnerForm.notify(current_user.id)
 	end
 
+	def dashboard
+    	@conversations = current_user.buyer_conversations.includes(:language, :status)
+  	end
+
 	def action
 		# on standby till we define welcome message
 		#@first_signin_flag = params[:fs]

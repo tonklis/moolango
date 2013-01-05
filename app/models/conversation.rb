@@ -1,8 +1,8 @@
 class Conversation < ActiveRecord::Base
     belongs_to :buyer, :class_name => "User", :foreign_key => :buyer_id
     belongs_to :seller, :class_name => "User", :foreign_key => :seller_id
-    has_many :languages
-    has_many :statuses
+    belongs_to :language
+    belongs_to :status
     has_many :evaluation_buyers
     has_many :evaluation_sellers
 	
@@ -20,6 +20,13 @@ class Conversation < ActiveRecord::Base
             :opentok_session => opentok.to_s
         )
         conversation
+    end
+
+    def is_ready
+        if (self.status_id == Status.find_by_name("open").id) && (Time.now >= (self.when - 5.minutes)) && ( Time.now <= (self.when + 5.minutes))
+            return true
+        end
+        return false
     end
 
     def self.get_options current_user, options

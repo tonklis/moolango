@@ -1,0 +1,49 @@
+<div class="landing_header">
+	<%= image_tag "webpage/schedule_a_conversation.png", :alt => "schedule a conversation"%>
+</div>
+<br /><br />
+<div class="span8 offset2 moolango-box" >
+	<div style="margin: 15px;">
+		<table class="table table-bordered" style="background-color: white;" >
+			<thead>
+				<tr style="background-color: #9bd8f7; color: white;">
+					<th>When</th>
+					<th>Topic</th>
+					<th>Duration</th>
+					<th>Language</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody style="color: #3c89bd;">
+				<% count = 0 %>
+				<% @conversations.each do |conversation| %>
+				<% count+= 1 %>
+				<% if count % 2 != 0 %>
+				<tr style="">
+				<% else %>
+				<tr style="background-color: #d4effa">
+				<% end %>
+					<!-- s.when.in_time_zone("Eastern Time (US & Canada)").strftime("%A %b %d, %Y %H:%M %Z") -->
+					<td> <%= conversation.when %> </td>
+					<td> <%= conversation.topic %>	</td>
+					<td> <%= conversation.duration %> minutes </td>
+					<td> <%= conversation.language.name %> </td>
+					<% if conversation.is_ready %>
+					<td class="orange-link"> <%= link_to "Enter room", :controller => "display", :action => "conversation_room", :id => conversation.id %></td>
+					<% else %>
+					<td> Room not ready</td>
+					<% end %>
+				</tr>
+				<!--tr style="background-color: #d4effa">
+					<td> Saturday Dec 22, 2012 20:00 EST	</td>
+					<td> Chuck Norris	</td>
+					<td> 30 minutes	</td>
+					<td> English	</td>
+					<td> Room not yet ready</td>
+				</tr-->
+				<% end %>
+			</tbody>
+		</table>
+		<button class="next_button" style="float: right; margin-bottom: 15px;">Book a conversation</button>
+	</div>
+</div>

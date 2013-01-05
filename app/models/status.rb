@@ -1,3 +1,3 @@
 class Status < ActiveRecord::Base
-	belongs_to :conversation
+	has_many :conversations
 end

@@ -107,6 +107,8 @@ Moolango::Application.routes.draw do
 
   match 'create_conversation_ui' => 'conversations#create_conversation_ui', :as => :create_conversation_ui	
 
+  match 'dashboard' => 'display#dashboard', :as => :dashboard
+
   #match 'new_schedule_ui' => 'schedules#new_schedule_ui', :as => :new_schedule_ui
 	
   #match 'create_schedule_ui' => 'schedules#create_schedule_ui', :as => :create_schedule_ui
