@@ -7,10 +7,24 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new
     @conversation.status_id = Status.find_by_name("open").id
     @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
+    @time_start = 9
+    @offset = '-0500' 
+    if (current_user.timezone != '')
+      start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(current_user.timezone)
+      @time_start = start.hour
+      hours = (start.utc_offset/60/60).to_s
+      if (hours.length == 2)
+        @offset = hours[0] == '-' ? hours[0] + '0' + hours[1] + '00' : hours + '00'
+      elsif (hours.length < 2)
+        @offset = '0' + hours + '00'
+      else
+        @offset = hours + '00'
+      end
+    end
   end
 
   def create_conversation_ui
-    params[:conversation][:buyer_id] = params[:buyer_id]
+    params[:conversation][:buyer_id] = params[:buyer_id]    
     opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
     session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "enabled"}
     open_tok_session = opentok.create_session(request.remote_addr, session_properties)
@@ -18,9 +32,24 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.create_new(params[:conversation], open_tok_session)
     #@conversation = Conversation.new(params[:conversation])
     @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
+    @time_start = 9
+    @offset = '-0500' 
+    if (current_user.timezone != '')
+      start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(current_user.timezone)
+      @time_start = start.hour
+      hours = (start.utc_offset/60/60).to_s
+      if (hours.length == 2)
+        @offset = hours[0] == '-' ? hours[0] + '0' + hours[1] + '00' : hours + '00'
+      elsif (hours.length < 2)
+        @offset = '0' + hours + '00'
+      else
+        @offset = hours + '00'
+      end
+    end
 
     respond_to do |format|
       if @conversation.save
+        current_user.update_timezone params[:user][:time_zone]
         TestMailer.new_booked_conversation(@conversation).deliver
 	render :contact_soon
         format.json { render json: @conversation, status: :created, location: @conversation }
@@ -31,6 +60,22 @@ class ConversationsController < ApplicationController
       end
     end
   end 
+
+  def calculate_timezone
+    tz = params[:timezone]
+    start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(tz)
+    hours = (start.utc_offset/60/60).to_s
+    if (hours.length == 2)
+      offset = hours[0] == '-' ? hours[0] + '0' + hours[1] + '00' : hours + '00'
+    elsif (hours.length < 2)
+      offset = '0' + hours + '00'
+    else
+      offset = hours + '00'
+    end
+    respond_to do |format|
+      format.json { render json: {:offset => offset, :time_start => start.hour} }
+    end
+  end
 
   # GET /conversations
   # GET /conversations.json

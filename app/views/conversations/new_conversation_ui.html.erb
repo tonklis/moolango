@@ -1,4 +1,7 @@
 <script type="text/javascript">
+	
+	var time_start = parseInt('<%= @time_start %>')
+	var time_zone = '<%= @offset %>'
 
 	function selected(desc, show){
 
@@ -20,20 +23,54 @@
 		$('#conversation_topic')[0].value = '';
 	}
 
-	$(function(){
-			$("#conversation_when").datetimepicker({
+	function setPicker(tz, min, max) {
+		$("#conversation_when").datetimepicker({
+				controlType: 'select',
 				dateFormat: "yy-mm-dd",
 				minDate: 2,
 				maxDate: 20,
-				timeFormat: 'hh:mm z',
+				timeFormat: 'hh:mm tt z',
 				showTimezone: false,
-				timezoneList: [{ value: '-0500', label: 'Eastern Time' }],
+				timezoneList: [{value: tz, label: ''}],
 				stepMinute: 30,
-				hourMin: 9,
-				hourMax: 20
-				});
-			$('#conversation_topic').hide();
+				hourMin: min,
+				hourMax: max
+		});
+		//[{ value: '-0500', label: 'Eastern Time' }],
+	}
+
+	function updateTimezone(newTz) {
+		$.ajax({	
+			type: "POST", 
+  			url: "calculate_timezone",
+  			data: 'timezone=' + newTz,
+			beforeSend: function(xhr) {
+    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  		},
+			success: function(data){
+				time_zone = data.offset;
+				time_start = parseInt(data.time_start)
+				$("#conversation_when").datetimepicker('option', 'hourMin', time_start)
+				$("#conversation_when").datetimepicker('option', 'hourMax', time_start + 11)
+				$("#conversation_when").datetimepicker('option', 'timezoneList', [{value: time_zone, label: ''}])
+				$("#conversation_when").datetimepicker('setDate', '')
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	}
+
+	$(function(){
+		setPicker(time_zone, time_start, time_start + 11)
+		$('#conversation_topic').hide();
+
+		$("#user_time_zone").change(function() {
+			newTz = $(this).val();
+			updateTimezone(newTz)
+		});
 	});
+
 </script>
 <style>
 .field_with_errors { display: inline; }
@@ -52,7 +89,7 @@
 					<% end %>
 					</ul>
 				</div>
-				<% end %>
+			<% end %>
 			<div class="earner_body moolango-box"  style="height: auto;">
 				<br />
 				<div class="earner_form">
@@ -60,7 +97,7 @@
 					<div class="field">
 						<%= f.label "What language do you want to practice?" %>
 						<%= f.select :language_id, [['English','1'],['Spanish','2']] %>
-					</div> <br />
+					</div>
 					<div class="field">
 						<%= f.label "What would you like to focus on this session?" %>
 						<%= f.select :purpose, [['vocabulary','vocabulary'],['fun','fun'],['pace','pace'],['pronunciation','pronunciation']], :prompt => true %>
@@ -68,48 +105,55 @@
 					<div class="field">
 						<%= f.label "Which topic would you like to talk about?" %>
 					</div>
-		<div id="content" style="height: auto; width: auto; overflow: auto;">
-			
-			<div id="apple_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
-				<%= image_tag("topics/apple_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('apple', false);") %>
-			</div>
-			<div id="beatles_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
-				<%= image_tag("topics/the_beatles_s.jpg", :style=>"height: 100%; width: 100%;", :onclick=>"selected('beatles', false);") %>
-			</div>
-			<div id="food_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
-				<%= image_tag("topics/food_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('food', false);") %>
-			</div>
-			<!-- <div class="box one-edge-shadow">
-				<%= link_to image_tag("topics/beer_pong.gif"), "/" %>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= link_to image_tag("topics/fraternities.gif"), "/" %>
-			</div>
-			<div class="box one-edge-shadow">
-				<%= link_to image_tag("topics/tail_gate.gif"), "/" %>
-			</div> -->
-			<div id="pick_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 5px;">
-				<%= image_tag("topics/pick_your_own_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('Eg. movies, music, football', true);") %>
-			</div>
-			
-		</div>
-		<div>
-			<%= f.text_field :topic, :value => "", :onfocus => "resetField();" %>
-		</div>
-		<br/>
 					
-				  <div class="field">
-						<p> When do you want to practice? (in EST, GMT-05:00) </p>
-						<%= f.text_field :when %> <%= f.select :duration, @conversation_options %> <br />
-						<p style="text-align: center;">
-						<%= link_to 'Convert to your timezone here', 'http://www.thetimezoneconverter.com/', :target => "_blank", :class => "linkText" %>
-						</p>
+					<div id="content" style="height: auto; width: auto; overflow: auto;">
+			
+						<div id="apple_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
+							<%= image_tag("topics/apple_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('apple', false);") %>
+						</div>
+						<div id="beatles_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
+							<%= image_tag("topics/the_beatles_s.jpg", :style=>"height: 100%; width: 100%;", :onclick=>"selected('beatles', false);") %>
+						</div>
+						<div id="food_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
+							<%= image_tag("topics/food_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('food', false);") %>
+						</div>
+						<!-- <div class="box one-edge-shadow">
+							<%= link_to image_tag("topics/beer_pong.gif"), "/" %>
+						</div>
+						<div class="box one-edge-shadow">
+							<%= link_to image_tag("topics/fraternities.gif"), "/" %>
+						</div>
+						<div class="box one-edge-shadow">
+							<%= link_to image_tag("topics/tail_gate.gif"), "/" %>
+						</div> -->
+						<div id="pick_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 5px;">
+							<%= image_tag("topics/pick_your_own_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('Eg. movies, music, football', true);") %>
+						</div>
+			
+					</div>
+					<div>
+						<%= f.text_field :topic, :value => "", :onfocus => "resetField();" %>
+					</div>
+					<br/>
+					<div class="field">
+						<p> Select the timezone where you live </p>
+						<%= time_zone_select(:user, :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => false, :default => current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)') %>
+					</div>
+				  	<div class="field">
+						<p> When do you want to practice? </p>
+						<%= f.text_field :when %> 
+					</div> 
+
+					<div class="field">
+						<p> How many minutes do you want to practice?</p>
+						<%= f.select :duration, @conversation_options %>
 						<%= hidden_field_tag :buyer_id, current_user.id %>
-					</div> <br />
+					</div>
+
 					<div class="actions" style="text-align: center">
 							<%= f.submit "Schedule now!", :class => "next_button" %>
 					</div>
-				<% end %>
+					<% end %>
 				</div>
 			</div>
 		</div>

@@ -43,6 +43,11 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def update_timezone timezone
+		self.update_attribute(:timezone, timezone)
+		return self
+	end
+
 	def charge_call total_time
 		if (self.credits >= (total_time.to_f / 60) )
 			self.update_attribute(:credits, self.credits - (total_time.to_f/60) )
