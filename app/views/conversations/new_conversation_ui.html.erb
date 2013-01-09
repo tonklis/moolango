@@ -43,7 +43,7 @@
 		$.ajax({	
 			type: "POST", 
   			url: "calculate_timezone",
-  			data: 'timezone=' + newTz,
+  			data: 'timezone=' + encodeURIComponent(newTz), //encodear el timezone
 			beforeSend: function(xhr) {
     		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
   		},
