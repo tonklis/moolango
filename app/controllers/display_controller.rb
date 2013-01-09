@@ -1,13 +1,13 @@
 class DisplayController < ApplicationController
 
 	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :topics_list_feedback, :thank_you, :about, :faq]
-	before_filter :set_timezone
+	before_filter :set_timezone, :except => [:index, :paypal_purchase, :topics_list_feedback, :thank_you, :about, :faq]
 
 	#negative to remove open window constraint
 	AVAILABLE_TIME = -1
 
 	def set_timezone
-		Time.zone = current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)'
+		Time.zone = current_user.timezone != nil && current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)'
 	end
 
 	def index

@@ -137,7 +137,7 @@
 					<br/>
 					<div class="field">
 						<p> Select the timezone where you live </p>
-						<%= time_zone_select(:user, :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => false, :default => current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)') %>
+						<%= time_zone_select(:user, :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => false, :default => current_user.timezone != nil && current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)') %>
 					</div>
 				  	<div class="field">
 						<p> When do you want to practice? </p>

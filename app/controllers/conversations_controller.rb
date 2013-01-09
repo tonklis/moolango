@@ -9,7 +9,7 @@ class ConversationsController < ApplicationController
     @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
     @time_start = 9
     @offset = '-0500' 
-    if (current_user.timezone != '')
+    if (current_user.timezone != nil && current_user.timezone != '')
       start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(current_user.timezone)
       @time_start = start.hour
       hours = (start.utc_offset/60/60).to_s
@@ -34,7 +34,7 @@ class ConversationsController < ApplicationController
     @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
     @time_start = 9
     @offset = '-0500' 
-    if (current_user.timezone != '')
+    if (current_user.timezone != nil && current_user.timezone != '')
       start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(current_user.timezone)
       @time_start = start.hour
       hours = (start.utc_offset/60/60).to_s
