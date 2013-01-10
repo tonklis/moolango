@@ -6,6 +6,8 @@ class Conversation < ActiveRecord::Base
     has_many :evaluation_buyers
     has_many :evaluation_sellers
 	
+    validates_presence_of :language_id, :purpose, :topic, :buyer_id, :when
+
     def self.create_new values, opentok
 
         conversation = Conversation.create(

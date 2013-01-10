@@ -24,7 +24,7 @@
 				<tr style="background-color: #d4effa">
 				<% end %>
 					<!-- s.when.in_time_zone("Eastern Time (US & Canada)").strftime("%A %b %d, %Y %H:%M %Z") -->
-					<td> <%= conversation.when %> </td>
+					<td> <%= conversation.when.strftime("%A %b %d, %Y - %I:%M %p %Z") %> </td>
 					<td> <%= conversation.topic %>	</td>
 					<td> <%= conversation.duration %> minutes </td>
 					<td> <%= conversation.language.name %> </td>

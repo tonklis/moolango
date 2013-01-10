@@ -51,10 +51,9 @@
 			success: function(data){
 				time_zone = data.offset;
 				time_start = parseInt(data.time_start);
-				$("#conversation_when").datetimepicker('option', 'hourMin', time_start);
-				$("#conversation_when").datetimepicker('option', 'hourMax', time_start + 11);
-				$("#conversation_when").datetimepicker('option', 'timezoneList', [{value: time_zone, label: ''}]);
 				$("#conversation_when").datetimepicker('setDate', '');
+				$("#conversation_when").datetimepicker('destroy');
+				setPicker(time_zone, time_start, time_start + 11);
 				$("#tz_spinner").hide();
 			},
 			error: function(jqXHR, textStatus, errorThrown){
