@@ -56,8 +56,6 @@
 
 
 <script type="text/javascript">
-		
 	var currentUserId = $("#data_holder")[0].getAttribute("data-user-id");
-	var conversationId = $("#conv_holder")[0].getAttribute("data-conv-id");
-	
+	var conversationId = $("#conv_holder")[0] ? $("#conv_holder")[0].getAttribute("data-conv-id") : null;
 </script>
