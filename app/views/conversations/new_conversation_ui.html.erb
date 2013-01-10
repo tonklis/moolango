@@ -45,18 +45,21 @@
   			url: "calculate_timezone",
   			data: 'timezone=' + encodeURIComponent(newTz), //encodear el timezone
 			beforeSend: function(xhr) {
-    		xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+				$("#tz_spinner").show();
   		},
 			success: function(data){
 				time_zone = data.offset;
-				time_start = parseInt(data.time_start)
-				$("#conversation_when").datetimepicker('option', 'hourMin', time_start)
-				$("#conversation_when").datetimepicker('option', 'hourMax', time_start + 11)
-				$("#conversation_when").datetimepicker('option', 'timezoneList', [{value: time_zone, label: ''}])
-				$("#conversation_when").datetimepicker('setDate', '')
+				time_start = parseInt(data.time_start);
+				$("#conversation_when").datetimepicker('option', 'hourMin', time_start);
+				$("#conversation_when").datetimepicker('option', 'hourMax', time_start + 11);
+				$("#conversation_when").datetimepicker('option', 'timezoneList', [{value: time_zone, label: ''}]);
+				$("#conversation_when").datetimepicker('setDate', '');
+				$("#tz_spinner").hide();
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				alert(textStatus);
+				$("#tz_spinner").hide();
 			}
 		});
 	}
@@ -64,7 +67,7 @@
 	$(function(){
 		setPicker(time_zone, time_start, time_start + 11)
 		$('#conversation_topic').hide();
-
+		$("#tz_spinner").hide();
 		$("#user_time_zone").change(function() {
 			newTz = $(this).val();
 			updateTimezone(newTz)
@@ -138,6 +141,7 @@
 					<div class="field">
 						<p> Select the timezone where you live </p>
 						<%= time_zone_select(:user, :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => false, :default => current_user.timezone != nil && current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)') %>
+						<%= image_tag "waiting.gif", :style => "margin: -10px auto auto 10px;" , :id => "tz_spinner" %>
 					</div>
 				  	<div class="field">
 						<p> When do you want to practice? </p>
