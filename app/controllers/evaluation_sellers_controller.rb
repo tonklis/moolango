@@ -1,5 +1,9 @@
 class EvaluationSellersController < ApplicationController
-  # GET /evaluation_sellers
+
+	before_filter :authenticate_user!
+	#TODO: check_access needed
+
+	# GET /evaluation_sellers
   # GET /evaluation_sellers.json
   def index
     @evaluation_sellers = EvaluationSeller.all

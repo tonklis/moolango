@@ -1,5 +1,9 @@
 class BillingAddressesController < ApplicationController
-  # GET /billing_addresses
+
+	before_filter :authenticate_user!
+	#TODO: check_access needed
+
+	# GET /billing_addresses
   # GET /billing_addresses.json
   def index
     @billing_addresses = BillingAddress.all
