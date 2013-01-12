@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def available_conversations
+		self.buyer_conversations.where("conversations.when >= ?", Time.now).includes(:language, :status)
+	end
+
 	def next_conversation
 		self.buyer_conversations.each do |conversation|
 			if (conversation.status_id == Status.find_by_name("open").id) && (Time.now >= (conversation.when - 5.minutes)) && ( Time.now <= (conversation.when + 5.minutes))

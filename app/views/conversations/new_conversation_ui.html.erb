@@ -81,7 +81,7 @@
 	<div class="span12">
 		<div style="margin: -50px;">
 			<div class="landing_header">
-				<%= image_tag "webpage/schedule_a_conversation.png", :alt => "schedule a conversation"%>
+				BOOK A CONVERSATION
 			</div>
 			<% if @conversation.errors.any? %>
 				<div id="error_explanation" class="alert alert-error" style="width: 15%; margin-top: 15px; float: right;">
@@ -152,7 +152,7 @@
 						<%= f.select :duration, @conversation_options %>
 						<%= hidden_field_tag :buyer_id, current_user.id %>
 					</div>
-
+					<br/>
 					<div class="actions" style="text-align: center">
 							<%= f.submit "Schedule now!", :class => "next_button" %>
 					</div>

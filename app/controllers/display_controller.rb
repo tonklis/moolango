@@ -1,7 +1,7 @@
 class DisplayController < ApplicationController
 
-	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :topics_list_feedback, :thank_you, :about, :faq]
-	before_filter :set_timezone, :except => [:index, :paypal_purchase, :topics_list_feedback, :thank_you, :about, :faq]
+	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :about, :faq]
+	before_filter :set_timezone, :except => [:index, :paypal_purchase, :about, :faq]
 
 	#negative to remove open window constraint
 	AVAILABLE_TIME = -1
@@ -12,12 +12,7 @@ class DisplayController < ApplicationController
 
 	def index
 		if signed_in?
-			#session[:language] is obsolete, modify when we find out the new rule
-			if current_user.sign_in_count == 1 and not session[:language] 
-				redirect_to (action_path+"?fs=true")
-			else
-				redirect_to action_path
-			end
+			redirect_to dashboard_path
 		end
 	end
 
@@ -36,17 +31,18 @@ class DisplayController < ApplicationController
 	def faq
 	end
 
-	def thank_you
-		render :layout => "feedback"
+	def free_credit
+		current_user.update_attribute(:credits, 15)
+		redirect_to :dashboard
 	end
-	
+
 	def language_earners
 		@notify = EarnerForm.notify(current_user.id)
 	end
 
 	def dashboard
-    	@conversations = current_user.buyer_conversations.includes(:language, :status)
-  	end
+   	@conversations = current_user.available_conversations 
+  end
 
 	def action
 		# on standby till we define welcome message
@@ -69,10 +65,6 @@ class DisplayController < ApplicationController
 		@language_id = session[:language] = params[:id]
 		@enabled_topics = Topic.where("enabled = ?", true)
 		render :layout => "topics"
-	end
-
-	def topics_list_feedback
-		render :layout => "feedback"
 	end
 
 	def conversation_room

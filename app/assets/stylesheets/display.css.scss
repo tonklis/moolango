@@ -141,6 +141,16 @@ iframe {
 	font-size: 16px;
 }
 
+.calendar_button{
+	background-image: url("webpage/calendar_button.gif");
+	border: medium none;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 7px;
+	padding: 5px 0 5px 0;
+}
+
 .next_button{
 	background-image: url("webpage/next_button.gif");
   border: medium none;
@@ -183,8 +193,10 @@ iframe {
 .landing_header{
 	color: #ffffff;
 	font-family: "Arial";
+	font-size: 26px;
 	font-weight: bold;
 	text-align: center;
+	margin-top: 10px;
 }
 
 .signup_header{
@@ -217,7 +229,6 @@ iframe {
 	margin-top: 10px;
 	margin-bottom: 20px;
 	height: 43px;
-  width: 190px;
 	float: right;
 	cursor: pointer;
 }
@@ -237,6 +248,17 @@ iframe {
 	min-height: 33px;
 	min-width: 190px;
 	padding-top: 15px;
+}
+
+.get_started_button_min{
+	background-image: url("webpage/next_button.gif");
+	border: medium none;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	min-height: 33px;
+	min-width: 100px;
+	padding: 5px 0 5px 0;
 }
 
 .action_body{
@@ -259,19 +281,24 @@ iframe {
 
 .nav_buttons{
 	width:100%;
-	height: 50px;
-	margin-top: 20px;
+	margin: auto auto auto 22px;
 }
 
 .login_button{
   height: 70px;
-  width: 120%;	
+  width: 50%;
+	float: right;
 }
 
-.logout_button{
+.add_credit_button{
 	height: 50%;
 	margin: -40% 0 0 72%;
 	width: 50%;
+}
+
+.logout_button{
+	width: 20%;
+	float: right;
 }
 
 .login_text{
@@ -292,9 +319,9 @@ iframe {
 .account_text{
 	color: #FFFFFF;
   font-family: "Arial";
-  font-size: 16px;
+  font-size: 90%;
   font-weight: bold;
-  margin: -63% auto auto auto;
+  margin: -75% auto auto auto;
   text-align: center;
 }
 .account_text a:link {color:#FFFFFF; text-decoration: none;}
@@ -343,3 +370,25 @@ iframe {
 .orange-link a:visited {color:#fc9e47; text-decoration: underline;}
 .orange-link a:hover {color:#fc9e47; text-decoration: underline;}
 .orange-link a:active {color:#fc9e47; text-decoration: underline;}
+
+.time_booked_box {
+	background-color: #9bd8f7;
+	width: 250px;
+	height: 30px;
+	float: right;
+	margin-right: 70px;
+}
+
+.time_booked_text {
+	color: #FFFFFF;
+	margin: 5px auto auto 5px;
+	font-weight: bold;
+	float: left;
+}
+
+.time_booked_value{
+	color: #3c89bd;
+	margin: 5px 10px auto auto;
+	font-weight: bold;
+	float: right;
+}

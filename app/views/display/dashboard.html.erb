@@ -1,5 +1,5 @@
 <div class="landing_header">
-	<%= image_tag "webpage/schedule_a_conversation.png", :alt => "schedule a conversation"%>
+	<%= current_user.firstname.upcase %>'S CONVERSATIONS
 </div>
 <br /><br />
 <div class="span8 offset2 moolango-box" >
@@ -15,9 +15,15 @@
 				</tr>
 			</thead>
 			<tbody style="color: #3c89bd;">
-				<% count = 0 %>
+				<% 
+					count = 0
+					time_booked = 0
+		 		%>
 				<% @conversations.each do |conversation| %>
-				<% count+= 1 %>
+				<%
+					count+= 1
+					time_booked+= conversation.duration
+			 	%>
 				<% if count % 2 != 0 %>
 				<tr style="">
 				<% else %>
@@ -26,7 +32,7 @@
 					<!-- s.when.in_time_zone("Eastern Time (US & Canada)").strftime("%A %b %d, %Y %H:%M %Z") -->
 					<td> <%= conversation.when.strftime("%A %b %d, %Y - %I:%M %p %Z") %> </td>
 					<td> <%= conversation.topic %>	</td>
-					<td> <%= conversation.duration %> minutes </td>
+					<td> <%= conversation.duration %> min </td>
 					<td> <%= conversation.language.name %> </td>
 					<% if conversation.is_ready %>
 					<td class="orange-link"> <%= link_to "Enter room", :controller => "display", :action => "conversation_room", :id => conversation.id %></td>
@@ -44,6 +50,31 @@
 				<% end %>
 			</tbody>
 		</table>
-		<button class="next_button" style="float: right; margin-bottom: 15px;">Book a conversation</button>
+
+		<% if current_user.credits > 0 %>	
+			<div class="landing_get_started_button" style="margin-top: 0;" onclick="window.open('<%= new_conversation_ui_url %>', '_self');">
+				<div class="calendar_button">
+					<div style="margin: 0 10px 0 60px;">
+						<%= link_to raw("Book a <br /> conversation"), :new_conversation_ui %>
+					</div>
+				</div>
+			</div>
+		<% else %>
+		<div class="landing_get_started_button" style="margin-top: 0; cursor: default;">
+				<div class="calendar_button" style="opacity: 0.4;	filter: alpha(opacity=40);">
+					<div style="margin: 0 10px 0 60px;">
+						<%= raw("Book a <br /> conversation") %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<div class="time_booked_box">
+			<div class="time_booked_text">
+				TIME BOOKED
+			</div>
+			<div class="time_booked_value">
+				<%= time_booked %> min
+			</div>
+		</div>
 	</div>
 </div>

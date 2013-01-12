@@ -10,11 +10,11 @@
 				<div class="moolango-box-inner">
 					<div style="float: right; width: 70%;">
 						<div style="float: left;">
-							<h2 class="landing_header" style="text-align: left;">
-								Practice a language 
-							</h2>
+							<div class="landing_header" style="text-align: left;">
+								PRACTICE A LANGUAGE
+							</div>
 							<p style="color: #FFFFFF; font-size: 12px;">(English and Spanish available)</p>
-							<br />
+							<br/>
 							<div class="body_text">
 								<ul>
 									<li>Talk with native speakers</li>
@@ -26,7 +26,7 @@
 						</div>
 						<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
 							<div class="get_started_button">
-								<%= link_to "GET STARTED!", :signup %>
+								<%= link_to "TRY IT OUT!", :signup %>
 							</div>
 						</div>
 					</div>
@@ -38,13 +38,13 @@
 			<br /> <br /> <br />
 			<div class="moolango-box">
 				<div class="moolango-box-inner">
-					<div class="landing_get_started_button" onclick="window.open('<%= new_earner_form_path %>', '_self');">
-						<div class="get_started_button" style="float: right;">
-							<%= link_to "GET YOUR INVITE!", new_earner_form_path %>
-						</div>
-					</div>
-					<div class="body_text" style="float: left; margin-top: 10px; width: 50%;">
+					<div class="body_text" style="float: left; margin-top: 10px; width: 65%;">
 						<p> Want to make money speaking your language? </p>
+					</div>
+					<div class="landing_get_started_button" onclick="window.open('<%= new_earner_form_path %>', '_self');" >
+						<div class="get_started_button_min">
+							<%= link_to raw("LEARN<br/>MORE"), new_earner_form_path %>
+						</div>
 					</div>
 				</div>
 			</div>

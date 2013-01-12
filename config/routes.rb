@@ -53,10 +53,6 @@ Moolango::Application.routes.draw do
 	
   match 'topics_list_earners' => 'display#topics_list_earners', :as => :topics_list_earners
 	
-  match 'topics_list_feedback' => 'display#topics_list_feedback', :as => :topics_list_feedback
-	
-  match 'thank_you' => 'display#thank_you', :as => :thank_you
-	
   match 'about' => 'display#about', :as => :about
 	
   match 'faq' => 'display#faq', :as => :faq
@@ -110,6 +106,8 @@ Moolango::Application.routes.draw do
   match 'calculate_timezone' => 'conversations#calculate_timezone', :as => :calculate_timezone
 
   match 'dashboard' => 'display#dashboard', :as => :dashboard
+  
+	match 'free_credit' => 'display#free_credit', :as => :free_credit
 
   #match 'new_schedule_ui' => 'schedules#new_schedule_ui', :as => :new_schedule_ui
 	
