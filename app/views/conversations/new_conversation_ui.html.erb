@@ -1,6 +1,5 @@
 <script type="text/javascript">
 
-	var tonklis;	
 	var time_start = parseInt('<%= @time_start %>')
 	var time_zone = '<%= @offset %>'
 
@@ -50,7 +49,6 @@
 				$("#tz_spinner").show();
   		},
 			success: function(data){
-				tonklis = data;
 				time_zone = data.offset;
 				time_start = parseInt(data.time_start);
 				$("#conversation_when").datetimepicker('setDate', '');
