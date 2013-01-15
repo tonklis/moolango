@@ -7,10 +7,10 @@
 </p>
 <ul>
 	<li>Focus: <%= @conversation.purpose %> </li>
-	<li>Date: <%= @conversation.when.in_time_zone("Eastern Time (US & Canada)").strftime("%h %d %Y, %H:%M GMT%z") %>. You can convert to your timezone <a href="http://www.thetimezoneconverter.com/" target="_blank">here</a>.</li>
+	<li>Date: <%= @conversation.when.in_time_zone(@user.timezone).strftime("%h %d %Y, %H:%M GMT%z") %>.</li>
 </ul>
 <br/>
-<p> A 'practice now' button will be enabled in your <a href="http://www.moolango.com/action">MooLango homepage</a> five minutes before, and five minutes after your scheduled time. </p>
+<p> An 'enter here' link will be enabled in your <a href="http://www.moolango.com/dashboard">MooLango homepage</a> five minutes before, and five minutes after your scheduled time. </p>
 <p> For canceling or rescheduling, please let us know with 12 hours in advance replying to this e-mail. </p>
 <br/>
 <p>
