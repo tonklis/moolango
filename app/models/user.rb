@@ -58,7 +58,8 @@ class User < ActiveRecord::Base
 	end
 
 	def available_conversations
-		self.buyer_conversations.where("conversations.when >= ?", Time.now).includes(:language, :status)
+		#TODO: Remove past conversations
+		self.buyer_conversations.includes(:language, :status)
 	end
 
 	def next_conversation
