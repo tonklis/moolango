@@ -20,11 +20,12 @@ class InteractionController < ApplicationController
 	end
 	
 	def end_call
+		#TODO: Fix patch for ending call
 		channel = params[:channel]
-		room = Room.finish_call(params[:room_id])
+		# room = Room.finish_call(params[:room_id])
 		Pusher[channel].trigger('event_end_call', {:message => 'call has ended'}) if channel
 		respond_to do |format|
-			format.json { render json: room }
+			format.json { render json: "ok" }
 		end
 	end	
 
