@@ -262,3 +262,10 @@ Status.create(:id=>2, :name=>"closed", :description=>"The conversation took plac
 Status.create(:id=>3, :name=>"canceled", :description=>"The conversation is canceled")
 Status.create(:id=>4, :name=>"buyer absent", :description=>"The conversation didn't take place because the buyer didn't show up")
 Status.create(:id=>5, :name=>"seller absent", :description=>"The conversation didn't take place because the seller didn't show up")
+
+Language.create(name: 'english', thumbnail_url: 'languages/english.gif')
+Language.create(name: 'spanish', thumbnail_url: 'languages/spanish.gif')
+Language.create(name: 'portuguese', thumbnail_url: 'languages/portuguese.gif')
+Language.create(name: 'chinese', thumbnail_url: 'languages/chinese.gif')
+Language.create(name: 'french', thumbnail_url: 'languages/french.gif')
+Language.create(name: 'japanese', thumbnail_url: 'languages/japanese.gif')
