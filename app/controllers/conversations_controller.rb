@@ -24,7 +24,7 @@ class ConversationsController < ApplicationController
   end
 
   def create_conversation_ui
-    params[:conversation][:buyer_id] = params[:buyer_id]    
+    params[:conversation][:buyer_id] = params[:buyer_id]
     opentok = OpenTok::OpenTokSDK.new ENV['OPENTOK_API_KEY'], ENV['OPENTOK_API_SECRET']
     session_properties = {OpenTok::SessionPropertyConstants::P2P_PREFERENCE => "enabled"}
     open_tok_session = opentok.create_session(request.remote_addr, session_properties)

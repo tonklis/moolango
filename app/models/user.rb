@@ -59,7 +59,12 @@ class User < ActiveRecord::Base
 
 	def available_conversations
 		#TODO: Remove past conversations
-		self.buyer_conversations.includes(:language, :status)
+		conversations = self.buyer_conversations.includes(:language, :status)
+		active = [];
+		conversations.each do |conversation|
+			active.push(conversation) if (conversation.status_id == Status.find_by_name("open").id) && ( Time.now < (conversation.when + 5.minutes))
+		end
+		return active
 	end
 
 	def next_conversation

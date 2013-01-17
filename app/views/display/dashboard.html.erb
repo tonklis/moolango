@@ -1,3 +1,14 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('.conversation').each(function() {
+		var link = "<a href=/conversation_room/" + this.id + '> Enter room </a>';
+		$(this).countdown({until: new Date(parseInt(this.attributes.time.value)), layout: 'Starts in: <br/> {d<}{dn} {dl}{d>} {h<}{hn} {hl}{h>} {m<}{mn} {ml}{m>} {s<}{sn} {sl}{s>}', expiryText: link, format: 'dhms'});
+	});
+});
+
+</script>
+
 <div class="landing_header">
 	<%= current_user.firstname.upcase %>'S CONVERSATIONS
 </div>
@@ -11,7 +22,7 @@
 					<th>Topic</th>
 					<th>Duration</th>
 					<th>Language</th>
-					<th>Status</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody style="color: #3c89bd;">
@@ -30,23 +41,18 @@
 				<tr style="background-color: #d4effa">
 				<% end %>
 					<!-- s.when.in_time_zone("Eastern Time (US & Canada)").strftime("%A %b %d, %Y %H:%M %Z") -->
-					<td> <%= conversation.when.strftime("%A %b %d, %Y - %I:%M %p %Z") %> </td>
+					<td> <%= conversation.when.strftime("%A %b %d, %Y - %I:%M %p %Z") %></td>
 					<td> <%= conversation.topic %>	</td>
 					<td> <%= conversation.duration %> min </td>
 					<td> <%= conversation.language.name %> </td>
+					<td class="orange-link">
 					<% if conversation.is_ready %>
-					<td class="orange-link"> <%= link_to "Enter room", :controller => "display", :action => "conversation_room", :id => conversation.id %></td>
-					<% else %>
-					<td> Room not ready</td>
+						<%= link_to "Enter room", :controller => "display", :action => "conversation_room", :id => conversation.id %>
+					<% else %>  
+						<%= tag("div", :class => "conversation", :id => conversation.id, :time => (conversation.when.to_i - 5.minutes) * 1000) %> 
 					<% end %>
+					</td>
 				</tr>
-				<!--tr style="background-color: #d4effa">
-					<td> Saturday Dec 22, 2012 20:00 EST	</td>
-					<td> Chuck Norris	</td>
-					<td> 30 minutes	</td>
-					<td> English	</td>
-					<td> Room not yet ready</td>
-				</tr-->
 				<% end %>
 			</tbody>
 		</table>
