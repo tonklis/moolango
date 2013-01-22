@@ -28,7 +28,7 @@ function validateEnterKey(e){
 	return (key != 13);
 }
 
-function simplePusher(pusherKey, session){
+function simplePusher(pusherKey, session) {
 	
 	var pusher = new Pusher(pusherKey, { encrypted: true });
 	var channel = pusher.subscribe(session);
@@ -51,34 +51,34 @@ function simplePusher(pusherKey, session){
 	});
 
 	channel.bind('event_interaction', function(data) {
-		if ($("#origin_field")[0].value == 'true'){
-				if (data.button_pressed == 'btnNext'){
-					$('.btnNext')[0].click();
-				}else if(data.button_pressed == 'btnPrevious'){
-					$('.btnPrevious')[0].click();
-				}else if(data.button_pressed == 'btnLast'){
-					$('.btnLast')[0].click();
-				}else{
-					$('.btnFirst')[0].click();
-				}
+		if ($("#origin_field")[0].value == 'true') {
+			if (data.button_pressed == 'btnNext') {
+				$('.btnNext')[0].click();
+			}else if(data.button_pressed == 'btnPrevious') {
+				$('.btnPrevious')[0].click();
+			}else if(data.button_pressed == 'btnLast') {
+				$('.btnLast')[0].click();
+			}else{
+				$('.btnFirst')[0].click();
+			}
 		}	
 	});
 }
 
 
 function nextInteraction(button_pressed){
-		$.ajax({ 
-				type: "POST",  
-				url: "/interaction",
-				data: "button_pressed=" + button_pressed + "&channel=" + $("#internal_session")[0].value,
-				beforeSend: function(xhr) {
-					xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-				},			
-				success: function(data) {
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-				} 
-			});
+	$.ajax({ 
+		type: "POST",  
+		url: "/interaction",
+		data: "button_pressed=" + button_pressed + "&channel=" + $("#internal_session")[0].value,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+		},			
+		success: function(data) {
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		} 
+	});
 }
 
 function connect() {
@@ -193,15 +193,6 @@ function endCall() {
 	session.disconnect();
 }
 
-function keepalive() {
-	$.ajax({ 
-		type: "POST",  
-		url: "/rooms/keepalive/" + room_id,
-		beforeSend: function(xhr) {
-			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-		}
-	});
-}
 
 function showWaitSpiner() {
 	is_reconnect = false;
@@ -273,20 +264,6 @@ function formatTime(n) {
 		return '0' + n;
 	} else {
 		return n;
-	}
-}
-
-function openDisconnectDialog() {
-	if (!is_end_call) {
-		$.ajax({ 
-			type: "POST",
-			async : false,
-			url: "/interaction/end_call",
-			data: "room_id=" + room_id,
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-			}
-		});
 	}
 }
 

@@ -5,6 +5,7 @@ class Conversation < ActiveRecord::Base
     belongs_to :status
     has_many :evaluation_buyers
     has_many :evaluation_sellers
+    has_many :messages
 	
     validates_presence_of :language_id, :purpose, :topic, :buyer_id, :when
 
@@ -29,6 +30,11 @@ class Conversation < ActiveRecord::Base
             return true
         end
         return false
+    end
+
+    def close
+        self.update_attribute(:status_id, Status.find_by_name("closed").id)
+        return self
     end
 
     def self.get_options current_user, options

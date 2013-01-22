@@ -73,7 +73,7 @@ Moolango::Application.routes.draw do
 
   match 'messages/confirm_chat' => 'messages#confirm_chat'
 	
-  match 'interaction/end_call' => 'interaction#end_call', :as => :end_call
+  match 'close_conversation' => 'conversations#close_conversation', :as => :close_conversation
 	
   match 'view_video' => 'display#view_video', :as => :view_video
 
