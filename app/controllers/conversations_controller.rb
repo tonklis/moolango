@@ -77,6 +77,15 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def close_conversation
+    channel = params[:channel]
+    conversation = Conversation.find(params[:conversation_id]).close
+    Pusher[channel].trigger('event_end_call', {:message => 'call has ended'}) if channel
+    respond_to do |format|
+      format.json { render json: conversation }
+    end
+  end
+
   # GET /conversations
   # GET /conversations.json
   def index

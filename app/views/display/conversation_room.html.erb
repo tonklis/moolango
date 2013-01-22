@@ -22,9 +22,9 @@
 	var conversation_id = '<%= @conversation.id %>';
 	var total_time = 60 * <%= @conversation.duration %>;
 
-	window.onbeforeunload = function(){
+	/*window.onbeforeunload = function(){
 		openDisconnectDialog();
-	}
+	}*/
 
 	$(function() {
 		
@@ -65,7 +65,7 @@
 			
 		<div style="float:right; width:44px; border:none">
 			<div id="endCallDiv">
-				<%= form_tag('/interaction/end_call', :remote => true, :id => "end_call_form") do %>
+				<%= form_tag('/close_conversation', :remote => true, :id => "end_call_form") do %>
 					<%= hidden_field_tag :channel, @internal_session %>
 					<%= hidden_field_tag :conversation_id, @conversation.id if @conversation%>
 					<%= submit_tag "", :class => "endCallButton", :style => "border: none;", :title => "End Call"%>
