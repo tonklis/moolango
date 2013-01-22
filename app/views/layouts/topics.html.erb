@@ -96,10 +96,10 @@
 			</div>
 		</div>
 		<span class="footerText" style="float: right; margin-right:30px;">
-			<%= link_to "About", :about %>
-		</span>
+			<%= link_to (I18n.t 'about', :scope => :layout), :about %>
+			</span>
 		<span class="footerText" style="float: right; margin-right:30px;">
-			<%= link_to "FAQ", :faq %>
+			<%= link_to (I18n.t 'faq', :scope => :layout), :faq %>
 		</span>
 		<script type="text/javascript">var switchTo5x=false;</script>
 	</div>

@@ -6,7 +6,6 @@
 	<link rel="shortcut icon" href="http://24.media.tumblr.com/avatar_5449ac512dba_16.png" />	
   	<%= javascript_include_tag "application" %>
   	<%= javascript_include_tag "uservoice/uv_snippet" %>
-  	<%= javascript_include_tag "olark/olark_snippet" %>
   	<script src="http://static.opentok.com/v0.91/js/TB.min.js"></script>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,7 +60,7 @@
 									<div class="login_button" style="width: 55%; margin-right: 40px;">
 										<%= link_to image_tag("webpage/login_button.png", :alt => "Login button"), :signin %>
 										<div class="login_text" >
-											<%= link_to raw("LOG<br />IN"), :signin %>
+											<%= link_to raw(I18n.t 'login', :scope => :layout), :signin %>
 										</div>
 									</div>
 								<% end %>
@@ -71,11 +70,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="container sheight">
-		<div class="padding">
-			<%= yield %>
-		</div>
+		<%= yield %>
 	</div>
 	<div class="footer">
 		<div class="footerText" style="float: left; margin-right: 30px;">&nbsp;&nbsp;&nbsp;&copy; 2012 MooLango LLC</div>
@@ -97,10 +92,10 @@
 			</div>
 		</div>
 		<span class="footerText" style="float: right; margin-right:30px;">
-			<%= link_to "About", :about %>
+			<%= link_to (I18n.t 'about', :scope => :layout), :about %>
 		</span>
 		<span class="footerText" style="float: right; margin-right:30px;">
-			<%= link_to "FAQ", :faq %>
+			<%= link_to (I18n.t 'faq', :scope => :layout), :faq %>
 		</span>
 		<script type="text/javascript">var switchTo5x=false;</script>
 	</div>

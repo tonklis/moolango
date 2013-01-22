@@ -2,4 +2,29 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  layout:
+    faq: FAQ
+    about: About
+    login: LOG <br/> IN
+  landing:
+    video: 55034421
+    practice: PRACTICE A LANGUAGE
+    en_es:  (English and Spanish available)
+    native: Talk with native speakers
+    topics: Pick topics you love
+    no_skype: No need to swap Skype names
+    first_convo: First conversation is FREE
+    start: TRY IT OUT!
+    make_money: Want to make money speaking your language?
+    learn_more: LEARN <br/> MORE
+  signup:
+    first_name: First Name
+    email: E-mail
+    password: Password
+    create_account: CREATE ACCOUNT
+    already_account: Already have an account?
+    promise_header: "Our Promise:"
+    promise_body: "We won't share your information with any third party or post on your behalf."
+  login:
+    forgot_password: Forgot your password?
+    need_account: Need an account?

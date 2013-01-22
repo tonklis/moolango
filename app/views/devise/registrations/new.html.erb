@@ -2,15 +2,14 @@
 <div class="row">
 	<div class="span6">
 		<div class="landing_left_hemisphere">
-			<iframe src="http://player.vimeo.com/video/55034421?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="76%" height="100%" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe src="http://player.vimeo.com/video/<%=  I18n.t 'video', :scope => :landing %>?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="76%" height="100%" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 	</div>
 	<div class="span6">
 		<div class="landing_right_hemisphere">
 			<div class="moolango-box" style="float: right; width: 150px; color: #FFFFFF;">
 				<div class="moolango-box-inner">
-					<p class="bold">Our promise:</p> We won't share your information with any third party or post on your behalf.
-				</div>
+					<p class="bold"><%= I18n.t 'promise_header', :scope => :signup %></p> <%= I18n.t 'promise_body', :scope => :signup %></div>
 			</div>
 			<div class="signup_header">
 				<%= link_to image_tag("webpage/connect_with_facebook.png"), omniauth_authorize_path(resource_name, :facebook) %>
@@ -23,9 +22,9 @@
 				<%= image_tag "webpage/password_field.png", :class => "signup_labels" %><%= f.password_field :password  %>
 			</div>
 			<div class="landing_next_button">
-				<%= f.submit "CREATE ACCOUNT", :class => "next_button" %>
+				<%= f.submit (I18n.t 'create_account', :scope => :signup), :class => "next_button" %>
 				<br />
-				<%= link_to "Already have an account?", new_session_path(resource_name) %>
+				<%= link_to (I18n.t 'already_account', :scope => :signup), new_session_path(resource_name) %>
 			</div>
 		</div>
  		<%= devise_error_messages! %>

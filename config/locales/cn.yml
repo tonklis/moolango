@@ -1,0 +1,27 @@
+cn:
+  layout:
+    faq: 常见问题
+    about: 关于我们
+    login: 登陆
+  landing:
+    video: 57118343
+    practice: 练习口语
+    en_es: (目前开放英语和西班牙语)
+    native: 与母语人士直接对话
+    topics: 谈论感兴趣的话题
+    no_skype: 无须搜索对方的skype
+    first_convo: 首次对话免费
+    start: 预约时间
+    make_money: 想做口语老师吗?
+    learn_more: 了解详情
+  signup:
+    first_name: 拼音姓名
+    email: 邮箱
+    password: 密码
+    create_account: 立即注册
+    already_account: 已经注册?
+    promise_header: "我们承诺:"
+    promise_body: 绝不会将您的信息泄露给第三方, 或者未经允许发布状态
+  login:
+    forgot_password: 忘记密码? 
+    need_account: 注册帐户?

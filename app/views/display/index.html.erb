@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="span6">
 		<div class="landing_left_hemisphere">
-			<iframe src="http://player.vimeo.com/video/55034421?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="76%" height="100%" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe src="http://player.vimeo.com/video/<%=  I18n.t 'video', :scope => :landing %>?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="76%" height="100%" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 	</div>
 	<div class="span6">
@@ -11,22 +11,22 @@
 					<div style="float: right; width: 70%;">
 						<div style="float: left;">
 							<div class="landing_header" style="text-align: left;">
-								PRACTICE A LANGUAGE
+								<%= I18n.t 'practice', :scope => :landing %>
 							</div>
-							<p style="color: #FFFFFF; font-size: 12px;">(English and Spanish available)</p>
+							<p style="color: #FFFFFF; font-size: 12px;"><%= I18n.t 'en_es', :scope => :landing %></p>
 							<br/>
-							<div class="body_text">
+							<div class="body_text" style="width: 300px;">
 								<ul>
-									<li>Talk with native speakers</li>
-									<li>Pick topics you love</li>
-									<li>No need to swap Skype names</li>
-									<li>First conversation is FREE</li>
+									<li><%= I18n.t 'native', :scope => :landing %></li>
+									<li><%= I18n.t 'topics', :scope => :landing %></li>
+									<li><%= I18n.t 'no_skype', :scope => :landing %></li>
+									<li><%= I18n.t 'first_convo', :scope => :landing %></li>
 								</ul>
 							</div>							
 						</div>
 						<div class="landing_get_started_button" onclick="window.open('<%= signup_url %>', '_self');">
 							<div class="get_started_button">
-								<%= link_to "TRY IT OUT!", :signup %>
+								<%= link_to (I18n.t 'start', :scope => :landing), :signup %>
 							</div>
 						</div>
 					</div>
@@ -39,11 +39,11 @@
 			<div class="moolango-box">
 				<div class="moolango-box-inner">
 					<div class="body_text" style="float: left; margin-top: 10px; width: 65%;">
-						<p> Want to make money speaking your language? </p>
+						<p> <%= I18n.t 'make_money', :scope => :landing %> </p>
 					</div>
 					<div class="landing_get_started_button" onclick="window.open('<%= new_earner_form_path %>', '_self');" >
 						<div class="get_started_button_min">
-							<%= link_to raw("LEARN<br/>MORE"), new_earner_form_path %>
+							<%= link_to raw(I18n.t 'learn_more', :scope => :landing), new_earner_form_path %>
 						</div>
 					</div>
 				</div>
