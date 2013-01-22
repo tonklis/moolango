@@ -47,7 +47,7 @@ class DisplayController < ApplicationController
 	def action
 		# on standby till we define welcome message
 		#@first_signin_flag = params[:fs]
-		@conversation = current_user.next_conversation
+		#@conversation = current_user.next_conversation
 	end
 
 	def rooms_listing

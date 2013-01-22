@@ -262,6 +262,7 @@ Status.create(:id=>2, :name=>"closed", :description=>"The conversation took plac
 Status.create(:id=>3, :name=>"canceled", :description=>"The conversation is canceled")
 Status.create(:id=>4, :name=>"buyer absent", :description=>"The conversation didn't take place because the buyer didn't show up")
 Status.create(:id=>5, :name=>"seller absent", :description=>"The conversation didn't take place because the seller didn't show up")
+Status.create(:id=>6, :name=>"pending", :description=>"The user hasn't clicked the confirmation link")
 
 Language.create(name: 'english', thumbnail_url: 'languages/english.gif')
 Language.create(name: 'spanish', thumbnail_url: 'languages/spanish.gif')

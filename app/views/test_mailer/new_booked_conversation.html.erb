@@ -1,23 +1,22 @@
 <p>
-<%= @user.firstname.capitalize %>, your conversation in <%= Language.find(@conversation.language_id).name.capitalize %> about <%= @conversation.topic %> has been scheduled!
+<%= @user.firstname.capitalize %>, thanks for booking a conversation on MooLango!
 </p>
-<br />
 <p>
 	Here are the details:
 </p>
 <ul>
+	<li>Language: <%= Language.find(@conversation.language_id).name.capitalize %> </li>
+	<li>Topic: <%= @conversation.topic %> </li>
 	<li>Focus: <%= @conversation.purpose %> </li>
-	<li>Date: <%= @conversation.when.in_time_zone(@user.timezone).strftime("%h %d %Y, %H:%M GMT%z") %>.</li>
+	<li>Date: <%= @conversation.when.in_time_zone(@user.timezone).strftime("%h %d %Y, %H:%M GMT%z") %> </li>
 </ul>
-<br/>
-<p> An 'enter here' link will be enabled in your <a href="http://www.moolango.com/dashboard">MooLango homepage</a> five minutes before, and five minutes after your scheduled time. </p>
-<p> For canceling or rescheduling, please let us know with 12 hours in advance replying to this e-mail. </p>
-<br/>
-<p>
-	Feel free to write us at hello@moolango.com if you have any questions.
-</p>
+<p> When it is time for your conversation, return to your <a href="http://www.moolango.com/dashboard">Moolango dashboard</a>, where there will be an "Enter Conversation" link for five minutes before and after your scheduled time.</p>
+<p> For canceling or rescheduling, please let us know 12 hours in advance by replying to this e-mail. Feel free to respond to this email as well with any questions.</p>
 <p>
 You will need Adobe Flash installed on your browser. To get the latest version for free, <a href="http://get.adobe.com/flashplayer/">click here</a>.</p>
-<br />
+<br/>
+<p>
+TO CONFIRM YOUR SCHEDULED TIME, PLEASE <a href="http://www.moolango.com/confirm/<%= @conversation.id %>?session=<%= @conversation.internal_session %>">CLICK HERE</a>:
+</p><br>
 <p>	Sincerely, </p>
 <p> The MooLango Team</p>

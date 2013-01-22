@@ -1,0 +1,42 @@
+<div class="earner_body">
+	<br />
+	<div class="contact_soon_body moolango-box">
+		<div class="moolango-box-inner">
+			<% if @confirmed %>
+				<h3>
+					Your conversation has been confirmed!
+				</h3>
+				<br />
+				<p>
+					Feel free to write us at hello@moolango.com if you have any questions.
+				</p>
+			<% else %>
+				<h3>
+					There was an error confirming your conversation.
+				</h3>
+				<br />
+				<p>
+				Please write us at hello@moolango.com mentioning
+				</p>
+				<p style="font-weight: normal";>
+					<i>"<%= @conversation.id %>_<%= @internal_session %>"</i>
+				</p>
+				<p> 	
+				and inform us about this problem. 
+				</p>
+			<% end %>
+			<br /> <br />
+			<div class="row">
+				<div class="span2">&nbsp;</div>
+					<div style="margin: auto; ">
+						<div class="contact_soon_button" onclick="window.open('/', '_self');">
+						<div class="contact_soon_button_text">
+							<%= link_to "HOME", :root %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+	</div>
+</div>

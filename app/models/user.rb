@@ -62,18 +62,9 @@ class User < ActiveRecord::Base
 		conversations = self.buyer_conversations.includes(:language, :status)
 		active = [];
 		conversations.each do |conversation|
-			active.push(conversation) if (conversation.status_id == Status.find_by_name("open").id) && ( Time.now < (conversation.when + 5.minutes))
+			active.push(conversation) if ( [Status.find_by_name("open").id, Status.find_by_name("pending").id].include?(conversation.status_id) ) && ( Time.now < (conversation.when + 5.minutes))
 		end
 		return active
-	end
-
-	def next_conversation
-		self.buyer_conversations.each do |conversation|
-			if (conversation.status_id == Status.find_by_name("open").id) && (Time.now >= (conversation.when - 5.minutes)) && ( Time.now <= (conversation.when + 5.minutes))
-				return conversation
-			end
-		end
-		return nil
 	end
 	
 end

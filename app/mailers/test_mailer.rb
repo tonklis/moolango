@@ -9,9 +9,9 @@ class TestMailer < ActionMailer::Base
     end
 
     def new_booked_conversation(conversation)
-    	@user = User.find(conversation.buyer_id)
+		@user = User.find(conversation.buyer_id)
 		@conversation = conversation
-		mail(:to => "#{@user.email}, hello@moolango.com", :subject => "Your MooLango conversation information")
+		mail(:to => "#{@user.email}, hello@moolango.com", :subject => "Your Conversation on MooLango: Please Confirm")
     end
 
 	def new_purchase(user_id, reference, amount)

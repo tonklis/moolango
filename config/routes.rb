@@ -98,6 +98,8 @@ Moolango::Application.routes.draw do
   match 'rooms/reactivate/:id' => 'rooms#reactivate'
 	
   match 'rooms/verify/:id' => 'rooms#verify'
+
+	match 'confirm/:id' => 'conversations#confirm', :as => :confirm_conversation
 	
   match 'new_conversation_ui' => 'conversations#new_conversation_ui', :as => :new_conversation_ui
 

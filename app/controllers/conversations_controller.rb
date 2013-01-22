@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   
   before_filter :authenticate_user!
-  before_filter :check_access, :except => [:new_conversation_ui, :create_conversation_ui, :calculate_timezone]
+  before_filter :check_access, :except => [:new_conversation_ui, :create_conversation_ui, :calculate_timezone, :confirm]
   
   def new_conversation_ui
     @conversation = Conversation.new
@@ -59,7 +59,17 @@ class ConversationsController < ApplicationController
       	format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
     end
-  end 
+  end
+
+	def confirm
+		@conversation = Conversation.find(params[:id])
+		@internal_session = params[:session] 
+		@confirmed = false
+		if @conversation.internal_session == @internal_session
+			@conversation.confirm
+			@confirmed = true
+		end
+	end	
 
   def calculate_timezone
     tz = params[:timezone]

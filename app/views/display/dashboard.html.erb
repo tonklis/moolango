@@ -47,7 +47,9 @@ $(document).ready(function() {
 						<td> <%= conversation.duration %> min </td>
 						<td> <%= conversation.language.name %> </td>
 						<td class="orange-link">
-						<% if conversation.is_ready %>
+						<% if conversation.is_pending %>
+							<%= "Pending confirmation" %>
+						<% elsif conversation.is_ready %>
 							<%= link_to "Enter room", :controller => "display", :action => "conversation_room", :id => conversation.id %>
 						<% else %>  
 							<%= tag("div", :class => "conversation", :id => conversation.id, :time => (conversation.when.to_i - 5.minutes) * 1000) %> 
@@ -86,3 +88,4 @@ $(document).ready(function() {
 	</div>
 </div>
 </div>
+<br/> <br/>

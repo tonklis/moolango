@@ -18,7 +18,7 @@ class Conversation < ActiveRecord::Base
             :duration => values[:duration],
             :purpose => values[:purpose],
             :buyer_id => values[:buyer_id],
-            :status_id => Status.find_by_name("open").id,
+            :status_id => Status.find_by_name("pending").id,
             :internal_session => SecureRandom.uuid.slice(0,7),
             :opentok_session => opentok.to_s
         )
@@ -32,10 +32,22 @@ class Conversation < ActiveRecord::Base
         return false
     end
 
+		def is_pending
+        if (self.status_id == Status.find_by_name("pending").id)
+					return true
+        end
+        return false
+    end
+
     def close
         self.update_attribute(:status_id, Status.find_by_name("closed").id)
         return self
     end
+
+		def confirm
+			self.update_attribute(:status_id, Status.find_by_name("open").id)
+			return self
+		end
 
     def self.get_options current_user, options
         #FREE TRIALS
@@ -53,4 +65,5 @@ class Conversation < ActiveRecord::Base
     	    return options
 	    end
     end
+		
 end
