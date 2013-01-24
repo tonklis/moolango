@@ -65,6 +65,7 @@ class ConversationsController < ApplicationController
 		@conversation = Conversation.find(params[:id])
 		@internal_session = params[:session] 
 		@confirmed = false
+		#TODO: notify if a conversation was already confirmed (if a user clicks twice or more times on the link)
 		if @conversation.internal_session == @internal_session
 			@conversation.confirm
 			@confirmed = true

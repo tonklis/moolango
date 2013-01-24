@@ -11,9 +11,10 @@ cn:
     topics: 谈论感兴趣的话题
     no_skype: 无须搜索对方的skype
     first_convo: 首次对话免费
-    start: 预约时间
+    start: 试一试!
     make_money: 想做口语老师吗?
     learn_more: 了解详情
+    tagline: 有趣, 方便, 实惠的口语练习 
   signup:
     first_name: 拼音姓名
     email: 邮箱
@@ -25,3 +26,41 @@ cn:
   login:
     forgot_password: 忘记密码? 
     need_account: 注册帐户?
+  tooltips:
+    credit: 充值
+    logout: 退出
+    twitter: Our Twitter
+    blog: 博客
+    facebook: Our Facebook
+    home: 主页
+    available: 可供分钟
+  dashboard:
+    balance: "时间:"
+    minutes: 分钟
+    conversations: 对话
+    free_min: "点击这里获取15<br />分钟免费时间" 
+    when: 日期
+    topic: 话题
+    duration: 时长
+    language: 语言
+    status: 状态
+    time_booked: 已预约时间
+    book_conversation: <br/>预约对话
+    enter: 进入聊天室
+  new_conversation:
+    book_a_convo: 预约时间
+    language: 选择练习语言
+    english: 英语
+    spanish: 西班牙语
+    focus: 选择本次练习的侧重点
+    vocabulary: 扩充词汇量
+    fun: 开心一下
+    pace: 提高语速
+    pronunciation: 纠正发音
+    topic: 选择想探讨的话题
+    eg: "例如: 电影, 音乐, 足球"
+    timezone: 选择你的时区
+    when: 选择时间
+    schedule: 提交
+    how_many_min: 你想花多长时间练习?
+    

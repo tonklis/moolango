@@ -17,6 +17,7 @@ en:
     start: TRY IT OUT!
     make_money: Want to make money speaking your language?
     learn_more: LEARN <br/> MORE
+    tagline: enjoyable, affordable, language practice
   signup:
     first_name: First Name
     email: E-mail
@@ -28,3 +29,41 @@ en:
   login:
     forgot_password: Forgot your password?
     need_account: Need an account?
+  tooltips:
+    credit: Add Credit
+    logout: Logout
+    twitter: Our Twitter
+    blog: Our Blog
+    facebook: Our Facebook
+    home: Home
+    available: Available minutes
+  dashboard:
+    balance: "BALANCE:"
+    minutes: min
+    conversations: CONVERSATIONS
+    free_min: "CLICK HERE<br />FOR 15 FREE<br />MINUTES"
+    when: When
+    topic: Topic
+    duration: Duration
+    language: Language
+    status: Status
+    time_booked: TIME BOOKED
+    book_conversation: Book a <br/> conversation
+    enter: Enter here
+  new_conversation:
+    book_a_convo: BOOK A CONVERSATION
+    language: What language do you want to practice?
+    english: English
+    spanish: Spanish
+    focus: What would you like to focus in this session?
+    vocabulary: vocabulary
+    fun: fun
+    pace: pace
+    pronunciation: pronunciation
+    topic: Which topic would you like to talk about?
+    eg: "Eg: movies, music, football"
+    timezone: Select the timezone where you live
+    when: When do you want to practice?
+    schedule: Schedule now!
+    how_many_min: How many minutes do you want to practice?
+    

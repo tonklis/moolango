@@ -22,12 +22,12 @@
 			<div class="row">
 				<div class="span2">
 					<div style="width: 100%; height: 120px; padding-top: 15px;">
-					<%= link_to image_tag("webpage/logo.png", :alt => "Moolango logo"), :root %>
+					<%= link_to image_tag("webpage/logo.png", :alt => "Moolango logo"), :root, :rel => "tooltip", "data-original-title" => "#{I18n.t 'home', :scope => :tooltips}" %>
 					</div>
 				</div>
 				<div class="span8">
 					<div style="width: 100%; height: 120px; text-align: center;">
-						<%= image_tag "webpage/banner_biplane.png", :alt => "Enjoyable, affordable language practice!" %>
+						<%= image_tag "webpage/banner_biplane.#{I18n.locale}.png", :alt => "#{I18n.t 'tagline', :scope => :landing}" %>
 					</div>
 				</div>
 				<div class="span2">
@@ -36,23 +36,23 @@
 							<div style="float: right;">
 								<% if current_user %>
 									<div class="logout_button">
-										<%= link_to image_tag("webpage/logout_button.png"), :logout, :rel => "tooltip", "data-original-title" => "Logout", "data-placement"=> "left" %>
+										<%= link_to image_tag("webpage/logout_button.png"), :logout, :rel => "tooltip", "data-original-title" => "#{I18n.t 'logout', :scope => :tooltips}", "data-placement"=> "left" %>
 									</div>
 									<% if current_user.buyer_conversations.empty? and current_user.credits == 0  %>
 										<div class="login_button">
-											<%= link_to image_tag("webpage/login_button.png", :alt => "Click here for 15 free minutes"), :free_credit %>
+											<%= link_to image_tag("webpage/login_button.png", :alt => "#{I18n.t 'free_min', :scope => :dashboard}"), :free_credit %>
 											<div class="login_text" style="font-size: 80%; margin-top: -80%;">
-												<%= link_to raw("CLICK HERE<br />FOR 15 FREE<br />MINUTES"), :free_credit %>
+												<%= link_to raw("#{I18n.t 'free_min', :scope => :dashboard}"), :free_credit %>
 											</div>
 										</div>
 									<% else %>
 										<div class="login_button">
 											<%= image_tag "webpage/account_button.png", :alt => "My account button" %>
 											<div class="add_credit_button">
-												<%= link_to image_tag("webpage/buy_more_button.png"), :paypal_shopping_cart, :rel => "tooltip", "data-original-title" => "Add Credit", "data-placement"=> "left" %>
+												<%= link_to image_tag("webpage/buy_more_button.png"), :paypal_shopping_cart, :rel => "tooltip", "data-original-title" => "#{I18n.t 'credit', :scope => :tooltips}", "data-placement"=> "left" %>
 											</div>
 											<div class="account_text">
-												<%= link_to raw("BALANCE: <br/> #{current_user.credits.to_i} min"), "#", :rel=>"tooltip", "data-placement"=>"left", "data-original-title"=>"Available minutes", :id=>"minutes" %>
+												<%= link_to raw("#{I18n.t 'balance', :scope => :dashboard} <br/> #{current_user.credits.to_i} #{I18n.t 'minutes', :scope => :dashboard}"), "#", :rel=>"tooltip", "data-placement"=>"left", "data-original-title"=>"#{I18n.t 'available', :scope => :tooltips}", :id=>"minutes" %>
 											</div>
 										</div>
 									<% end %>
@@ -77,17 +77,17 @@
 		<div>
 			<div style="float: left;">
 				<div class="nav_buttons">
-					<%= link_to image_tag("webpage/twitter.png", :alt => "Twitter button"), "http://twitter.com/Moolango", :target => "_blank", :rel => "tooltip", "data-original-title" => "Our Twitter" %>
+					<%= link_to image_tag("webpage/twitter.png", :alt => "Twitter button"), "http://twitter.com/Moolango", :target => "_blank", :rel => "tooltip", "data-original-title" => "#{I18n.t 'twitter', :scope => :tooltips}" %>
 				</div>
 			</div>
 			<div style="float: left;">
 				<div class="nav_buttons">
-					<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button"), "http://facebook.com/Moolango", :target => "_blank", :rel => "tooltip", "data-original-title" => "Our Fanpage"%>
+					<%= link_to image_tag("webpage/facebook.png", :alt => "Facebook button"), "http://facebook.com/Moolango", :target => "_blank", :rel => "tooltip", "data-original-title" => "#{I18n.t 'facebook', :scope => :tooltips}"%>
 				</div>
 			</div>
 			<div style="float: left;">
 				<div class="nav_buttons">
-					<%= link_to image_tag("webpage/blog.png", :alt => "Blog button"), "http://blog.moolango.com", :target => "_blank", :rel => "tooltip", "data-original-title" => "Our Blog" %>
+					<%= link_to image_tag("webpage/blog.png", :alt => "Blog button"), "http://blog.moolango.com", :target => "_blank", :rel => "tooltip", "data-original-title" => "#{I18n.t 'blog', :scope => :tooltips}" %>
 				</div>
 			</div>
 		</div>

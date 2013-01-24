@@ -81,7 +81,7 @@
 	<div class="span12">
 		<div>
 			<div class="landing_header">
-				BOOK A CONVERSATION
+				<%= I18n.t 'book_a_convo', :scope => :new_conversation %>
 			</div>
 			<% if @conversation.errors.any? %>
 				<div id="error_explanation" class="alert alert-error" style="width: 15%; margin-top: 15px; float: right;">
@@ -97,15 +97,15 @@
 				<div class="earner_form">
 					<%= form_for(@conversation, :url => :create_conversation_ui) do |f| %>
 					<div class="field">
-						<%= f.label "What language do you want to practice?" %>
-						<%= f.select :language_id, [['English','1'],['Spanish','2']] %>
+						<%= f.label "#{I18n.t 'language', :scope => :new_conversation}" %>
+						<%= f.select :language_id, [["#{I18n.t 'english', :scope => :new_conversation}",'1'],["#{I18n.t 'spanish', :scope => :new_conversation}",'2']] %>
 					</div>
 					<div class="field">
-						<%= f.label "What would you like to focus on this session?" %>
-						<%= f.select :purpose, [['vocabulary','vocabulary'],['fun','fun'],['pace','pace'],['pronunciation','pronunciation']], :prompt => true %>
+						<%= f.label "#{I18n.t 'focus', :scope => :new_conversation}" %>
+						<%= f.select :purpose, [["#{I18n.t 'vocabulary', :scope => :new_conversation}",'vocabulary'],["#{I18n.t 'fun', :scope => :new_conversation}",'fun'],["#{I18n.t 'pace', :scope => :new_conversation}",'pace'],["#{I18n.t 'pronunciation', :scope => :new_conversation}",'pronunciation']], :prompt => true %>
 					</div>
 					<div class="field">
-						<%= f.label "Which topic would you like to talk about?" %>
+						<%= f.label "#{I18n.t 'topic', :scope => :new_conversation}" %>
 					</div>
 					
 					<div id="content" style="height: auto; width: auto; overflow: auto;">
@@ -129,7 +129,7 @@
 							<%= link_to image_tag("topics/tail_gate.gif"), "/" %>
 						</div> -->
 						<div id="pick_div" class="box one-edge-shadow" style="width: 100px; height: 100px; float:left; margin: 5px 5px 0 5px;">
-							<%= image_tag("topics/pick_your_own_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('Eg. movies, music, football', true);") %>
+							<%= image_tag("topics/pick_your_own_s.#{I18n.locale}.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('#{I18n.t 'eg', :scope => :new_conversation}', true);") %>
 						</div>
 			
 					</div>
@@ -138,23 +138,23 @@
 					</div>
 					<br/>
 					<div class="field">
-						<p> Select the timezone where you live </p>
+						<p> <%= I18n.t 'timezone', :scope => :new_conversation %> </p>
 						<%= time_zone_select(:user, :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => false, :default => current_user.timezone != nil && current_user.timezone != '' ? current_user.timezone : 'Eastern Time (US & Canada)') %>
 						<%= image_tag "waiting.gif", :style => "margin: -10px auto auto 10px;" , :id => "tz_spinner" %>
 					</div>
 				  	<div class="field">
-						<p> When do you want to practice? </p>
+							<p> <%= I18n.t 'when', :scope => :new_conversation %> </p>
 						<%= f.text_field :when %> 
 					</div> 
 
 					<div class="field">
-						<p> How many minutes do you want to practice?</p>
+						<p> <%= I18n.t 'how_many_min', :scope => :new_conversation %> </p>
 						<%= f.select :duration, @conversation_options %>
 						<%= hidden_field_tag :buyer_id, current_user.id %>
 					</div>
 					<br/>
 					<div class="actions" style="text-align: center">
-							<%= f.submit "Schedule now!", :class => "next_button" %>
+						<%= f.submit "#{I18n.t 'schedule', :scope => :new_conversation}", :class => "next_button" %>
 					</div>
 					<% end %>
 				</div>
