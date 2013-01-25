@@ -102,7 +102,7 @@
 					</div>
 					<div class="field">
 						<%= f.label "#{I18n.t 'focus', :scope => :new_conversation}" %>
-						<%= f.select :purpose, [["#{I18n.t 'vocabulary', :scope => :new_conversation}",'vocabulary'],["#{I18n.t 'fun', :scope => :new_conversation}",'fun'],["#{I18n.t 'pace', :scope => :new_conversation}",'pace'],["#{I18n.t 'pronunciation', :scope => :new_conversation}",'pronunciation']], :prompt => true %>
+						<%= f.select :purpose, [["#{I18n.t 'vocabulary', :scope => :new_conversation}",'vocabulary'],["#{I18n.t 'fun', :scope => :new_conversation}",'fun'],["#{I18n.t 'pace', :scope => :new_conversation}",'pace'],["#{I18n.t 'pronunciation', :scope => :new_conversation}",'pronunciation']], {:prompt => "#{I18n.t 'select_prompt', :scope => :new_conversation}"} %>
 					</div>
 					<div class="field">
 						<%= f.label "#{I18n.t 'topic', :scope => :new_conversation}" %>
@@ -110,14 +110,14 @@
 					
 					<div id="content" style="height: auto; width: auto; overflow: auto;">
 			
-						<div id="apple_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
-							<%= image_tag("topics/apple_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('apple', false);") %>
+						<div id="<%= I18n.t 'apple', :scope => :new_conversation %>_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
+							<%= image_tag("topics/apple_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('#{I18n.t 'apple', :scope => :new_conversation}', false);") %>
 						</div>
-						<div id="beatles_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
-							<%= image_tag("topics/the_beatles_s.jpg", :style=>"height: 100%; width: 100%;", :onclick=>"selected('beatles', false);") %>
+						<div id="<%= I18n.t 'beatles', :scope => :new_conversation %>_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
+							<%= image_tag("topics/the_beatles_s.jpg", :style=>"height: 100%; width: 100%;", :onclick=>"selected('#{I18n.t 'beatles', :scope => :new_conversation}', false);") %>
 						</div>
-						<div id="food_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
-							<%= image_tag("topics/food_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('food', false);") %>
+						<div id="<%= I18n.t 'food', :scope => :new_conversation %>_div" style="width: 100px; height: 100px; float:left; margin: 5px 5px 5px 5px;">
+							<%= image_tag("topics/food_s.gif", :style=>"height: 100%; width: 100%;", :onclick=>"selected('#{I18n.t 'food', :scope => :new_conversation}', false);") %>
 						</div>
 						<!-- <div class="box one-edge-shadow">
 							<%= link_to image_tag("topics/beer_pong.gif"), "/" %>

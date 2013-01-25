@@ -5,7 +5,7 @@
 	<%= stylesheet_link_tag    "application" %>
 	<link rel="shortcut icon" href="http://24.media.tumblr.com/avatar_5449ac512dba_16.png" />	
   	<%= javascript_include_tag "application" %>
-  	<%= javascript_include_tag "uservoice/uv_snippet" %>
+		<%= javascript_include_tag "uservoice/uv_snippet.#{I18n.locale}" %>
   	<script src="http://static.opentok.com/v0.91/js/TB.min.js"></script>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">

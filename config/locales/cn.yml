@@ -1,4 +1,29 @@
 cn:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %e日"
+      long: "%Y年 %B %e日"
+      only_day: "%e日"
+    day_names: "[星期日, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六]"
+    abbr_day_names: "[日, 一, 二, 三, 四, 五, 六]"
+    month_names: "[~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]"
+    abbr_month_names: "[~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]"
+    order: "[ :year, :month, :day ]"
+  time:
+    formats:
+      diary: "%Y年%b%d日 %A"
+      default: "%Y年%b%d日 %A %H:%M:%S"
+      moolango: "%Y年%b%d日 %A %I:%M %p %Z"
+      short: "%b%d日 %H:%M"
+      long: "%Y年%m月%d日 %H:%M"
+      time: "%H:%M"
+      only_second: "%S"
+      datetime:
+        formats:
+          default: "%Y-%m-%dT%H:%M:%S"
+    am: "上午"
+    pm: "下午"
   layout:
     faq: 常见问题
     about: 关于我们
@@ -47,6 +72,7 @@ cn:
     time_booked: 已预约时间
     book_conversation: <br/>预约对话
     enter: 进入聊天室
+    pending: 待确认电子邮件
   new_conversation:
     book_a_convo: 预约时间
     language: 选择练习语言
@@ -59,8 +85,27 @@ cn:
     pronunciation: 纠正发音
     topic: 选择想探讨的话题
     eg: "例如: 电影, 音乐, 足球"
+    beatles: 披头士
+    apple: 苹果
+    food: 食品
     timezone: 选择你的时区
     when: 选择时间
     schedule: 提交
     how_many_min: 你想花多长时间练习?
-    
+    select_prompt: 请选择
+  after_booked_conversation:
+    thanks: 感谢您预约对话!
+    details: 我们只是向您发送一封电子邮件到您提供的地址. 请按照以下说明, 并确认您的参与.
+    write_us: 如果您有任何的问题及建议, 请发邮件至 hello@moolango.com
+  detail_email:
+    details: 以下是本次对话的详细信息
+    focus: 话题
+    date: 时间
+    adobe: 您需要安装Adobe Flash, 以正常使用我们的服务. 下载Flash,
+    click_here: 请点击这里
+    sincerely: 祝好!
+    team: MooLango团队
+    questions: 如果您需要改约对话时间或者取消本次对话, 请在对话开始前12小时回复这封邮件告诉我们.
+    thanks: thanks for booking a conversation on MooLango!
+    instructions: "When it is time for your conversation, return to your <a href='http://www.moolango.com/dashboard'>Moolango dashboard</a>, where there will be an 'Enter Conversation' link for five minutes before and after your scheduled time" 
+    confirm: TO CONFIRM YOUR SCHEDULED TIME, PLEASE

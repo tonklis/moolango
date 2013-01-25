@@ -2,6 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  time:
+    formats:
+      moolango: "%A %b %d, %Y - %I:%M %p %Z" 
   layout:
     faq: FAQ
     about: About
@@ -50,6 +53,7 @@ en:
     time_booked: TIME BOOKED
     book_conversation: Book a <br/> conversation
     enter: Enter here
+    pending: Pending confirmation
   new_conversation:
     book_a_convo: BOOK A CONVERSATION
     language: What language do you want to practice?
@@ -62,8 +66,27 @@ en:
     pronunciation: pronunciation
     topic: Which topic would you like to talk about?
     eg: "Eg: movies, music, football"
+    beatles: Beatles
+    apple: Apple
+    food: Food 
     timezone: Select the timezone where you live
     when: When do you want to practice?
     schedule: Schedule now!
     how_many_min: How many minutes do you want to practice?
-    
+    select_prompt: Please select
+  after_booked_conversation:
+    thanks: Thanks for booking a conversation!
+    details: We just sent you an e-mail to the address associated with your account. Please confirm by following the e-mail instructions.
+    write_us: Feel free to write us at hello@moolango.com if you have any questions.
+  detail_email:
+    details: Here are the details
+    focus: Focus
+    date: Date
+    adobe: You will need Adobe Flash installed on your browser. To get the latest version for free, 
+    click_here: click here
+    sincerely: Sincerely,
+    team: The MooLango Team
+    questions: For canceling or rescheduling, please let us know 12 hours in advance by replying to this e-mail.
+    thanks:  thanks for booking a conversation on MooLango!
+    instructions: "When it is time for your conversation, return to your <a href='http://www.moolango.com/dashboard'>Moolango dashboard</a>, where there will be an 'Enter Conversation' link for five minutes before and after your scheduled time"
+    confirm: TO CONFIRM YOUR SCHEDULED TIME, PLEASE

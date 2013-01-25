@@ -52,7 +52,7 @@ class Conversation < ActiveRecord::Base
     def self.get_options current_user, options
         #FREE TRIALS
         if current_user.credits == 15
-	       return [['15 minutes', 15]]
+	       return [["15 #{I18n.t 'minutes', :scope => :dashboard}", 15]]
         else
 	       total_time = 0
     	   current_user.buyer_conversations.each do |conversation|

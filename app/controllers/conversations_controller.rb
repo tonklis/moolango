@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
   def new_conversation_ui
     @conversation = Conversation.new
     @conversation.status_id = Status.find_by_name("open").id
-    @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
+    @conversation_options = Conversation.get_options(current_user, [["30 #{I18n.t 'minutes', :scope => :dashboard}",'30'], ["60 #{I18n.t 'minutes', :scope => :dashboard}",'60']])
     @time_start = 9
     @offset = '-0500' 
     if (current_user.timezone != nil && current_user.timezone != '')

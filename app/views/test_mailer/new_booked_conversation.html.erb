@@ -1,22 +1,22 @@
 <p>
-<%= @user.firstname.capitalize %>, thanks for booking a conversation on MooLango!
+<%= @user.firstname.capitalize %>, <%= I18n.t 'thanks', :scope => :detail_email %>
 </p>
 <p>
-	Here are the details:
+<%= I18n.t 'details', :scope => :detail_email %>:
 </p>
 <ul>
-	<li>Language: <%= Language.find(@conversation.language_id).name.capitalize %> </li>
-	<li>Topic: <%= @conversation.topic %> </li>
-	<li>Focus: <%= @conversation.purpose %> </li>
-	<li>Date: <%= @conversation.when.in_time_zone(@user.timezone).strftime("%h %d %Y, %H:%M GMT%z") %> </li>
+	<li><%= I18n.t 'language', :scope => :dashboard %>: <%= Language.find(@conversation.language_id).name.capitalize %> </li>
+	<li><%= I18n.t 'topic', :scope => :dashboard %>: <%= @conversation.topic %> </li>
+	<li><%= I18n.t 'focus', :scope => :detail_email %>: <%= @conversation.purpose %> </li>
+	<li><%= I18n.t 'date', :scope => :detail_email %>: <%= l @conversation.when.in_time_zone(@user.timezone), :format => :moolango %> </li>
 </ul>
-<p> When it is time for your conversation, return to your <a href="http://www.moolango.com/dashboard">Moolango dashboard</a>, where there will be an "Enter Conversation" link for five minutes before and after your scheduled time.</p>
-<p> For canceling or rescheduling, please let us know 12 hours in advance by replying to this e-mail. Feel free to respond to this email as well with any questions.</p>
+<p> .</p>
+<p> <%= I18n.t 'questions', :scope => :detail_email %> </p>
 <p>
-You will need Adobe Flash installed on your browser. To get the latest version for free, <a href="http://get.adobe.com/flashplayer/">click here</a>.</p>
+<%= I18n.t 'adobe', :scope => :detail_email %> <a href="http://get.adobe.com/flashplayer/"><%= I18n.t 'click_here', :scope => :detail_email %></a>.</p>
 <br/>
 <p>
-TO CONFIRM YOUR SCHEDULED TIME, PLEASE <a href="http://www.moolango.com/confirm/<%= @conversation.id %>?session=<%= @conversation.internal_session %>">CLICK HERE</a>:
+<%= I18n.t 'confirm', :scope => :detail_email %>, <a href="http://www.moolango.com/confirm/<%= @conversation.id %>?session=<%= @conversation.internal_session %>"><%= (I18n.t 'click_here', :scope => :detail_email).upcase %></a>:
 </p><br>
-<p>	Sincerely, </p>
-<p> The MooLango Team</p>
+<p>	<%= I18n.t 'sincerely', :scope => :detail_email %> </p>
+<p> <%= I18n.t 'team', :scope => :detail_email %> </p>

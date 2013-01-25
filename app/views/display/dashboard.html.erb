@@ -41,14 +41,13 @@ $(document).ready(function() {
 					<% else %>
 					<tr style="background-color: #d4effa">
 					<% end %>
-						<!-- s.when.in_time_zone("Eastern Time (US & Canada)").strftime("%A %b %d, %Y %H:%M %Z") -->
-						<td> <%= conversation.when.strftime("%A %b %d, %Y - %I:%M %p %Z") %></td>
+						<td> <%= l conversation.when, :format => :moolango %></td>
 						<td> <%= conversation.topic %>	</td>
-						<td> <%= conversation.duration %> min </td>
-						<td> <%= conversation.language.name %> </td>
+						<td> <%= conversation.duration %> <%= I18n.t 'minutes', :scope => :dashboard %> </td>
+						<td>  <%= I18n.t conversation.language.name, :scope => :new_conversation %> </td>
 						<td class="orange-link">
 						<% if conversation.is_pending %>
-							<%= "Pending confirmation" %>
+							<%= I18n.t 'pending', :scope => :dashboard %>
 						<% elsif conversation.is_ready %>
 							<%= link_to "#{I18n.t 'enter', :scope => :dashboard}", :controller => "display", :action => "conversation_room", :id => conversation.id %>
 						<% else %>  
