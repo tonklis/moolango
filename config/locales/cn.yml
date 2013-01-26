@@ -109,3 +109,11 @@ cn:
     thanks: thanks for booking a conversation on MooLango!
     instructions: "When it is time for your conversation, return to your <a href='http://www.moolango.com/dashboard'>Moolango dashboard</a>, where there will be an 'Enter Conversation' link for five minutes before and after your scheduled time" 
     confirm: TO CONFIRM YOUR SCHEDULED TIME, PLEASE
+  shopping_cart:
+    add_credit: 充值 
+    packages: 你可以选择以下任意一种面额充值
+    continue: 继续
+    option_one: 试试看
+    option_two: 骨灰级英语
+    option_three: 我要成为莎士比亚
+    hours: 小时

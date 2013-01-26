@@ -90,3 +90,11 @@ en:
     thanks:  thanks for booking a conversation on MooLango!
     instructions: "When it is time for your conversation, return to your <a href='http://www.moolango.com/dashboard'>Moolango dashboard</a>, where there will be an 'Enter Conversation' link for five minutes before and after your scheduled time"
     confirm: TO CONFIRM YOUR SCHEDULED TIME, PLEASE
+  shopping_cart:
+    add_credit: ADD CREDIT
+    packages: You can buy practice time in three different packages
+    continue: Continue
+    option_one: I want to give this English thing a chance
+    option_two: "I'll use these powers to talk to girls (or boys) at the bar"
+    option_three: I will be Shakespeare!
+    hours: hour(s)

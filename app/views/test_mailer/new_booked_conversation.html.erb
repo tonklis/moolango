@@ -16,7 +16,7 @@
 <%= I18n.t 'adobe', :scope => :detail_email %> <a href="http://get.adobe.com/flashplayer/"><%= I18n.t 'click_here', :scope => :detail_email %></a>.</p>
 <br/>
 <p>
-<%= I18n.t 'confirm', :scope => :detail_email %>, <a href="http://www.moolango.com/confirm/<%= @conversation.id %>?session=<%= @conversation.internal_session %>"><%= (I18n.t 'click_here', :scope => :detail_email).upcase %></a>:
+<%= I18n.t 'confirm', :scope => :detail_email %>, <a href="http://<%= I18n.locale == :cn ? "cn." : "www." %>moolango.com/confirm/<%= @conversation.id %>?session=<%= @conversation.internal_session %>"><%= (I18n.t 'click_here', :scope => :detail_email).upcase %></a>:
 </p><br>
 <p>	<%= I18n.t 'sincerely', :scope => :detail_email %> </p>
 <p> <%= I18n.t 'team', :scope => :detail_email %> </p>

@@ -1,36 +1,42 @@
-<div class="landing_header">
-	ADD CREDIT
-</div>
-<div class="selection_body moolango-box">
-	<div class="moolango-box-inner">
-		<br/>
-		<div>
-			You can buy practice time in three different packages:
+<div class="row">
+	<div class="span12">
+		<div class="landing_header">
+			<%= I18n.t 'add_credit', :scope => :shopping_cart %>	
 		</div>
-		<br/>
-		<%= form_tag('/paypal_billing') do %>
-			<div style="width: 435px; margin: auto; height: 10px;">
-				<% Pricing.all.each do |item| %>
-					<% if item == Pricing.first %>
-						<div style="float:left; margin: 0 10px 0 10px;">
-							<div style="width: 125px; height: 85px;"> <%= item.tagline %> </div>
-							<div style="width: 125px;"> <%= item.description %> </div>
-							<div style="font-weight: bold;"> $<%= item.price %> </div>
-							<%= radio_button_tag 'pricing', item.id, :selected %>
-						</div>
-					<% else %>
-						<div style="float:left; margin: 0 10px 0 10px;">
-							<div style="width: 125px; height: 85px;"> <%= item.tagline %> </div>
-							<div style="width: 125px;"> <%= item.description %> </div>
-							<div style="font-weight: bold;"> $<%= item.price %> </div>
-							<%= radio_button_tag 'pricing', item.id%>
-						</div>
-					<% end %>
+	</div>
+	<div class="span6 offset3 moolango-box">
+		<div class="moolango-box-inner">
+			<br/>
+			<div class="selection_header">
+				<%= I18n.t 'packages', :scope => :shopping_cart %>:
+			</div>
+			<br/>
+			<%= form_tag('/paypal_billing') do %>
+	
+				<table class="table table-bordered" style="background-color: white;" >
+					<tbody style="color: #3c89bd;">
+						<tr style="background-color: #d4effa">
+							<% Pricing.all.each do |item| %>
+								<td> <div style="text-align: center;"> <%= I18n.t item.tagline, :scope => :shopping_cart %> </div> </td>
+							<% end %>
+						</tr>
+						<tr>
+							<% Pricing.all.each do |item| %>
+								<td>
+									<div style="text-align: center;">
+									 	<div> <%= item.minutes / 60 %> <%= I18n.t 'hours', :scope => :shopping_cart %> </div>
+										<div style="font-weight: bold;"> $<%= item.price %> USD </div>
+										<%= radio_button_tag 'pricing', item.id, :selected %>
+									</div>
+								</td>
+							<% end %>
+						</tr>
+					</tbody>
+				</table>
+				<div style="text-align: center;">
+					<%= submit_tag "#{I18n.t 'continue', :scope => :shopping_cart}", :class => "next_button", :style => "margin-top: 20px;" %>
+				</div>
 				<% end %>
-			</div>
-			<div>
-				<%= submit_tag 'Continue', :class => "next_button", :style => "margin-top: 20px;" %>
-			</div>
-			<% end %>
+		</div>
 	</div>
 </div>
