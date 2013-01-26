@@ -253,9 +253,9 @@ Country.create(:id=>249,:iso=>"ZW",:name=>"Zimbabwe")
 Country.create(:id=>250,:iso=>"CS",:name=>"Serbia and Montenegro")
 Country.create(:id=>251,:iso=>"AN",:name=>"Netherlands Antilles")
 
-Pricing.create(:id=>1, :hourly_rate=>14.99, :price =>14.99, :minutes=>60, :description=>"1 hr", :tagline => "I want to give this English thing a chance")
-Pricing.create(:id=>2, :hourly_rate=>12.99, :price =>64.95, :minutes=>300, :description=>"5 hrs", :tagline => "I'll use these powers to talk to girls (or guys) at the bar")
-Pricing.create(:id=>3, :hourly_rate=>9.99, :price =>99.99, :minutes=>600, :description=>"10 hrs", :tagline => "I will be Shakespeare!")
+Pricing.create(:id=>1, :hourly_rate=>14.99, :price =>14.99, :minutes=>60, :description=>"1 hr", :tagline => "option_one")
+Pricing.create(:id=>2, :hourly_rate=>12.99, :price =>64.95, :minutes=>300, :description=>"5 hrs", :tagline => "option_two")
+Pricing.create(:id=>3, :hourly_rate=>9.99, :price =>99.99, :minutes=>600, :description=>"10 hrs", :tagline => "option_three")
 
 Status.create(:id=>1, :name=>"open", :description=>"The conversation is booked and waiting to occur")
 Status.create(:id=>2, :name=>"closed", :description=>"The conversation took place")
