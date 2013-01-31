@@ -31,7 +31,7 @@ class ConversationsController < ApplicationController
 
     @conversation = Conversation.create_new(params[:conversation], open_tok_session)
     #@conversation = Conversation.new(params[:conversation])
-    @conversation_options = Conversation.get_options(current_user, [['30 minutes','30'], ['60 minutes','60']])
+    @conversation_options = Conversation.get_options(current_user, [["30 #{I18n.t 'minutes', :scope => :dashboard}",'30'], ["60 #{I18n.t 'minutes', :scope => :dashboard}",'60']])
     @time_start = 9
     @offset = '-0500' 
     if (current_user.timezone != nil && current_user.timezone != '')
@@ -50,7 +50,10 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       if @conversation.save
         current_user.update_timezone params[:user][:time_zone]
-        TestMailer.new_booked_conversation(@conversation).deliver
+        Time.zone = current_user.timezone
+        #TestMailer.new_booked_conversation(@conversation).deliver
+        MailNotification.new.booked_conversation(current_user, @conversation)
+
 	render :contact_soon
         format.json { render json: @conversation, status: :created, location: @conversation }
 	return
@@ -59,7 +62,7 @@ class ConversationsController < ApplicationController
       	format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
 	def confirm
 		@conversation = Conversation.find(params[:id])

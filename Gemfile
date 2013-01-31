@@ -7,6 +7,7 @@ gem 'rails', '3.1.10'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+gem 'mandrill-api'
 gem 'devise'
 gem 'opentok', " ~> 0.0.91"
 gem 'omniauth-facebook'
