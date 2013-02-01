@@ -50,9 +50,9 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       if @conversation.save
         current_user.update_timezone params[:user][:time_zone]
-        Time.zone = current_user.timezone
+        #Time.zone = current_user.timezone
         #TestMailer.new_booked_conversation(@conversation).deliver
-        MailNotification.new.booked_conversation(current_user, @conversation)
+        MailNotification.new.booked_conversation(current_user, @conversation, I18n.locale)
 
 	render :contact_soon
         format.json { render json: @conversation, status: :created, location: @conversation }

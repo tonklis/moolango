@@ -102,7 +102,7 @@
 					</div>
 					<div class="field">
 						<%= f.label "#{I18n.t 'focus', :scope => :new_conversation}" %>
-						<%= f.select :purpose, [["#{I18n.t 'vocabulary', :scope => :new_conversation}",'vocabulary'],["#{I18n.t 'fun', :scope => :new_conversation}",'fun'],["#{I18n.t 'pace', :scope => :new_conversation}",'pace'],["#{I18n.t 'pronunciation', :scope => :new_conversation}",'pronunciation']], {:prompt => "#{I18n.t 'select_prompt', :scope => :new_conversation}"} %>
+						<%= f.select :purpose, [["#{I18n.t 'vocabulary', :scope => :new_conversation}","#{I18n.t 'vocabulary', :scope => :new_conversation}"],["#{I18n.t 'fun', :scope => :new_conversation}","#{I18n.t 'fun', :scope => :new_conversation}"],["#{I18n.t 'pace', :scope => :new_conversation}","#{I18n.t 'pace', :scope => :new_conversation}"],["#{I18n.t 'pronunciation', :scope => :new_conversation}","#{I18n.t 'pronunciation', :scope => :new_conversation}"]], {:prompt => "#{I18n.t 'select_prompt', :scope => :new_conversation}"} %>
 					</div>
 					<div class="field">
 						<%= f.label "#{I18n.t 'topic', :scope => :new_conversation}" %>
