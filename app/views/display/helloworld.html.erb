@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+        <title>OpenTok Simple Example</title>
+				<script src="http://static.opentok.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
+		<link href="http://static.opentok.com/opentok/assets/css/demos.css" type="text/css" rel="stylesheet" >
+        <script type="text/javascript" charset="utf-8">
+			TB.addEventListener("exception", exceptionHandler);
+			var session = TB.initSession("1_MX4xMTI3fn5XZWQgQXVnIDIyIDE1OjIzOjQxIFBEVCAyMDEyfjAuMzA1OTAxM34"); // Replace with your own session ID. See http://www.tokbox.com/opentok/api/tools/generator
+			session.addEventListener("sessionConnected", sessionConnectedHandler);
+			session.addEventListener("streamCreated", streamCreatedHandler);
+			session.connect(1127,'T1==cGFydG5lcl9pZD0xMTI3JnNpZz1iMWQ4YzFhZmExNzczODgwZDE2ZDY0NWViMmM1MzY4MWNhMTRmY2RkOnNlc3Npb25faWQ9MV9NWDR4TVRJM2ZuNVhaV1FnUVhWbklESXlJREUxT2pJek9qUXhJRkJFVkNBeU1ERXlmakF1TXpBMU9UQXhNMzQmY3JlYXRlX3RpbWU9MTM0NTY3NDIyMiZyb2xlPXB1Ymxpc2hlciZub25jZT0xMzQ1Njc0MjIyLjM1NDU4NjIyNzQzMzU='); // Replace with your API key and token. See http://www.tokbox.com/
+
+			function sessionConnectedHandler(event) {
+				 subscribeToStreams(event.streams);
+				 session.publish();
+			}
+			
+			function streamCreatedHandler(event) {
+				subscribeToStreams(event.streams);
+			}
+			
+			function subscribeToStreams(streams) {
+				for (i = 0; i < streams.length; i++) {
+					var stream = streams[i];
+					if (stream.connection.connectionId != session.connection.connectionId) {
+						session.subscribe(stream);
+					}
+				}
+			}
+			
+			function exceptionHandler(event) {
+				if (event.code == 1013) {
+					document.body.innerHTML = "This page is trying to connect a third client to an OpenTok peer-to-peer session. "
+						+ "Only two clients can connect to peer-to-peer sessions.";
+				}
+			}
+			
+
+		</script>
+    </head>
+    <body>
+    </body>
+</html>

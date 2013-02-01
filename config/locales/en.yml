@@ -98,3 +98,7 @@ en:
     option_two: "I'll use these powers to talk to girls (or boys) at the bar"
     option_three: I will be Shakespeare!
     hours: hour(s)
+  error_403:
+    title: "The page you were looking for doesn't exist (404)"
+    header: "The page you were looking for doesn't exist."
+    body: "You may have mistyped the address or the page may have moved."

@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   
   before_filter :authenticate_user!
-  before_filter :check_access, :except => [:new_conversation_ui, :create_conversation_ui, :calculate_timezone, :confirm]
+  authorize_resource :except => [:new_conversation_ui, :create_conversation_ui, :calculate_timezone, :confirm, :close_conversation]
   
   def new_conversation_ui
     @conversation = Conversation.new

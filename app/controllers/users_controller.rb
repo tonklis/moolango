@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	before_filter :authenticate_user!
-	before_filter :check_access, :except => [:new_balance]
+	authorize_resource :except => [:new_balance]
 
 	# GET /users
   # GET /users.json

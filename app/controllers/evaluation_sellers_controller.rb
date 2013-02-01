@@ -1,7 +1,7 @@
 class EvaluationSellersController < ApplicationController
 
 	before_filter :authenticate_user!
-	#TODO: check_access needed
+  authorize_resource :except => [:new, :create]
 
 	# GET /evaluation_sellers
   # GET /evaluation_sellers.json

@@ -117,3 +117,7 @@ cn:
     option_two: 骨灰级英语
     option_three: 我要成为莎士比亚
     hours: 小时
+  error_403:
+    title: "CN The page you were looking for doesn't exist (404)"
+    header: "CN The page you were looking for doesn't exist."
+    body: "CN You may have mistyped the address or the page may have moved."

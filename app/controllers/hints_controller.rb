@@ -1,7 +1,9 @@
 class HintsController < ApplicationController
 
+	#TODO: Delete this class?
+
 	before_filter :authenticate_user!
-	before_filter :check_access
+  authorize_resource	
 
   # GET /hints
   # GET /hints.json

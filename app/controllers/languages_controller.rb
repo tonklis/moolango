@@ -1,7 +1,7 @@
 class LanguagesController < ApplicationController
 
 	before_filter :authenticate_user!
-	before_filter :check_access
+  authorize_resource	
 
 	# GET /languages
   # GET /languages.json

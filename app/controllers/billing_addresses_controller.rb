@@ -1,7 +1,7 @@
 class BillingAddressesController < ApplicationController
 
 	before_filter :authenticate_user!
-	#TODO: check_access needed
+  authorize_resource :except => [:new, :create]
 
 	# GET /billing_addresses
   # GET /billing_addresses.json

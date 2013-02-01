@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Room</th>
+    <th>Conversation</th>
     <th>Clarity</th>
     <th>Pronunciation</th>
     <th>Fluency</th>
@@ -15,7 +15,7 @@
 
 <% @evaluation_buyers.each do |evaluation_buyer| %>
   <tr>
-    <td><%= evaluation_buyer.room_id %></td>
+    <td><%= evaluation_buyer.conversation_id %></td>
     <td><%= evaluation_buyer.clarity %></td>
     <td><%= evaluation_buyer.pronunciation %></td>
     <td><%= evaluation_buyer.fluency %></td>

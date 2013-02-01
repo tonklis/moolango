@@ -9,6 +9,7 @@ gem 'rails', '3.1.10'
 
 gem 'mandrill-api'
 gem 'devise'
+gem 'cancan'
 gem 'opentok', " ~> 0.0.91"
 gem 'omniauth-facebook'
 gem 'pusher'

@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
 
 	before_filter :authenticate_user!
-	before_filter :check_access
+	authorize_resource
 
 	# GET /topics
   # GET /topics.json

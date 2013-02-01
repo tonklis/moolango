@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 	has_many :seller_conversations, :class_name => "Conversation", :foreign_key => :seller_id
 	has_many :billing_addresses
 	has_many :transactions
+	has_and_belongs_to_many :roles
 
 	validates_presence_of :firstname, :email, :password
 
@@ -66,5 +67,9 @@ class User < ActiveRecord::Base
 		end
 		return active
 	end
-	
+
+	def role?(role)
+		return !!self.roles.find_by_name(role)
+	end	
+
 end
