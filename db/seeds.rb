@@ -270,3 +270,7 @@ Language.create(name: 'portuguese', thumbnail_url: 'languages/portuguese.gif')
 Language.create(name: 'chinese', thumbnail_url: 'languages/chinese.gif')
 Language.create(name: 'french', thumbnail_url: 'languages/french.gif')
 Language.create(name: 'japanese', thumbnail_url: 'languages/japanese.gif')
+
+Role.create(name: 'admin')
+Role.create(name: 'buyer')
+Role.create(name: 'seller')
