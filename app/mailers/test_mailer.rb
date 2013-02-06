@@ -34,4 +34,10 @@ class TestMailer < ActionMailer::Base
 		mail(:to => "#{@user.email}, hello@moolango.com", :subject => "Your MooLango conversation information")
 	end
 
+	def join_conversation(conversation)
+		@conversation = conversation
+		@timezone = conversation.seller ? conversation.seller.timezone : "Eastern Time (US & Canada)"
+		mail(:to => "hello@moolango.com", :subject => "Conversation with #{@conversation.buyer.firstname} @ #{I18n.l @conversation.when.in_time_zone(@timezone), :format => :moolango}")		
+	end
+
 end

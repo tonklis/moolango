@@ -1,0 +1,11 @@
+<p>
+	Here are the conversation details:
+</p>
+<ul>
+	<li>User: <%= @conversation.buyer.firstname %> </li>
+	<li>Language: <%= Language.find(@conversation.language_id).name.capitalize %> </li>
+	<li>Focus: <%= @conversation.purpose %> </li>
+	<li>Duration: <%= @conversation.duration %> </li>
+	<li>Date: <%= I18n.l @conversation.when.in_time_zone("Eastern Time (US & Canada)"), :format => :moolango %></li>
+	<li>Link: <a href="http://www.moolango.com/join_conversation_room/<%= @conversation.id %>">join conversation room</a></li>
+</ul>
