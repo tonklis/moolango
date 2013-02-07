@@ -29,6 +29,7 @@ en:
     already_account: Already have an account?
     promise_header: "Our Promise:"
     promise_body: "We won't share your information with any third party or post on your behalf."
+    subject: Welcome to MooLango!
   login:
     forgot_password: Forgot your password?
     need_account: Need an account?
@@ -79,6 +80,7 @@ en:
     details: We just sent you an e-mail to the address associated with your account. Please confirm by following the e-mail instructions.
     write_us: Feel free to write us at hello@moolango.com if you have any questions.
   detail_email:
+    subject: Please confirm your booked conversation
     details: Here are the details
     focus: Focus
     date: Date

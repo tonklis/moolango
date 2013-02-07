@@ -48,6 +48,7 @@ cn:
     already_account: 已经注册?
     promise_header: "我们承诺:"
     promise_body: 绝不会将您的信息泄露给第三方, 或者未经允许发布状态
+    subject: Welcome to MooLango!
   login:
     forgot_password: 忘记密码? 
     need_account: 注册帐户?
@@ -98,6 +99,7 @@ cn:
     details: 我们只是向您发送一封电子邮件到您提供的地址. 请按照以下说明, 并确认您的参与.
     write_us: 如果您有任何的问题及建议, 请发邮件至 hello@moolango.com
   detail_email:
+    subject: Please confirm your booked conversation
     details: 以下是本次对话的详细信息
     focus: 话题
     date: 时间
