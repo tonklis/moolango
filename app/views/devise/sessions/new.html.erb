@@ -1,8 +1,9 @@
 <script type="text/javascript">
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-		alert("mobile");
-		$("#our_promise").hide(); 
-	}
+	$(function() {
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+			$("#our_promise").hide(); 
+		}
+	});
 </script>
 
 <% @title_desc = "Log In" %>

@@ -5,6 +5,11 @@ $(document).ready(function() {
 		var link = "<a href=/conversation_room/" + this.id + '> Enter room </a>';
 		$(this).countdown({until: new Date(parseInt(this.attributes.time.value)), layout: 'Starts in: <br/> {d<}{dn} {dl}{d>} {h<}{hn} {hl}{h>} {m<}{mn} {ml}{m>} {s<}{sn} {sl}{s>}', expiryText: link, format: 'dhms'});
 	});
+
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+		alert("Our video-chatroom mobile version is not yet complete. Stay tuned to get our latest updates.");
+	}
+
 });
 
 </script>
