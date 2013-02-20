@@ -1,3 +1,9 @@
+<script type="text/javascript">
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+	$("#our_promise").hide(); 
+}
+</script>
+
 <% @title_desc = "Log In" %>
 <div class="row">
 	<div class="span6">
@@ -7,7 +13,7 @@
 	</div>
 	<div class="span6">
 		<div class="landing_right_hemisphere">
-			<div class="moolango-box" style="float: right; width: 150px; color: #FFFFFF;">
+			<div id="our_promise" class="moolango-box" style="float: right; width: 150px; color: #FFFFFF;">
 				<div class="moolango-box-inner">
 					<p class="bold"><%= I18n.t 'promise_header', :scope => :signup %></p> <%= I18n.t 'promise_body', :scope => :signup %></div>
 			</div>
