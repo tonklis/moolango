@@ -1,7 +1,7 @@
 class DisplayController < ApplicationController
 
-	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :about, :faq]
-	before_filter :set_timezone, :except => [:index, :paypal_purchase, :about, :faq]
+	before_filter :authenticate_user!, :except => [:index, :paypal_purchase, :about, :faq, :mobile]
+	before_filter :set_timezone, :except => [:index, :paypal_purchase, :about, :faq, :mobile]
 
 	#negative to remove open window constraint
 	AVAILABLE_TIME = -1
