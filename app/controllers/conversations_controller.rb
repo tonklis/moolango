@@ -52,8 +52,6 @@ class ConversationsController < ApplicationController
         current_user.update_timezone params[:user][:time_zone]
         #Time.zone = current_user.timezone
         MailNotification.new.booked_conversation(current_user, @conversation, I18n.locale)
-        TestMailer.join_conversation(@conversation).deliver
-
 	render :contact_soon
         format.json { render json: @conversation, status: :created, location: @conversation }
 	return
@@ -72,6 +70,7 @@ class ConversationsController < ApplicationController
 		if @conversation.internal_session == @internal_session
 			@conversation.confirm
 			@confirmed = true
+      TestMailer.join_conversation(@conversation).deliver
 		end
 	end	
 

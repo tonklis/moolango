@@ -63,7 +63,7 @@ $(document).ready(function() {
 					<% end %>
 				</tbody>
 			</table>	
-			<% if current_user.credits > 0 %>	
+			<% if current_user.credits > 0 && current_user.credits > time_booked %>	
 				<div class="landing_get_started_button" style="margin-top: 0;" onclick="window.open('<%= new_conversation_ui_url %>', '_self');">
 					<div class="calendar_button">
 						<div style="margin: 0 10px 0 60px;">
