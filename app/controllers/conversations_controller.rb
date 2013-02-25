@@ -7,10 +7,10 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new
     @conversation.status_id = Status.find_by_name("open").id
     @conversation_options = Conversation.get_options(current_user, [["30 #{I18n.t 'minutes', :scope => :dashboard}",'30'], ["60 #{I18n.t 'minutes', :scope => :dashboard}",'60']])
-    @time_start = 9
+    @time_start = 10
     @offset = '-0500' 
     if (current_user.timezone != nil && current_user.timezone != '')
-      start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(current_user.timezone)
+      start = Time.find_zone('EST').parse("2013-01-01 10am").in_time_zone(current_user.timezone)
       @time_start = start.hour
       hours = (start.utc_offset/60/60).to_s
       if (hours.length == 2)
@@ -32,10 +32,10 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.create_new(params[:conversation], open_tok_session)
     #@conversation = Conversation.new(params[:conversation])
     @conversation_options = Conversation.get_options(current_user, [["30 #{I18n.t 'minutes', :scope => :dashboard}",'30'], ["60 #{I18n.t 'minutes', :scope => :dashboard}",'60']])
-    @time_start = 9
+    @time_start = 10
     @offset = '-0500' 
     if (current_user.timezone != nil && current_user.timezone != '')
-      start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(current_user.timezone)
+      start = Time.find_zone('EST').parse("2013-01-01 10am").in_time_zone(current_user.timezone)
       @time_start = start.hour
       hours = (start.utc_offset/60/60).to_s
       if (hours.length == 2)
@@ -76,7 +76,7 @@ class ConversationsController < ApplicationController
 
   def calculate_timezone
     tz = params[:timezone]
-    start = Time.find_zone('EST').parse("2013-01-01 9am").in_time_zone(tz)
+    start = Time.find_zone('EST').parse("2013-01-01 10am").in_time_zone(tz)
     hours = (start.utc_offset/60/60).to_s
     if (hours.length == 2)
       offset = hours[0] == '-' ? hours[0] + '0' + hours[1] + '00' : hours + '00'
